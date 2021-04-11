@@ -1,0 +1,2701 @@
+<<<<<<< HEAD
+Data--> Stored inside the database.. Management of the data
+
+Security:
+	
+We can allow different users to access different data...
+
+Relation:Entring the values for the attributes for the Entity described
+
+Entity: Anything we store the data about.. Attribute: The things that we store..
+
+Entity:Person Attributes: haircolor address phoneno
+
+EntityType: A particular Row  AttributeType: A particular column
+
+DBMS: Allows to manage the data and allows us to view the data in human friendly way and do all the cool things(search for the values.Change the appearance of data..Change the way data is stored..delete the data) Create update delete & insert operations
+
+RDBMS: A sub category of the DBMS to managae the Relational Databases.
+
+Views::Not everyone whose access to db can have access to create the views or update the data, change the way it is structured--->Only admins or business is going to create the views..Users/applications can act on the views..
+
+That way we can create the multiple apperances(views) of single table and it provides the security features in DB prespective..
+
+Transaction Management:
+
+SQL: It is programming language to talk with db server to perfom the operations..
+
+Two Major SQL Catageories:
+
+Defines the DB structure..DDL
+
+Manipulate the data within(insert update delete):DML
+
+
+Database Design:
+===============
+
+Data Integrity: All of the data is correct & update to date..Data Integrity Problem
+
+If we have the repeating data..for the single person we have two addresses then it is the bad database design..
+
+Conceptual Schema :: It is like unlimited brain stroming phase....(General)..How the data is related
+
+Logical Schema :: You're structuring the DataType and Columns or the relationships are drawn.. Logical drawing for the schema
+
+Physical Schema :: Here we talk about what kind of database we are going to use(Specific) and how people are going to use the data via internet or from the databaseserver..
+
+Talking about General SQL Concepts to specific implementation
+
+
+Database design allows to sperate the data into multiple tables.Help to maintain the data integrity..
+
+
+DataIntegrity::
+
+Entity Integrity Refrential Integrity Domain integrity
+
+Is having the Correct data in the database.. We don't want the repeating values incorrect values broken relationships between the tables..
+
+Enity Integrity: uniqueness with the rowss..Implemented using the PK
+
+Refrential Integrity:
+
+Domian Integrity: The range of what we are storing.
+
+DatabaseDesign: Process of designing your table to remove the anomalies and have the data integrity..
+
+
+Atomicity:: Breaking the Adress column into multiple subcolumns: street city state zipcode etc.. So we can perfom complex queries.. Like pulling the employees from california..
+
+Column::    favouriteMovies::
+
+	    Indra,Sashi				--->We shouldn't store the things like this..It should be one thing only.
+
+Column   favouriteMovie
+
+	Indra
+	Sashi
+
+
+
+Relationship talks about entities..They are related and connected someway between them..
+
+A table should be about one entity and a row also should be about one entity..
+
+You can design the one-to-one relationship using the only one table as attribute or designing the seprate table..
+
+FK points to the primary key in the Primary Table..Keys keep the things unique. They used to connect the tables that are related..
+
+Parent 			Child
+
+PK			FK
+
+In One to Many:
+
+Child Table (FK) lets us to decide who is parent... But in the Primary Table we don't have any info to identify who the childs are..
+
+FK: Unique + not null/null in One to One relation..
+
+FK: not null/null in to one to Many relation
+
+In the relationship Customer--->Order
+
+The order(Child) can't exist alone without the Parent(PK)
+
+
+The key should never be changed.They should be unique.Never Null..Keys/indexes are used for the select statements where clauses joins 
+
+Keys does less maintanenace , less incorrect data..keeps everything unique,improves the functionality of database, less work for updation
+
+
+Least no:of columns required to make the every row unique is called as the Candidate key..Any no:of  columns required to make the every row unique is called as the Super key
+
+Can each row be unique?  how may columns are needed?
+
+how many ck do i have?
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SpringMVC REST  CORE JAVA Revision ------> 2 Months
+
+Oracle	------>	2 Months
+
+HTML CSS JAVASCRIPT  REACT --------->3 Months
+
+AWS DEVOPS
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Oracle History:
+
+
+Upto Oracle 6 it is DBMS.. From Oracle 7 it is rdbms.. Oracle 8 they included JVM inbuilt.. 8i internet based application..Sending email Receiving an email uploading attachment downloading attachments can be perfomed from the oracle database directly without using the browsers..
+
+10G--->Multiple database servers can be connected together..At higher level we can see it as the Single database but we can see multiple disks involved..
+
+12C--->Whataever database we have we can upload to the cloud and we can access the database from the cloud directly..
+
+
+Various Databases in Market-->Oracle SQL Server MYSQL DB2 Sybase FaxPro MSACESS NOSQL Teradata BigData POSTGRE Informix dBase 
+
+We give the request to database via commands and it sends the Response..
+
+
+We can perfom the READ:Select Write: INSERT(NEW) DELETE(Existing) MODIFYING/UPDATE/Manipulation of existing data
+
+Sorting: Re arranging of data based on particular attribute/column.. Join Operations
+
+
+DBMS: 
+
+Data-->The fact
+
+Collection of the meaning full Data is called as the information..
+
+Collection of interrelated data that can will be stored in the Datbase
+
+Physical storage space is called Database
+
+DBMS: Communication To & From the database 
+
+-Manipulation of the data 
+-Storing retriving deleting Sorting the data..
+
+
+SQL: The language that used to communicate with database..SQL uses the statements to communicate with Database..SQL requires an environment to implment the features in the form of statements
+
+
+SQL Commands Categories:
+-----------------------
+
+DDL DML TCL DCL 
+
+DDL:
+---
+Define Structure/Definition of Objects..They interact with DB directly..Because of this there will be implicit commit with every command..Once before the DDL statemnt and after DDl statemnt there will be commit.
+
+
+Commit		(This commit is placed irrespective of succes/failure of DDL)
+
+DDL
+
+Commit		(This commit is placed only if succes of DDL)
+
+
+>We cannot do undo/rollback for the DDL commands..DDl statements will be faster..Becuase of the buffer involvement the DML will be slower than DDL commands
+
+CREATE ALTER DROP TRUNCATE RENAME FLASHBACK PURGE COMMENT
+
+FLASHBACK PURGE-->Introudced in 10g
+
+
+DML:: They deal with only the data.. DML commands interact with the buffer first and then on the DB on commit.. If we do the rollback the content from the buffer will be erased/removed.
+
+DML--->Categorised into Read  write operations.. Together read/Write operations will be as part of the transaction.
+
+Write: Insert update delete.. With all the write operations there will be implicit row level locks on the rows that we are modfying..
+
+The rows will be locked for the user who is perfoming the Write operations and lock will be released only when the owner completes his operations..
+
+***Even the data/row is locked but we can read the data by any no:of users..
+
+Write: Merge command introduced in the 9i..It is further enhanced in 10G..
+
+Transaction Control Language:
+---------------------------
+
+This commands will be dealing only with the transcations.. This commands are valid only within the transcation.. Outside the transcation they are not valid.
+
+Transcation: Set of DML statments with commit/rollback is called transcation.Every tx will strat with DML write operation..
+
+Commit: To make the changes permanent
+
+RollBack: To undo the previous work done by DML statements
+
+This commit/rollback can be explicit or implcit by the DBserver..
+
+
+DMLStatements
+RollBack/Commit ---->iscalled as tx
+
+SavePoint:: A temporary saving point with in the tx.
+
+SET TRANSACTION: To change the isolation level of the tx.. The mode of the tx..
+
+
+DCL Commands: Will be dealing with only previleges/permissions.
+
+They will interact with DB directly.. So there will be implcit commit once before the statement and once after the statement like DDL Commands..
+
+We cannot perfom the undo/rollback..
+
+GRANT
+REVOKE
+SET ROLE
+
+
+
+SQL COMMANDS::
+-------------
+
+CREATE:: Create the new Object in Database
+
+ALTER: Modify the structure of Object
+
+Truncate: To remove the complete data of the table..Structure wiill remian
+
+Rename: to change the name of any db object
+
+DROP: To remove the Object permanently from the DB server.. The structure as well as the data will be removed..
+
+FLASHBACK::Once we drop the Object it will be stored in Recycle bin.. When we FlashBack the table will be restored in DB..
+
+PURGE:: Remove from the Recycle bin also..
+
+COMMENT:To provide the meaningful description to the tables and columns 
+
+
+create table <tabname>( columnname dataType(size) )
+
+Datatype: Specifies which type of data will be stored in column.. Size will specify the lenght of column
+
+
+Create the table using the existing tables (WITH DATA):
+------------------------------------------------------
+
+CTAS
+
+>create table emp1 as select * from emp;   Structure & data will be copied to emp1
+
+>create table emp1 as select empname,sal from emp; 	only the specific columns Structure & data will be copied to emp1
+
+> create table emp1 as select * from Emp where 1=1; Both the strcuture and data will be copied
+
+>  To store only the particular rows use the where clause
+
+Create the table using the existing tables (ONLY STRUCTURE):
+------------------------------------------------------
+
+> create table emp1 as select * from Emp where 1=2;  Only the structure will be copied
+
+
+
+TRUNCATE:
+---------
+
+Truncate table <tablename>
+
+Implicit commit will be placed.. We cannot Rollback
+
+
+RENAME:
+------
+
+Change the name of table column and constraints
+
+RENAME <OLDTableName> TO <NEWTableName>
+
+>RENAME EMP To Employee
+
+Renaming the Column/Constraint:(Avaliable from oracle 9.2)
+------------------------------
+
+>ALTER TABLE <TABLENAME> RENAME COLUMN <OLD> TO <NEW>
+
+>ALTER TABLE <TABLENAME> RENAME CONSTRAINT <OLD> TO <NEW>
+
+
+DROP: To remove the Objects permanently from the DB.. Upto 9i the objects will removed completely. From 10G it will be placed into the ReCyclebin
+----
+
+Drop Table <tableName>
+
+Dropping Column:
+---------------
+> ALTER TABLE TABLENAME DROP COLUMN <COLUMNNAME>		Single Column Drop
+> ALTER TABLE TABLENAME DROP(COLUMNNAME)		Single Column Drop
+
+> ALTER TABLE TABLENAME DROP(COLNAME1,COLNAME2,COLNAME2) 	Multiple COlumn Dropping
+
+
+Displays the objects present in Recycle bin
+
+>Select * from RECYCLEBIN;
+>show recyclebin;		SQLPLUS Command
+
+FlashBack:
+
+>FLASHBACK Table <tabname> TO BEFORE DROP
+
+>FLASHBACK Table <tabname> TO BEFORE DROP RENAME TO <NEW_NAME>
+
+
+PURGE: Added in Oracle 10g
+----
+
+>PURGE TABLE <TABLENAME>
+
+>PURGE TABLE EMP
+
+>FLASHBACK Table EMP TO BEFORE DROP --->ERROR  We cannot FLASHBACK once it is purged
+
+
+>DROP TABLE <TABLENAME>			>It will be moved to the recycle bin		  DELETE
+>DROP TABLE <TABLENAME> PURGE		>It will even remove from the recycle bin.. SHIFT+DELETE
+
+
+Comment on Table:
+----------------
+
+>COMMENT ON TABLE <TABLENAME> IS '';
+>COMMENT ON COLUMN <TABLENAME.COLNAME> IS '';
+
+Comment will be replaced if we place on Column that was having comment intailly
+
+Viewing the comments from the DATA Dictionary:
+----------------------------------------------
+
+USER_TAB_COMMENTS
+
+USER_COL_COMMENTS
+
+
+DDL ALTER:
+----------
+
+>Adding/Dropping Columns
+
+>Hiding the columns
+
+>Rename/Dropping the Column Constraints
+
+>Modyfying the datatype of Column
+
+>Modifying the Size of Column-->Increasing/Decreasing
+
+	---Without Data
+	---With Data
+
+> Adding/dropping the constraints ---With/Without constraint namess..
+
+> Enabling/Disabling constraints 
+
+				ADD		COLUMN/CONSTRAINT
+				MODIFY		DATATYPE/SIZE
+>ALTER TABLE <TABLE_NAME> 	DROP  		COLUMN/CONSTRAINT	
+				RENAME		COLUMN/CONSTRAINT
+				SET UNUSED 	HIDING A COLUMN
+				ENABLE		CONSTRAINT
+				DISABLE		CONSTRAINT
+
+>ALTER TABLE <TAB_NAME> ADD COLUMN DATATYPE(SIZE)
+>ALTER TABLE <TAB_NAME> ADD (COLUMN_NAME DATATYPE(SIZE)) 				--Single column Adding
+
+>ALTER TABLE <TAB_NAME> ADD (COLUMN_NAME DATATYPE(SIZE),COLUMN_NAME DATATYPE(SIZE))  	--Multiple Columns Adding
+
+
+>>ALTER TABLE <TAB_NAME> MODIFY COLUMN DATATYPE(SIZE)
+>ALTER TABLE <TAB_NAME> MODIFY (COLUMN_NAME DATATYPE(SIZE)) 				--MODIFY SINGLE column
+
+>ALTER TABLE <TAB_NAME> MODIFY (COLUMN_NAME DATATYPE(SIZE),COLUMN_NAME DATATYPE(SIZE))  	--Multiple Columns MODIFYING
+
+
+>ALTER TABLE <TABNAME> SET UNUSED(MOBNO)
+>We cannot drop the columns when there is a high volume of data..During the Working hours
+
+>ALTER TABLE <TABNAME> SET UNUSED(MOBNO).. 		Can we add a column with name MOBNO now.. Yes
+>>ALTER TABLE <TABNAME> DROP UNUSED COLUMNS;
+
+>Once the column is Hide using SET UNUSED.. We cannot rollback.. only option is to Drop the column later 
+
+
+
+DML COmmands:
+------------
+
+READ: SELECT (DRL: Data Retrival Language)
+
+WRITE: INSERT UPDATE DELETE MERGE(Insert+update) in 9i  MERGE(Insert+update+delete) in 9i10g 
+
+
+>insert into EMP(EMPNO,DOB,ENAME,SAL) values (1,'a','12-Mar-1978',1000)
+
+>insert into EMP values (1,'12-Mar-1978','a',1000)				--Default Order..Order inwhich table columns is defined
+
+>insert into EMP(EMPNO,DOB,ENAME,SAL) values (1,'12-Mar-1978','a',1000)		--Arbitary Order
+
+>insert into EMP(EMPNO,ENAME,SAL) values (1,'a',1000) --->the dob column for this insertion is Null
+
+
+Insertion using the substitution varaibles:
+------------------------------------------
+
+>insert into EMP values (&EMPNO,'&ENAME','&DOB',&SAL);  --Default Order
+
+>insert into EMP(EMPNO,ENAME) values (&EMPNO,'&ENAME')
+
+> /  The previous statment that is stored in buffer will be executed again..
+
+
+Inserting the records using the records of Another Table:
+---------------------------------------------------------
+
+> insert into emp select * from EMP1      --->Name of the columns the datatypes of the columns and size of the columns should match
+
+> insert into emp(ENO1,ENAME1,SAL1) select ENO,ENAME,SAL from EMP -->Name of columns not required to match as we are specifying names of source & target 								     tables.. The datatypes of columns should match
+
+SELECT:
+------
+
+> We will add where caluse to select only the particular rows..
+
+> select sal+comm from emp where sal=2000;	We are not selecting the physical data we are selecting only the logical data..so we can perfom any   operations while you are selecting
+
+> select sal*2 from emp;
+
+
+UPDATE:
+-----
+
+>update <tabname> SET COL=<value1>
+
+>>update <tabname> SET COL1=<value1> ,COL2=<value2>
+
+>update Emp set ename='a'  			for all records it will be updated
+	
+>update Emp set ename='a',sal=200 		for all records ename & sal will be updated as 'a' & 2000
+
+> update Emp set ename='a' where empno=1	Only one record will be updated...conditon to update
+
+> update Emp set ename='a' where empno=1 and sal=2000   --Conditions to update the specific row that satisfies the condition
+
+DELETE:
+------
+
+We can delete the single record multiple records or all the records of the table can also be dleeted
+
+> delete [FROM] EMP --->All records will be deleted
+
+>delete from emp where ename='aaa';  condition to dlete selected row.
+
+
+Differences between Delete & Truncate:
+-------------------------------------
+
+Delete is DML					Truncate is DDL
+
+Rollback is possible				Not possible
+
+Implicit Commit not there			it is there
+
+All rows can be deleted				All rows of table can be truncated
+
+Single row can be deleted			Single row can't be deleted
+
+Multiple selectedrows can be deleted		Multiple selcted rows can't be deleted
+
+Where clause can be used			Where clause cannot be used
+
+Space will be released 				Space will not be released incase of trucnate
+
+Perfomance will be slow				Perfomance will be faster since no buffer is involved..
+
+------------------------------------------------------------------------------------------------------
+> Trigger upto ORACLE 8i cannot be created in Truncate but from the 9i it can be created..
+
+
+MERGE:
+------
+
+Oracle 9i -->Insert + update possible
+
+insert	Alone not possible 
+update	Alone not possible
+
+in Oracle 10G
+
+insert+update+delete 	possible
+insert+update		possible
+update+delete		possible
+insert+delete		Notpossible
+insert			possible
+update			possible
+delete			Notpossible
+
+
+MERGE INTO <targetTable> USING <sourcetableName/selectQuery(InlineView/Subquery/joins/views/materalized views/synonyomus)>
+
+ON (CONDITIONS)		You can have multipleconditions as well
+
+WHEN MATCHED THEN
+
+UPDATE;
+
+DELETE;
+
+WHEN NOT MATCHED THEN
+
+INSERT
+
+
+MERGE INTO EMP a USING (select * from Emp) b
+ON (a.empNo=b.empNo)
+WHEN MATCHED THEN 
+update set ENAME=b.ENAME, sal=b.sal, DOB=b.dob
+delete where sal=200;
+WHEN NOT MATCHED THEN
+insert (ENO,ENAME,DOB,SAL) values(b.ENO,b.ENAME,b.DOB,b.sal)
+
+
+>Target table is always one.. There we can get the source data from multiple tables...Using the select clause (InlineView/Subquery/joins/views/materalized views/synonyomus)>
+
+>For the inline view we should give the alias..> Conditional column we should not update as part of **Update Statement**
+
+>We will not specify the target table name in the insert/update/delete as the target table name specified in the beginnning
+
+> The select Query will bring out the resultset using that data we perfom the merge operation..
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DCL: Data control Language Commands:
+
+
+-The right to execute the particular type of SQL Statement
+-The right to connect to database
+-The right to create the table in your schema
+-The right to select the rows from the someone else tables/execute the stored procs
+
+Previleges Types:
+
+System Previleges: Avaialble only to the admins & application developers
+
+Object Previleges: Object previleges will be given by the schema owners.. On your Objects you can give the access to other users..
+
+GRANT REVOKE SET ROLE::
+
+GRANT:: Grant is used for giving the previleges to the other users on our own Objects..
+
+Revoke: To take back the previleges
+
+SET ROLE: To assign the specific role to the user.. Create the Multiple previleges for the specific role. Assign the Role
+
+
+Creating the new User: 
+-- Create a user
+CREATE USER youruser IDENTIFIED BY yourpassword;
+--Grant permissions
+GRANT CONNECT, RESOURCE, DBA TO <username> IDENTIFIED BY PASSWORD;
+
+SHOW USER-->DISPLAY user to which we have connected
+USER is "u1" 
+
+>Grant select on EMP to U2.  --U2 can select data from the U1.EMP... One previlege on table one user
+
+>Grant ALL on EMP to U2.  	--All the previlges that U1 user is holding on the EMP table to U2.
+
+>Grant select,insert on EMP to u2,u3   --Previleges can be multiple users can be multiple but the object should be always one
+
+
+Lets say scott is the owner of EMP table.. U1 got access to EMP table from scott..Then U2 cannot access directly EMP.. Either scott has to give the access to the EMP table to the U2 user.. Or the U1 should have the with Grant Option from the scoott
+
+scott>Grant select on EMP to U1 with Grant option 
+u1>Grant select on EMP to U2 with Grant option 			Now the U2 can share the preilvege to other users
+
+--------------------------------------------------------------------------------------------------------
+
+Exmple: Assume the owner of the EMP table is U1
+
+U1> Grant select on EMP to U2 with Grant OPTION
+
+U2>select * from u1.emp;
+
+U2>Grant select on U1.EMP to U3 
+
+u3> Select * from U1.EMP		(The owner name of the table has to be attached while accessing the table/granting/revoking the access)
+
+U1> REVOKE select on EMP from U3 (U1 cannot remove the select on EMP from U3.. As U3 didn't get access from U1)
+
+U1> REVOKE select on EMP from U2 (Now the acess will be removed for the both U2 & U3)
+
+		(OR)
+U2> Revoke Select on u1.EMP from U3  (U2 can remove)
+
+
+Creating the Roles:
+------------------
+
+>Create Role R1
+
+>Create Role R1 identified by PASSWORD
+
+>Create Role R1 NOT IDENTIFIED
+
+>Grnat P1,[P2,P3..,Pn] to R1
+
+>Grant R1 to U1[,U2...,Un]
+
+>ALTER ROLE R1 identified by PASSOWRD --Adding the password
+
+>ALTER ROLE R1 NOT IDENTIFIED   --Removing the password
+
+>ALTER USER U1 DEFAULT ROLE R1;		--Changing the Roles of user.. From SSE to Lead
+
+
+
+>Lets say if one extra previlege need to be added/removed to the ROLE R1. Then we can do that..
+
+>Grant P1,[P2,P3..,Pn] to R1.. Now users who are having the R1 Role extra permission will be provided automatically
+
+>Revoke P1 from R1.. The permission will be removed to all users who are having the Role R1
+
+
+SET ROLE:: 
+-------
+
+To the current logged in user..  For the other users we cannot assign the ROLE
+
+>Set Role R1;
+>Set Role ALL;
+>Set Role ALL Except R1
+>Set Role None
+>Set Role R1 identified by password
+
+TCL Commands:
+-------------
+
+Select command cannot be the starting point of Tx. But it can be part of the tx.
+
+Ending part of tx is commit/rollback (Implicit|Explicit commit)
+
+Implicit commit will be w.r.t to every DDL/DCL statement..implicit Rollback will be placed when we QUIT | EXIT command
+
+COMMIT ROLLBACK SAVEPOINT SET TRANSCATION
+
+Unless we commit the data other users can't see the data..Only the modified user can see the data
+
+
+SET TRANSCATION:
+----------------
+
+>SET TRANSCATION READ WRITE -->Default... It should be first statement of the transcation
+
+>SET TRANSCATION READ ONLY
+
+When this mode will be completed-->When the commit or rollback is used in tx.
+
+>SET TRANSCATION isolation level Read COMMITTED		--->Default
+
+>SET TRANSCATION isolation level SERIALIZABLE
+
+
+Oracle Data Types:
+------------------
+
+>Char --> Fixed lenght Character data type
+>Maximum size is 2000 byte/2000 char
+>size is optional
+>default size is 1 byte/char
+>characters allowed  are a-zA-Z0-9 & all special characters..
+
+Varchar/VarChar2(S):
+-------------------
+> Varaible length character datatype
+>Max size ids 4000 byte/4000 char
+>Size is mandatory
+>Character allowed are a-zA-Z0-9 & all special characters..
+
+>create table txx(C1 Number,C2 CHAR(10),C3 VARCHAR(10));
+
+>INSERT INTO tzz(1,'A','A');
+>INSERT INTO tzz(1,'AB','AB');
+>INSERT INTO tzz(1,'ABC','ABC');
+
+
+>select * txx; No change 
+
+>select C1,C2,C3,LENGTH(C2),LENGTH(C3) from txx;
+
+>select C1,C2,C3,LENGTH(RTRIM(C2)),LENGTH(C3) from txx;
+								-->For the char datatype extra blank charactres will padded to make it equal to its size
+>select C1,C2,C3,LENGTH(LTRIM(C2)),LENGTH(C3) from txx;
+
+
+**NOte the Character data is left alligned and Number data is right aligned with SQL PLUS Editor**
+
+
+>select C1,C2,C3,TRANSLATE(C2,'','$'),LENGTH(C3) from txx;
+ 
+** There is no blank padding in the case of varchar datatype..
+
+
+>create table t_char(c1 number, c2 CHAR(1), c3 char(1 BYTE),c4(1 CHAR))-->
+
+>There is difference between specifying the size in charcters and Bytes
+
+>Specifying the size in CHAR is only added in ORacle 9i..Single byte character data are only allowed when we specify only size/size specified in bytes..
+
+**Incase of c4(1 CHAR)) we can enter multi byte character data. The size of the each character can go upto 4bytes maximum
+
+
+NCHAR(S): Fixed length multibyte character datatype. Maximum size is 1000. Size is optional. Size of each character can be any no:of bytes..We cannot specify the size with bytes or chars
+
+NVARCHAR2(S): Variable length MultiByte character data Type..Maximum Size is 2000 . Size is mandatory..Size of each character can be any no:of bytes..
+
+
+DATE:: Default typeis :: DD-MON-YY or DD-MON-YYYY..Display width of date is 9 characters..
+
+>Storage size of each date value in DB is 7 bytes only
+
+>Internal storage of the Date is :: AD DD-MON-YYYY HH:MM:SS AM.. Until 8i current insertion time will be inserted. but after 9i starting time of current day that is 12:00 AM is being inserted
+
+>Range of dates allowed into the DB is: 8i 01-JAN-4712 BC to 31-Dec-4712 AD  9i: 01-JAN-4712 BC to 31-Dec-9999 AD
+ 
+Examples:
+
+create table dateex(n1 number, sampledate date);		Inserting in String format: Default format used DD-MON-YYYY or DD-MON-YY
+
+insert into dateex values(1,'01-JAN-11');		Background:AD 01-JAN-2011 12:01:00 AM		
+insert into dateex values(1,'02-JAN-2012');			   AD 02-JAN-2012 12:01:00 AM
+insert into dateex values(3,'03-JAN-99');			   AD 03-JAN-1999 12:01:00 AM
+insert into dateex values(3,'03-JAN-45');			   AD 03-JAN-2045 12:01:00 AM
+insert into dateex values(3,'03-JAN-49');			   AD 03-JAN-2049 12:01:00 AM
+insert into dateex values(3,'03-JAN-50');			   AD 03-JAN-1950 12:01:00 AM
+
+0-49  considered as 2000- 2049
+
+50-99 considered as 1950-1999
+
+
+TO_DATE function helps to insert the DateString by specifying the format of String:
+----------------------------------------------------------------------------------------------
+
+SELECT
+  TO_DATE( 'August 01, 2017', 'MONTH DD, YYYY' )
+FROM
+  dual;
+
+insert into dateex values(1,TO_DATE('August 01, 2017', 'MONTH DD, YYYY' ));
+
+
+Converting the Date to specific String format:
+---------------------------------------------
+
+SELECT
+  TO_CHAR( SYSDATE, 'FMMonth DD, YYYY' )
+FROM
+  dual;
+  
+select to_char(sampledate,'BC DD-MON-YYYY HH:MM:SS AM') as extract from dateex;
+
+
+Format Specifiers to be used: https://www.techonthenet.com/oracle/functions/to_date.php
+
+Formats::
+
+MM	Month (01-12; JAN = 01).
+MON	Abbreviated name of month.
+MONTH	Name of month, padded with blanks to length of 9 characters.
+W	Week of month (1-5) where week 1 starts on the first day of the month and ends on the seventh.
+WW	Week of year (1-53) where week 1 starts on the first day of the year and continues to the seventh day of the year.
+D	Day of week (1-7).
+DAY	Name of day.
+DD	Day of month (1-31).
+DDD	Day of year (1-366).
+HH	Hour of day (1-12).
+HH12	Hour of day (1-12).
+HH24	Hour of day (0-23).
+MI	Minute (0-59).
+SS	Second (0-59).
+SSSSS	Seconds past midnight (0-86399).
+AM, A.M., PM, or P.M. 			AD or A.D 		 BC or B.C.
+
+To insert the time/stamp of our own:
+
+
+select SYSDATE,LENGTH(SYSDATE),VSIZE(SYSDATE) FROM DUAL;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+LONG: Allows single byte varaibale length character data. Its an extension to the VARCHAR2. Maxsize is 2GB..Only one Long Column is allowed per Table.
+
+>LONG Columns are not allowed in the WHERE clause..Except DEFAULT NOT NULL constraint no other constraint is allowed on the LONG Column..Default display width of  long column is 80.Deprecated with introduction of LOB Datatypes..But still supported in latest versions for the backward compatability..
+
+>We cannot create the index on the LONG column..
+
+SET NUMWIDTH 80; MAximum
+
+SHOW LONG
+SET LONG 2000000000;  Maximum 
+
+>We can insert the number data and character data into the long columns.. in the insert statement.
+
+
+RAW: It supports the binary & hexadecimal data. Size is mandatory. Max size of raw datatype is 2000 Byte.
+
+LONG RAW:Allows the Binary and hexadecimal data. Long raw is extension of RAW datatype.. Maximum size is 2 GB..Only one LongRAW Column is allowed per Table.
+>LONGRAW Columns are not allowed in the WHERE clause..Except DEFAULT NOT NULL constraint no other constraint is allowed on the LONGRAW Column..
+>LONG RAW Columns cannot be displayed in SQLPLUS..Deprecated with introduction of LOB Datatypes..But still supported in latest versions for the backward compatability..
+
+>The data it allows are only binary and hexadecimal data.. It should be of only character type..
+
+>We cannot create the index on the LONGRAW Column..
+
+
+ROWID: ROWID 18 byte character length.
+
+UROWID(Universal RowID): RESTRICTED(Hexadecimal number system..16 character length) EXTENDED(Base64 number system..18 character length)
+
+BLOB: Extension to LONG,LONGRAW. It is having the max size of 4gb.It supports the binary and hexadecimal data.
+
+We have restriction on LONG LONGRAW columns.only one of LONG/LONGRAW can be present per table.
+
+CLOB(Charcter Large Object ): NLOB:(Multi Byte character large Object)
+
+Bfile: There is no maximum size limit. We should have cretaed the oracle directory to the path of OS.. We can store any data. It support images,garaph,graphics,animation,audio,video etc..
+
+
+
+Number DataType:	(.,+,-,0-9)
+----------------
+
+Number(P,S)  Precision(1 to 38) scale(-84 to +127)
+
+>The default Precision is 38.. The size can be specified only with Precision or with both Precision & Scale
+
+>Precision(The total number of digits in Number (IntegerPart+DecimialPart)
+
+>Scale is total number of digits only in the decimal part 
+
+>Data is right alligned. Default numwidth is 10
+
+
+>number(5),number(5,2)-->In the scale part if you have more number of digits than the mentioned scale then the value will be rounded/truncated mentioned scale value.. But in the precision part if you mention more no:of digits then that wil be error
+
+
+>Just number -->It accepts 40 digits without loss.. After 40 there will be truncation..
+
+>number(38,-5)--->Rounding the Integer part to 5 digits
+
+>SET NUMWIDTH 50 -->We cannot set the numwidth to more than 50
+
+
+
+SQL Identifier:
+--------------
+
+Usedefined name for the Table,column , Column Alias name, Procedure name , fn name , PLSQL Block name , User name , varaibe name , Constant name, Exception name,Cursor name
+
+Rules:: These rules are common for the SQL/PLSQL
+
+Max Length of identifier is 30 Char. A-Z,a-z,0-9,_,$,#..First character should be alphabet. It shouldn't start with number or special character
+
+-->ABC or abc identifier is same..
+
+--Keywords are not allowed for identifiers.
+
+
+With ""..Length should be 30 characters.. We can use any special character..First character can be any special character.When we use "" the identifiers will become case sensitive..
+
+--Keywords will also be allowed.. We should always use the "" when we refer the identifier in the subsequent programs..
+
+>create table "EMP"()
+
+select * from EMP  --Object not found
+select * from emp  --Object not found
+select * from Emp  --Object not found
+select * from "emp"  --Object not found
+select * from "EMP"  --Object is found
+
+
+SQL Clauses:
+-----------
+
+SELECT ENO,ENAME,SAL		-- SELECT CLAUSE
+FROM EMP			-- FROM CLAUSE			First two are Mandatory Clause
+WHERE ENO=123;			-- WHERE CLAUSE			it is a optional Clause..
+
+Four Optional Clauses:
+
+WHERE		---->Restricting rows
+GROUP BY 	----> Forming Groups
+HAVING		----> Restricting the Groups
+ORDER BY 	----->Sorting the Columns
+
+These clauses are mainly used in the DML statements like insert update delete Merge ...
+
+
+WHERE CLAUSE: Eliminates the non matching rows used in the where clause
+
+>It has highest priority.Must be the first clause used in the select..Group functions are not allowed in the where clause since groups are not formed while where clause is getting evaluating.Long/Long Raw Columns are not allowed.
+
+>select * from emp where eno=101;		Number
+>select * from emp where ename='john';		Varchar
+>select * from emp where dob='11-Nov-1980';	Date
+
+In Update Statements also we can take the Where clause and can take more than one condition
+
+INSERT INTO Customers (CustomerName, City, Country) SELECT SupplierName, City, Country FROM Suppliers WHERE Country='Germany';
+
+> In the DML Merge statement also we can use the WHERE Clause..
+
+
+GroupBy: Evaluated after the where clause
+-------
+
+>Data is first loaded into the buffer first and all the optional clauses will be applied.
+
+>select dno,sum(sal) from EMP GROUP BY dno;
+
+>After Applying the groupBy the data of one group will be placed together..
+
+
+>select dno,sum(sal) from EMP where sal > 500 GROUP BY dno;		
+
+Note: The columns that appears in the select clause must appear in the GROUPBY Clause..There is exception for the GROUP Functions..The reverse is not true. the columns that appear in the Group By clause need not to appear in the SELECT CLAUSE..
+
+
+HAVING - Restricting Groups:
+----------------------------
+
+> Having clause always used with GROUP BY Clause.. Can preceed or succed the groupBy clause..Evaluated after the forming of groups by groupBy clause..
+> Used for eliminating the non-matching groups..
+>Since the group functions are not allowed in the where clause, we have to use the HAVING Clause to eliminate the groups..
+
+
+>select dno,sum(sal) from emp having sum(sal) > 50000 group by dno;
+
+>select dno,sum(sal) from emp where sal >=1250 HAVING sum(sal) > 50000 group by dno;
+
+>select dno,sum(sal) from emp where sal >=1250 group by dno HAVING sum(sal) > 50000 ;
+
+	GroupColumn, GroupFunction.. It is optional to have the Group Column.
+
+OrderBy Clause:
+--------------
+
+>Order by clause has the least Priority. 
+>Must be the last clause in the select clause..Evaluated after all the optional clauses..
+>Used for the sorting of the data in the ASC or DESC order
+>Can have the single or multiple columns names or the Positions of the column
+
+>Select * from emp order by ename;
+>Select * from emp order by ename desc;
+
+>Select * from emp order by ename,eno; --Multiple Columns
+
+>Within the first column if it has same data or the common data.. Then the second column eno comes into picture and arranges into the ASC order..
+
+
+2 A 100		1 A 500			
+3 A 200	----->	2 A 100
+1 A 500		3 A 200
+
+>Select * from emp order by ename desc,eno desc; --Multiple Columns
+
+>Select sal+comm from emp order by sal+comm; 
+
+>Select sal+comm from emp order by 1; 
+
+>Select * from emp order by 1,4,2;
+
+Nulls in OrderBy:
+----------------
+
+ASC order->At end DESC-->At Beginning
+
+
+Processing:
+-----------
+
+WHERE 
+
+GROUPBY 
+
+[Aggregate Functions]
+
+Having
+
+Order
+
+> select dno,sum(sal) from emp where sal>=500 group by dno Having sum(sal)>=5000 order by dno desc;
+
+
+SQL Functions:
+------------
+
+> Single row functions:: Accepts the arguments and return one vaue..Acts on the single row and produces the one o/p for each record. Single row functions      can be nested upto any level..Inner most function wil be evaluated first.. Inner to outer.
+
+> Multiple Row Functions:: Acts on group of values and produces the one result per each group.. These functions can be nested upto only two levels..
+
+Based on the type of Input they accept:
+
+>Character Functions
+>Number Functions
+>Date Functions
+>Conversion Functions
+>General Functions	It will accept the Mixed type of data
+>TimeStamp Functions
+
+
+Character Functions:		O/p: Can be Character Number DATE
+------------------------------------------------------------------
+
+Case Manipulation:
+
+UPPER(Col/Char_String)
+LOWER(Col/Char_String)
+INITCAP(Col/Char_String)
+
+String Manipulation Functions:
+
+-LENGTH(Col1/String1)
+-CONCAT(Col1/String1,Col2/String2)
+-LPAD
+-RPAD
+-LTRIM
+-RTRIM
+-TRIM
+-TRANSLATE
+-REPLACE
+-SUBSTR
+-INSTR
+
+>select LENGTH('SDGFK":%$') AS LENGTH FROM DUAL;	Even doublequote is also considered..
+
+>select concat(concat('ORACLE','SERVER'),'ABCD') FROM DUAL;
+
+>select 'ORACLE' || 'SERVER' || 'ABCD' FROM DUAL;	>Operator is always faster than function
+
+
+LPAD: Adding extra characters to make the given String as the Fixed Length String..
+
+Either on left hand side either on Right hand Side or on both sides of the given String..
+
+>select LPAD('ORACE',20,'*') as LPAD_OUTPUT FROM DUAL; The third parameter is optional.. If not there it will consider the space..
+
+It will not add 20 characters.. It will make the total length as the 20 characters
+
+>select RPAD(LPAD('ORACLE',10,'$'),14,'$') from DUAL;
+
+
+>select LTRIM('ORACLE SERVER','O') from dual; 		>Removes the given character if it is only present in the left most character.
+
+>select LTRIM('ORACLE SERVER','ORA') from dual;
+
+>select LTRIM('ORACLE SERVER','ORACLE') from dual;
+
+>select LTRIM('OOOOORACLE SERVER','O') from dual; 	> All the O's will be removed
+
+> Similarly RTRIM function also works..
+
+
+-TRIM:		
+-------
+
+TRIM Function can accept only one character to remove.. It cannot remove multiple characters..You should use the TRIM in Nested Fashion to remove the multiple characters or use the LTRIM OR RTRIM function directly
+
+
+>Select TRIM('O' FROM 'OOOOORACLESERVEROOOO') AS TRIM_OUTPUT FROM DUAL; Without using the LTRIM & RTRIM together we achived this only by TRIM
+
+>Select TRIM(BOTH 'O' FROM 'OOOOORACLESERVEROOOO') AS TRIM_OUTPUT FROM DUAL;
+
+>Select TRIM(' ' FROM '		ORACLESERVER	') AS TRIM_OUTPUT FROM DUAL;     (OR)
+
+>Select TRIM('		ORACLESERVER	') AS TRIM_OUTPUT FROM DUAL; 	Removes the spaces from the both sides by default
+
+> To remove the characters only from the left hand side..
+
+>Select TRIM(LEADING ' ' FROM '		ORACLESERVER	') AS TRIM_OUTPUT FROM DUAL;   		Only on the left side the spaces will be removed
+
+>Select TRIM(TRAILING ' ' FROM '		ORACLESERVER	') AS TRIM_OUTPUT FROM DUAL; 	On the right side the spaces will be removed
+
+>Select TRIM(TRAILING 'O' FROM 'OOOOORACLESERVEROOOOO') AS TRIM_OUTPUT FROM DUAL;
+
+OOOOORACLESERVER
+
+>Select TRIM(BOTH 'O' FROM 'OOOOORACLESERVEROOOOO') AS TRIM_OUTPUT FROM DUAL;
+
+RACLESERVER
+
+>Select TRIM('OOOOORACLESERVEROOOOO') AS TRIM_OUTPUT FROM DUAL; This will only can remove spacess. It cannot remove the O's
+
+
+TRANSATE:
+---------
+
+SELECT TRANSLATE('ORACLE SERVER','OEL','123') from dual 		If O replace with 1 if E replace with 2 if L replace with 3
+
+>1RAC32 S2RV2R
+
+No:of characters in 2 argument should be equal to no:of chaacters in the Third argument..
+
+SELECT TRANSLATE('ORACLE SERVER','OEL','12') from dual 	
+
+>1AC2 S2RV2R			L is removed but not replaced by any chaacter..
+
+
+REPLACE:
+-------
+
+The entire string will be replaced with the given string.. It cannot be the same..
+
+>SELECT REPLACE('ORACLE SERVER','ER','12') AS REPLACE_OUTPUT FROM DUAL;
+
+ORACLE S12V12
+
+>SELECT REPLACE('ORACLE SERVER','ER','12345') AS REPLACE_OUTPUT FROM DUAL;
+
+ORACLE S12345V12345
+
+
+SUBSTR:
+------
+
+>SELECT SUBSTR('ORACLE SERVER',1,4) AS SUBSTR_OUTPUT FROM DUAL; Start from first character and take the four characters
+
+>Third parameter is the optional one.. If we dont mention it will start from the starting pos to the end of the String...
+
+> Starting postion can be Postive or Negative..Postive it will start from the left hand side.. if it is negative it will start from right hand side..
+
+>SELECT SUBSTR('ORACLE SERVER',-1).. -1 starting position it is last character from right side. 0 is the first character from the left hand side
+
+R
+
+SELECT SUBSTR('ORACLE SERVER',-4) from dual; --Returns the last four characters
+
+
+INSTR:
+-----
+
+>SELECT INSTR('ORACLE SERVER','O',1,1) from dual; Inputvalue,searching character, starting pos, occurence.It returns the index position of the Character.If not found 0 is returned
+
+**Starting pos, occurence are the optional ones..By default both are 1 if not mentioned..
+
+>select INSTR('ORACLE SERVER','E',-1) AS INSTR_OUTPUT from dual; starting position as -1. Search will happen from the right side..First occurence of E.. Returns the index no from the left side only..
+
+>NLS_INITCAP NLS_LOWER NLS_UPPER NLS_SORT
+
+>REGEXP_INSTR REGEXP_REPLACE REGEXP_COUNT REGEXP_LIKE REGEXP_SUBSTR
+
+REVERSE:
+-------
+
+The given string will be reversed..
+
+
+
+NUMBER Functions: I/p is always the number & o/p is also always the Number..
+----------------
+
+Numeric functions manipulate the numeric values and return the numeric values as the result..
+
+ABS CEIL FLOOR POWER MOD SQRT SIGN LOG(logba) LN EXP(e^) ROUND TRUNC
+
+TRIGNOMETRIC FUNCTIONS:
+----------------------
+
+SIN ASIN SINH 
+
+STATICAL FUNCTIONS:
+-------------------
+
+STDDEV(Standard Deviation) VARIANCE
+
+GROUP/AGGREGATE FUNCTIONS:
+---------------------------
+
+MIN MAX SUM AVG COUNT DISTINCT UNIQUE 
+
+
+SELECT SIGN(123),SIGN(+123),SIGN(-123),SIGN(0) from dual;
+
+1	1	-1	0
+
+
+SeleCT LOG(10,100) from dual;
+
+
+Group Function:
+--------------
+
+The input will be multiple values and o/p is one value for the each group..
+
+MIN() MAX AVG SUM COUNT DISTINCT UNIQUE
+
+
+>TRUNC(123.45,0) ROUND(123.45,0)-->Remove the Decimal part completely
+
+
+>TRUNC(123.45,1) Keep only one digit from the decimal part 
+>TRUNC(123.45,2) Keep two digits from the decimal part 
+
+
+>TRUNC(123.45,-1) If the second parameter is -ve the decimal part will be removed and Truncation will be in the Integral Part
+
+
+DATE FUNCTIONS:
+---------------
+
+>InCase of Date functions input is date o/p is DATE NUMBER or CHARACTER
+
+SYSDATE-->Present date from the Database server will be given..
+
+CURRENT_DATE-->Present date from the Client system will be given...
+
+ADD_MONTHS(DATE,+-N) Add/Subtract
+
+LAST_DAY(DATE)
+---------------
+select LAST_DAY('12-02-2000') from dual;
+
+NEXT_DAY(DATE,'DAYNAME')-->After today which date will be Sunday
+-----------------------
+select NEXT_DAY('30-03-2021','TUESDAY') from dual; --Or you can mention day number Sun is 1 Mon-2
+
+MONTHS_BETWEEN(Date1,Date2);
+----------------------------
+SELECT MONTHS_BETWEEN('20-04-2021','30-03-2021') from dual;
+SELECT MONTHS_BETWEEN(SYSDATE,SYSDATE+60) from dual;
+
+NEW_TIME(Date,THIS,THAT) --->When Working with Multiple Timezones Want to know the time from different timezone
+---------------------------
+
+SELECT to_char(SYSDATE,'DD-MON-YYYY HH:MI:SS AM')   ServerTime ,
+to_char(NEW_TIME(SYSDATE,'PST','AST') ,'DD-MON-YYYY HH:MI:SS AM') as ASTTimeZONE from dual;
+
+
+ROUND	-->To Years,Months,Days , Hours Minutes Secs
+
+TRUNC	-->To Years,Months,Days , Hours Minutes Secs
+
+EXTRACT 
+
+TO_CHAR
+
+Extracting:
+
+>AD/BC/A.D/B.C/ad/bc/a.d/b.c
+>AM/PM/A.M/P.M/am/pm/a.m/p.m
+>D/d -->Day of the week (1 to 7)
+>DD  --->Day of Month (1 to 31)
+>DDD ---->Day of the Year (1 to 365)
+>J/j ----> Julian no:Days from 01-JAN-4712 BC
+>Dy/DY/dy-->First 3 characters of DayName
+>DAY -->Full Name of the day padded to fixed legth of 9 chars
+>W/w ---> Week no:of month (1 to 5)
+>WW  ----> Week no:of the year(1 to 52)
+>MM/mm -->Month no:f year(1 to 12)
+>MONTH/Month/month -->Full name of month padded to length of 9 chars
+>Mon/Mon/mon -->First 3 chars of month 
+>Q/q --->Quarter of the Year(1 to 4)
+>YYYY/yyyy
+>YYYY/yyy		--->Full Year(2013)
+>YY/yy
+>Y/y
+>Year/YEAR
+>HH/hh
+>HH12/hh12
+>HH24/hh24
+>MI/mi
+>SS/ss
+>FF/ff
+>TZH		--Timezone Hou
+>TZM		--Timezone Minute
+>TH/th (1st/2nd/3rd/4th)	--SuperSet(1st/2nd/3d/4th)
+>SP/sp				--Spelled out number in words(ONE)
+>SPTH/spth			--(First/second/Third/fourth/fifth)
+>FM/fm		--Fill Mode
+
+
+EXTRACT--SYSDATE:
+----------------
+
+DAY MONTH YEAR
+
+select SYSDATE,EXTRACT(DAY FROM SYSDATE) FROM Dual;
+
+select SYSDATE,EXTRACT(YEAR FROM SYSDATE) FROM Dual;
+
+select SYSDATE,EXTRACT(MONTH FROM SYSDATE) FROM Dual;
+
+select SYSDATE,EXTRACT(MINUTE FROM SYSDATE) FROM Dual; --ERROR
+select SYSDATE,EXTRACT(SECOND FROM SYSDATE) FROM Dual; --ERROR
+select SYSDATE,EXTRACT(HOUR FROM SYSDATE) FROM Dual; --ERROR
+
+EXTRACT--TIMESTAMP:
+------------------
+
+DAY MONTH YEAR HOUR MINUTE SECOND TIMEZONE_HOUR TIMEZONE_MINUTE TIMEZONE_REGION TIMEZONE_OFFSET TIMEZONE_ABBR
+
+
+
+CONEVRSION FUNCTIONS:
+---------------------
+
+TO_CHAR		-->NUMBER TO CHAR | DATE TO CHAR  ALWAYS POSSIBLE
+TO_DATE		-->CHAR TO DATE   --Not Always|Sometimes
+TO_NUMBER	---> CHAR TO NUMBER --Not Always|Sometimes
+
+TO_TIMESTAMP	-->CHAR TO TIMESTAMP
+TO_TIMESTAMP_TZ  --->CHAR TO TIMESTAMP WITH TimeZone
+TO_YMINTERVAL	--->CHAR TO YEAR TO MONTH INTERVAL
+
+
+
+
+ 
+
+
+
+=======
+Data--> Stored inside the database.. Management of the data
+
+Security:
+	
+We can allow different users to access different data...
+
+Relation:Entring the values for the attributes for the Entity described
+
+Entity: Anything we store the data about.. Attribute: The things that we store..
+
+Entity:Person Attributes: haircolor address phoneno
+
+EntityType: A particular Row  AttributeType: A particular column
+
+DBMS: Allows to manage the data and allows us to view the data in human friendly way and do all the cool things(search for the values.Change the appearance of data..Change the way data is stored..delete the data) Create update delete & insert operations
+
+RDBMS: A sub category of the DBMS to managae the Relational Databases.
+
+Views::Not everyone whose access to db can have access to create the views or update the data, change the way it is structured--->Only admins or business is going to create the views..Users/applications can act on the views..
+
+That way we can create the multiple apperances(views) of single table and it provides the security features in DB prespective..
+
+Transaction Management:
+
+SQL: It is programming language to talk with db server to perfom the operations..
+
+Two Major SQL Catageories:
+
+Defines the DB structure..DDL
+
+Manipulate the data within(insert update delete):DML
+
+
+Database Design:
+===============
+
+Data Integrity: All of the data is correct & update to date..Data Integrity Problem
+
+If we have the repeating data..for the single person we have two addresses then it is the bad database design..
+
+Conceptual Schema :: It is like unlimited brain stroming phase....(General)..How the data is related
+
+Logical Schema :: You're structuring the DataType and Columns or the relationships are drawn.. Logical drawing for the schema
+
+Physical Schema :: Here we talk about what kind of database we are going to use(Specific) and how people are going to use the data via internet or from the databaseserver..
+
+Talking about General SQL Concepts to specific implementation
+
+
+Database design allows to sperate the data into multiple tables.Help to maintain the data integrity..
+
+
+DataIntegrity::
+
+Entity Integrity Refrential Integrity Domain integrity
+
+Is having the Correct data in the database.. We don't want the repeating values incorrect values broken relationships between the tables..
+
+Enity Integrity: uniqueness with the rowss..Implemented using the PK
+
+Refrential Integrity:
+
+Domian Integrity: The range of what we are storing.
+
+DatabaseDesign: Process of designing your table to remove the anomalies and have the data integrity..
+
+
+Atomicity:: Breaking the Adress column into multiple subcolumns: street city state zipcode etc.. So we can perfom complex queries.. Like pulling the employees from california..
+
+Column::    favouriteMovies::
+
+	    Indra,Sashi				--->We shouldn't store the things like this..It should be one thing only.
+
+Column   favouriteMovie
+
+	Indra
+	Sashi
+
+
+
+Relationship talks about entities..They are related and connected someway between them..
+
+A table should be about one entity and a row also should be about one entity..
+
+You can design the one-to-one relationship using the only one table as attribute or designing the seprate table..
+
+FK points to the primary key in the Primary Table..Keys keep the things unique. They used to connect the tables that are related..
+
+Parent 			Child
+
+PK			FK
+
+In One to Many:
+
+Child Table (FK) lets us to decide who is parent... But in the Primary Table we don't have any info to identify who the childs are..
+
+FK: Unique + not null/null in One to One relation..
+
+FK: not null/null in to one to Many relation
+
+In the relationship Customer--->Order
+
+The order(Child) can't exist alone without the Parent(PK)
+
+
+The key should never be changed.They should be unique.Never Null..Keys/indexes are used for the select statements where clauses joins 
+
+Keys does less maintanenace , less incorrect data..keeps everything unique,improves the functionality of database, less work for updation
+
+
+Least no:of columns required to make the every row unique is called as the Candidate key..Any no:of  columns required to make the every row unique is called as the Super key
+
+Can each row be unique?  how may columns are needed?
+
+how many ck do i have?
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SpringMVC REST  CORE JAVA Revision ------> 2 Months
+
+Oracle	------>	2 Months
+
+HTML CSS JAVASCRIPT  REACT --------->3 Months
+
+AWS DEVOPS
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Oracle History:
+
+
+Upto Oracle 6 it is DBMS.. From Oracle 7 it is rdbms.. Oracle 8 they included JVM inbuilt.. 8i internet based application..Sending email Receiving an email uploading attachment downloading attachments can be perfomed from the oracle database directly without using the browsers..
+
+10G--->Multiple database servers can be connected together..At higher level we can see it as the Single database but we can see multiple disks involved..
+
+12C--->Whataever database we have we can upload to the cloud and we can access the database from the cloud directly..
+
+
+Various Databases in Market-->Oracle SQL Server MYSQL DB2 Sybase FaxPro MSACESS NOSQL Teradata BigData POSTGRE Informix dBase 
+
+We give the request to database via commands and it sends the Response..
+
+
+We can perfom the READ:Select Write: INSERT(NEW) DELETE(Existing) MODIFYING/UPDATE/Manipulation of existing data
+
+Sorting: Re arranging of data based on particular attribute/column.. Join Operations
+
+
+DBMS: 
+
+Data-->The fact
+
+Collection of the meaning full Data is called as the information..
+
+Collection of interrelated data that can will be stored in the Datbase
+
+Physical storage space is called Database
+
+DBMS: Communication To & From the database 
+
+-Manipulation of the data 
+-Storing retriving deleting Sorting the data..
+
+
+SQL: The language that used to communicate with database..SQL uses the statements to communicate with Database..SQL requires an environment to implment the features in the form of statements
+
+
+SQL Commands Categories:
+-----------------------
+
+DDL DML TCL DCL 
+
+DDL:
+---
+Define Structure/Definition of Objects..They interact with DB directly..Because of this there will be implicit commit with every command..Once before the DDL statemnt and after DDl statemnt there will be commit.
+
+
+Commit		(This commit is placed irrespective of succes/failure of DDL)
+
+DDL
+
+Commit		(This commit is placed only if succes of DDL)
+
+
+>We cannot do undo/rollback for the DDL commands..DDl statements will be faster..Becuase of the buffer involvement the DML will be slower than DDL commands
+
+CREATE ALTER DROP TRUNCATE RENAME FLASHBACK PURGE COMMENT
+
+FLASHBACK PURGE-->Introudced in 10g
+
+
+DML:: They deal with only the data.. DML commands interact with the buffer first and then on the DB on commit.. If we do the rollback the content from the buffer will be erased/removed.
+
+DML--->Categorised into Read  write operations.. Together read/Write operations will be as part of the transaction.
+
+Write: Insert update delete.. With all the write operations there will be implicit row level locks on the rows that we are modfying..
+
+The rows will be locked for the user who is perfoming the Write operations and lock will be released only when the owner completes his operations..
+
+***Even the data/row is locked but we can read the data by any no:of users..
+
+Write: Merge command introduced in the 9i..It is further enhanced in 10G..
+
+Transaction Control Language:
+---------------------------
+
+This commands will be dealing only with the transcations.. This commands are valid only within the transcation.. Outside the transcation they are not valid.
+
+Transcation: Set of DML statments with commit/rollback is called transcation.Every tx will strat with DML write operation..
+
+Commit: To make the changes permanent
+
+RollBack: To undo the previous work done by DML statements
+
+This commit/rollback can be explicit or implcit by the DBserver..
+
+
+DMLStatements
+RollBack/Commit ---->iscalled as tx
+
+SavePoint:: A temporary saving point with in the tx.
+
+SET TRANSACTION: To change the isolation level of the tx.. The mode of the tx..
+
+
+DCL Commands: Will be dealing with only previleges/permissions.
+
+They will interact with DB directly.. So there will be implcit commit once before the statement and once after the statement like DDL Commands..
+
+We cannot perfom the undo/rollback..
+
+GRANT
+REVOKE
+SET ROLE
+
+
+
+SQL COMMANDS::
+-------------
+
+CREATE:: Create the new Object in Database
+
+ALTER: Modify the structure of Object
+
+Truncate: To remove the complete data of the table..Structure wiill remian
+
+Rename: to change the name of any db object
+
+DROP: To remove the Object permanently from the DB server.. The structure as well as the data will be removed..
+
+FLASHBACK::Once we drop the Object it will be stored in Recycle bin.. When we FlashBack the table will be restored in DB..
+
+PURGE:: Remove from the Recycle bin also..
+
+COMMENT:To provide the meaningful description to the tables and columns 
+
+
+create table <tabname>( columnname dataType(size) )
+
+Datatype: Specifies which type of data will be stored in column.. Size will specify the lenght of column
+
+
+Create the table using the existing tables (WITH DATA):
+------------------------------------------------------
+
+CTAS
+
+>create table emp1 as select * from emp;   Structure & data will be copied to emp1
+
+>create table emp1 as select empname,sal from emp; 	only the specific columns Structure & data will be copied to emp1
+
+> create table emp1 as select * from Emp where 1=1; Both the strcuture and data will be copied
+
+>  To store only the particular rows use the where clause
+
+Create the table using the existing tables (ONLY STRUCTURE):
+------------------------------------------------------
+
+> create table emp1 as select * from Emp where 1=2;  Only the structure will be copied
+
+
+
+TRUNCATE:
+---------
+
+Truncate table <tablename>
+
+Implicit commit will be placed.. We cannot Rollback
+
+
+RENAME:
+------
+
+Change the name of table column and constraints
+
+RENAME <OLDTableName> TO <NEWTableName>
+
+>RENAME EMP To Employee
+
+Renaming the Column/Constraint:(Avaliable from oracle 9.2)
+------------------------------
+
+>ALTER TABLE <TABLENAME> RENAME COLUMN <OLD> TO <NEW>
+
+>ALTER TABLE <TABLENAME> RENAME CONSTRAINT <OLD> TO <NEW>
+
+
+DROP: To remove the Objects permanently from the DB.. Upto 9i the objects will removed completely. From 10G it will be placed into the ReCyclebin
+----
+
+Drop Table <tableName>
+
+Dropping Column:
+---------------
+> ALTER TABLE TABLENAME DROP COLUMN <COLUMNNAME>		Single Column Drop
+> ALTER TABLE TABLENAME DROP(COLUMNNAME)		Single Column Drop
+
+> ALTER TABLE TABLENAME DROP(COLNAME1,COLNAME2,COLNAME2) 	Multiple COlumn Dropping
+
+
+Displays the objects present in Recycle bin
+
+>Select * from RECYCLEBIN;
+>show recyclebin;		SQLPLUS Command
+
+FlashBack:
+
+>FLASHBACK Table <tabname> TO BEFORE DROP
+
+>FLASHBACK Table <tabname> TO BEFORE DROP RENAME TO <NEW_NAME>
+
+
+PURGE: Added in Oracle 10g
+----
+
+>PURGE TABLE <TABLENAME>
+
+>PURGE TABLE EMP
+
+>FLASHBACK Table EMP TO BEFORE DROP --->ERROR  We cannot FLASHBACK once it is purged
+
+
+>DROP TABLE <TABLENAME>			>It will be moved to the recycle bin		  DELETE
+>DROP TABLE <TABLENAME> PURGE		>It will even remove from the recycle bin.. SHIFT+DELETE
+
+
+Comment on Table:
+----------------
+
+>COMMENT ON TABLE <TABLENAME> IS '';
+>COMMENT ON COLUMN <TABLENAME.COLNAME> IS '';
+
+Comment will be replaced if we place on Column that was having comment intailly
+
+Viewing the comments from the DATA Dictionary:
+----------------------------------------------
+
+USER_TAB_COMMENTS
+
+USER_COL_COMMENTS
+
+
+DDL ALTER:
+----------
+
+>Adding/Dropping Columns
+
+>Hiding the columns
+
+>Rename/Dropping the Column Constraints
+
+>Modyfying the datatype of Column
+
+>Modifying the Size of Column-->Increasing/Decreasing
+
+	---Without Data
+	---With Data
+
+> Adding/dropping the constraints ---With/Without constraint namess..
+
+> Enabling/Disabling constraints 
+
+				ADD		COLUMN/CONSTRAINT
+				MODIFY		DATATYPE/SIZE
+>ALTER TABLE <TABLE_NAME> 	DROP  		COLUMN/CONSTRAINT	
+				RENAME		COLUMN/CONSTRAINT
+				SET UNUSED 	HIDING A COLUMN
+				ENABLE		CONSTRAINT
+				DISABLE		CONSTRAINT
+
+>ALTER TABLE <TAB_NAME> ADD COLUMN DATATYPE(SIZE)
+>ALTER TABLE <TAB_NAME> ADD (COLUMN_NAME DATATYPE(SIZE)) 				--Single column Adding
+
+>ALTER TABLE <TAB_NAME> ADD (COLUMN_NAME DATATYPE(SIZE),COLUMN_NAME DATATYPE(SIZE))  	--Multiple Columns Adding
+
+
+>>ALTER TABLE <TAB_NAME> MODIFY COLUMN DATATYPE(SIZE)
+>ALTER TABLE <TAB_NAME> MODIFY (COLUMN_NAME DATATYPE(SIZE)) 				--MODIFY SINGLE column
+
+>ALTER TABLE <TAB_NAME> MODIFY (COLUMN_NAME DATATYPE(SIZE),COLUMN_NAME DATATYPE(SIZE))  	--Multiple Columns MODIFYING
+
+
+>ALTER TABLE <TABNAME> SET UNUSED(MOBNO)
+>We cannot drop the columns when there is a high volume of data..During the Working hours
+
+>ALTER TABLE <TABNAME> SET UNUSED(MOBNO).. 		Can we add a column with name MOBNO now.. Yes
+>>ALTER TABLE <TABNAME> DROP UNUSED COLUMNS;
+
+>Once the column is Hide using SET UNUSED.. We cannot rollback.. only option is to Drop the column later 
+
+
+
+DML COmmands:
+------------
+
+READ: SELECT (DRL: Data Retrival Language)
+
+WRITE: INSERT UPDATE DELETE MERGE(Insert+update) in 9i  MERGE(Insert+update+delete) in 9i10g 
+
+
+>insert into EMP(EMPNO,DOB,ENAME,SAL) values (1,'a','12-Mar-1978',1000)
+
+>insert into EMP values (1,'12-Mar-1978','a',1000)				--Default Order..Order inwhich table columns is defined
+
+>insert into EMP(EMPNO,DOB,ENAME,SAL) values (1,'12-Mar-1978','a',1000)		--Arbitary Order
+
+>insert into EMP(EMPNO,ENAME,SAL) values (1,'a',1000) --->the dob column for this insertion is Null
+
+
+Insertion using the substitution varaibles:
+------------------------------------------
+
+>insert into EMP values (&EMPNO,'&ENAME','&DOB',&SAL);  --Default Order
+
+>insert into EMP(EMPNO,ENAME) values (&EMPNO,'&ENAME')
+
+> /  The previous statment that is stored in buffer will be executed again..
+
+
+Inserting the records using the records of Another Table:
+---------------------------------------------------------
+
+> insert into emp select * from EMP1      --->Name of the columns the datatypes of the columns and size of the columns should match
+
+> insert into emp(ENO1,ENAME1,SAL1) select ENO,ENAME,SAL from EMP -->Name of columns not required to match as we are specifying names of source & target 								     tables.. The datatypes of columns should match
+
+SELECT:
+------
+
+> We will add where caluse to select only the particular rows..
+
+> select sal+comm from emp where sal=2000;	We are not selecting the physical data we are selecting only the logical data..so we can perfom any   operations while you are selecting
+
+> select sal*2 from emp;
+
+
+UPDATE:
+-----
+
+>update <tabname> SET COL=<value1>
+
+>>update <tabname> SET COL1=<value1> ,COL2=<value2>
+
+>update Emp set ename='a'  			for all records it will be updated
+	
+>update Emp set ename='a',sal=200 		for all records ename & sal will be updated as 'a' & 2000
+
+> update Emp set ename='a' where empno=1	Only one record will be updated...conditon to update
+
+> update Emp set ename='a' where empno=1 and sal=2000   --Conditions to update the specific row that satisfies the condition
+
+DELETE:
+------
+
+We can delete the single record multiple records or all the records of the table can also be dleeted
+
+> delete [FROM] EMP --->All records will be deleted
+
+>delete from emp where ename='aaa';  condition to dlete selected row.
+
+
+Differences between Delete & Truncate:
+-------------------------------------
+
+Delete is DML					Truncate is DDL
+
+Rollback is possible				Not possible
+
+Implicit Commit not there			it is there
+
+All rows can be deleted				All rows of table can be truncated
+
+Single row can be deleted			Single row can't be deleted
+
+Multiple selectedrows can be deleted		Multiple selcted rows can't be deleted
+
+Where clause can be used			Where clause cannot be used
+
+Space will be released 				Space will not be released incase of trucnate
+
+Perfomance will be slow				Perfomance will be faster since no buffer is involved..
+
+------------------------------------------------------------------------------------------------------
+> Trigger upto ORACLE 8i cannot be created in Truncate but from the 9i it can be created..
+
+
+MERGE:
+------
+
+Oracle 9i -->Insert + update possible
+
+insert	Alone not possible 
+update	Alone not possible
+
+in Oracle 10G
+
+insert+update+delete 	possible
+insert+update		possible
+update+delete		possible
+insert+delete		Notpossible
+insert			possible
+update			possible
+delete			Notpossible
+
+
+MERGE INTO <targetTable> USING <sourcetableName/selectQuery(InlineView/Subquery/joins/views/materalized views/synonyomus)>
+
+ON (CONDITIONS)		You can have multipleconditions as well
+
+WHEN MATCHED THEN
+
+UPDATE;
+
+DELETE;
+
+WHEN NOT MATCHED THEN
+
+INSERT
+
+
+MERGE INTO EMP a USING (select * from Emp) b
+ON (a.empNo=b.empNo)
+WHEN MATCHED THEN 
+update set ENAME=b.ENAME, sal=b.sal, DOB=b.dob
+delete where sal=200;
+WHEN NOT MATCHED THEN
+insert (ENO,ENAME,DOB,SAL) values(b.ENO,b.ENAME,b.DOB,b.sal)
+
+
+>Target table is always one.. There we can get the source data from multiple tables...Using the select clause (InlineView/Subquery/joins/views/materalized views/synonyomus)>
+
+>For the inline view we should give the alias..> Conditional column we should not update as part of **Update Statement**
+
+>We will not specify the target table name in the insert/update/delete as the target table name specified in the beginnning
+
+> The select Query will bring out the resultset using that data we perfom the merge operation..
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DCL: Data control Language Commands:
+
+
+-The right to execute the particular type of SQL Statement
+-The right to connect to database
+-The right to create the table in your schema
+-The right to select the rows from the someone else tables/execute the stored procs
+
+Previleges Types:
+
+System Previleges: Avaialble only to the admins & application developers
+
+Object Previleges: Object previleges will be given by the schema owners.. On your Objects you can give the access to other users..
+
+GRANT REVOKE SET ROLE::
+
+GRANT:: Grant is used for giving the previleges to the other users on our own Objects..
+
+Revoke: To take back the previleges
+
+SET ROLE: To assign the specific role to the user.. Create the Multiple previleges for the specific role. Assign the Role
+
+
+Creating the new User: 
+-- Create a user
+CREATE USER youruser IDENTIFIED BY yourpassword;
+--Grant permissions
+GRANT CONNECT, RESOURCE, DBA TO <username> IDENTIFIED BY PASSWORD;
+
+SHOW USER-->DISPLAY user to which we have connected
+USER is "u1" 
+
+>Grant select on EMP to U2.  --U2 can select data from the U1.EMP... One previlege on table one user
+
+>Grant ALL on EMP to U2.  	--All the previlges that U1 user is holding on the EMP table to U2.
+
+>Grant select,insert on EMP to u2,u3   --Previleges can be multiple users can be multiple but the object should be always one
+
+
+Lets say scott is the owner of EMP table.. U1 got access to EMP table from scott..Then U2 cannot access directly EMP.. Either scott has to give the access to the EMP table to the U2 user.. Or the U1 should have the with Grant Option from the scoott
+
+scott>Grant select on EMP to U1 with Grant option 
+u1>Grant select on EMP to U2 with Grant option 			Now the U2 can share the preilvege to other users
+
+--------------------------------------------------------------------------------------------------------
+
+Exmple: Assume the owner of the EMP table is U1
+
+U1> Grant select on EMP to U2 with Grant OPTION
+
+U2>select * from u1.emp;
+
+U2>Grant select on U1.EMP to U3 
+
+u3> Select * from U1.EMP		(The owner name of the table has to be attached while accessing the table/granting/revoking the access)
+
+U1> REVOKE select on EMP from U3 (U1 cannot remove the select on EMP from U3.. As U3 didn't get access from U1)
+
+U1> REVOKE select on EMP from U2 (Now the acess will be removed for the both U2 & U3)
+
+		(OR)
+U2> Revoke Select on u1.EMP from U3  (U2 can remove)
+
+
+Creating the Roles:
+------------------
+
+>Create Role R1
+
+>Create Role R1 identified by PASSWORD
+
+>Create Role R1 NOT IDENTIFIED
+
+>Grnat P1,[P2,P3..,Pn] to R1
+
+>Grant R1 to U1[,U2...,Un]
+
+>ALTER ROLE R1 identified by PASSOWRD --Adding the password
+
+>ALTER ROLE R1 NOT IDENTIFIED   --Removing the password
+
+>ALTER USER U1 DEFAULT ROLE R1;		--Changing the Roles of user.. From SSE to Lead
+
+
+
+>Lets say if one extra previlege need to be added/removed to the ROLE R1. Then we can do that..
+
+>Grant P1,[P2,P3..,Pn] to R1.. Now users who are having the R1 Role extra permission will be provided automatically
+
+>Revoke P1 from R1.. The permission will be removed to all users who are having the Role R1
+
+
+SET ROLE:: 
+-------
+
+To the current logged in user..  For the other users we cannot assign the ROLE
+
+>Set Role R1;
+>Set Role ALL;
+>Set Role ALL Except R1
+>Set Role None
+>Set Role R1 identified by password
+
+TCL Commands:
+-------------
+
+Select command cannot be the starting point of Tx. But it can be part of the tx.
+
+Ending part of tx is commit/rollback (Implicit|Explicit commit)
+
+Implicit commit will be w.r.t to every DDL/DCL statement..implicit Rollback will be placed when we QUIT | EXIT command
+
+COMMIT ROLLBACK SAVEPOINT SET TRANSCATION
+
+Unless we commit the data other users can't see the data..Only the modified user can see the data
+
+
+SET TRANSCATION:
+----------------
+
+>SET TRANSCATION READ WRITE -->Default... It should be first statement of the transcation
+
+>SET TRANSCATION READ ONLY
+
+When this mode will be completed-->When the commit or rollback is used in tx.
+
+>SET TRANSCATION isolation level Read COMMITTED		--->Default
+
+>SET TRANSCATION isolation level SERIALIZABLE
+
+
+Oracle Data Types:
+------------------
+
+>Char --> Fixed lenght Character data type
+>Maximum size is 2000 byte/2000 char
+>size is optional
+>default size is 1 byte/char
+>characters allowed  are a-zA-Z0-9 & all special characters..
+
+Varchar/VarChar2(S):
+-------------------
+> Varaible length character datatype
+>Max size ids 4000 byte/4000 char
+>Size is mandatory
+>Character allowed are a-zA-Z0-9 & all special characters..
+
+>create table txx(C1 Number,C2 CHAR(10),C3 VARCHAR(10));
+
+>INSERT INTO tzz(1,'A','A');
+>INSERT INTO tzz(1,'AB','AB');
+>INSERT INTO tzz(1,'ABC','ABC');
+
+
+>select * txx; No change 
+
+>select C1,C2,C3,LENGTH(C2),LENGTH(C3) from txx;
+
+>select C1,C2,C3,LENGTH(RTRIM(C2)),LENGTH(C3) from txx;
+								-->For the char datatype extra blank charactres will padded to make it equal to its size
+>select C1,C2,C3,LENGTH(LTRIM(C2)),LENGTH(C3) from txx;
+
+
+**NOte the Character data is left alligned and Number data is right aligned with SQL PLUS Editor**
+
+
+>select C1,C2,C3,TRANSLATE(C2,'','$'),LENGTH(C3) from txx;
+ 
+** There is no blank padding in the case of varchar datatype..
+
+
+>create table t_char(c1 number, c2 CHAR(1), c3 char(1 BYTE),c4(1 CHAR))-->
+
+>There is difference between specifying the size in charcters and Bytes
+
+>Specifying the size in CHAR is only added in ORacle 9i..Single byte character data are only allowed when we specify only size/size specified in bytes..
+
+**Incase of c4(1 CHAR)) we can enter multi byte character data. The size of the each character can go upto 4bytes maximum
+
+
+NCHAR(S): Fixed length multibyte character datatype. Maximum size is 1000. Size is optional. Size of each character can be any no:of bytes..We cannot specify the size with bytes or chars
+
+NVARCHAR2(S): Variable length MultiByte character data Type..Maximum Size is 2000 . Size is mandatory..Size of each character can be any no:of bytes..
+
+
+DATE:: Default typeis :: DD-MON-YY or DD-MON-YYYY..Display width of date is 9 characters..
+
+>Storage size of each date value in DB is 7 bytes only
+
+>Internal storage of the Date is :: AD DD-MON-YYYY HH:MM:SS AM.. Until 8i current insertion time will be inserted. but after 9i starting time of current day that is 12:00 AM is being inserted
+
+>Range of dates allowed into the DB is: 8i 01-JAN-4712 BC to 31-Dec-4712 AD  9i: 01-JAN-4712 BC to 31-Dec-9999 AD
+ 
+Examples:
+
+create table dateex(n1 number, sampledate date);		Inserting in String format: Default format used DD-MON-YYYY or DD-MON-YY
+
+insert into dateex values(1,'01-JAN-11');		Background:AD 01-JAN-2011 12:01:00 AM		
+insert into dateex values(1,'02-JAN-2012');			   AD 02-JAN-2012 12:01:00 AM
+insert into dateex values(3,'03-JAN-99');			   AD 03-JAN-1999 12:01:00 AM
+insert into dateex values(3,'03-JAN-45');			   AD 03-JAN-2045 12:01:00 AM
+insert into dateex values(3,'03-JAN-49');			   AD 03-JAN-2049 12:01:00 AM
+insert into dateex values(3,'03-JAN-50');			   AD 03-JAN-1950 12:01:00 AM
+
+0-49  considered as 2000- 2049
+
+50-99 considered as 1950-1999
+
+
+TO_DATE function helps to insert the DateString by specifying the format of String:
+----------------------------------------------------------------------------------------------
+
+SELECT
+  TO_DATE( 'August 01, 2017', 'MONTH DD, YYYY' )
+FROM
+  dual;
+
+insert into dateex values(1,TO_DATE('August 01, 2017', 'MONTH DD, YYYY' ));
+
+
+Converting the Date to specific String format:
+---------------------------------------------
+
+SELECT
+  TO_CHAR( SYSDATE, 'FMMonth DD, YYYY' )
+FROM
+  dual;
+  
+select to_char(sampledate,'BC DD-MON-YYYY HH:MM:SS AM') as extract from dateex;
+
+
+Format Specifiers to be used: https://www.techonthenet.com/oracle/functions/to_date.php
+
+Formats::
+
+MM	Month (01-12; JAN = 01).
+MON	Abbreviated name of month.
+MONTH	Name of month, padded with blanks to length of 9 characters.
+W	Week of month (1-5) where week 1 starts on the first day of the month and ends on the seventh.
+WW	Week of year (1-53) where week 1 starts on the first day of the year and continues to the seventh day of the year.
+D	Day of week (1-7).
+DAY	Name of day.
+DD	Day of month (1-31).
+DDD	Day of year (1-366).
+HH	Hour of day (1-12).
+HH12	Hour of day (1-12).
+HH24	Hour of day (0-23).
+MI	Minute (0-59).
+SS	Second (0-59).
+SSSSS	Seconds past midnight (0-86399).
+AM, A.M., PM, or P.M. 			AD or A.D 		 BC or B.C.
+
+To insert the time/stamp of our own:
+
+
+select SYSDATE,LENGTH(SYSDATE),VSIZE(SYSDATE) FROM DUAL;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+LONG: Allows single byte varaibale length character data. Its an extension to the VARCHAR2. Maxsize is 2GB..Only one Long Column is allowed per Table.
+
+>LONG Columns are not allowed in the WHERE clause..Except DEFAULT NOT NULL constraint no other constraint is allowed on the LONG Column..Default display width of  long column is 80.Deprecated with introduction of LOB Datatypes..But still supported in latest versions for the backward compatability..
+
+>We cannot create the index on the LONG column..
+
+SET NUMWIDTH 80; MAximum
+
+SHOW LONG
+SET LONG 2000000000;  Maximum 
+
+>We can insert the number data and character data into the long columns.. in the insert statement.
+
+
+RAW: It supports the binary & hexadecimal data. Size is mandatory. Max size of raw datatype is 2000 Byte.
+
+LONG RAW:Allows the Binary and hexadecimal data. Long raw is extension of RAW datatype.. Maximum size is 2 GB..Only one LongRAW Column is allowed per Table.
+>LONGRAW Columns are not allowed in the WHERE clause..Except DEFAULT NOT NULL constraint no other constraint is allowed on the LONGRAW Column..
+>LONG RAW Columns cannot be displayed in SQLPLUS..Deprecated with introduction of LOB Datatypes..But still supported in latest versions for the backward compatability..
+
+>The data it allows are only binary and hexadecimal data.. It should be of only character type..
+
+>We cannot create the index on the LONGRAW Column..
+
+
+ROWID: ROWID 18 byte character length.
+
+UROWID(Universal RowID): RESTRICTED(Hexadecimal number system..16 character length) EXTENDED(Base64 number system..18 character length)
+
+BLOB: Extension to LONG,LONGRAW. It is having the max size of 4gb.It supports the binary and hexadecimal data.
+
+We have restriction on LONG LONGRAW columns.only one of LONG/LONGRAW can be present per table.
+
+CLOB(Charcter Large Object ): NLOB:(Multi Byte character large Object)
+
+Bfile: There is no maximum size limit. We should have cretaed the oracle directory to the path of OS.. We can store any data. It support images,garaph,graphics,animation,audio,video etc..
+
+
+
+Number DataType:	(.,+,-,0-9)
+----------------
+
+Number(P,S)  Precision(1 to 38) scale(-84 to +127)
+
+>The default Precision is 38.. The size can be specified only with Precision or with both Precision & Scale
+
+>Precision(The total number of digits in Number (IntegerPart+DecimialPart)
+
+>Scale is total number of digits only in the decimal part 
+
+>Data is right alligned. Default numwidth is 10
+
+
+>number(5),number(5,2)-->In the scale part if you have more number of digits than the mentioned scale then the value will be rounded/truncated mentioned scale value.. But in the precision part if you mention more no:of digits then that wil be error
+
+
+>Just number -->It accepts 40 digits without loss.. After 40 there will be truncation..
+
+>number(38,-5)--->Rounding the Integer part to 5 digits
+
+>SET NUMWIDTH 50 -->We cannot set the numwidth to more than 50
+
+
+
+SQL Identifier:
+--------------
+
+Usedefined name for the Table,column , Column Alias name, Procedure name , fn name , PLSQL Block name , User name , varaibe name , Constant name, Exception name,Cursor name
+
+Rules:: These rules are common for the SQL/PLSQL
+
+Max Length of identifier is 30 Char. A-Z,a-z,0-9,_,$,#..First character should be alphabet. It shouldn't start with number or special character
+
+-->ABC or abc identifier is same..
+
+--Keywords are not allowed for identifiers.
+
+
+With ""..Length should be 30 characters.. We can use any special character..First character can be any special character.When we use "" the identifiers will become case sensitive..
+
+--Keywords will also be allowed.. We should always use the "" when we refer the identifier in the subsequent programs..
+
+>create table "EMP"()
+
+select * from EMP  --Object not found
+select * from emp  --Object not found
+select * from Emp  --Object not found
+select * from "emp"  --Object not found
+select * from "EMP"  --Object is found
+
+
+SQL Clauses:
+-----------
+
+SELECT ENO,ENAME,SAL		-- SELECT CLAUSE
+FROM EMP			-- FROM CLAUSE			First two are Mandatory Clause
+WHERE ENO=123;			-- WHERE CLAUSE			it is a optional Clause..
+
+Four Optional Clauses:
+
+WHERE		---->Restricting rows
+GROUP BY 	----> Forming Groups
+HAVING		----> Restricting the Groups
+ORDER BY 	----->Sorting the Columns
+
+These clauses are mainly used in the DML statements like insert update delete Merge ...
+
+
+WHERE CLAUSE: Eliminates the non matching rows used in the where clause
+
+>It has highest priority.Must be the first clause used in the select..Group functions are not allowed in the where clause since groups are not formed while where clause is getting evaluating.Long/Long Raw Columns are not allowed.
+
+>select * from emp where eno=101;		Number
+>select * from emp where ename='john';		Varchar
+>select * from emp where dob='11-Nov-1980';	Date
+
+In Update Statements also we can take the Where clause and can take more than one condition
+
+INSERT INTO Customers (CustomerName, City, Country) SELECT SupplierName, City, Country FROM Suppliers WHERE Country='Germany';
+
+> In the DML Merge statement also we can use the WHERE Clause..
+
+
+GroupBy: Evaluated after the where clause
+-------
+
+>Data is first loaded into the buffer first and all the optional clauses will be applied.
+
+>select dno,sum(sal) from EMP GROUP BY dno;
+
+>After Applying the groupBy the data of one group will be placed together..
+
+
+>select dno,sum(sal) from EMP where sal > 500 GROUP BY dno;		
+
+Note: The columns that appears in the select clause must appear in the GROUPBY Clause..There is exception for the GROUP Functions..The reverse is not true. the columns that appear in the Group By clause need not to appear in the SELECT CLAUSE..
+
+
+HAVING - Restricting Groups:
+----------------------------
+
+> Having clause always used with GROUP BY Clause.. Can preceed or succed the groupBy clause..Evaluated after the forming of groups by groupBy clause..
+> Used for eliminating the non-matching groups..
+>Since the group functions are not allowed in the where clause, we have to use the HAVING Clause to eliminate the groups..
+
+
+>select dno,sum(sal) from emp having sum(sal) > 50000 group by dno;
+
+>select dno,sum(sal) from emp where sal >=1250 HAVING sum(sal) > 50000 group by dno;
+
+>select dno,sum(sal) from emp where sal >=1250 group by dno HAVING sum(sal) > 50000 ;
+
+	GroupColumn, GroupFunction.. It is optional to have the Group Column.
+
+OrderBy Clause:
+--------------
+
+>Order by clause has the least Priority. 
+>Must be the last clause in the select clause..Evaluated after all the optional clauses..
+>Used for the sorting of the data in the ASC or DESC order
+>Can have the single or multiple columns names or the Positions of the column
+
+>Select * from emp order by ename;
+>Select * from emp order by ename desc;
+
+>Select * from emp order by ename,eno; --Multiple Columns
+
+>Within the first column if it has same data or the common data.. Then the second column eno comes into picture and arranges into the ASC order..
+
+
+2 A 100		1 A 500			
+3 A 200	----->	2 A 100
+1 A 500		3 A 200
+
+>Select * from emp order by ename desc,eno desc; --Multiple Columns
+
+>Select sal+comm from emp order by sal+comm; 
+
+>Select sal+comm from emp order by 1; 
+
+>Select * from emp order by 1,4,2;
+
+Nulls in OrderBy:
+----------------
+
+ASC order->At end DESC-->At Beginning
+
+
+Processing:
+-----------
+
+WHERE 
+
+GROUPBY 
+
+[Aggregate Functions]
+
+Having
+
+Order
+
+> select dno,sum(sal) from emp where sal>=500 group by dno Having sum(sal)>=5000 order by dno desc;
+
+
+SQL Functions:
+------------
+
+> Single row functions:: Accepts the arguments and return one vaue..Acts on the single row and produces the one o/p for each record. Single row functions      can be nested upto any level..Inner most function wil be evaluated first.. Inner to outer.
+
+> Multiple Row Functions:: Acts on group of values and produces the one result per each group.. These functions can be nested upto only two levels..
+
+Based on the type of Input they accept:
+
+>Character Functions
+>Number Functions
+>Date Functions
+>Conversion Functions
+>General Functions	It will accept the Mixed type of data
+>TimeStamp Functions
+
+
+Character Functions:		O/p: Can be Character Number DATE
+------------------------------------------------------------------
+
+Case Manipulation:
+
+UPPER(Col/Char_String)
+LOWER(Col/Char_String)
+INITCAP(Col/Char_String)
+
+String Manipulation Functions:
+
+-LENGTH(Col1/String1)
+-CONCAT(Col1/String1,Col2/String2)
+-LPAD
+-RPAD
+-LTRIM
+-RTRIM
+-TRIM
+-TRANSLATE
+-REPLACE
+-SUBSTR
+-INSTR
+
+>select LENGTH('SDGFK":%$') AS LENGTH FROM DUAL;	Even doublequote is also considered..
+
+>select concat(concat('ORACLE','SERVER'),'ABCD') FROM DUAL;
+
+>select 'ORACLE' || 'SERVER' || 'ABCD' FROM DUAL;	>Operator is always faster than function
+
+
+LPAD: Adding extra characters to make the given String as the Fixed Length String..
+
+Either on left hand side either on Right hand Side or on both sides of the given String..
+
+>select LPAD('ORACE',20,'*') as LPAD_OUTPUT FROM DUAL; The third parameter is optional.. If not there it will consider the space..
+
+It will not add 20 characters.. It will make the total length as the 20 characters
+
+>select RPAD(LPAD('ORACLE',10,'$'),14,'$') from DUAL;
+
+
+>select LTRIM('ORACLE SERVER','O') from dual; 		>Removes the given character if it is only present in the left most character.
+
+>select LTRIM('ORACLE SERVER','ORA') from dual;
+
+>select LTRIM('ORACLE SERVER','ORACLE') from dual;
+
+>select LTRIM('OOOOORACLE SERVER','O') from dual; 	> All the O's will be removed
+
+> Similarly RTRIM function also works..
+
+
+-TRIM:		
+-------
+
+TRIM Function can accept only one character to remove.. It cannot remove multiple characters..You should use the TRIM in Nested Fashion to remove the multiple characters or use the LTRIM OR RTRIM function directly
+
+
+>Select TRIM('O' FROM 'OOOOORACLESERVEROOOO') AS TRIM_OUTPUT FROM DUAL; Without using the LTRIM & RTRIM together we achived this only by TRIM
+
+>Select TRIM(BOTH 'O' FROM 'OOOOORACLESERVEROOOO') AS TRIM_OUTPUT FROM DUAL;
+
+>Select TRIM(' ' FROM '		ORACLESERVER	') AS TRIM_OUTPUT FROM DUAL;     (OR)
+
+>Select TRIM('		ORACLESERVER	') AS TRIM_OUTPUT FROM DUAL; 	Removes the spaces from the both sides by default
+
+> To remove the characters only from the left hand side..
+
+>Select TRIM(LEADING ' ' FROM '		ORACLESERVER	') AS TRIM_OUTPUT FROM DUAL;   		Only on the left side the spaces will be removed
+
+>Select TRIM(TRAILING ' ' FROM '		ORACLESERVER	') AS TRIM_OUTPUT FROM DUAL; 	On the right side the spaces will be removed
+
+>Select TRIM(TRAILING 'O' FROM 'OOOOORACLESERVEROOOOO') AS TRIM_OUTPUT FROM DUAL;
+
+OOOOORACLESERVER
+
+>Select TRIM(BOTH 'O' FROM 'OOOOORACLESERVEROOOOO') AS TRIM_OUTPUT FROM DUAL;
+
+RACLESERVER
+
+>Select TRIM('OOOOORACLESERVEROOOOO') AS TRIM_OUTPUT FROM DUAL; This will only can remove spacess. It cannot remove the O's
+
+
+TRANSATE:
+---------
+
+SELECT TRANSLATE('ORACLE SERVER','OEL','123') from dual 		If O replace with 1 if E replace with 2 if L replace with 3
+
+>1RAC32 S2RV2R
+
+No:of characters in 2 argument should be equal to no:of chaacters in the Third argument..
+
+SELECT TRANSLATE('ORACLE SERVER','OEL','12') from dual 	
+
+>1AC2 S2RV2R			L is removed but not replaced by any chaacter..
+
+
+REPLACE:
+-------
+
+The entire string will be replaced with the given string.. It cannot be the same..
+
+>SELECT REPLACE('ORACLE SERVER','ER','12') AS REPLACE_OUTPUT FROM DUAL;
+
+ORACLE S12V12
+
+>SELECT REPLACE('ORACLE SERVER','ER','12345') AS REPLACE_OUTPUT FROM DUAL;
+
+ORACLE S12345V12345
+
+
+SUBSTR:
+------
+
+>SELECT SUBSTR('ORACLE SERVER',1,4) AS SUBSTR_OUTPUT FROM DUAL; Start from first character and take the four characters
+
+>Third parameter is the optional one.. If we dont mention it will start from the starting pos to the end of the String...
+
+> Starting postion can be Postive or Negative..Postive it will start from the left hand side.. if it is negative it will start from right hand side..
+
+>SELECT SUBSTR('ORACLE SERVER',-1).. -1 starting position it is last character from right side. 0 is the first character from the left hand side
+
+R
+
+SELECT SUBSTR('ORACLE SERVER',-4) from dual; --Returns the last four characters
+
+
+INSTR:
+-----
+
+>SELECT INSTR('ORACLE SERVER','O',1,1) from dual; Inputvalue,searching character, starting pos, occurence.It returns the index position of the Character.If not found 0 is returned
+
+**Starting pos, occurence are the optional ones..By default both are 1 if not mentioned..
+
+>select INSTR('ORACLE SERVER','E',-1) AS INSTR_OUTPUT from dual; starting position as -1. Search will happen from the right side..First occurence of E.. Returns the index no from the left side only..
+
+>NLS_INITCAP NLS_LOWER NLS_UPPER NLS_SORT
+
+>REGEXP_INSTR REGEXP_REPLACE REGEXP_COUNT REGEXP_LIKE REGEXP_SUBSTR
+
+REVERSE:
+-------
+
+The given string will be reversed..
+
+
+
+NUMBER Functions: I/p is always the number & o/p is also always the Number..
+----------------
+
+Numeric functions manipulate the numeric values and return the numeric values as the result..
+
+ABS CEIL FLOOR POWER MOD SQRT SIGN LOG(logba) LN EXP(e^) ROUND TRUNC
+
+TRIGNOMETRIC FUNCTIONS:
+----------------------
+
+SIN ASIN SINH 
+
+STATICAL FUNCTIONS:
+-------------------
+
+STDDEV(Standard Deviation) VARIANCE
+
+GROUP/AGGREGATE FUNCTIONS:
+---------------------------
+
+MIN MAX SUM AVG COUNT DISTINCT UNIQUE 
+
+
+SELECT SIGN(123),SIGN(+123),SIGN(-123),SIGN(0) from dual;
+
+1	1	-1	0
+
+
+SeleCT LOG(10,100) from dual;
+
+
+Group Function:
+--------------
+
+The input will be multiple values and o/p is one value for the each group..
+
+MIN() MAX AVG SUM COUNT DISTINCT UNIQUE
+
+
+>TRUNC(123.45,0) ROUND(123.45,0)-->Remove the Decimal part completely
+
+
+>TRUNC(123.45,1) Keep only one digit from the decimal part 
+>TRUNC(123.45,2) Keep two digits from the decimal part 
+
+
+>TRUNC(123.45,-1) If the second parameter is -ve the decimal part will be removed and Truncation will be in the Integral Part
+
+
+DATE FUNCTIONS:
+---------------
+
+>InCase of Date functions input is date o/p is DATE NUMBER or CHARACTER
+
+SYSDATE-->Present date from the Database server will be given..
+
+CURRENT_DATE-->Present date from the Client system will be given...
+
+ADD_MONTHS(DATE,+-N) Add/Subtract
+
+LAST_DAY(DATE)
+---------------
+select LAST_DAY('12-02-2000') from dual;
+
+NEXT_DAY(DATE,'DAYNAME')-->After today which date will be Sunday
+-----------------------
+select NEXT_DAY('30-03-2021','TUESDAY') from dual; --Or you can mention day number Sun is 1 Mon-2
+
+MONTHS_BETWEEN(Date1,Date2);
+----------------------------
+SELECT MONTHS_BETWEEN('20-04-2021','30-03-2021') from dual;
+SELECT MONTHS_BETWEEN(SYSDATE,SYSDATE+60) from dual;
+
+NEW_TIME(Date,THIS,THAT) --->When Working with Multiple Timezones Want to know the time from different timezone
+---------------------------
+
+SELECT to_char(SYSDATE,'DD-MON-YYYY HH:MI:SS AM')   ServerTime ,
+to_char(NEW_TIME(SYSDATE,'PST','AST') ,'DD-MON-YYYY HH:MI:SS AM') as ASTTimeZONE from dual;
+
+
+ROUND	-->To Years,Months,Days , Hours Minutes Secs
+
+TRUNC	-->To Years,Months,Days , Hours Minutes Secs
+
+EXTRACT 
+
+TO_CHAR
+
+Extracting:
+
+>AD/BC/A.D/B.C/ad/bc/a.d/b.c
+>AM/PM/A.M/P.M/am/pm/a.m/p.m
+>D/d -->Day of the week (1 to 7)
+>DD  --->Day of Month (1 to 31)
+>DDD ---->Day of the Year (1 to 365)
+>J/j ----> Julian no:Days from 01-JAN-4712 BC
+>Dy/DY/dy-->First 3 characters of DayName
+>DAY -->Full Name of the day padded to fixed legth of 9 chars
+>W/w ---> Week no:of month (1 to 5)
+>WW  ----> Week no:of the year(1 to 52)
+>MM/mm -->Month no:f year(1 to 12)
+>MONTH/Month/month -->Full name of month padded to length of 9 chars
+>Mon/Mon/mon -->First 3 chars of month 
+>Q/q --->Quarter of the Year(1 to 4)
+>YYYY/yyyy
+>YYYY/yyy		--->Full Year(2013)
+>YY/yy
+>Y/y
+>Year/YEAR
+>HH/hh
+>HH12/hh12
+>HH24/hh24
+>MI/mi
+>SS/ss
+>FF/ff
+>TZH		--Timezone Hou
+>TZM		--Timezone Minute
+>TH/th (1st/2nd/3rd/4th)	--SuperSet(1st/2nd/3d/4th)
+>SP/sp				--Spelled out number in words(ONE)
+>SPTH/spth			--(First/second/Third/fourth/fifth)
+>FM/fm		--Fill Mode
+
+
+EXTRACT--SYSDATE:
+----------------
+
+DAY MONTH YEAR
+
+select SYSDATE,EXTRACT(DAY FROM SYSDATE) FROM Dual;
+
+select SYSDATE,EXTRACT(YEAR FROM SYSDATE) FROM Dual;
+
+select SYSDATE,EXTRACT(MONTH FROM SYSDATE) FROM Dual;
+
+select SYSDATE,EXTRACT(MINUTE FROM SYSDATE) FROM Dual; --ERROR
+select SYSDATE,EXTRACT(SECOND FROM SYSDATE) FROM Dual; --ERROR
+select SYSDATE,EXTRACT(HOUR FROM SYSDATE) FROM Dual; --ERROR
+
+EXTRACT--TIMESTAMP:
+------------------
+
+DAY MONTH YEAR HOUR MINUTE SECOND TIMEZONE_HOUR TIMEZONE_MINUTE TIMEZONE_REGION TIMEZONE_OFFSET TIMEZONE_ABBR
+
+
+
+CONEVRSION FUNCTIONS:
+---------------------
+
+TO_CHAR		-->NUMBER TO CHAR | DATE TO CHAR  ALWAYS POSSIBLE
+TO_DATE		-->CHAR TO DATE   --Not Always|Sometimes
+TO_NUMBER	---> CHAR TO NUMBER --Not Always|Sometimes
+
+TO_TIMESTAMP	-->CHAR TO TIMESTAMP
+TO_TIMESTAMP_TZ  --->CHAR TO TIMESTAMP WITH TimeZone
+TO_YMINTERVAL	--->CHAR TO YEAR TO MONTH INTERVAL
+
+
+
+
+ 
+
+
+
+>>>>>>> origin/main

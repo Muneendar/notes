@@ -1,0 +1,2572 @@
+<<<<<<< HEAD
+How many webservers you need if you want if you have laks of customers accessing your website?What Webserver do? 
+
+Terminologies:: server{Hardware} 	Webserver/HttpServer/Software/Application..
+
+Apache Tomcat:: ApplicationContainer/WebContainer
+
+Servers gets the request from --->Direct Url of Client Request , HyperLinks of HTML Document,Form Submissions
+
+How the Put Delete HttpRequest are made from the Browser?? How to create this requests?
+
+We cannot simulate the Put & Delete requests from the req's cmng from http client/form based/hyper link based requests....Requests can only be from the POST MAN.. PUT DELETE HEAD TRACE OPTIONS CONNECT servlets supports this requests also...
+
+GET/POST--HttpRequest sends the url+parameters and Body+Headers...	HttpRequest could be from Client/POstman/weblink/formsubmission
+HttpResponse--Sends the resource in HttpResponse Object along with the HttpHeaders+Body
+
+****GET & POST Requests can go directly to the JSP pages also..
+
+x/y/server.html		x/ 	 x/y/servlet.do		x/y/nameofpdffile   x/y/nameofimagefile
+
+Extension Matching 	Directory Matching 
+
+Action specific request's creations: /select/someservlet     /select/some.html  /select/some.jsp /select/pdffile  /select/imagefiles ...so..on
+
+Are we even maintaing the static PDF files imagefiles soundfiles xmlfiles or anything on directories and is the webserver is returing them....
+
+
+Application::Attach the StaticContent CSS/JavaScript/Imagefiles to the Dynamically WebPages in the WEB-INF folders..
+Application:Attach the StaticContent CSS/JavaScript/Imagefiles to the static HTML Pages in the actionspecfic folders..
+
+https://mkyong.com/spring-mvc/spring-mvc-how-to-include-js-or-css-files-in-a-jsp-page/ 
+
+****GET & POST Requests can go directly to the JSP pages also..
+
+(Servlet JSP JSF Webservice) are the Dynamic Components on the server.. HTML CSS & Javascript JQuery BootStrap are the static components on the Server.
+
+******All the urls should match to any of the dynamic Component or static component on the server...
+
+**JSP/ErrorPages/WelcomePages will be developed by the webdesigner..Web.xml/servelet/Listener's/Filters devloped by the Servlet or server side Devloper
+
+What does WebServer do? How it is calling the Application Server or WebContainer? Why WebServers and ApplicationSevers are put into the different nodes?
+
+The API In between the WebServer and Applicationserver is the least.. you dont bother about them...Just assume Webserver gave/handover the request to the Application container... It is the networking/socket based programming that is actually in between the Container and Webserver
+
+Configuring the https request? Is it the configuration on the webserver or on the Application server configuration?
+
+Does Webserver is also preparing the Response Headers if the request is for the Static Resources like the Videos/Images/gifs?
+
+Dynamic Response is always stuffed into the HTTPResponse Object..
+
+Intercommunication between the Servlet -Jsp or JSP-Servlet are possible..
+
+Do JSP's are also having the public url name and it can point to JSP without going the request to Servlet and internally forwarding to JSP? Yes
+
+How the client urls of the JSP's are then mapped?
+
+Can I use both the xml and annotation approach for the configuring the clients request to a servlets/jsp/webservice.. Which will be considered as the priority
+
+If there was no dev tools introduction in the spring boot then the XML approach could been the best approach
+
+Loading is getting automated by Spring boot but the maintenance of the properties files with the environment specific values or the configurations isn't changing..Chnage the web.xml files configuration based on the environment..
+
+			database related information loads..
+application-dev.xml 	application-prod.xml application-uat.xml.. The files like the mvcappconfig.xml or securityconfig.xml files will remain constant..
+
+/reqservlet-->Can multiple requests will have mapping to the same servlet..What is use case
+
+Microservices Architecture:
+--------------------------
+LoadBalancers handling the Multiple requests to different instances..
+
+Remote calls will always has to be the HTTP Calls.. Our entire business is split into the multiple modules or services as many as possible & deployed.
+
+Loadbalancers will now care of forwarding the request's based on the requesttype to a specific instance/service where the service is located/deployed..
+
+The servlet Controller isn’t doing much except some generic application stuff for this app, and, oh yeah, it does update the Model and then it kicks the View into gear.But the worst part is that all that generic application logic is duplicated in every single frickin’ servlet! If one thing needs to change, it has to change everywhere. A maintenance train wreck waiting to happen.Surely you don’t mean for me to put everything in a single servlet again? How could that be good?”
+
+Forward all the clients requests to the one common Servlet and it takes care of forwarding to the right controller and view...It takes the help of the HandlerMappings and ViewResolvers..
+
+The Container creates a request and response object that servlets (and other parts of the web app) can use to get information about the request and send information to the client.
+
+You can have any devlopment environment in any format but the deployement should be in the container expecting format...
+
+Does the Deployment environment changes from server to server? say Apache Tomcat to JBoss Server.. No
+
+All the Application servers are built following the J2EE Specifications
+
+All the dependencies that our Project use into the Web-application development should go into the WEB-INF/lib deployment folder.. There will be some dependencies(servlet.jar) that (runtime environments/server/applicationserver) will be provide.. We shouldn't move while preparing the war file.
+
+Is there any maven plugin that automatically moves the maven dependencies into the lib folder..maven-war plugin that copies the dependencies to lib folder
+
+or we can use the deployment descriptor assembly option of the eclipse...
+
+Throughout this book we’re using Tomcat as both the web Server and the web Container. In the real world, you probably use a more robust Web Server (like Apache) configured with a Web Container (like Tomcat).
+
+<form action="selectBeer.do" method="POST">	<!--check out the relative url always-->
+
+<url-pattern>/SelectBeer.do</url-pattern>  The / infront is mandatory
+
+For the components like Servlets & JSP & RestControllers if you need to Test then you need the Application to get deployed in the ApacheTomcat Server..
+
+JSP Generates the page for the container... The conatiner returns the page to the Happy User!!!
+
+Are there someone who is attaching the entire JSP page into the HttpResponse Object ...
+
+We don’t compile the JSP (the Container does that at first request). 
+
+What happens if we map the two urls to one servlet?  Tomcat container doesn't allow you to deploy the Application.. It throws RuntimeError.. The tomcat server itself will not start..
+
+Use the request dispatcher to ask the Container to crank up the JSP, sending it the request and response.Container doesn't even no that response is coming from the .jsp page.
+RD:: servlet can call servlet  jsp -->jsp servlet-->jsp  jsp-->servlet
+
+in the client requests urls::/select/select.do   some part of url can correspond to the directory on the server.but last part of the url should be corresponded to the servlet url jsp file url or the html file 
+
+HttpServletRequest HttpServletResponse HttpServlet ServletConfig ServletContext-->All these Objects are implementations of the Tomcat Conatiner
+
+1)Container Loads the class:
+
+2)Instanitaite the Servlet(Constructor is run):Your servlet class no-arg constructor runs (you should NOT write a constructor; just use the compiler-supplied default). If you place userdefined constructor in the servlet and configure the load-on-startup=1 then Tomcat Conatiner cannot intialise the Servlet.. Other servlets will be intialized and container can run the other servlets..
+
+3)init(): Called only ONCE in the servlet’s life, and must complete before Container can call service().
+
+4)service():This is where the servlet spends most of its life..Each request runs in a separate thread
+
+5)destroy():Container calls to give the servlet a chance to clean up before the servlet is killed (i.e., made ready for garbage collection). Like init(), it’s called only once
+
+
+Container Responsibilities:
+--------------------------
+
+Create a Thread from threadpool.create servlet request and servletResponse Objects..Load the servlet class if not loaded.. instantiate constructor run.
+
+intilaize the Servlet with the help of( init method){Even it handsover the ServletConfig Object & Servlet Context Objects to the servlet instance}
+
+invoke the service method.. then service method implementation of HttpServlet class  internally calls the doGet or doPost method based on the request....
+
+
+At any given time, you’ll have at least as many runnable threads as there are client requests, limited by the resources or policies/configuration of the Container. (You might, for example, have a Container that lets you specify the maximum number of simultaneous threads, and when the number of client requests exceeds that, some clients will just have to wait.)
+
+The Container runs multiple threads to process multiple requests to a single servlet.And every client request generates a new pair of request and response objects..
+
+
+Tomcat: finds for the deployed webapps and searches for all the servlets(how,why,where it looks?) that configured with load-on-startup=1 and creates the instance of the servlet and runs the init method. or else creates the instance of servlet on fly when the first client request and runs the init method
+
+Service() method will not run until the servlet is fully initialized{init is also run}.
+
+When an Object becomes servlet, it gets all the unique previleges that comes with being servelt use its ServletContext reference to get information from the
+Container.
+
+Between the constructor and the init() method, the servlet is in a Schroedinger’s* servlet state:
+
+You might have servlet initialization code, like getting web app configuration info, or looking up a reference to another part of the application, that will fail if you run it too early in the servlet’s life. It’s pretty simple though, if you remember to put nothing in the servlet’s constructor!
+
+Servlet is mapped as /test%3F/* and the application is deployed under /app. 
+http://30thh.loc:8480/app/test%3F/a%3F+b;jsessionid=S%3F+ID?p+1=c+d&p+2=e+f#a  Encoded Url that is sent from Client Browser
+
+Method              URL-Decoded Result           
+----------------------------------------------------
+getContextPath()        no      /app
+getLocalAddr()                  127.0.0.1
+getLocalName()                  30thh.loc
+getLocalPort()                  8480
+getMethod()                     GET
+getPathInfo()           yes     /a?+b
+getProtocol()                   HTTP/1.1
+getQueryString()        no      p+1=c+d&p+2=e+f
+getRequestedSessionId() no      S%3F+ID
+getRequestURI()         no      /app/test%3F/a%3F+b;jsessionid=S+ID
+getRequestURL()         no      http://30thh.loc:8480/app/test%3F/a%3F+b;jsessionid=S+ID
+getScheme()                     http
+getServerName()                 30thh.loc
+getServerPort()                 8480
+getServletPath()        yes     /test?
+getParameterNames()     yes     [p 2, p 1]
+getParameter("p 1")     yes     c d
+
+
+"+" is handled as space only in the query string..Anchor "#a" is not transferred to the server. Only the browser can work with it.
+If the url-pattern in the servlet mapping does not end with * (for example /test or *.jsp), getPathInfo() returns null.
+
+
+Differences between the GET & POST?
+
+But besides size, security, and bookmarking, there’s another crucial difference between GET and POST—the way they’re supposed to be used. GET is meant to be used for getting things. Period. Simple retrieval. Sure, you might use the parameters to help figure out what to send back, but the point is—you’re not making any changes on the server! POST is meant to be used for sending data to be processed. This could be as simple as query parameters used to figure out what to send back, just as with a GET, but when you think of POST, think: update. Think: use the data from the POST body to change something on the server
+
+
+Double POSTING Problems? Don't try to makes changes on the server with the GET Request.. You should handle the DoublePosting problem even for the GET requests
+
+Repatable Operations: GET PUT DELETE HEAD   Non-Repetable Operations: POST
+
+Being idempotent is GOOD. It means you can do the same thing over and over again, with no unwanted side effects!
+
+POST is not idempotent—the data submitted in the body of a POST might be destined for a transaction that can’t be reversed. So you have to be careful with
+your doPost() functionality!
+
+What’s to stop me from using the parameters in GET to update the server? But don't do as per HTTP spec it supposed to be Ideompotent
+
+<form method=”POST” action=”SelectBeer.do”> if you explicitly SAY method=”POST”, then, surprisingly, it’s a POST.
+
+<form action=”SelectBeer.do”> The default is GET and parameters are sent inthe request Header..Because if the request comes in as a GET, that means you’ll run into big trouble at runtime if you have only a doPost() and not a doGet() in your servlet!
+
+
+Can Sizes: <p>
+<input type=checkbox name=sizes value=”12oz”> 12 oz.<br>
+<input type=checkbox name=sizes value=”16oz”> 16 oz.<br>
+<input type=checkbox name=sizes value=”22oz”> 22 oz.<br>
+<br><br>
+
+String one = request.getParameterValues(“sizes”)[0]; String [] sizes = request.getParameterValues(“sizes”);
+
+To collect all the front end Objects we maintain one Object that is VTO or DTO in the Types the inputs are coming from the Front end..All front end objects are Strings only
+
+
+Most servers can, for static content. In Apache, for example, you can set up MIME types by mapping a specific file extension (.txt, .jar, etc.) to a specific content type, and Apache will use that to set the content type in the HTTP header.But we’re talking about what happens inside a servlet where there IS no file! You’re the one who is sending back the response; the Container has no idea what you’re sending.
+
+But what about that last example where you read a specific JAR file? Can’t the Container see that you’re reading a JAR?
+
+You can also look in your browser preferences for a list of those that have been configured for your browser, and you can check your Web server configuration files as well
+
+Wait a second... why would you use a servlet to send back that JAR file when you can just have the web server send it back as a resource? In other words, why wouldn’t you have the user click a link that goes to the JAR instead of to a servlet? Can’t the server be configured to send back the JAR directly without even GOING through a servlet? 
+
+To figure out which jar file to send..take the parameters and genrate only fly the file that is not existed on the server deployment directories..
+Maybe it’s something as simple as putting code in your servlet that—along with sending back the JAR—writes some info to a database about this particular user. Or maybe you have to check to see if he’s even allowed to download this JAR, based on something you first read from the database
+
+How do you Handle the static Pdf files and Dynamic Pdf files/jar files that are generated on the server? Will you delete them immediately or store them somewhere?
+
+The PrintWriter actually “wraps” the ServletOutputStream. In other words, the PrintWriter has a reference to the ServletOutputStream and delegates calls
+to it.There’s just ONE output stream back to the client, but the PrintWriter “decorates” the stream by adding higher-level character-friendly methods
+
+When you call setContentType(“text/html”), you’re setting a header just as if you said: setHeader(“content-type”, “text/html”);
+
+So what’s the difference? No difference... assuming you type the “content-type” header correctly. The setHeader() method won’t complain if you misspell the header names—it just thinks you’re adding a new kind of header.
+
+
+You can either redirect the request to a completely different URL..you can dispatch the request to some other component in your web app
+
+The servlet/jsp/webservice decides that the request should go to a completely different URL..The servlet calls sendRedirect(aString) on the response and that’s it.The HTTP response has a status code “301” and a “Location” header with a URL as the value...The browser gets the response, sees the “301” status code, and looks for a “Location” header..The browser makes a new request using the URL that was the value of the “Location” header in the previous
+response. The user might notice that the URL in the browser bar changed...The HTTP response is just like any other response... except it isn’t coming
+from the location the client typed in.
+
+
+Servlet/Jsp/Webservice Decision Making
+---------------------------------------
+
+if (worksForMe) {
+// handle the request
+} else {
+response.sendRedirect(“http://www.oreilly.com”);	The URL you want the browser to use for the request. This is what the client will see.			
+}//Container logics takes care of adding the location header
+
+In servlet/webservice/jsp named “bar.do”, the servlet calls sendRedirect() with a relative URL that does NOT start with a forward slash
+
+sendRedirect(“foo/stuff.html”);The Container knows the original request URL started from the myApp/cool path, so if you don’t use a forward slash, that part of the path is prepended to the front of “foo/stuff.html”..****"foo" is a web app, separate from the "myApp" web app.
+
+But if the argument to sendRedirect() DOES start with a forward slash::The forward slash at the beginning means “relative to the root of this web Container.
+
+****If the sendRedirect Urls starts with /. Then the container consider the url to be root of the webcontainer while building
+
+**If you want to forward the request to another webapp deployed on the same container use the /(forward-slash..).. If you want to forward the another component(servlet/jsp/webservice) deployed on the same-webapp then url shouldn't start with slash. If you want to forward to a completely another App deployed on other container on same machine or the other container on the different machine then you should use the encodeRedirectUrl
+
+
+How to deploy the multiple webapplications on the same container and on different Ports? With SpringBoot it is made easy with just a server.port specified on the each application individually.How it is different if you deploy the application on the GlassFish or WebLogic..Just with the server.port will it work or any other changes
+
+After the response is committed then don't call the response.sendRedircect:: It will throw the IllegalStateException
+
+****By the way, this idea that “once it’s committed it’s too late” also applies to setting headers, cookies, status codes, the content-type, and so on...)
+
+How do you do the HTTP Post Redirect?
+
+***How do you let components share information? How do you hide information? How do you make information threadsafe?
+
+Remeber you cannot call the getServletConfig() from the constructor of the servlet
+
+The Container “reads” the servlet init parameters from the DD and gives them to the ServletConfig, then passes the ServletConfig to the servlet’s init()
+method.
+
+Wait a minute! In the last chapter you said that we could override the init() method, and nobody said a word about the ServletConfig argument?
+
+**There’s no law that stops you from overriding the one that takes a ServletConfig, but if you DO, then you better call super.init(ServletConfig)!
+
+There is need to override the init(ServletConfig) method,since you can always get your ServletConfig by calling your inherited getServletConfig() method.
+
+The servlet init parameters are read only ONCE—when the Container initializes the servlet The servletConfig is the Interface and don't worry about the implementation
+
+What is the benefit that you achive with the web.xml DD? You can avoid the recompilation of the code.But with SpringBoot that is ignored..
+
+
+All the other webapps going down for sake of one initialization parameter change is BAD.production-quality Web Containers let you do a hot redeploy, which means that you don’t have to restart your server or take any other web apps down.In fact, Tomcat does include a manager tool that will let you deploy, undeploy, and redeploy entire web apps without restarting
+
+But in the real world, even a hot redeploy is a Big Deal, and taking even a single app down just because the init parameter value changed can be a bad idea. If the values of your init parameters are going to change frequently, you’re better off having your servlet methods get the values from a file or database, but this approach will mean a lot more overhead each time your servlet code runs, instead of only once during initialization.
+
+How can the JSP get the servlet InitParameters? Put them in requestAttribute
+The request object lets you set attributes (think of them as a name/value pair where the value can be any object) that any other servlet or JSP that gets the request can use. That means any servlet or JSP to which the request is forwarded using a RequestDispatcher..
+
+Why the servlet initParameters are required for other component in Webapp? initParams are specific to the one servlet configuration only na !!!
+
+out.println(getServletContext().getInitParameter(“adminEmail”));Every servlet inherits a getServletContext() method (and JSPs have special access to a context as well).
+
+
+ServletContext is one per app, but only if the app is in a single JVM!In a distributed environment, you’ll have one ServletContext per JVM If the app is distributed, there’s one ServletContext per JVM!Now, chances are this won’t create problems, but if you have a distributed web app, you better consider the
+consequences of having different contexts for each JVM
+
+****Yes, JSPs are turned into first-class servlets, so they also get their own ServletConfig
+
+You can only get the SevletInitParameter or ContextInitParameter but you cannot modify the values of them using the code in the servlet..
+
+Perhaps the most common use of a context parameter is storing database lookup names. You’d want all parts of your app to have access to the correct name, and when it changes, you want to change it in only one place.
+
+If you modify the XML to change the value of an init parameter (either servlet or context), when does the servlet or the rest of the web app see the change?
+
+ServletContext and ServletConfig objects are created after reading the xml file.. If you change then you should redeploy inorder to change the values..
+ONLY when the web app is redeployed. Remember—we talked about this before—the servlet is initialized only once, at the beginning of its life, and that’s when it’s given its ServletConfig and ServletContext. The Container reads the values from the DD when it creates those two objects, and sets the values.
+
+Think Context-Params & init-Params are as deployment time constants.You can get them at runtime, but you can’t set them. There’s no setInitParameter().
+
+getServletConfig(). getServletContext(). getInitParameter() In a servlet, the only time you would NEED to go through your ServletConfi g to get your ServletContext is if you’re in a Servlet class that doesn’t extend HttpServlet or GenericServlet (the getServletContext() method you inherit comes from GenericServlet
+
+
+It’s fine to use the ServletContext log() method for simple experiments, but in a real production environment, you will almost certainly want to choose something else
+
+
+******Configuring the COntextParameters without using the web.xml..We have annotation for @WebInitParam..For ContextParameters ?
+
+
+Listener: She needs someone who is sitting there, waiting to be notified that the app is starting up.She wants to listen for a context initialization event,
+so that she can get the context init parameters and run some code before the rest of the app can service a client
+
+Listener JOb:You need something else. Not a servlet or JSP, but some other kind of Java object whose sole purpose in life is to initialize the app (and possibly to uninitialize it too, cleaning up resources when it learns of the app’s demise...
+
+ServletContextListener:: Listening for the two key events of ServletContxt creation and ServletContextDestruction
+
+Our Servlets JSP's and Listener all the Objects will be created by the ServletContainers..Spring Container takes care of creation of Bean Type Objects
+
+***Now ServletContext has the Shared Object(listner kept in attribute) which can be used by multiple servlets at the same time
+
+Listener is now like a factory class..with the help of parameter that is in the <init-param> we are creating the Object..
+
+How many instances of the Listener will be created?one
+
+Does the attributes need to be Serializable?
+
+
+There are several different attribute types, and whether the attribute should be Serializable only matters with Session attributes. And the
+scenario in which it matters is only if the application is distributed across more than one JVM. 
+
+There’s no technical need to have any attributes (including Session attributes) be Serializable, although you might consider making all of your attributes Serializable by default, unless you have a really good reason NOT to.
+
+Think about it—are you really certain that nobody will ever want to use objects of that type as arguments or return values as part of a remote method call? Can you really guarantee that anyone who uses this class (Dog, in this case) will never run in a distributed environment?
+
+**Aim is to::Intializing the Application before any other Servlet is being serviced.. Use the ServletContextListener
+
+**One Listener can implement multiple Listeners
+
+I just thought of something... since attributes can be set programmatically (unlike init parameters), can I listen for attribute events? Like if someone adds or replaces a Dog?
+
+
+***You DO need to know the what kinds of events that you(Listener) can listen for?
+
+ServletContextAttributeListener  ServletContextAttributeEvent
+ServletContextListener		 ServletContextEvent
+HttpSessionListener		 HttpSessionEvent
+HttpSessionActivationListener    HttpSessionEvent
+HttpSessionBindingListener	 HttpSessionBindingEvent
+HttpSessionAtrributeListener	 HttpSessionBindingEvent
+ServletRequestListener		 ServletRequestEvent
+ServletRequestAttributeListener  ServletRequestAttributeEvent
+
+
+HttpSessionBindingListener::You have an attribute class (a class for an object that will be stored as an attribute) and you want objects of this type to be notified when they are bound to or removed from a session..
+
+HttpSessionActivationListener::You have an attribute class, and you want objects of this type to be notified when the session to which they’re bound is migrating to and from another JVM
+
+HttpSessionBindingListener and HttpSessionActivationListener will be implemented by the attribute classes that will be part of the Session Attribute..
+
+A plain old HttpSessionAttributeListener is just a class that wants to know when any type of attribute has been added, removed, or replaced in a Session. But the HttpSessionBindingListener exists so that the attribute itself can find out when it has been added to or removed from a Session.
+
+****Note: binding listeners are NOT registered in the DD... it just happens automatically.
+
+Imagine the Dog is a Customer class, with each active instance representing a single customer’s info for name, address, order info, etc. The real data is stored in an underlying database. You use the database info to populate the fields of the Customer object, but the issue is how and when do you keep the database record and the Customer info synchronized? You know that whenever a Customer object is added to a session, it’s time to refresh the fields of the Customer with this customer’s data from his record in the database. So the valueBound() method is like a kick that says, “Go load me up with fresh data from the database... just in case it changed since the last time I was used.” Then valueUnbound() is a kick that says, “Update the database with the value of the Customer object fields.
+
+Differences between the Atrribute and Parameters?
+
+Types		Application/context,Request,Session         Application/context init parameters (&) Request parameters & Servlet init parameters
+
+Notes:There is no servlet-specific attribute (just use an instance variable).No such thing as session parameters
+
+setMethods:	setAttribute(String name, Object value)	    You CANNOT set Application and Servlet init parameters—they’re set in the DD, remember..
+
+Return type:	Object					    String
+
+Method to get:  getAttribute(String name)		    getInitParameter(String name)
+
+Notes:Don’t forget that attributes must be cast, since the return type is Object
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+The Three Scopes: Context, Request, and Session.
+
+ContextAttributes: Everyone in the application has access
+
+Session Attributes:: Accessible to only those with access to a specific HttpSession
+
+REQUEST Attributes:: Accessible to only those with access to a specific ServletRequest
+
+**The one who has access can set/remove or just read the attribute
+
+Note: you should think about the implications of garbage collection when you think about scope... some attributes won’t be GC’d until the application is undeployed or dies
+
+
+***There is a possibility if the scope of the attributes is higher then two resources in the webapp can be modifying them simulatenously...
+
+**ServletContext & HttpSession Objects are sharable across multiple components in the WebApp. They have to ThreadSafe Objects or Operations you perfom on them should be in Synchronized Fashion.
+
+getServletContext().setAttribute(“foo”, “22”);
+getServletContext().setAttribute(“bar”, “42”);		1)Lets assume request is first made to this servlet.. It was running and moved to runnable
+out.println(getServletContext().getAttribute(“foo”));
+out.println(getServletContext().getAttribute(“bar”));	3) Imagine this Thread has got again the chance now it will get the bar as 16 instead 42
+
+Imagaine Servlet-B
+getServletContext().setAttribute(“bar”, “16”); 		2) The second Thread has modified the attribute for the bar.
+
+
+Options to get ThreadSafety on ServletContext & ServletSession:
+
+***Synchronizing the doGet is Bad Idea?Synchronizing on the doGet() means kissing your concurrency goodbye. If you synchronize doGet(), it means that servlet can handle only ONE client at a time..
+
+Synchronizing the service method means that only one thread in a servlet can be running at a time... but it doesn’t stop other servlets or JSPs from accessing the attribute!Synchronizing the service method would stop other threads from the same servlet from accessing the context attributes, but it won’t do anything to stop a completely different servlet...
+
+You won’t do anything to stop OTHER servlets! Regardless of whether the service methods in other servlets are synchronized or not... it still means other parts of the app have access to the context attributes.
+
+HttpSessions:
+------------
+
+HTTP sessions  is an object used to maintain conversational state with a client.The session persists across multiple requests from the same client. But it’s still just one client we’re talking about..And if it’s one client, and a single client can be in only one request at a time, doesn’t that automatically mean that sessions are thread-safe? In other words, even if multiple servlets are involved, at any given moment there’s only one request from that particular client..
+
+
+Can you think of a scenario in which there could be more than one request at the same time, from the same client? What do you think? Are session attributes
+guaranteed thread-safe?
+
+It is not that the Client is making the requests only from the WebBrowser.. Lets think it is coming from the POSTMAN.. What is now... The client could open a new browser window!So the Container can still use the same session for a client...
+
+
+HttpSession session = request.getSession();
+
+synchronized(session) {
+	session.setAttribute(“foo”, “22”);
+	session.setAttribute(“bar”, “42”);
+	out.println(session.getAttribute(“foo”));
+	out.println(session.getAttribute(“bar”));
+}
+
+synchronized(getServletContext()) {
+	getServletContext().setAttribute(“foo”, “22”);
+	getServletContext().setAttribute(“bar”, “42”);
+	out.println(getServletContext().getAttribute(“foo”));
+	out.println(getServletContext().getAttribute(“bar”));
+}
+
+
+SingleThreadModel:
+-----------------
+If a servlet implements this interface, you are guaranteed that no two threads will execute concurrently in the servlet’s service method.
+
+The container can maintain a single servlet, but queue every request and process one request completely before allowing the next request to proceed. Or the container can create a pool of servlet instances and process each request concurrently, one per servlet instance.
+
+Queuing Strategy or Multiple Instances:what if one of the instance variables is meant to record how many requests have been processed. The counter variable would have several different counts, and none of them would be right... only the summation of them is correct
+
+Different venodors will be using the different strategy..The specification writers wanted to give the container vendors the opportunity to compete with each other in terms of performance and flexibility.
+
+Why STM is introduced? To protect the instance varaibles from the ThreadSafety inside the servlet the STM was introduced...but by pooling multiple instances
+the semantics of the servlet changes..Furthermore, STM does not help with other variable or attribute scopes.
+
+But are class variables thread-safe?No, they are not, and the STM mechanism does not help with class variables..
+
+
+Only Request attributes and method parameters & local variables are thread-safe!!!
+
+That’s right. If you have multiple clients making requests on that servlet, that means multiple threads running that servlet code. And all threads have access to the servlet’s instance variables, so instance variables aren’t thread-safe.
+
+But they WOULD be thread-safe if you implemented the SingleThreadModel, right!!Yes, because you’d never have more than one thread for that servlet, so the instance variables would be thread-safe. But of course nobody would ever allow you into the servlets club ever again.
+
+What if synchronize the service method?idiot. The effect of implementing SingleThreadModel is virtually the same as synchronizing the service method. Both can bring a web app to its knees without protecting the session and context state.
+
+But if you’re not supposed to use SingleThreadModel or synchronize the service method, then how DO you make instance variables thread-safe?
+
+Look at a well-written servlet, and chances are you won’t find any instance variables. Or at least any that are non-final. (And since you’re a Java programmer you know that even a final variable can still be manipulated unless it’s immutable..just don’t use instance variables if you need thread-safe state, because all threads for that servlet can step on instance variables.
+
+*****If you want all the threads or (multiple servelts) to access a value, decide which attribute state makes the most sense, and store the value in an attribute.
+
+RequestDispatcher: You should use to forward the request to any component within the current webapp only..
+
+RequestDispatcher view = request.getRequestDispatcher(“result.jsp”); You can use with /fowrad slash or without.
+
+If no forward slash container looks for the resource in the same logical location of the cuurent request or relative path to current request Url..if path starts with the /(forward slash) then container starts searching for the root of the current webapp.
+
+
+RequestDispatcher view = getServletContext().getRequestDispatcher(“/result.jsp”); It should always starts with the (/)forward slash. You cannot specify path relative to the current resource.then container starts searching for the root of the current webapp.
+
+You can’t forward the request if you’ve already committed a response!Container will throw an IllegalStateException.
+
+include() method is not used much in the real world from the servlets programming perspective..
+
+In other words, include() means asking for help in handling the request, but it’s not a complete hand-off. It’s a temporary, rather than permanent transfer of control. With forward(), you’re saying, “That’s it, I’m not do-ing anything else to process this request and response.” But with include(), you’re saying, “I want someone else to do some things with the request and/or response, but when they’re done, I want to finish handling the request and
+response myself (although I might decide to do another include or forward after that...”).
+	
+
+****View.inlcude() View.forward() shouldn't be called after you have commiteed the response...
+
+**** Some Exceptions are thrown by Container like ServletException,IllegalThreadStateExceptionIOException other than the Programmer thrown Exceptions..
+
+Context:(Entire APP)
+--------
+Visibility:Any part of the web app including servlets, JSPs, ServletContextListeners, ServletContextAttribute-Listeners
+
+Scope:Lifetime of the ServletContext, which means life of the deployed app. If server or app goes down, the context is destroyed (along with itsattributes).
+									
+Usage:Resources you want the entire application to share, including database connections, JNDI lookup names, email addresses., etc.
+
+
+HttpSession:(Servlet/JSP/WebService)
+------------
+
+Visibility:Any servlet or JSP with access to this particular session. Remember, a session extends beyond a single client request to span multiple requests by the same client, which could go to different servlets.
+
+Life/Scope:The life of the session. A session can be destroyed programmatically or can simply time-out. 
+
+Usgae:Data and resources related to this client’s session, not just a single request. Something that requires an ongoing conversation with the client. A shopping cart is a typical example.
+
+Request:(Servlet/JSP/WebService)
+-------
+
+Visibility:Any part of the application that has direct access to the Request object. That mostly means only the Servlets and JSPs to which the request is forwarded using a RequestDispatcher. Also Request-related listeners
+
+Life/Scope:The life of the Request, which means until the Servlet’s service() method completes. In other words, for the life of the thread (stack) handling this request.
+
+Usage:Passing model info from the controller to the view... or any other data specific to a single client request.
+
+
+public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+ req.setAttribute(“a”, “b”);
+ req.setAttribute(“a”, “c”);
+ req.removeAttribute(“a”);
+ }
+ public void attributeAdded(ServletRequestAttributeEvent ev) {
+	 System.out.print(“ A:” + ev.getName() + “->” + ev.getValue());
+ }
+public void attributeRemoved(ServletRequestAttributeEvent ev) {
+	System.out.print(“ M:” + ev.getName() + “->” + ev.getValue());
+}
+public void attributeReplaced(ServletRequestAttributeEvent ev) {
+	System.out.print(“ P:” + ev.getName() + “->” + ev.getValue());
+}
+A:a->b P:a->b M:a->c
+
+
+**Registering the Listeners with Container so Container can trigger the Listener class Objects when the specific event occurs..
+
+***The servlet to which a request is forwarded may access the original query string by calling getAttribute(“javax.servlet.forward.query_string”) on the ServletRequest.
+
+What is the recommended way to deal with servlets and thread safety?
+**Use local variables exclusively, and if you have to use instance variables, synchronize access to them.
+
+**ServletContext Pednig Object to remeber the methods
+
+If a servlet's RequestDispatcher was obtained using one of the getRequestDispatcher methods (and not using getNamedDispatcher), the following attributes are available in the ServletRequest:
+
+When?	Name					Description
+forward	javax.servlet.forward.request_uri	original request URI (see getRequestURI)
+forward	javax.servlet.forward.context_path	original context path (see getContextPath)
+forward	javax.servlet.forward.servlet_path	original context path (see getServletPath)
+forward	javax.servlet.forward.path_info		original path info (see getPathInfo)
+forward	javax.servlet.forward.query_string	original query string (see getQueryString)
+include	javax.servlet.include.request_uri	included request URI (see getRequestURI)
+include	javax.servlet.include.context_path	included context path (see getContextPath)
+include	javax.servlet.include.servlet_path	included context path (see getServletPath)
+include	javax.servlet.include.path_info		included path info (see getPathInfo)
+include	javax.servlet.include.query_string	included query string (see getQueryString)
+
+
+Forward to Static Content:
+--------------------------
+ // before or after noon? determine path to the right image in the WAR
+boolean isPM = new GregorianCalendar().get(Calendar.AM_PM) == Calendar.PM; 
+String resName = "/WEB-INF/images/time" + (isPM ? "PM" : "AM") + ".png";
+getServletContext().getRequestDispatcher(resName).forward(request, response);
+
+
+HttpSession:
+
+An HttpSession object can hold conversational state across multiple requests from the same client.In other words, it persists for an entire session with a specific client..We can use it to store everything we get back from the client in all the requests the client makes during a session.
+
+Why can’t the Container just use the IP address of the client? It’s part of the request, right?
+
+To the server, your IP address is the address of the router, so you have the same IP address as everybody else on that network! So that wouldn’t help. You’d have the same problem—the stuff Jim puts in his shopping cart might end up in Pradeep’s cart, and vice versa. So no, IP address isn’t a solution for uniquely identifying a specific client on the internet.
+
+Well then how about security info? If the user is logged in, and the connection is secure (HTTPS), the Container knows EXACTLY who the client is, right
+
+Yes, if the user is logged in and the connection is secure, the Container can identify the client and associate him with a session. But that’s a big if. Most good web site design says, “don’t force the user to log in until it really matters, and don’t switch on security (HTTPS) until it really matters.” If your users are just browsing, even if they’re adding items to a shopping cart, you probably don’t want the overhead (for you or the user) of having them authenticate to the system until they decide to checkout! So, we need a mechanism to link a client to a session that doesn’t require a securely authenticated client
+
+Our Role: Request.getSession();
+
+Container Role: Container takes care of generating the SessionId 2)Creating the new Cookie Object 3)Stuffing the sessionId into the Cookie 4)Stuffing the Cookie into the Response Header..
+
+And on subsequent requests, the Container gets the session ID from a cookie in the request, matches the session ID with an existing session, and associates that session with the current request.
+
+HttpSession session = request.getSession();
+------------------------------------------
+You don’t make the new HttpSession object yourself.
+You don’t generate the unique session ID.
+You don’t make the new Cookie object.
+You don’t associate the session ID with the cookie.
+You don’t set the Cookie into the response
+(under the Set-Cookie header).All the cookie work happens behind the scenes
+
+Cookie::Cookie is the small piece of information. String value pair that we need from the client recognise.
+
+HttpSession session = request.getSession();
+
+
+IF (the request includes a session ID cookie)
+	find the session matching that ID
+
+ELSE IF (there’s no session ID cookie OR there’s no current session matching the session ID)
+	create a new session.
+
+All the cookie work happens behind the scenes.
+
+What if I want to know whether the session already existed or was just created?
+
+
+HttpSession session = request.getSession();getSession() returns a session no matter what.... but you can’t tell if it’s a new session unless you ask the session
+
+if (session.isNew()) {}	isNew() returns true if the client has not yet responded with this session ID.
+
+
+**You get a session by calling request.getSession(), but is that the only way to get the session? Can’t you get it from the ServletContext?
+
+But there is another way that you can get a session... from a session event object. Remember, a listener class isn’t a servlet or JSP—it’s just a class that wants to know about the events. For example, the listener might be an attribute trying to find out when it (the attribute object) was added to or removed from a session..The event-handling methods defined by the listener interfaces related to sessions take an argument of type HttpSessionEvent, or its subclass, HttpSessionBindingEvent. And HttpSessionEvent has a getSession() method!So, if you implement any of the four listener interfaces related to sessions (we’ll get to that later in the chapter), you can access the session through the event-handling callback methods. For example, this code is from a class that implements the HttpSessionListener interface
+
+public void sessionCreated(HttpSessionEvent event) {
+HttpSession session = event.getSession();
+// event handling code
+}
+
+What if I want ONLY a pre-existing session?It might not make sense for the checkout servlet, for example, to start a new session.
+
+So there’s an overloaded getSession(boolean) method just for that purpose. If you don’t want to create a new session, call getSession(false), and you’ll get either null, or a pre-existing HttpSession
+
+HttpSession session = request.getSession(false);	the no-arg getSession() would NEVER return null
+Passing “false” means the method returns a pre-existing session, or null if there was no session associated with this client
+
+So it looks like getSession(true) is exactly the same as getSession()...
+
+Right again. The no-arg version is a convenience for those times when you know that you always want a session, new or existing. The version that takes a boolean is useful when you know that you don’t want a new session, or when the decision of whether to make a new session happens at runtime (and you’re passing a variable into the getSession(someBoolean) method).
+
+
+URL Rewriting: url;jsessionid=
+
+Imagine a web page where every link has a little bit of extra info (the session ID) tacked onto the end of the URL. When the user clicks that “enhanced” link, the request goes to the Container with that extra bit on the end, and the Container simply strips off the extra part of the request URL and uses it to find the matching session
+
+**Does you change every url that you write as part of the webapp with Url Rewrting? Only the links that want the sessionState Compulsory..
+
+Remember, if the Container doesn’t get a session ID from the client, the Container won’t even KNOW that this is the next request from that client. The Container won’t have any way to know that it tried cookies the last time, and they didn’t work. Remember, the ONLY way the Container can recognize that it has seen this client before is if the client sends a session ID!So, when the Container sees you call request.getSession(), and realizes it needs to start a new session with this client, the Container sends the response with both a “Set-Cookie” header for the session ID, and the session ID appended to the URLs (assuming you used response.encodeURL()).Now imagine the next request from this client—it will have the session ID appended to the request URL, but if the client accepts cookies, the request will ALSO have a session ID cookie. When the servlet calls request.getSession(), the Container reads the session ID from the request, finds the session, and thinks to itself, “This client accepts cookies, so I can ignore the response.encodeURL() calls. In the response, I’ll send a cookie since I know that works, and there’s no need for any URL rewriting, so I won’t bother...”
+
+
+You might have a scenario in which you want to redirect the request to a different URL, but you still want to use a session.
+There’s a special URL encoding method just for that:
+
+response. encodeRedirectURL(“/BeerTest.do”)
+
+What about all my static HTML pages... they are full of <a href> links. How do I do URL rewriting on those static pages?
+
+You can’t! The only way to use URL rewriting is if ALL the pages that are part of a session are dynamically-generated! You can’t hard-code session ID’s, obviously, since the ID doesn’t exist until runtime. So, if you depend on sessions, you need URL rewriting as a fall-back strategy. And since you need URL rewriting, you have to dynamically generate the URLs in the response HTML! And that means you have to process the HTML at runtime.
+
+Yes, this is a performance issue. So you must think very carefully about the places where sessions matter to your app, and whether sessions are critical to have or merely good to have
+
+**For Sessions Management you need to depend on the Cookies or URL Rewriting 
+
+URL rewriting is automatic but only if you encode your URLs. YOU have to run all your URLs through a method of the response object—encodeURL() or
+encodeRedirectURL()—and the Container does everything else
+
+You can do URL-rewriting in a JSP, and there’s even a simple JSTL tag that makes it easy, <c:URL>, that you’ll see when you get to the chapter on using custom tags...
+
+Yes, URL rewriting is handled in a vendor-specific way. Tomcat uses a semicolon “;” to append the extra info to the URL. Another vendor might use a comma or something else. And while Tomcat adds “jsessionid=” in the rewritten URL, another vendor might append only the session ID itself. The point is, whatever the Container uses as the separator is recognized by the Container when a request comes in. So when the Container sees the separator that it uses (in other words, the separator that it added during URL rewriting), it knows that everything after that is “extra info” that the Container put there.
+
+
+Don't ever do this:
+
+String sessionID = request.getParameter(“jsessionid”)
+
+And you shouldn’t see a custom “jsessionid” header in a request or response:
+
+POST /select/selectBeerTaste.do HTTP/1.1
+User-Agent: Mozilla/5.0
+JSESSIONID: 0AAB6C8DE415	Don’t do this! It’s supposed to be a header!
+
+In fact, the ONLY place a “jsessionid” belongs is inside a cookie header:
+POST /select/selectBeerTaste.do HTTP/1.1
+User-Agent: Mozilla/5.0
+Cookie: JSESSIONID=0AAB6C8DE415	This is right, but you don’t do it yourself
+
+POST /select/selectBeerTaste.do;jsessionid=0AAB6C8DE415
+
+*** If it is the GET Request or the POST request the in the URL Rewriting the jsessionId will be in url. That will be used for HACKING. So whenever you login to the website you should logout/invalidate the session before you come out of any site..
+
+****The only way to use URL rewriting is if ALL the pages that are part of a session are dynamically-generated!..
+
+
+Cookies:
+-------
+
+Remember, a cookie is nothing more than a little piece of data (a name/value String pair) exchanged between the client and server. The server sends the cookie to the client, and the client returns the cookie when the client makes another request. One cool thing about cookies is that the user doesn’t have to get involved—the cookie exchange is automatic..By default, a cookie lives only as long as a session; once the client quits his browser, the cookie disappears. That’s how the “JSESSIONID” cookie works. But you can tell a cookie to stay alive even AFTER the browser shuts down.
+
+<session-config>
+    <session-timeout>720</session-timeout> <!-- 720 minutes = 12 hours -->
+    <cookie-config>
+        <max-age>43200</max-age> <!-- 43200 seconds = 12 hours -->		Client can comeback and use the same session..
+    </cookie-config>
+</session-config>
+
+You can tell a cookie to stay alive even AFTER the browser shuts down of the browser....
+
+***How the Cookies to the specific site are sent ? How cookies are stored in the webbrowser?
+**When we access the flipkart does only the flipkart Cookies sent or all the Websites cookies are sent?
+
+** We don't need to declare the Binding Listeners in the DD..
+
+
+If an attribute class (like the Dog class here) implements the HttpSessionBindingListener, the Container calls the event-handling callbacks (valueBound() and valueUnbound()) when an instance of this class is added to or removed from a session. That’s it. It just works. But this is NOT true for the other session-related listeners on the previous page. HttpSessionListener and HttpSessionActivationListener must be registered in the DD, since they’re related to the session itself, rather than an individual attribute placed in the session
+
+** Who creates the Objects of the Listener? When it creates the Object First time when the event is triggered or before only?
+
+we talked briefly about distributed web apps, where the pieces of the app might be replicated across multiple nodes in the network. In a clustered environment, the Container might do load-balancing by taking client requests and sending them out to JVMs (which may or may not be on different physical boxes, but that doesn’t matter to us). The point is, the app is in multiple places.
+
+That means each time the same client makes a request, the request could end up going to a different instance of the same servlet. In other words, request A for Servlet A could happen on one VM, and request B for Servlet A could end up on a different VM. So the question is, what happens to things like ServletContext, ServletConfig, and HttpSession objects?
+
+
+Only HttpSession objects (and their attributes) move from one VM to another.
+There is one ServletContext per VM. There is one ServletConfig per servlet, per VM. But there is only one HttpSession object for a given session ID per web app, regardless of how many VM’s the app is distributed across.
+
+
+Everything is duplicated in the second server EXCEPT the HttpSession objects.Sessions live in only ONE place at any given moment. The same session ID for a given web app will NEVER appear in two VMs at the same time
+
+
+App server vendor handles clustering and web app distribution varies with each vendor, and there’s no guarantee in the J2EE spec that a vendor has to support distributed apps. But the picture here gives you a high-level idea of how it works. The key point is that while other parts of the app are replicated on each node/VM,the session objects are moved. And that is guaranteed. In other words, if the vendor does support distributed apps, then the Container is required to migrate sessions across VMs. And that includes migrating session attributes as well.
+
+A Container is required to migrate Serializable attributes (which assumes that all instance variables within the attribute are either Serializable or null).
+
+But a Container is not required to use Serialization as the means for migrating the HttpSession object! What does this mean to you? Simple: make sure your attribute class types are Serializable and you never have to worry about it. But if they’re not Serializable (which could be because one of the
+attribute object’s instance variables is not Serializable), have your attribute object class implement HttpSessionActivationListener and use the activation/passivation callbacks to work around
+
+The Container is not REQUIRED to use Serialization, so there’s no guarantee that readObject() and writeObject() will be called on a Serializable attribute or one of its instance variables
+
+If you’re familiar with Serialization, you know that a class that implements Serializable can also choose to implement a writeObject() method, called by the VM whenever an object is serialized, and a readObject() method, called when an object is deserialized. A Serializable object can use these methods to, for example, set non-Serializable fields to null during Serialization (writeObject()) and then restore the fields during deserialization (readObject()). (If you’re NOT familiar with the details of Serialization, don’t worry about it.) But the methods won’t necessarily be called during session migration! So if you need to save and restore instance variable state in your attribute, use HttpSessionActivationListener, and use the two event call- backs (sessionDidActivate() and sessionWillPassivate()) the way you’d use readObject() and writeObject().
+
+public class BeerSessionCounter implements HttpSessionListener {
+	static private int activeSessions;
+public static int getActiveSessions() {
+	return activeSessions;
+}
+public void sessionCreated(HttpSessionEvent event) {
+	activeSessions++;
+}
+public void sessionDestroyed(HttpSessionEvent event) {
+	activeSessions--;
+}
+}
+
+This class will be deployed in WEB-INF/classes like all the other web-app classes, so all servlets and other helper classes can access this method..
+
+FYI- this wouldn’t work correctly if the app is distributed on multiple JVMs, because there is no way to keep the static variables in sync. If the class is loaded on more than one JVM, each class will have its own value for the static counter variable
+
+what the heck are you printing to? Where does System.out go in a web app?
+
+Wherever this Container chooses to send it (which may or may not be configurable by you). In other words, in a vendor-specific place, often a log file. Tomcat puts the output in tomcat/logs/catalina.log. You’ll have to read your server docs to find out what your Container does with standard output.
+
+
+public class Dog implements HttpSessionBindingListener, HttpSessionActivationListener,Serializable {
+private String breed;
+
+// imagine more instance variables, including
+// some that are not Serializable
+// imagine constructor and other getter/setter methods
+public void valueBound(HttpSessionBindingEvent event) {
+// code to run now that I know I’m in a session
+}
+
+public void valueUnbound(HttpSessionBindingEvent event) {
+// code to run now that I know I am no longer part of a session
+}
+
+public void sessionWillPassivate(HttpSessionEvent event) {
+// code to get my non-Serializable fields in a state
+// that can survive the move to a new VM
+}
+
+public void sessionDidActivate(HttpSessionEvent event) {
+// code to restore my fields... to redo whatever I undid
+// in sessionWillPassivate()
+}
+}
+
+***A session whose timeout period has been set to -1 will never expire.A session will become invalid after a timeout period defined by the servlet container.
+
+** The app1 session Objects are not accessible inside the app-2. Suppose from your app-1 you redirect request to app2 & want to use the same session then it is not possible.. You have to configure within the context.xml to have the Sharable SessionContext..
+
+<Valve className="org.apache.catalina.valves.PersistentValve"/>
+    <Manager className="org.apache.catalina.session.PersistentManager">
+        <Store className="org.apache.catalina.session.FileStore" directory="${catalina.base}/temp/sessions"/>
+    </Manager>
+
+https://www.cacheonix.org/articles/How_to_Distribute_Java_Application_on_Multiple_JVMs.htm
+
+
+								JSP
+								----
+JSP finally will be become servlet..It’s a lot like any other servlet, except that the servlet class is written for you—by the Container..
+
+The Container takes what you’ve written in your JSP, translates it into a servlet class source (.java) file, then compiles that into a Java servlet class. After that, it’s just servlets all the way down, and the servlet runs in exactly the same way it would if you’d written and compiled the code yourself. In other words, the Container loads the servlet class, instantiates and initializes it, makes a separate thread for each request, and calls the servlet’s service() method
+
+container Translates		   Compiles		  Loaded and Intialized	
+MyJSP.jsp----------->MyJSP_jsp.java--------->MyJSP_jsp.class---------------------->MYJSP_jsp(ServletObject)
+
+When You have some changes to JSP.. Does changes get reflected immediately or it needs to deployed again? Reflected Immediately
+
+On First request to the jsp ..The jsp will be converted to java file and compile it and intialize.. If you make some changes then does the jsp need to reconverted and recompile the file and load and intialize.
+
+
+<html><body>
+<% int count=0; %>
+The page count is now:
+<%= ++count %>
+</body></html>
+
+
+public class basicCounter_jsp extends SomeSpecialHttpServlet {
+
+     public void _jspService(HttpServletRequest request,HttpServletResponse response)throws java.io.IOException,ServletException {
+	
+	PrintWriter out = response.getWriter();
+	response.setContentType(“text/html”);
+	out.write(“<html><body>”);
+	int count=0;
+	out.write(“The page count is now:”);
+	out.print( ++count );
+	out.write(“</body></html>”);
+}
+
+}
+
+****This is also servlet so not recommeded to take the class level varaibles they are subjected to Multiple Threads modifications..
+
+
+
+Time to see the REAL generated servlet:
+-------------------------------------
+
+1) Looks at the directives, for information it might need during translation
+
+2) Creates an HttpServlet subclass. For Tomcat 5, the generated servlet extends: org.apache.jasper.runtime.HttpJspBase
+
+3) If there’s a page directive with an import attribute, it writes the import statements at the top of the class file, just below the package statement.
+   For Tomcat 5, the package statement (which you don’t care about) is: package org.apache.jsp;
+
+4)If there are declarations, it writes them into the class file, usually just below the class declaration and before the service method. Tomcat 5 declares   one static variable and one instance method of its own
+
+5)Builds the service method. The service method’s actual name is _jspService(). It’s called by the servlet superclass’ overridden service() method, and receives the HttpServletRequest and HttpServletResponse. As part of building this method, the Container declares and initializes all the implicit objects. (You’ll see more implicit objects when you turn the page.)
+
+6)Combines the plain old HTML (called template text), scriptlets, and expressions into the service method, formatting everything and writing it to the PrintWriter response output.
+
+
+public final class BasicCounter_jsp extends org.apache.jasper.runtime.HttpJspBase implements org.apache.jasper.runtime.JspSourceDependent {
+ int count=0;
+ private static java.util.Vector _jspx_dependants;
+  public java.util.List getDependants() {
+		return _jspx_dependants;
+}
+public void _jspService(HttpServletRequest request, HttpServletResponse response) throws java.io.IOException, ServletException {
+	JspFactory _jspxFactory = null;
+	PageContext pageContext = null;
+	HttpSession session = null;
+	ServletContext application = null;			The Container declares a bunch of its own local variables, including those that represent 								the “implicit objects” your code might need, like “out” and “request
+	ServletConfig config = null;
+	JspWriter out = null;
+	Object page = this;
+	JspWriter _jspx_out = null;
+	PageContext _jspx_page_context = null;
+
+	try {
+	_jspxFactory = JspFactory.getDefaultFactory();
+	response.setContentType(“text/html”);
+	pageContext = _jspxFactory.getPageContext(this, request, response,null, true, 8192, true);
+	_jspx_page_context = pageContext;
+	application = pageContext.getServletContext();
+	config = pageContext.getServletConfig();
+	session = pageContext.getSession();
+	out = pageContext.getOut();
+	_jspx_out = out;
+	out.write(“\r<html>\r<body>\r”);
+	out.write(“\rThe page count is now: \r”);
+	out.print( ++count );
+	out.write(“\r</body>\r</html>\r”);
+	} 
+	catch (Throwable t) {
+		if (!(t instanceof SkipPageException)){
+			out = _jspx_out;
+		if (out != null && out.getBufferSize() != 0)
+			out.clearBuffer();
+		if (_jspx_page_context != null) _jspx_page_context.handlePageException(t);
+	}
+} 	finally {
+	if (_jspxFactory != null) _jspxFactory.releasePageContext(_jspx_page_context);
+}
+}
+}
+}
+
+Initializing your JSP:
+--------------------
+You can do servlet initialization stuff in your JSP, but it’s slightly different from what you do in a regular servlet.
+
+You configure servlet init params for your JSP virtually the same way you configure them for a normal servlet. The only difference is that you have to add a <jsp-file> element within the <servlet> tag.
+
+<web-app ...>
+<servlet>
+	<servlet-name>MyTestInit</servlet-name>
+	<jsp-file>/TestInit.jsp</jsp-file>
+	<init-param>
+	<param-name>email</param-name>
+	<param-value>ikickedbutt@wickedlysmart.com</param-value>
+	</init-param>
+</servlet>
+<servlet-mapping>
+	<servlet-name>MyTestInit</servlet-name>
+	<url-pattern>/jspservlet</url-pattern>
+</servlet-mapping>
+
+
+Even the Jsp's can also have the URLS..When you invoke the appname/jspservlet --->It will map to servlet called /TestInit.jsp or /WEB-INF/TestInt.jsp
+
+****This way you can hide the .jsp extension to the user..
+
+
+Overriding the jspint():
+------------------------
+
+Yes, it’s that simple. If you implement a jspInit() method, the Container calls this method at the beginning of this page’s life as a servlet. It’s called from the servlet’s init() method, so by the time this method runs there is a ServletConfig and ServletContext available to the servlet. That means you can call getServletConfig() and getServletContext() from within the jspInit() method.
+
+This example uses the jspInit() method to retrieve a servlet init parameter (configured in the DD), and uses the value to set an application-scoped attribute
+
+<%!						         //Override the jspInit() method using a declaration
+public void jspInit() {
+ServletConfig sConfig = getServletConfig();		//You’re in a servlet, so you can call your inherited getServletConfig() method
+String emailAddr = sConfig.getInitParameter(“email”);	
+ServletContext ctx = getServletContext();		//Get a reference to the ServletContext and set an application-scope attribute.
+ctx.setAttribute(“mail”, emailAddr);
+}
+%>
+
+
+The example on the opposite page shows the JSP setting an application-scoped attribute using a method declaration that overrides jspInit(). But most of the
+time you’ll be using one of the four implicit objects to get and set attributes corresponding to the four attribute scopes available in a JSP.
+
+**The implicit Objects will not be available in the jsp init and jspdestroy methods that you write..
+
+Examples using pageContext to get and set attributes:::
+-----------------------------------------------------
+
+Setting a page-scoped attribute:
+
+<% Float one = new Float(42.5); %> <% pageContext.setAttribute(“foo”, one); %>
+
+Getting a page-scoped attribute :   <%= pageContext.getAttribute(“foo”) %>
+
+Using the pageContext to set a session-scoped attribute
+
+<% Float two = new Float(22.4); %>
+<% pageContext.setAttribute(“foo”, two, PageContext.SESSION_SCOPE); %>
+
+Using the pageContext to get a session-scoped attribute
+
+<%= pageContext.getAttribute(“foo”, PageContext.SESSION_SCOPE) %> (Which is identical to: <%= session.getAttribute(“foo”) %> )
+
+
+<%= pageContext.getAttribute(“mail”, PageContext.APPLICATION_SCOPE) %> identical to (Email is: <%= application.getAttribute(“mail”) %>)
+
+****Using the PageCOntext for getting & setting the attributes is bit uglier and heavy.. But there is no way for setting and retriving the page scoped attributes...
+
+<%= request.getAttribute()%> <%= session.getAttribute()%> <%= application.getAttribute()%> <%= pageContext.getAttribute("“foo”")%>(for pagescope)
+
+<% request.setAttribute()%> <% session.setAttribute()%> <% application.setAttribute()%> <% pageContext.setAttribute("foo",one)%>
+
+
+Writing the Scriplets, Expressions and declartions code in the jsp page is Bad Programming practisce..Some people believe (OK, technically a lot of people including the JSP and Servlet spec teams) that it’s bad practice to put all this Java into your JSP.To clearly give the seprate roles for the webdesigners and Java Developers..
+
+1) Web page designers shouldn’t have to know Java.
+2) Java code in a JSP is hard to change and maintain
+
+
+					Completely Swtiching to EL:(Writing the Scriplets in the JSP is Bad Programming Practisce)
+
+You can make it invalid for a JSP to have scripting elements (scriptlets, Java expressions, or declarations) by putting a <scripting-invalid> tag in the DD:
+
+<web-app>
+<jsp-config>
+	<jsp-property-group>
+	<url-pattern>*.jsp</url-pattern>
+	<scripting-invalid>true</scripting-invalid>
+	</jsp-property-group>
+</jsp-config>
+</web-app>
+
+This disables scripting elements for ALL JSPs in the app (because we used the wildcard *.jsp as the URL pattern.).. You cannot disable it for the particular JSP
+
+DD configuration <scripting-invalid>	
+------------------------------------
+unspecified	evaluated
+true		error
+false		evaluated
+
+**You can only disable scripting elements through the DD. The <jsp-property-group> element allows you to disable scripting in selective JSPs by specifying URL patterns to be disabled.. Since there is no specific attribute in the page directive
+
+
+You can also choose to Ignore the EL:
+-------------------------------------
+
+It’s kind of the same thing with disabling EL—if you happened to have template text (plain old HTML or text) in your JSP that included something that looked like EL (${something}), you’d be in Big Trouble if you couldn’t tell the Container to just ignore anything that appears to be EL and instead treat it like any other unprocessed text....
+
+If you want EL-looking things in your JSP to be ignored, you have to say so explicitly, either through a page directive or a DD element.
+
+<web-app ...>
+<jsp-confi g>
+	<jsp-property-group>
+	<url-pattern>*.jsp</url-pattern>
+	<el-ignored>true</el-ignored>
+	</jsp-property-group>
+</jsp-config>
+</web-app>
+
+Using the isELIgnored page directive attribute::<%@ page isELIgnored=”true” %>
+
+The page directive takes priority over the DD setting:: If there’s a conflict between the <el-ignored> setting in the DD and the isELIgnored page directive attribute, the directive always wins! That lets you specify the default behavior in the DD, but override it for a specificy page using a page directive
+
+
+DD el-ignored		Page Directive(isElIgnored)     
+unspecified		unspecified				evaluated
+false			unspecified				evaluated
+true			unspecified				ignored
+false			false					evaluated
+false			true					ignored
+true			false					evaluated
+
+
+****All the standardActions/CustomActions & Expression language statement scriplets expressions and declrations are translated into the Java Statements before they are itself put into the service methods..
+	
+							Expression Language:
+							--------------------
+
+Inside the Scripting elements we can use the jsp default Objects.. In the expression language we should use the Expression Language implicit Objects..
+
+jsp:useBean searches for the attribute inside the scope with the id.id=”person”Declares the identifier for the bean object. This corresponds to the name used when the servlet code said: request.setAttribute(“person”, p);
+
+<jsp:useBean id="person" class="com.model.Person" scope="request">
+<jsp:setProperty property="name" name="person" value="Pavan"/>		Conditional Code setting if bean/attribute not found in the request scope
+</jsp:useBean>
+<jsp:getProperty property="name" name="person"/>
+<jsp:setProperty property="name" name="person" value="Pavan"/>		Resetting the Bean properties without conditional check
+<jsp:getProperty property="name" name="person"/>
+
+Bean Laws:
+
+Why didn’t they just let you specify arguments to the constructor of the bean? Why do you have to go through the extra trouble of setting values anyway?
+
+The simple answer is this: beans can’t HAVE constructors with arguments! Well, as a Java class, they can, but when an object is going to be treated as a bean, Bean Law states that ONLY the bean’s public, no-arg constructor will be called. End of story. In fact if you do NOT have a public no-arg constructor in your bean class, this whole thing will fail anyway.
+
+What the Heck is the Beans Law?
+
+1) You MUST have a public, no-arg constructor
+
+2) You MUST name your public getter and setter methods starting with “get” (or “is”, for a boolean) and “set”, followed by the same word. 
+(getFoo(), setFoo()).The property name is derived from stripping off the “get” and “set”, and changing the first character of what’s left to lowercase.
+
+3) The setter argument type and the getter return type MUST be identical. This defines the property type. int getFoo() void setFoo(int foo)
+
+4)The property name and type are derived from the getters and setters and NOT from a member in the class. For example, just because you have a private int foo variable does NOT mean a thing in terms of properties. You can name your variables whatever you like. The “foo” property name comes from the methods. In other words, you have a property simply because you have a getter and setter
+
+***5) For use with JSPs, the property type SHOULD be a type that is either a String or a primitive. If it isn’t, it can still be a legal bean, but you won’t be able to rely only on standard actions, and you might have to use scripting.
+
+
+Type can be a class type, abstract type, or an interface—anything that you can use as a declared reference type for the class type of the bean object...
+You can’t violate Java typing rules, of course. If the class type can’t be assigned to the reference type, you’re screwed. So that means the class must be a subclass or concrete implementation of the type
+
+What if you have the only Type attribute but you don't have the class attribute:
+--------------------------------------------------------------------------------
+
+What happens if we declare a type, but not a class? Does it matter if the type is abstract or concrete
+
+<jsp:useBean id=”person” type=”foo.Person” scope=”page”/> It searches for the attribute of types Person in the page scope.. The attribute can be the Employee or the any other subtype..If it is found you're out of the danger. Else jsp:useBean tries to create the newBean but it doesn't have class attribute
+so we get the exception..java.lang.InstantiationException: bean person not found within scope
+
+If type is used without class, the bean must already exist.
+If class is used (with or without type) the class must NOT be abstract, and must have a public no-arg constructor..If class is abstract we will get CE
+
+If you use only Type you give only the refrence varaible information.If there is no bean at the scope mentioned with the id mentioned it cannot create Object.. If you use only class then If there is no bean at the scope mentioned with the id mentioned then class attr value can be used for the refrence type and Object type..
+
+
+				Going straight from the request to the JSP without going through a servlet
+				--------------------------------------------------------------------------
+
+Is there a way I can use the request parameters to set a bean property, WITHOUT using scripting?
+
+<form action=“TestBean.jsp”>
+name: <input type=“text” name=“userName”>
+ID#: <input type=“text” name=“userID”>
+<input type=”submit”>
+</form>
+
+<jsp:useBean id=“person” type=“foo.Person” class=“foo.Employee”/>
+<% person.setName(request.getParameter(“userName”)); %>
+
+<jsp:useBean id=“person” type=“foo.Person” class=“foo.Employee”>
+<jsp:setProperty name=“person” property=“name” value='<%= request.getParameter(“userName”) %>' />
+</jsp:useBean>
+
+Yes, you ARE seeing an expression INSIDE the <jsp:setProperty> tag (which happens to be inside the body of a <jsp:useBean> tag) And yes, it DOES look bad
+
+Example:
+-------
+
+<form action="formParameters.jsp">
+Name: <input type="text" name="userName">
+ID#: <input type="text" name="userID">
+<input type="submit">
+</form>
+
+abstract public class Person {
+	String name;
+	public void setName(String name) {
+		this.name = name;
+	}
+}
+
+public class Employee extends Person{
+	private Integer empId;
+	public void setEmpId(Integer empId) {
+		this.empId = empId;
+	}
+}
+
+<jsp:useBean id="person" type="com.model.Person" class="com.model.Employee">
+<jsp:setProperty name="person" property="name" value='<%=request.getParameter("userName")%>'/>
+<jsp:setProperty name="person" property="empId" value='<%=Integer.parseInt(request.getParameter("userID"))%>'/>
+</jsp:useBean>
+
+You should take the extra Headache of Converting them to the Type it is required...
+
+The param attribute to the rescue:
+------------------------------------
+It’s so simple. You can send a request parameter straight into a bean, without scripting, using the param attribute
+
+***The param attribute lets you set the value of a bean property to the value of a request parameter. JUST by naming the request parameter!
+
+<jsp:setProperty name="person" property="empId" param="userID"/> 
+The param value “userName” comes from the name attribute of the form’s input field
+
+There is a chance that if you don't specify the requestParamName correctly you will receive the null value from the front end..
+
+*****param takes the Headche of converting it to the required types 
+
+But wait! It gets even better...
+
+And all you have to do is make sure your form input field name (which becomes the request parameter name) is the same as the property name in your bean. Then in the <jsp:setProperty> tag, you don’t have to specify the param attribute. If you name the property but don’t specify a value or param, you’re telling the Container to get the value from a request parameter with a matching name...
+
+<jsp:setProperty name="person" property="empId" value='<%=Integer.parseInt(request.getParameter("userID"))%>'/>
+<jsp:setProperty name="person" property="empId" param="userID"/>
+<jsp:setProperty name="person" property="empID"/>  	*******If the form parameter name and bean property name are same	
+<!-- Look for the requestParameter with name and set its value here in beans name property -->
+
+<jsp:setProperty name="person" property="*"/> If all the input field names of the form are matching to Bean Property names then container does work automatcally..
+
+
+
+
+				Going straight from the request to the JSP without going through a servlet
+				--------------------------------------------------------------------------
+
+Is there a way I can use the request parameters to set a bean property, WITHOUT using scripting?
+
+<form action=“TestBean.jsp”>
+name: <input type=“text” name=“userName”>
+ID#: <input type=“text” name=“userID”>
+<input type=”submit”>
+</form>
+
+<jsp:useBean id=“person” type=“foo.Person” class=“foo.Employee”/>
+<% person.setName(request.getParameter(“userName”)); %>
+
+<jsp:useBean id=“person” type=“foo.Person” class=“foo.Employee”>
+<jsp:setProperty name=“person” property=“name” value='<%= request.getParameter(“userName”) %>' />
+</jsp:useBean>
+
+Yes, you ARE seeing an expression INSIDE the <jsp:setProperty> tag (which happens to be inside the body of a <jsp:useBean> tag) And yes, it DOES look bad
+
+Example:
+-------
+
+<form action="formParameters.jsp">
+Name: <input type="text" name="userName">
+ID#: <input type="text" name="userID">
+<input type="submit">
+</form>
+
+abstract public class Person {
+	String name;
+	public void setName(String name) {
+		this.name = name;
+	}
+}
+
+public class Employee extends Person{
+	private Integer empId;
+	public void setEmpId(Integer empId) {
+		this.empId = empId;
+	}
+}
+
+<jsp:useBean id="person" type="com.model.Person" class="com.model.Employee">
+<jsp:setProperty name="person" property="name" value='<%=request.getParameter("userName")%>'/>
+<jsp:setProperty name="person" property="empId" value='<%=Integer.parseInt(request.getParameter("userID"))%>'/>
+</jsp:useBean>
+
+You should take the extra Headache of Converting them to the Type it is required...
+
+The param attribute to the rescue:
+------------------------------------
+It’s so simple. You can send a request parameter straight into a bean, without scripting, using the param attribute
+
+***The param attribute lets you set the value of a bean property to the value of a request parameter. JUST by naming the request parameter!
+
+<jsp:setProperty name="person" property="empId" param="userID"/> 
+The param value “userName” comes from the name attribute of the form’s input field
+
+There is a chance that if you don't specify the requestParamName correctly you will receive the null value from the front end..
+
+*****param takes the Headche of converting it to the required types 
+
+But wait! It gets even better...
+
+And all you have to do is make sure your form input field name (which becomes the request parameter name) is the same as the property name in your bean. Then in the <jsp:setProperty> tag, you don’t have to specify the param attribute. If you name the property but don’t specify a value or param, you’re telling the Container to get the value from a request parameter with a matching name...
+
+<jsp:setProperty name="person" property="empId" value='<%=Integer.parseInt(request.getParameter("userID"))%>'/>
+<jsp:setProperty name="person" property="empId" param="userID"/>
+<jsp:setProperty name="person" property="empID"/>  	*******If the form parameter name and bean property name are same	
+<!-- Look for the requestParameter with name and set its value here in beans name property -->
+
+<jsp:setProperty name="person" property="*"/> If all the input field names of the form are matching to Bean Property names then container does work automatcally..
+
+JSP::I want you to iterate through the request parameters, and find any that match this bean’s property names, and set the VALUE of the matching properties equal to the value of the corresponding request parameter...
+
+Container:Oh sure... make ME do all the work. I have to look at the bean class getters and setters to fi gure out the bean properties, then match that to
+the parameter names...
+
+Bean tags convert primitive properties automatically:
+----------------------------------------------------
+
+JavaBean properties can be anything, but if they’re Strings or primitives, all the coercing is done for you. That’s right—you don’t have to do the parsing and conversion yourself..
+
+OK, I’m thinking that the Container code is doing some kind of Integer.parseInt(“343”), so wouldn’t you get a NumberFormatException if the user doesn’t type in something that can be parsed to an int? Like, what if the user types “three” in the employee ID fi eld
+
+Good catch. Yes, something will definitely go wrong if the request parameter for the empID property can’t be parsed into an int. You need to validate the contents of that field, to make sure it contains only numeric characters. You could send the form data to a servlet first, instead of sending it straight to the JSP. But if you’re committed to going from the form straight to the JSP, and you don’t want scripting, just use JavaScript in the HTML form to check the
+field before sending the request
+
+Working with complex Datatype using the <jsp:useBean> and <jsp:setProperty>?
+
+If a bean property doesn’t have to be a String or a primitive, then HOW can you set the property without scripting? The value attribute of the tag is always a String, right?
+
+It is possible (but potentially a *lot* of extra work) to create a special class, called a custom property editor, that supports the bean. It takes your String value and figures out how to parse that into something that can be used to set a more complex type... This is part of the JavaBeans spec,though, not the JSP spec. Also, if the value attribute in the <jsp:setProperty> tag is an expression rather than a String literal, then IF that expression evaluates to an object that’s compatible with bean property type, then it will probably work. If you pass in an expression that evaluates to a Dog, for example, the Person bean’s setDog(Dog) method will be called. But think about it—this means the Dog object must already exist. Anyway, you’re way better off NOT trying to construct new things in your JSP! Trying to get away with constructing and setting even marginally complex data types is gonna be tough without scripting
+
+***If the request if coming from servlet to the jsp and working to set the properties of String/Primitive types in the JSP Bean then you have to use the value attribute.. If you have to deal with the complex types then you need to write the scripting(expression) inside the value attribute..Even if you set the complex type using the value attribute it is difficult to retrive using the <jsp:getProperty> where you can retrive the only simple String and primitive Types..
+
+***If the request is Coming from the form/html and want to map all the coming field values to Bean then you use the <jsp:setProperty> with the param attribute.As the coming values from the fields are of the String type then <jsp:setProperty> tag is capable of coercing into the required primtive 
+datatypes automatically... If you maintain the input filed names same with the bean property names then you don't have to use the param tag also
+
+
+								EL Expression Language:
+
+=======
+How many webservers you need if you want if you have laks of customers accessing your website?What Webserver do? 
+
+Terminologies:: server{Hardware} 	Webserver/HttpServer/Software/Application..
+
+Apache Tomcat:: ApplicationContainer/WebContainer
+
+Servers gets the request from --->Direct Url of Client Request , HyperLinks of HTML Document,Form Submissions
+
+How the Put Delete HttpRequest are made from the Browser?? How to create this requests?
+
+We cannot simulate the Put & Delete requests from the req's cmng from http client/form based/hyper link based requests....Requests can only be from the POST MAN.. PUT DELETE HEAD TRACE OPTIONS CONNECT servlets supports this requests also...
+
+GET/POST--HttpRequest sends the url+parameters and Body+Headers...	HttpRequest could be from Client/POstman/weblink/formsubmission
+HttpResponse--Sends the resource in HttpResponse Object along with the HttpHeaders+Body
+
+****GET & POST Requests can go directly to the JSP pages also..
+
+x/y/server.html		x/ 	 x/y/servlet.do		x/y/nameofpdffile   x/y/nameofimagefile
+
+Extension Matching 	Directory Matching 
+
+Action specific request's creations: /select/someservlet     /select/some.html  /select/some.jsp /select/pdffile  /select/imagefiles ...so..on
+
+Are we even maintaing the static PDF files imagefiles soundfiles xmlfiles or anything on directories and is the webserver is returing them....
+
+
+Application::Attach the StaticContent CSS/JavaScript/Imagefiles to the Dynamically WebPages in the WEB-INF folders..
+Application:Attach the StaticContent CSS/JavaScript/Imagefiles to the static HTML Pages in the actionspecfic folders..
+
+https://mkyong.com/spring-mvc/spring-mvc-how-to-include-js-or-css-files-in-a-jsp-page/ 
+
+****GET & POST Requests can go directly to the JSP pages also..
+
+(Servlet JSP JSF Webservice) are the Dynamic Components on the server.. HTML CSS & Javascript JQuery BootStrap are the static components on the Server.
+
+******All the urls should match to any of the dynamic Component or static component on the server...
+
+**JSP/ErrorPages/WelcomePages will be developed by the webdesigner..Web.xml/servelet/Listener's/Filters devloped by the Servlet or server side Devloper
+
+What does WebServer do? How it is calling the Application Server or WebContainer? Why WebServers and ApplicationSevers are put into the different nodes?
+
+The API In between the WebServer and Applicationserver is the least.. you dont bother about them...Just assume Webserver gave/handover the request to the Application container... It is the networking/socket based programming that is actually in between the Container and Webserver
+
+Configuring the https request? Is it the configuration on the webserver or on the Application server configuration?
+
+Does Webserver is also preparing the Response Headers if the request is for the Static Resources like the Videos/Images/gifs?
+
+Dynamic Response is always stuffed into the HTTPResponse Object..
+
+Intercommunication between the Servlet -Jsp or JSP-Servlet are possible..
+
+Do JSP's are also having the public url name and it can point to JSP without going the request to Servlet and internally forwarding to JSP? Yes
+
+How the client urls of the JSP's are then mapped?
+
+Can I use both the xml and annotation approach for the configuring the clients request to a servlets/jsp/webservice.. Which will be considered as the priority
+
+If there was no dev tools introduction in the spring boot then the XML approach could been the best approach
+
+Loading is getting automated by Spring boot but the maintenance of the properties files with the environment specific values or the configurations isn't changing..Chnage the web.xml files configuration based on the environment..
+
+			database related information loads..
+application-dev.xml 	application-prod.xml application-uat.xml.. The files like the mvcappconfig.xml or securityconfig.xml files will remain constant..
+
+/reqservlet-->Can multiple requests will have mapping to the same servlet..What is use case
+
+Microservices Architecture:
+--------------------------
+LoadBalancers handling the Multiple requests to different instances..
+
+Remote calls will always has to be the HTTP Calls.. Our entire business is split into the multiple modules or services as many as possible & deployed.
+
+Loadbalancers will now care of forwarding the request's based on the requesttype to a specific instance/service where the service is located/deployed..
+
+The servlet Controller isn’t doing much except some generic application stuff for this app, and, oh yeah, it does update the Model and then it kicks the View into gear.But the worst part is that all that generic application logic is duplicated in every single frickin’ servlet! If one thing needs to change, it has to change everywhere. A maintenance train wreck waiting to happen.Surely you don’t mean for me to put everything in a single servlet again? How could that be good?”
+
+Forward all the clients requests to the one common Servlet and it takes care of forwarding to the right controller and view...It takes the help of the HandlerMappings and ViewResolvers..
+
+The Container creates a request and response object that servlets (and other parts of the web app) can use to get information about the request and send information to the client.
+
+You can have any devlopment environment in any format but the deployement should be in the container expecting format...
+
+Does the Deployment environment changes from server to server? say Apache Tomcat to JBoss Server.. No
+
+All the Application servers are built following the J2EE Specifications
+
+All the dependencies that our Project use into the Web-application development should go into the WEB-INF/lib deployment folder.. There will be some dependencies(servlet.jar) that (runtime environments/server/applicationserver) will be provide.. We shouldn't move while preparing the war file.
+
+Is there any maven plugin that automatically moves the maven dependencies into the lib folder..maven-war plugin that copies the dependencies to lib folder
+
+or we can use the deployment descriptor assembly option of the eclipse...
+
+Throughout this book we’re using Tomcat as both the web Server and the web Container. In the real world, you probably use a more robust Web Server (like Apache) configured with a Web Container (like Tomcat).
+
+<form action="selectBeer.do" method="POST">	<!--check out the relative url always-->
+
+<url-pattern>/SelectBeer.do</url-pattern>  The / infront is mandatory
+
+For the components like Servlets & JSP & RestControllers if you need to Test then you need the Application to get deployed in the ApacheTomcat Server..
+
+JSP Generates the page for the container... The conatiner returns the page to the Happy User!!!
+
+Are there someone who is attaching the entire JSP page into the HttpResponse Object ...
+
+We don’t compile the JSP (the Container does that at first request). 
+
+What happens if we map the two urls to one servlet?  Tomcat container doesn't allow you to deploy the Application.. It throws RuntimeError.. The tomcat server itself will not start..
+
+Use the request dispatcher to ask the Container to crank up the JSP, sending it the request and response.Container doesn't even no that response is coming from the .jsp page.
+RD:: servlet can call servlet  jsp -->jsp servlet-->jsp  jsp-->servlet
+
+in the client requests urls::/select/select.do   some part of url can correspond to the directory on the server.but last part of the url should be corresponded to the servlet url jsp file url or the html file 
+
+HttpServletRequest HttpServletResponse HttpServlet ServletConfig ServletContext-->All these Objects are implementations of the Tomcat Conatiner
+
+1)Container Loads the class:
+
+2)Instanitaite the Servlet(Constructor is run):Your servlet class no-arg constructor runs (you should NOT write a constructor; just use the compiler-supplied default). If you place userdefined constructor in the servlet and configure the load-on-startup=1 then Tomcat Conatiner cannot intialise the Servlet.. Other servlets will be intialized and container can run the other servlets..
+
+3)init(): Called only ONCE in the servlet’s life, and must complete before Container can call service().
+
+4)service():This is where the servlet spends most of its life..Each request runs in a separate thread
+
+5)destroy():Container calls to give the servlet a chance to clean up before the servlet is killed (i.e., made ready for garbage collection). Like init(), it’s called only once
+
+
+Container Responsibilities:
+--------------------------
+
+Create a Thread from threadpool.create servlet request and servletResponse Objects..Load the servlet class if not loaded.. instantiate constructor run.
+
+intilaize the Servlet with the help of( init method){Even it handsover the ServletConfig Object & Servlet Context Objects to the servlet instance}
+
+invoke the service method.. then service method implementation of HttpServlet class  internally calls the doGet or doPost method based on the request....
+
+
+At any given time, you’ll have at least as many runnable threads as there are client requests, limited by the resources or policies/configuration of the Container. (You might, for example, have a Container that lets you specify the maximum number of simultaneous threads, and when the number of client requests exceeds that, some clients will just have to wait.)
+
+The Container runs multiple threads to process multiple requests to a single servlet.And every client request generates a new pair of request and response objects..
+
+
+Tomcat: finds for the deployed webapps and searches for all the servlets(how,why,where it looks?) that configured with load-on-startup=1 and creates the instance of the servlet and runs the init method. or else creates the instance of servlet on fly when the first client request and runs the init method
+
+Service() method will not run until the servlet is fully initialized{init is also run}.
+
+When an Object becomes servlet, it gets all the unique previleges that comes with being servelt use its ServletContext reference to get information from the
+Container.
+
+Between the constructor and the init() method, the servlet is in a Schroedinger’s* servlet state:
+
+You might have servlet initialization code, like getting web app configuration info, or looking up a reference to another part of the application, that will fail if you run it too early in the servlet’s life. It’s pretty simple though, if you remember to put nothing in the servlet’s constructor!
+
+Servlet is mapped as /test%3F/* and the application is deployed under /app. 
+http://30thh.loc:8480/app/test%3F/a%3F+b;jsessionid=S%3F+ID?p+1=c+d&p+2=e+f#a  Encoded Url that is sent from Client Browser
+
+Method              URL-Decoded Result           
+----------------------------------------------------
+getContextPath()        no      /app
+getLocalAddr()                  127.0.0.1
+getLocalName()                  30thh.loc
+getLocalPort()                  8480
+getMethod()                     GET
+getPathInfo()           yes     /a?+b
+getProtocol()                   HTTP/1.1
+getQueryString()        no      p+1=c+d&p+2=e+f
+getRequestedSessionId() no      S%3F+ID
+getRequestURI()         no      /app/test%3F/a%3F+b;jsessionid=S+ID
+getRequestURL()         no      http://30thh.loc:8480/app/test%3F/a%3F+b;jsessionid=S+ID
+getScheme()                     http
+getServerName()                 30thh.loc
+getServerPort()                 8480
+getServletPath()        yes     /test?
+getParameterNames()     yes     [p 2, p 1]
+getParameter("p 1")     yes     c d
+
+
+"+" is handled as space only in the query string..Anchor "#a" is not transferred to the server. Only the browser can work with it.
+If the url-pattern in the servlet mapping does not end with * (for example /test or *.jsp), getPathInfo() returns null.
+
+
+Differences between the GET & POST?
+
+But besides size, security, and bookmarking, there’s another crucial difference between GET and POST—the way they’re supposed to be used. GET is meant to be used for getting things. Period. Simple retrieval. Sure, you might use the parameters to help figure out what to send back, but the point is—you’re not making any changes on the server! POST is meant to be used for sending data to be processed. This could be as simple as query parameters used to figure out what to send back, just as with a GET, but when you think of POST, think: update. Think: use the data from the POST body to change something on the server
+
+
+Double POSTING Problems? Don't try to makes changes on the server with the GET Request.. You should handle the DoublePosting problem even for the GET requests
+
+Repatable Operations: GET PUT DELETE HEAD   Non-Repetable Operations: POST
+
+Being idempotent is GOOD. It means you can do the same thing over and over again, with no unwanted side effects!
+
+POST is not idempotent—the data submitted in the body of a POST might be destined for a transaction that can’t be reversed. So you have to be careful with
+your doPost() functionality!
+
+What’s to stop me from using the parameters in GET to update the server? But don't do as per HTTP spec it supposed to be Ideompotent
+
+<form method=”POST” action=”SelectBeer.do”> if you explicitly SAY method=”POST”, then, surprisingly, it’s a POST.
+
+<form action=”SelectBeer.do”> The default is GET and parameters are sent inthe request Header..Because if the request comes in as a GET, that means you’ll run into big trouble at runtime if you have only a doPost() and not a doGet() in your servlet!
+
+
+Can Sizes: <p>
+<input type=checkbox name=sizes value=”12oz”> 12 oz.<br>
+<input type=checkbox name=sizes value=”16oz”> 16 oz.<br>
+<input type=checkbox name=sizes value=”22oz”> 22 oz.<br>
+<br><br>
+
+String one = request.getParameterValues(“sizes”)[0]; String [] sizes = request.getParameterValues(“sizes”);
+
+To collect all the front end Objects we maintain one Object that is VTO or DTO in the Types the inputs are coming from the Front end..All front end objects are Strings only
+
+
+Most servers can, for static content. In Apache, for example, you can set up MIME types by mapping a specific file extension (.txt, .jar, etc.) to a specific content type, and Apache will use that to set the content type in the HTTP header.But we’re talking about what happens inside a servlet where there IS no file! You’re the one who is sending back the response; the Container has no idea what you’re sending.
+
+But what about that last example where you read a specific JAR file? Can’t the Container see that you’re reading a JAR?
+
+You can also look in your browser preferences for a list of those that have been configured for your browser, and you can check your Web server configuration files as well
+
+Wait a second... why would you use a servlet to send back that JAR file when you can just have the web server send it back as a resource? In other words, why wouldn’t you have the user click a link that goes to the JAR instead of to a servlet? Can’t the server be configured to send back the JAR directly without even GOING through a servlet? 
+
+To figure out which jar file to send..take the parameters and genrate only fly the file that is not existed on the server deployment directories..
+Maybe it’s something as simple as putting code in your servlet that—along with sending back the JAR—writes some info to a database about this particular user. Or maybe you have to check to see if he’s even allowed to download this JAR, based on something you first read from the database
+
+How do you Handle the static Pdf files and Dynamic Pdf files/jar files that are generated on the server? Will you delete them immediately or store them somewhere?
+
+The PrintWriter actually “wraps” the ServletOutputStream. In other words, the PrintWriter has a reference to the ServletOutputStream and delegates calls
+to it.There’s just ONE output stream back to the client, but the PrintWriter “decorates” the stream by adding higher-level character-friendly methods
+
+When you call setContentType(“text/html”), you’re setting a header just as if you said: setHeader(“content-type”, “text/html”);
+
+So what’s the difference? No difference... assuming you type the “content-type” header correctly. The setHeader() method won’t complain if you misspell the header names—it just thinks you’re adding a new kind of header.
+
+
+You can either redirect the request to a completely different URL..you can dispatch the request to some other component in your web app
+
+The servlet/jsp/webservice decides that the request should go to a completely different URL..The servlet calls sendRedirect(aString) on the response and that’s it.The HTTP response has a status code “301” and a “Location” header with a URL as the value...The browser gets the response, sees the “301” status code, and looks for a “Location” header..The browser makes a new request using the URL that was the value of the “Location” header in the previous
+response. The user might notice that the URL in the browser bar changed...The HTTP response is just like any other response... except it isn’t coming
+from the location the client typed in.
+
+
+Servlet/Jsp/Webservice Decision Making
+---------------------------------------
+
+if (worksForMe) {
+// handle the request
+} else {
+response.sendRedirect(“http://www.oreilly.com”);	The URL you want the browser to use for the request. This is what the client will see.			
+}//Container logics takes care of adding the location header
+
+In servlet/webservice/jsp named “bar.do”, the servlet calls sendRedirect() with a relative URL that does NOT start with a forward slash
+
+sendRedirect(“foo/stuff.html”);The Container knows the original request URL started from the myApp/cool path, so if you don’t use a forward slash, that part of the path is prepended to the front of “foo/stuff.html”..****"foo" is a web app, separate from the "myApp" web app.
+
+But if the argument to sendRedirect() DOES start with a forward slash::The forward slash at the beginning means “relative to the root of this web Container.
+
+****If the sendRedirect Urls starts with /. Then the container consider the url to be root of the webcontainer while building
+
+**If you want to forward the request to another webapp deployed on the same container use the /(forward-slash..).. If you want to forward the another component(servlet/jsp/webservice) deployed on the same-webapp then url shouldn't start with slash. If you want to forward to a completely another App deployed on other container on same machine or the other container on the different machine then you should use the encodeRedirectUrl
+
+
+How to deploy the multiple webapplications on the same container and on different Ports? With SpringBoot it is made easy with just a server.port specified on the each application individually.How it is different if you deploy the application on the GlassFish or WebLogic..Just with the server.port will it work or any other changes
+
+After the response is committed then don't call the response.sendRedircect:: It will throw the IllegalStateException
+
+****By the way, this idea that “once it’s committed it’s too late” also applies to setting headers, cookies, status codes, the content-type, and so on...)
+
+How do you do the HTTP Post Redirect?
+
+***How do you let components share information? How do you hide information? How do you make information threadsafe?
+
+Remeber you cannot call the getServletConfig() from the constructor of the servlet
+
+The Container “reads” the servlet init parameters from the DD and gives them to the ServletConfig, then passes the ServletConfig to the servlet’s init()
+method.
+
+Wait a minute! In the last chapter you said that we could override the init() method, and nobody said a word about the ServletConfig argument?
+
+**There’s no law that stops you from overriding the one that takes a ServletConfig, but if you DO, then you better call super.init(ServletConfig)!
+
+There is need to override the init(ServletConfig) method,since you can always get your ServletConfig by calling your inherited getServletConfig() method.
+
+The servlet init parameters are read only ONCE—when the Container initializes the servlet The servletConfig is the Interface and don't worry about the implementation
+
+What is the benefit that you achive with the web.xml DD? You can avoid the recompilation of the code.But with SpringBoot that is ignored..
+
+
+All the other webapps going down for sake of one initialization parameter change is BAD.production-quality Web Containers let you do a hot redeploy, which means that you don’t have to restart your server or take any other web apps down.In fact, Tomcat does include a manager tool that will let you deploy, undeploy, and redeploy entire web apps without restarting
+
+But in the real world, even a hot redeploy is a Big Deal, and taking even a single app down just because the init parameter value changed can be a bad idea. If the values of your init parameters are going to change frequently, you’re better off having your servlet methods get the values from a file or database, but this approach will mean a lot more overhead each time your servlet code runs, instead of only once during initialization.
+
+How can the JSP get the servlet InitParameters? Put them in requestAttribute
+The request object lets you set attributes (think of them as a name/value pair where the value can be any object) that any other servlet or JSP that gets the request can use. That means any servlet or JSP to which the request is forwarded using a RequestDispatcher..
+
+Why the servlet initParameters are required for other component in Webapp? initParams are specific to the one servlet configuration only na !!!
+
+out.println(getServletContext().getInitParameter(“adminEmail”));Every servlet inherits a getServletContext() method (and JSPs have special access to a context as well).
+
+
+ServletContext is one per app, but only if the app is in a single JVM!In a distributed environment, you’ll have one ServletContext per JVM If the app is distributed, there’s one ServletContext per JVM!Now, chances are this won’t create problems, but if you have a distributed web app, you better consider the
+consequences of having different contexts for each JVM
+
+****Yes, JSPs are turned into first-class servlets, so they also get their own ServletConfig
+
+You can only get the SevletInitParameter or ContextInitParameter but you cannot modify the values of them using the code in the servlet..
+
+Perhaps the most common use of a context parameter is storing database lookup names. You’d want all parts of your app to have access to the correct name, and when it changes, you want to change it in only one place.
+
+If you modify the XML to change the value of an init parameter (either servlet or context), when does the servlet or the rest of the web app see the change?
+
+ServletContext and ServletConfig objects are created after reading the xml file.. If you change then you should redeploy inorder to change the values..
+ONLY when the web app is redeployed. Remember—we talked about this before—the servlet is initialized only once, at the beginning of its life, and that’s when it’s given its ServletConfig and ServletContext. The Container reads the values from the DD when it creates those two objects, and sets the values.
+
+Think Context-Params & init-Params are as deployment time constants.You can get them at runtime, but you can’t set them. There’s no setInitParameter().
+
+getServletConfig(). getServletContext(). getInitParameter() In a servlet, the only time you would NEED to go through your ServletConfi g to get your ServletContext is if you’re in a Servlet class that doesn’t extend HttpServlet or GenericServlet (the getServletContext() method you inherit comes from GenericServlet
+
+
+It’s fine to use the ServletContext log() method for simple experiments, but in a real production environment, you will almost certainly want to choose something else
+
+
+******Configuring the COntextParameters without using the web.xml..We have annotation for @WebInitParam..For ContextParameters ?
+
+
+Listener: She needs someone who is sitting there, waiting to be notified that the app is starting up.She wants to listen for a context initialization event,
+so that she can get the context init parameters and run some code before the rest of the app can service a client
+
+Listener JOb:You need something else. Not a servlet or JSP, but some other kind of Java object whose sole purpose in life is to initialize the app (and possibly to uninitialize it too, cleaning up resources when it learns of the app’s demise...
+
+ServletContextListener:: Listening for the two key events of ServletContxt creation and ServletContextDestruction
+
+Our Servlets JSP's and Listener all the Objects will be created by the ServletContainers..Spring Container takes care of creation of Bean Type Objects
+
+***Now ServletContext has the Shared Object(listner kept in attribute) which can be used by multiple servlets at the same time
+
+Listener is now like a factory class..with the help of parameter that is in the <init-param> we are creating the Object..
+
+How many instances of the Listener will be created?one
+
+Does the attributes need to be Serializable?
+
+
+There are several different attribute types, and whether the attribute should be Serializable only matters with Session attributes. And the
+scenario in which it matters is only if the application is distributed across more than one JVM. 
+
+There’s no technical need to have any attributes (including Session attributes) be Serializable, although you might consider making all of your attributes Serializable by default, unless you have a really good reason NOT to.
+
+Think about it—are you really certain that nobody will ever want to use objects of that type as arguments or return values as part of a remote method call? Can you really guarantee that anyone who uses this class (Dog, in this case) will never run in a distributed environment?
+
+**Aim is to::Intializing the Application before any other Servlet is being serviced.. Use the ServletContextListener
+
+**One Listener can implement multiple Listeners
+
+I just thought of something... since attributes can be set programmatically (unlike init parameters), can I listen for attribute events? Like if someone adds or replaces a Dog?
+
+
+***You DO need to know the what kinds of events that you(Listener) can listen for?
+
+ServletContextAttributeListener  ServletContextAttributeEvent
+ServletContextListener		 ServletContextEvent
+HttpSessionListener		 HttpSessionEvent
+HttpSessionActivationListener    HttpSessionEvent
+HttpSessionBindingListener	 HttpSessionBindingEvent
+HttpSessionAtrributeListener	 HttpSessionBindingEvent
+ServletRequestListener		 ServletRequestEvent
+ServletRequestAttributeListener  ServletRequestAttributeEvent
+
+
+HttpSessionBindingListener::You have an attribute class (a class for an object that will be stored as an attribute) and you want objects of this type to be notified when they are bound to or removed from a session..
+
+HttpSessionActivationListener::You have an attribute class, and you want objects of this type to be notified when the session to which they’re bound is migrating to and from another JVM
+
+HttpSessionBindingListener and HttpSessionActivationListener will be implemented by the attribute classes that will be part of the Session Attribute..
+
+A plain old HttpSessionAttributeListener is just a class that wants to know when any type of attribute has been added, removed, or replaced in a Session. But the HttpSessionBindingListener exists so that the attribute itself can find out when it has been added to or removed from a Session.
+
+****Note: binding listeners are NOT registered in the DD... it just happens automatically.
+
+Imagine the Dog is a Customer class, with each active instance representing a single customer’s info for name, address, order info, etc. The real data is stored in an underlying database. You use the database info to populate the fields of the Customer object, but the issue is how and when do you keep the database record and the Customer info synchronized? You know that whenever a Customer object is added to a session, it’s time to refresh the fields of the Customer with this customer’s data from his record in the database. So the valueBound() method is like a kick that says, “Go load me up with fresh data from the database... just in case it changed since the last time I was used.” Then valueUnbound() is a kick that says, “Update the database with the value of the Customer object fields.
+
+Differences between the Atrribute and Parameters?
+
+Types		Application/context,Request,Session         Application/context init parameters (&) Request parameters & Servlet init parameters
+
+Notes:There is no servlet-specific attribute (just use an instance variable).No such thing as session parameters
+
+setMethods:	setAttribute(String name, Object value)	    You CANNOT set Application and Servlet init parameters—they’re set in the DD, remember..
+
+Return type:	Object					    String
+
+Method to get:  getAttribute(String name)		    getInitParameter(String name)
+
+Notes:Don’t forget that attributes must be cast, since the return type is Object
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+The Three Scopes: Context, Request, and Session.
+
+ContextAttributes: Everyone in the application has access
+
+Session Attributes:: Accessible to only those with access to a specific HttpSession
+
+REQUEST Attributes:: Accessible to only those with access to a specific ServletRequest
+
+**The one who has access can set/remove or just read the attribute
+
+Note: you should think about the implications of garbage collection when you think about scope... some attributes won’t be GC’d until the application is undeployed or dies
+
+
+***There is a possibility if the scope of the attributes is higher then two resources in the webapp can be modifying them simulatenously...
+
+**ServletContext & HttpSession Objects are sharable across multiple components in the WebApp. They have to ThreadSafe Objects or Operations you perfom on them should be in Synchronized Fashion.
+
+getServletContext().setAttribute(“foo”, “22”);
+getServletContext().setAttribute(“bar”, “42”);		1)Lets assume request is first made to this servlet.. It was running and moved to runnable
+out.println(getServletContext().getAttribute(“foo”));
+out.println(getServletContext().getAttribute(“bar”));	3) Imagine this Thread has got again the chance now it will get the bar as 16 instead 42
+
+Imagaine Servlet-B
+getServletContext().setAttribute(“bar”, “16”); 		2) The second Thread has modified the attribute for the bar.
+
+
+Options to get ThreadSafety on ServletContext & ServletSession:
+
+***Synchronizing the doGet is Bad Idea?Synchronizing on the doGet() means kissing your concurrency goodbye. If you synchronize doGet(), it means that servlet can handle only ONE client at a time..
+
+Synchronizing the service method means that only one thread in a servlet can be running at a time... but it doesn’t stop other servlets or JSPs from accessing the attribute!Synchronizing the service method would stop other threads from the same servlet from accessing the context attributes, but it won’t do anything to stop a completely different servlet...
+
+You won’t do anything to stop OTHER servlets! Regardless of whether the service methods in other servlets are synchronized or not... it still means other parts of the app have access to the context attributes.
+
+HttpSessions:
+------------
+
+HTTP sessions  is an object used to maintain conversational state with a client.The session persists across multiple requests from the same client. But it’s still just one client we’re talking about..And if it’s one client, and a single client can be in only one request at a time, doesn’t that automatically mean that sessions are thread-safe? In other words, even if multiple servlets are involved, at any given moment there’s only one request from that particular client..
+
+
+Can you think of a scenario in which there could be more than one request at the same time, from the same client? What do you think? Are session attributes
+guaranteed thread-safe?
+
+It is not that the Client is making the requests only from the WebBrowser.. Lets think it is coming from the POSTMAN.. What is now... The client could open a new browser window!So the Container can still use the same session for a client...
+
+
+HttpSession session = request.getSession();
+
+synchronized(session) {
+	session.setAttribute(“foo”, “22”);
+	session.setAttribute(“bar”, “42”);
+	out.println(session.getAttribute(“foo”));
+	out.println(session.getAttribute(“bar”));
+}
+
+synchronized(getServletContext()) {
+	getServletContext().setAttribute(“foo”, “22”);
+	getServletContext().setAttribute(“bar”, “42”);
+	out.println(getServletContext().getAttribute(“foo”));
+	out.println(getServletContext().getAttribute(“bar”));
+}
+
+
+SingleThreadModel:
+-----------------
+If a servlet implements this interface, you are guaranteed that no two threads will execute concurrently in the servlet’s service method.
+
+The container can maintain a single servlet, but queue every request and process one request completely before allowing the next request to proceed. Or the container can create a pool of servlet instances and process each request concurrently, one per servlet instance.
+
+Queuing Strategy or Multiple Instances:what if one of the instance variables is meant to record how many requests have been processed. The counter variable would have several different counts, and none of them would be right... only the summation of them is correct
+
+Different venodors will be using the different strategy..The specification writers wanted to give the container vendors the opportunity to compete with each other in terms of performance and flexibility.
+
+Why STM is introduced? To protect the instance varaibles from the ThreadSafety inside the servlet the STM was introduced...but by pooling multiple instances
+the semantics of the servlet changes..Furthermore, STM does not help with other variable or attribute scopes.
+
+But are class variables thread-safe?No, they are not, and the STM mechanism does not help with class variables..
+
+
+Only Request attributes and method parameters & local variables are thread-safe!!!
+
+That’s right. If you have multiple clients making requests on that servlet, that means multiple threads running that servlet code. And all threads have access to the servlet’s instance variables, so instance variables aren’t thread-safe.
+
+But they WOULD be thread-safe if you implemented the SingleThreadModel, right!!Yes, because you’d never have more than one thread for that servlet, so the instance variables would be thread-safe. But of course nobody would ever allow you into the servlets club ever again.
+
+What if synchronize the service method?idiot. The effect of implementing SingleThreadModel is virtually the same as synchronizing the service method. Both can bring a web app to its knees without protecting the session and context state.
+
+But if you’re not supposed to use SingleThreadModel or synchronize the service method, then how DO you make instance variables thread-safe?
+
+Look at a well-written servlet, and chances are you won’t find any instance variables. Or at least any that are non-final. (And since you’re a Java programmer you know that even a final variable can still be manipulated unless it’s immutable..just don’t use instance variables if you need thread-safe state, because all threads for that servlet can step on instance variables.
+
+*****If you want all the threads or (multiple servelts) to access a value, decide which attribute state makes the most sense, and store the value in an attribute.
+
+RequestDispatcher: You should use to forward the request to any component within the current webapp only..
+
+RequestDispatcher view = request.getRequestDispatcher(“result.jsp”); You can use with /fowrad slash or without.
+
+If no forward slash container looks for the resource in the same logical location of the cuurent request or relative path to current request Url..if path starts with the /(forward slash) then container starts searching for the root of the current webapp.
+
+
+RequestDispatcher view = getServletContext().getRequestDispatcher(“/result.jsp”); It should always starts with the (/)forward slash. You cannot specify path relative to the current resource.then container starts searching for the root of the current webapp.
+
+You can’t forward the request if you’ve already committed a response!Container will throw an IllegalStateException.
+
+include() method is not used much in the real world from the servlets programming perspective..
+
+In other words, include() means asking for help in handling the request, but it’s not a complete hand-off. It’s a temporary, rather than permanent transfer of control. With forward(), you’re saying, “That’s it, I’m not do-ing anything else to process this request and response.” But with include(), you’re saying, “I want someone else to do some things with the request and/or response, but when they’re done, I want to finish handling the request and
+response myself (although I might decide to do another include or forward after that...”).
+	
+
+****View.inlcude() View.forward() shouldn't be called after you have commiteed the response...
+
+**** Some Exceptions are thrown by Container like ServletException,IllegalThreadStateExceptionIOException other than the Programmer thrown Exceptions..
+
+Context:(Entire APP)
+--------
+Visibility:Any part of the web app including servlets, JSPs, ServletContextListeners, ServletContextAttribute-Listeners
+
+Scope:Lifetime of the ServletContext, which means life of the deployed app. If server or app goes down, the context is destroyed (along with itsattributes).
+									
+Usage:Resources you want the entire application to share, including database connections, JNDI lookup names, email addresses., etc.
+
+
+HttpSession:(Servlet/JSP/WebService)
+------------
+
+Visibility:Any servlet or JSP with access to this particular session. Remember, a session extends beyond a single client request to span multiple requests by the same client, which could go to different servlets.
+
+Life/Scope:The life of the session. A session can be destroyed programmatically or can simply time-out. 
+
+Usgae:Data and resources related to this client’s session, not just a single request. Something that requires an ongoing conversation with the client. A shopping cart is a typical example.
+
+Request:(Servlet/JSP/WebService)
+-------
+
+Visibility:Any part of the application that has direct access to the Request object. That mostly means only the Servlets and JSPs to which the request is forwarded using a RequestDispatcher. Also Request-related listeners
+
+Life/Scope:The life of the Request, which means until the Servlet’s service() method completes. In other words, for the life of the thread (stack) handling this request.
+
+Usage:Passing model info from the controller to the view... or any other data specific to a single client request.
+
+
+public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+ req.setAttribute(“a”, “b”);
+ req.setAttribute(“a”, “c”);
+ req.removeAttribute(“a”);
+ }
+ public void attributeAdded(ServletRequestAttributeEvent ev) {
+	 System.out.print(“ A:” + ev.getName() + “->” + ev.getValue());
+ }
+public void attributeRemoved(ServletRequestAttributeEvent ev) {
+	System.out.print(“ M:” + ev.getName() + “->” + ev.getValue());
+}
+public void attributeReplaced(ServletRequestAttributeEvent ev) {
+	System.out.print(“ P:” + ev.getName() + “->” + ev.getValue());
+}
+A:a->b P:a->b M:a->c
+
+
+**Registering the Listeners with Container so Container can trigger the Listener class Objects when the specific event occurs..
+
+***The servlet to which a request is forwarded may access the original query string by calling getAttribute(“javax.servlet.forward.query_string”) on the ServletRequest.
+
+What is the recommended way to deal with servlets and thread safety?
+**Use local variables exclusively, and if you have to use instance variables, synchronize access to them.
+
+**ServletContext Pednig Object to remeber the methods
+
+If a servlet's RequestDispatcher was obtained using one of the getRequestDispatcher methods (and not using getNamedDispatcher), the following attributes are available in the ServletRequest:
+
+When?	Name					Description
+forward	javax.servlet.forward.request_uri	original request URI (see getRequestURI)
+forward	javax.servlet.forward.context_path	original context path (see getContextPath)
+forward	javax.servlet.forward.servlet_path	original context path (see getServletPath)
+forward	javax.servlet.forward.path_info		original path info (see getPathInfo)
+forward	javax.servlet.forward.query_string	original query string (see getQueryString)
+include	javax.servlet.include.request_uri	included request URI (see getRequestURI)
+include	javax.servlet.include.context_path	included context path (see getContextPath)
+include	javax.servlet.include.servlet_path	included context path (see getServletPath)
+include	javax.servlet.include.path_info		included path info (see getPathInfo)
+include	javax.servlet.include.query_string	included query string (see getQueryString)
+
+
+Forward to Static Content:
+--------------------------
+ // before or after noon? determine path to the right image in the WAR
+boolean isPM = new GregorianCalendar().get(Calendar.AM_PM) == Calendar.PM; 
+String resName = "/WEB-INF/images/time" + (isPM ? "PM" : "AM") + ".png";
+getServletContext().getRequestDispatcher(resName).forward(request, response);
+
+
+HttpSession:
+
+An HttpSession object can hold conversational state across multiple requests from the same client.In other words, it persists for an entire session with a specific client..We can use it to store everything we get back from the client in all the requests the client makes during a session.
+
+Why can’t the Container just use the IP address of the client? It’s part of the request, right?
+
+To the server, your IP address is the address of the router, so you have the same IP address as everybody else on that network! So that wouldn’t help. You’d have the same problem—the stuff Jim puts in his shopping cart might end up in Pradeep’s cart, and vice versa. So no, IP address isn’t a solution for uniquely identifying a specific client on the internet.
+
+Well then how about security info? If the user is logged in, and the connection is secure (HTTPS), the Container knows EXACTLY who the client is, right
+
+Yes, if the user is logged in and the connection is secure, the Container can identify the client and associate him with a session. But that’s a big if. Most good web site design says, “don’t force the user to log in until it really matters, and don’t switch on security (HTTPS) until it really matters.” If your users are just browsing, even if they’re adding items to a shopping cart, you probably don’t want the overhead (for you or the user) of having them authenticate to the system until they decide to checkout! So, we need a mechanism to link a client to a session that doesn’t require a securely authenticated client
+
+Our Role: Request.getSession();
+
+Container Role: Container takes care of generating the SessionId 2)Creating the new Cookie Object 3)Stuffing the sessionId into the Cookie 4)Stuffing the Cookie into the Response Header..
+
+And on subsequent requests, the Container gets the session ID from a cookie in the request, matches the session ID with an existing session, and associates that session with the current request.
+
+HttpSession session = request.getSession();
+------------------------------------------
+You don’t make the new HttpSession object yourself.
+You don’t generate the unique session ID.
+You don’t make the new Cookie object.
+You don’t associate the session ID with the cookie.
+You don’t set the Cookie into the response
+(under the Set-Cookie header).All the cookie work happens behind the scenes
+
+Cookie::Cookie is the small piece of information. String value pair that we need from the client recognise.
+
+HttpSession session = request.getSession();
+
+
+IF (the request includes a session ID cookie)
+	find the session matching that ID
+
+ELSE IF (there’s no session ID cookie OR there’s no current session matching the session ID)
+	create a new session.
+
+All the cookie work happens behind the scenes.
+
+What if I want to know whether the session already existed or was just created?
+
+
+HttpSession session = request.getSession();getSession() returns a session no matter what.... but you can’t tell if it’s a new session unless you ask the session
+
+if (session.isNew()) {}	isNew() returns true if the client has not yet responded with this session ID.
+
+
+**You get a session by calling request.getSession(), but is that the only way to get the session? Can’t you get it from the ServletContext?
+
+But there is another way that you can get a session... from a session event object. Remember, a listener class isn’t a servlet or JSP—it’s just a class that wants to know about the events. For example, the listener might be an attribute trying to find out when it (the attribute object) was added to or removed from a session..The event-handling methods defined by the listener interfaces related to sessions take an argument of type HttpSessionEvent, or its subclass, HttpSessionBindingEvent. And HttpSessionEvent has a getSession() method!So, if you implement any of the four listener interfaces related to sessions (we’ll get to that later in the chapter), you can access the session through the event-handling callback methods. For example, this code is from a class that implements the HttpSessionListener interface
+
+public void sessionCreated(HttpSessionEvent event) {
+HttpSession session = event.getSession();
+// event handling code
+}
+
+What if I want ONLY a pre-existing session?It might not make sense for the checkout servlet, for example, to start a new session.
+
+So there’s an overloaded getSession(boolean) method just for that purpose. If you don’t want to create a new session, call getSession(false), and you’ll get either null, or a pre-existing HttpSession
+
+HttpSession session = request.getSession(false);	the no-arg getSession() would NEVER return null
+Passing “false” means the method returns a pre-existing session, or null if there was no session associated with this client
+
+So it looks like getSession(true) is exactly the same as getSession()...
+
+Right again. The no-arg version is a convenience for those times when you know that you always want a session, new or existing. The version that takes a boolean is useful when you know that you don’t want a new session, or when the decision of whether to make a new session happens at runtime (and you’re passing a variable into the getSession(someBoolean) method).
+
+
+URL Rewriting: url;jsessionid=
+
+Imagine a web page where every link has a little bit of extra info (the session ID) tacked onto the end of the URL. When the user clicks that “enhanced” link, the request goes to the Container with that extra bit on the end, and the Container simply strips off the extra part of the request URL and uses it to find the matching session
+
+**Does you change every url that you write as part of the webapp with Url Rewrting? Only the links that want the sessionState Compulsory..
+
+Remember, if the Container doesn’t get a session ID from the client, the Container won’t even KNOW that this is the next request from that client. The Container won’t have any way to know that it tried cookies the last time, and they didn’t work. Remember, the ONLY way the Container can recognize that it has seen this client before is if the client sends a session ID!So, when the Container sees you call request.getSession(), and realizes it needs to start a new session with this client, the Container sends the response with both a “Set-Cookie” header for the session ID, and the session ID appended to the URLs (assuming you used response.encodeURL()).Now imagine the next request from this client—it will have the session ID appended to the request URL, but if the client accepts cookies, the request will ALSO have a session ID cookie. When the servlet calls request.getSession(), the Container reads the session ID from the request, finds the session, and thinks to itself, “This client accepts cookies, so I can ignore the response.encodeURL() calls. In the response, I’ll send a cookie since I know that works, and there’s no need for any URL rewriting, so I won’t bother...”
+
+
+You might have a scenario in which you want to redirect the request to a different URL, but you still want to use a session.
+There’s a special URL encoding method just for that:
+
+response. encodeRedirectURL(“/BeerTest.do”)
+
+What about all my static HTML pages... they are full of <a href> links. How do I do URL rewriting on those static pages?
+
+You can’t! The only way to use URL rewriting is if ALL the pages that are part of a session are dynamically-generated! You can’t hard-code session ID’s, obviously, since the ID doesn’t exist until runtime. So, if you depend on sessions, you need URL rewriting as a fall-back strategy. And since you need URL rewriting, you have to dynamically generate the URLs in the response HTML! And that means you have to process the HTML at runtime.
+
+Yes, this is a performance issue. So you must think very carefully about the places where sessions matter to your app, and whether sessions are critical to have or merely good to have
+
+**For Sessions Management you need to depend on the Cookies or URL Rewriting 
+
+URL rewriting is automatic but only if you encode your URLs. YOU have to run all your URLs through a method of the response object—encodeURL() or
+encodeRedirectURL()—and the Container does everything else
+
+You can do URL-rewriting in a JSP, and there’s even a simple JSTL tag that makes it easy, <c:URL>, that you’ll see when you get to the chapter on using custom tags...
+
+Yes, URL rewriting is handled in a vendor-specific way. Tomcat uses a semicolon “;” to append the extra info to the URL. Another vendor might use a comma or something else. And while Tomcat adds “jsessionid=” in the rewritten URL, another vendor might append only the session ID itself. The point is, whatever the Container uses as the separator is recognized by the Container when a request comes in. So when the Container sees the separator that it uses (in other words, the separator that it added during URL rewriting), it knows that everything after that is “extra info” that the Container put there.
+
+
+Don't ever do this:
+
+String sessionID = request.getParameter(“jsessionid”)
+
+And you shouldn’t see a custom “jsessionid” header in a request or response:
+
+POST /select/selectBeerTaste.do HTTP/1.1
+User-Agent: Mozilla/5.0
+JSESSIONID: 0AAB6C8DE415	Don’t do this! It’s supposed to be a header!
+
+In fact, the ONLY place a “jsessionid” belongs is inside a cookie header:
+POST /select/selectBeerTaste.do HTTP/1.1
+User-Agent: Mozilla/5.0
+Cookie: JSESSIONID=0AAB6C8DE415	This is right, but you don’t do it yourself
+
+POST /select/selectBeerTaste.do;jsessionid=0AAB6C8DE415
+
+*** If it is the GET Request or the POST request the in the URL Rewriting the jsessionId will be in url. That will be used for HACKING. So whenever you login to the website you should logout/invalidate the session before you come out of any site..
+
+****The only way to use URL rewriting is if ALL the pages that are part of a session are dynamically-generated!..
+
+
+Cookies:
+-------
+
+Remember, a cookie is nothing more than a little piece of data (a name/value String pair) exchanged between the client and server. The server sends the cookie to the client, and the client returns the cookie when the client makes another request. One cool thing about cookies is that the user doesn’t have to get involved—the cookie exchange is automatic..By default, a cookie lives only as long as a session; once the client quits his browser, the cookie disappears. That’s how the “JSESSIONID” cookie works. But you can tell a cookie to stay alive even AFTER the browser shuts down.
+
+<session-config>
+    <session-timeout>720</session-timeout> <!-- 720 minutes = 12 hours -->
+    <cookie-config>
+        <max-age>43200</max-age> <!-- 43200 seconds = 12 hours -->		Client can comeback and use the same session..
+    </cookie-config>
+</session-config>
+
+You can tell a cookie to stay alive even AFTER the browser shuts down of the browser....
+
+***How the Cookies to the specific site are sent ? How cookies are stored in the webbrowser?
+**When we access the flipkart does only the flipkart Cookies sent or all the Websites cookies are sent?
+
+** We don't need to declare the Binding Listeners in the DD..
+
+
+If an attribute class (like the Dog class here) implements the HttpSessionBindingListener, the Container calls the event-handling callbacks (valueBound() and valueUnbound()) when an instance of this class is added to or removed from a session. That’s it. It just works. But this is NOT true for the other session-related listeners on the previous page. HttpSessionListener and HttpSessionActivationListener must be registered in the DD, since they’re related to the session itself, rather than an individual attribute placed in the session
+
+** Who creates the Objects of the Listener? When it creates the Object First time when the event is triggered or before only?
+
+we talked briefly about distributed web apps, where the pieces of the app might be replicated across multiple nodes in the network. In a clustered environment, the Container might do load-balancing by taking client requests and sending them out to JVMs (which may or may not be on different physical boxes, but that doesn’t matter to us). The point is, the app is in multiple places.
+
+That means each time the same client makes a request, the request could end up going to a different instance of the same servlet. In other words, request A for Servlet A could happen on one VM, and request B for Servlet A could end up on a different VM. So the question is, what happens to things like ServletContext, ServletConfig, and HttpSession objects?
+
+
+Only HttpSession objects (and their attributes) move from one VM to another.
+There is one ServletContext per VM. There is one ServletConfig per servlet, per VM. But there is only one HttpSession object for a given session ID per web app, regardless of how many VM’s the app is distributed across.
+
+
+Everything is duplicated in the second server EXCEPT the HttpSession objects.Sessions live in only ONE place at any given moment. The same session ID for a given web app will NEVER appear in two VMs at the same time
+
+
+App server vendor handles clustering and web app distribution varies with each vendor, and there’s no guarantee in the J2EE spec that a vendor has to support distributed apps. But the picture here gives you a high-level idea of how it works. The key point is that while other parts of the app are replicated on each node/VM,the session objects are moved. And that is guaranteed. In other words, if the vendor does support distributed apps, then the Container is required to migrate sessions across VMs. And that includes migrating session attributes as well.
+
+A Container is required to migrate Serializable attributes (which assumes that all instance variables within the attribute are either Serializable or null).
+
+But a Container is not required to use Serialization as the means for migrating the HttpSession object! What does this mean to you? Simple: make sure your attribute class types are Serializable and you never have to worry about it. But if they’re not Serializable (which could be because one of the
+attribute object’s instance variables is not Serializable), have your attribute object class implement HttpSessionActivationListener and use the activation/passivation callbacks to work around
+
+The Container is not REQUIRED to use Serialization, so there’s no guarantee that readObject() and writeObject() will be called on a Serializable attribute or one of its instance variables
+
+If you’re familiar with Serialization, you know that a class that implements Serializable can also choose to implement a writeObject() method, called by the VM whenever an object is serialized, and a readObject() method, called when an object is deserialized. A Serializable object can use these methods to, for example, set non-Serializable fields to null during Serialization (writeObject()) and then restore the fields during deserialization (readObject()). (If you’re NOT familiar with the details of Serialization, don’t worry about it.) But the methods won’t necessarily be called during session migration! So if you need to save and restore instance variable state in your attribute, use HttpSessionActivationListener, and use the two event call- backs (sessionDidActivate() and sessionWillPassivate()) the way you’d use readObject() and writeObject().
+
+public class BeerSessionCounter implements HttpSessionListener {
+	static private int activeSessions;
+public static int getActiveSessions() {
+	return activeSessions;
+}
+public void sessionCreated(HttpSessionEvent event) {
+	activeSessions++;
+}
+public void sessionDestroyed(HttpSessionEvent event) {
+	activeSessions--;
+}
+}
+
+This class will be deployed in WEB-INF/classes like all the other web-app classes, so all servlets and other helper classes can access this method..
+
+FYI- this wouldn’t work correctly if the app is distributed on multiple JVMs, because there is no way to keep the static variables in sync. If the class is loaded on more than one JVM, each class will have its own value for the static counter variable
+
+what the heck are you printing to? Where does System.out go in a web app?
+
+Wherever this Container chooses to send it (which may or may not be configurable by you). In other words, in a vendor-specific place, often a log file. Tomcat puts the output in tomcat/logs/catalina.log. You’ll have to read your server docs to find out what your Container does with standard output.
+
+
+public class Dog implements HttpSessionBindingListener, HttpSessionActivationListener,Serializable {
+private String breed;
+
+// imagine more instance variables, including
+// some that are not Serializable
+// imagine constructor and other getter/setter methods
+public void valueBound(HttpSessionBindingEvent event) {
+// code to run now that I know I’m in a session
+}
+
+public void valueUnbound(HttpSessionBindingEvent event) {
+// code to run now that I know I am no longer part of a session
+}
+
+public void sessionWillPassivate(HttpSessionEvent event) {
+// code to get my non-Serializable fields in a state
+// that can survive the move to a new VM
+}
+
+public void sessionDidActivate(HttpSessionEvent event) {
+// code to restore my fields... to redo whatever I undid
+// in sessionWillPassivate()
+}
+}
+
+***A session whose timeout period has been set to -1 will never expire.A session will become invalid after a timeout period defined by the servlet container.
+
+** The app1 session Objects are not accessible inside the app-2. Suppose from your app-1 you redirect request to app2 & want to use the same session then it is not possible.. You have to configure within the context.xml to have the Sharable SessionContext..
+
+<Valve className="org.apache.catalina.valves.PersistentValve"/>
+    <Manager className="org.apache.catalina.session.PersistentManager">
+        <Store className="org.apache.catalina.session.FileStore" directory="${catalina.base}/temp/sessions"/>
+    </Manager>
+
+https://www.cacheonix.org/articles/How_to_Distribute_Java_Application_on_Multiple_JVMs.htm
+
+
+								JSP
+								----
+JSP finally will be become servlet..It’s a lot like any other servlet, except that the servlet class is written for you—by the Container..
+
+The Container takes what you’ve written in your JSP, translates it into a servlet class source (.java) file, then compiles that into a Java servlet class. After that, it’s just servlets all the way down, and the servlet runs in exactly the same way it would if you’d written and compiled the code yourself. In other words, the Container loads the servlet class, instantiates and initializes it, makes a separate thread for each request, and calls the servlet’s service() method
+
+container Translates		   Compiles		  Loaded and Intialized	
+MyJSP.jsp----------->MyJSP_jsp.java--------->MyJSP_jsp.class---------------------->MYJSP_jsp(ServletObject)
+
+When You have some changes to JSP.. Does changes get reflected immediately or it needs to deployed again? Reflected Immediately
+
+On First request to the jsp ..The jsp will be converted to java file and compile it and intialize.. If you make some changes then does the jsp need to reconverted and recompile the file and load and intialize.
+
+
+<html><body>
+<% int count=0; %>
+The page count is now:
+<%= ++count %>
+</body></html>
+
+
+public class basicCounter_jsp extends SomeSpecialHttpServlet {
+
+     public void _jspService(HttpServletRequest request,HttpServletResponse response)throws java.io.IOException,ServletException {
+	
+	PrintWriter out = response.getWriter();
+	response.setContentType(“text/html”);
+	out.write(“<html><body>”);
+	int count=0;
+	out.write(“The page count is now:”);
+	out.print( ++count );
+	out.write(“</body></html>”);
+}
+
+}
+
+****This is also servlet so not recommeded to take the class level varaibles they are subjected to Multiple Threads modifications..
+
+
+
+Time to see the REAL generated servlet:
+-------------------------------------
+
+1) Looks at the directives, for information it might need during translation
+
+2) Creates an HttpServlet subclass. For Tomcat 5, the generated servlet extends: org.apache.jasper.runtime.HttpJspBase
+
+3) If there’s a page directive with an import attribute, it writes the import statements at the top of the class file, just below the package statement.
+   For Tomcat 5, the package statement (which you don’t care about) is: package org.apache.jsp;
+
+4)If there are declarations, it writes them into the class file, usually just below the class declaration and before the service method. Tomcat 5 declares   one static variable and one instance method of its own
+
+5)Builds the service method. The service method’s actual name is _jspService(). It’s called by the servlet superclass’ overridden service() method, and receives the HttpServletRequest and HttpServletResponse. As part of building this method, the Container declares and initializes all the implicit objects. (You’ll see more implicit objects when you turn the page.)
+
+6)Combines the plain old HTML (called template text), scriptlets, and expressions into the service method, formatting everything and writing it to the PrintWriter response output.
+
+
+public final class BasicCounter_jsp extends org.apache.jasper.runtime.HttpJspBase implements org.apache.jasper.runtime.JspSourceDependent {
+ int count=0;
+ private static java.util.Vector _jspx_dependants;
+  public java.util.List getDependants() {
+		return _jspx_dependants;
+}
+public void _jspService(HttpServletRequest request, HttpServletResponse response) throws java.io.IOException, ServletException {
+	JspFactory _jspxFactory = null;
+	PageContext pageContext = null;
+	HttpSession session = null;
+	ServletContext application = null;			The Container declares a bunch of its own local variables, including those that represent 								the “implicit objects” your code might need, like “out” and “request
+	ServletConfig config = null;
+	JspWriter out = null;
+	Object page = this;
+	JspWriter _jspx_out = null;
+	PageContext _jspx_page_context = null;
+
+	try {
+	_jspxFactory = JspFactory.getDefaultFactory();
+	response.setContentType(“text/html”);
+	pageContext = _jspxFactory.getPageContext(this, request, response,null, true, 8192, true);
+	_jspx_page_context = pageContext;
+	application = pageContext.getServletContext();
+	config = pageContext.getServletConfig();
+	session = pageContext.getSession();
+	out = pageContext.getOut();
+	_jspx_out = out;
+	out.write(“\r<html>\r<body>\r”);
+	out.write(“\rThe page count is now: \r”);
+	out.print( ++count );
+	out.write(“\r</body>\r</html>\r”);
+	} 
+	catch (Throwable t) {
+		if (!(t instanceof SkipPageException)){
+			out = _jspx_out;
+		if (out != null && out.getBufferSize() != 0)
+			out.clearBuffer();
+		if (_jspx_page_context != null) _jspx_page_context.handlePageException(t);
+	}
+} 	finally {
+	if (_jspxFactory != null) _jspxFactory.releasePageContext(_jspx_page_context);
+}
+}
+}
+}
+
+Initializing your JSP:
+--------------------
+You can do servlet initialization stuff in your JSP, but it’s slightly different from what you do in a regular servlet.
+
+You configure servlet init params for your JSP virtually the same way you configure them for a normal servlet. The only difference is that you have to add a <jsp-file> element within the <servlet> tag.
+
+<web-app ...>
+<servlet>
+	<servlet-name>MyTestInit</servlet-name>
+	<jsp-file>/TestInit.jsp</jsp-file>
+	<init-param>
+	<param-name>email</param-name>
+	<param-value>ikickedbutt@wickedlysmart.com</param-value>
+	</init-param>
+</servlet>
+<servlet-mapping>
+	<servlet-name>MyTestInit</servlet-name>
+	<url-pattern>/jspservlet</url-pattern>
+</servlet-mapping>
+
+
+Even the Jsp's can also have the URLS..When you invoke the appname/jspservlet --->It will map to servlet called /TestInit.jsp or /WEB-INF/TestInt.jsp
+
+****This way you can hide the .jsp extension to the user..
+
+
+Overriding the jspint():
+------------------------
+
+Yes, it’s that simple. If you implement a jspInit() method, the Container calls this method at the beginning of this page’s life as a servlet. It’s called from the servlet’s init() method, so by the time this method runs there is a ServletConfig and ServletContext available to the servlet. That means you can call getServletConfig() and getServletContext() from within the jspInit() method.
+
+This example uses the jspInit() method to retrieve a servlet init parameter (configured in the DD), and uses the value to set an application-scoped attribute
+
+<%!						         //Override the jspInit() method using a declaration
+public void jspInit() {
+ServletConfig sConfig = getServletConfig();		//You’re in a servlet, so you can call your inherited getServletConfig() method
+String emailAddr = sConfig.getInitParameter(“email”);	
+ServletContext ctx = getServletContext();		//Get a reference to the ServletContext and set an application-scope attribute.
+ctx.setAttribute(“mail”, emailAddr);
+}
+%>
+
+
+The example on the opposite page shows the JSP setting an application-scoped attribute using a method declaration that overrides jspInit(). But most of the
+time you’ll be using one of the four implicit objects to get and set attributes corresponding to the four attribute scopes available in a JSP.
+
+**The implicit Objects will not be available in the jsp init and jspdestroy methods that you write..
+
+Examples using pageContext to get and set attributes:::
+-----------------------------------------------------
+
+Setting a page-scoped attribute:
+
+<% Float one = new Float(42.5); %> <% pageContext.setAttribute(“foo”, one); %>
+
+Getting a page-scoped attribute :   <%= pageContext.getAttribute(“foo”) %>
+
+Using the pageContext to set a session-scoped attribute
+
+<% Float two = new Float(22.4); %>
+<% pageContext.setAttribute(“foo”, two, PageContext.SESSION_SCOPE); %>
+
+Using the pageContext to get a session-scoped attribute
+
+<%= pageContext.getAttribute(“foo”, PageContext.SESSION_SCOPE) %> (Which is identical to: <%= session.getAttribute(“foo”) %> )
+
+
+<%= pageContext.getAttribute(“mail”, PageContext.APPLICATION_SCOPE) %> identical to (Email is: <%= application.getAttribute(“mail”) %>)
+
+****Using the PageCOntext for getting & setting the attributes is bit uglier and heavy.. But there is no way for setting and retriving the page scoped attributes...
+
+<%= request.getAttribute()%> <%= session.getAttribute()%> <%= application.getAttribute()%> <%= pageContext.getAttribute("“foo”")%>(for pagescope)
+
+<% request.setAttribute()%> <% session.setAttribute()%> <% application.setAttribute()%> <% pageContext.setAttribute("foo",one)%>
+
+
+Writing the Scriplets, Expressions and declartions code in the jsp page is Bad Programming practisce..Some people believe (OK, technically a lot of people including the JSP and Servlet spec teams) that it’s bad practice to put all this Java into your JSP.To clearly give the seprate roles for the webdesigners and Java Developers..
+
+1) Web page designers shouldn’t have to know Java.
+2) Java code in a JSP is hard to change and maintain
+
+
+					Completely Swtiching to EL:(Writing the Scriplets in the JSP is Bad Programming Practisce)
+
+You can make it invalid for a JSP to have scripting elements (scriptlets, Java expressions, or declarations) by putting a <scripting-invalid> tag in the DD:
+
+<web-app>
+<jsp-config>
+	<jsp-property-group>
+	<url-pattern>*.jsp</url-pattern>
+	<scripting-invalid>true</scripting-invalid>
+	</jsp-property-group>
+</jsp-config>
+</web-app>
+
+This disables scripting elements for ALL JSPs in the app (because we used the wildcard *.jsp as the URL pattern.).. You cannot disable it for the particular JSP
+
+DD configuration <scripting-invalid>	
+------------------------------------
+unspecified	evaluated
+true		error
+false		evaluated
+
+**You can only disable scripting elements through the DD. The <jsp-property-group> element allows you to disable scripting in selective JSPs by specifying URL patterns to be disabled.. Since there is no specific attribute in the page directive
+
+
+You can also choose to Ignore the EL:
+-------------------------------------
+
+It’s kind of the same thing with disabling EL—if you happened to have template text (plain old HTML or text) in your JSP that included something that looked like EL (${something}), you’d be in Big Trouble if you couldn’t tell the Container to just ignore anything that appears to be EL and instead treat it like any other unprocessed text....
+
+If you want EL-looking things in your JSP to be ignored, you have to say so explicitly, either through a page directive or a DD element.
+
+<web-app ...>
+<jsp-confi g>
+	<jsp-property-group>
+	<url-pattern>*.jsp</url-pattern>
+	<el-ignored>true</el-ignored>
+	</jsp-property-group>
+</jsp-config>
+</web-app>
+
+Using the isELIgnored page directive attribute::<%@ page isELIgnored=”true” %>
+
+The page directive takes priority over the DD setting:: If there’s a conflict between the <el-ignored> setting in the DD and the isELIgnored page directive attribute, the directive always wins! That lets you specify the default behavior in the DD, but override it for a specificy page using a page directive
+
+
+DD el-ignored		Page Directive(isElIgnored)     
+unspecified		unspecified				evaluated
+false			unspecified				evaluated
+true			unspecified				ignored
+false			false					evaluated
+false			true					ignored
+true			false					evaluated
+
+
+****All the standardActions/CustomActions & Expression language statement scriplets expressions and declrations are translated into the Java Statements before they are itself put into the service methods..
+	
+							Expression Language:
+							--------------------
+
+Inside the Scripting elements we can use the jsp default Objects.. In the expression language we should use the Expression Language implicit Objects..
+
+jsp:useBean searches for the attribute inside the scope with the id.id=”person”Declares the identifier for the bean object. This corresponds to the name used when the servlet code said: request.setAttribute(“person”, p);
+
+<jsp:useBean id="person" class="com.model.Person" scope="request">
+<jsp:setProperty property="name" name="person" value="Pavan"/>		Conditional Code setting if bean/attribute not found in the request scope
+</jsp:useBean>
+<jsp:getProperty property="name" name="person"/>
+<jsp:setProperty property="name" name="person" value="Pavan"/>		Resetting the Bean properties without conditional check
+<jsp:getProperty property="name" name="person"/>
+
+Bean Laws:
+
+Why didn’t they just let you specify arguments to the constructor of the bean? Why do you have to go through the extra trouble of setting values anyway?
+
+The simple answer is this: beans can’t HAVE constructors with arguments! Well, as a Java class, they can, but when an object is going to be treated as a bean, Bean Law states that ONLY the bean’s public, no-arg constructor will be called. End of story. In fact if you do NOT have a public no-arg constructor in your bean class, this whole thing will fail anyway.
+
+What the Heck is the Beans Law?
+
+1) You MUST have a public, no-arg constructor
+
+2) You MUST name your public getter and setter methods starting with “get” (or “is”, for a boolean) and “set”, followed by the same word. 
+(getFoo(), setFoo()).The property name is derived from stripping off the “get” and “set”, and changing the first character of what’s left to lowercase.
+
+3) The setter argument type and the getter return type MUST be identical. This defines the property type. int getFoo() void setFoo(int foo)
+
+4)The property name and type are derived from the getters and setters and NOT from a member in the class. For example, just because you have a private int foo variable does NOT mean a thing in terms of properties. You can name your variables whatever you like. The “foo” property name comes from the methods. In other words, you have a property simply because you have a getter and setter
+
+***5) For use with JSPs, the property type SHOULD be a type that is either a String or a primitive. If it isn’t, it can still be a legal bean, but you won’t be able to rely only on standard actions, and you might have to use scripting.
+
+
+Type can be a class type, abstract type, or an interface—anything that you can use as a declared reference type for the class type of the bean object...
+You can’t violate Java typing rules, of course. If the class type can’t be assigned to the reference type, you’re screwed. So that means the class must be a subclass or concrete implementation of the type
+
+What if you have the only Type attribute but you don't have the class attribute:
+--------------------------------------------------------------------------------
+
+What happens if we declare a type, but not a class? Does it matter if the type is abstract or concrete
+
+<jsp:useBean id=”person” type=”foo.Person” scope=”page”/> It searches for the attribute of types Person in the page scope.. The attribute can be the Employee or the any other subtype..If it is found you're out of the danger. Else jsp:useBean tries to create the newBean but it doesn't have class attribute
+so we get the exception..java.lang.InstantiationException: bean person not found within scope
+
+If type is used without class, the bean must already exist.
+If class is used (with or without type) the class must NOT be abstract, and must have a public no-arg constructor..If class is abstract we will get CE
+
+If you use only Type you give only the refrence varaible information.If there is no bean at the scope mentioned with the id mentioned it cannot create Object.. If you use only class then If there is no bean at the scope mentioned with the id mentioned then class attr value can be used for the refrence type and Object type..
+
+
+				Going straight from the request to the JSP without going through a servlet
+				--------------------------------------------------------------------------
+
+Is there a way I can use the request parameters to set a bean property, WITHOUT using scripting?
+
+<form action=“TestBean.jsp”>
+name: <input type=“text” name=“userName”>
+ID#: <input type=“text” name=“userID”>
+<input type=”submit”>
+</form>
+
+<jsp:useBean id=“person” type=“foo.Person” class=“foo.Employee”/>
+<% person.setName(request.getParameter(“userName”)); %>
+
+<jsp:useBean id=“person” type=“foo.Person” class=“foo.Employee”>
+<jsp:setProperty name=“person” property=“name” value='<%= request.getParameter(“userName”) %>' />
+</jsp:useBean>
+
+Yes, you ARE seeing an expression INSIDE the <jsp:setProperty> tag (which happens to be inside the body of a <jsp:useBean> tag) And yes, it DOES look bad
+
+Example:
+-------
+
+<form action="formParameters.jsp">
+Name: <input type="text" name="userName">
+ID#: <input type="text" name="userID">
+<input type="submit">
+</form>
+
+abstract public class Person {
+	String name;
+	public void setName(String name) {
+		this.name = name;
+	}
+}
+
+public class Employee extends Person{
+	private Integer empId;
+	public void setEmpId(Integer empId) {
+		this.empId = empId;
+	}
+}
+
+<jsp:useBean id="person" type="com.model.Person" class="com.model.Employee">
+<jsp:setProperty name="person" property="name" value='<%=request.getParameter("userName")%>'/>
+<jsp:setProperty name="person" property="empId" value='<%=Integer.parseInt(request.getParameter("userID"))%>'/>
+</jsp:useBean>
+
+You should take the extra Headache of Converting them to the Type it is required...
+
+The param attribute to the rescue:
+------------------------------------
+It’s so simple. You can send a request parameter straight into a bean, without scripting, using the param attribute
+
+***The param attribute lets you set the value of a bean property to the value of a request parameter. JUST by naming the request parameter!
+
+<jsp:setProperty name="person" property="empId" param="userID"/> 
+The param value “userName” comes from the name attribute of the form’s input field
+
+There is a chance that if you don't specify the requestParamName correctly you will receive the null value from the front end..
+
+*****param takes the Headche of converting it to the required types 
+
+But wait! It gets even better...
+
+And all you have to do is make sure your form input field name (which becomes the request parameter name) is the same as the property name in your bean. Then in the <jsp:setProperty> tag, you don’t have to specify the param attribute. If you name the property but don’t specify a value or param, you’re telling the Container to get the value from a request parameter with a matching name...
+
+<jsp:setProperty name="person" property="empId" value='<%=Integer.parseInt(request.getParameter("userID"))%>'/>
+<jsp:setProperty name="person" property="empId" param="userID"/>
+<jsp:setProperty name="person" property="empID"/>  	*******If the form parameter name and bean property name are same	
+<!-- Look for the requestParameter with name and set its value here in beans name property -->
+
+<jsp:setProperty name="person" property="*"/> If all the input field names of the form are matching to Bean Property names then container does work automatcally..
+
+
+
+
+				Going straight from the request to the JSP without going through a servlet
+				--------------------------------------------------------------------------
+
+Is there a way I can use the request parameters to set a bean property, WITHOUT using scripting?
+
+<form action=“TestBean.jsp”>
+name: <input type=“text” name=“userName”>
+ID#: <input type=“text” name=“userID”>
+<input type=”submit”>
+</form>
+
+<jsp:useBean id=“person” type=“foo.Person” class=“foo.Employee”/>
+<% person.setName(request.getParameter(“userName”)); %>
+
+<jsp:useBean id=“person” type=“foo.Person” class=“foo.Employee”>
+<jsp:setProperty name=“person” property=“name” value='<%= request.getParameter(“userName”) %>' />
+</jsp:useBean>
+
+Yes, you ARE seeing an expression INSIDE the <jsp:setProperty> tag (which happens to be inside the body of a <jsp:useBean> tag) And yes, it DOES look bad
+
+Example:
+-------
+
+<form action="formParameters.jsp">
+Name: <input type="text" name="userName">
+ID#: <input type="text" name="userID">
+<input type="submit">
+</form>
+
+abstract public class Person {
+	String name;
+	public void setName(String name) {
+		this.name = name;
+	}
+}
+
+public class Employee extends Person{
+	private Integer empId;
+	public void setEmpId(Integer empId) {
+		this.empId = empId;
+	}
+}
+
+<jsp:useBean id="person" type="com.model.Person" class="com.model.Employee">
+<jsp:setProperty name="person" property="name" value='<%=request.getParameter("userName")%>'/>
+<jsp:setProperty name="person" property="empId" value='<%=Integer.parseInt(request.getParameter("userID"))%>'/>
+</jsp:useBean>
+
+You should take the extra Headache of Converting them to the Type it is required...
+
+The param attribute to the rescue:
+------------------------------------
+It’s so simple. You can send a request parameter straight into a bean, without scripting, using the param attribute
+
+***The param attribute lets you set the value of a bean property to the value of a request parameter. JUST by naming the request parameter!
+
+<jsp:setProperty name="person" property="empId" param="userID"/> 
+The param value “userName” comes from the name attribute of the form’s input field
+
+There is a chance that if you don't specify the requestParamName correctly you will receive the null value from the front end..
+
+*****param takes the Headche of converting it to the required types 
+
+But wait! It gets even better...
+
+And all you have to do is make sure your form input field name (which becomes the request parameter name) is the same as the property name in your bean. Then in the <jsp:setProperty> tag, you don’t have to specify the param attribute. If you name the property but don’t specify a value or param, you’re telling the Container to get the value from a request parameter with a matching name...
+
+<jsp:setProperty name="person" property="empId" value='<%=Integer.parseInt(request.getParameter("userID"))%>'/>
+<jsp:setProperty name="person" property="empId" param="userID"/>
+<jsp:setProperty name="person" property="empID"/>  	*******If the form parameter name and bean property name are same	
+<!-- Look for the requestParameter with name and set its value here in beans name property -->
+
+<jsp:setProperty name="person" property="*"/> If all the input field names of the form are matching to Bean Property names then container does work automatcally..
+
+JSP::I want you to iterate through the request parameters, and find any that match this bean’s property names, and set the VALUE of the matching properties equal to the value of the corresponding request parameter...
+
+Container:Oh sure... make ME do all the work. I have to look at the bean class getters and setters to fi gure out the bean properties, then match that to
+the parameter names...
+
+Bean tags convert primitive properties automatically:
+----------------------------------------------------
+
+JavaBean properties can be anything, but if they’re Strings or primitives, all the coercing is done for you. That’s right—you don’t have to do the parsing and conversion yourself..
+
+OK, I’m thinking that the Container code is doing some kind of Integer.parseInt(“343”), so wouldn’t you get a NumberFormatException if the user doesn’t type in something that can be parsed to an int? Like, what if the user types “three” in the employee ID fi eld
+
+Good catch. Yes, something will definitely go wrong if the request parameter for the empID property can’t be parsed into an int. You need to validate the contents of that field, to make sure it contains only numeric characters. You could send the form data to a servlet first, instead of sending it straight to the JSP. But if you’re committed to going from the form straight to the JSP, and you don’t want scripting, just use JavaScript in the HTML form to check the
+field before sending the request
+
+Working with complex Datatype using the <jsp:useBean> and <jsp:setProperty>?
+
+If a bean property doesn’t have to be a String or a primitive, then HOW can you set the property without scripting? The value attribute of the tag is always a String, right?
+
+It is possible (but potentially a *lot* of extra work) to create a special class, called a custom property editor, that supports the bean. It takes your String value and figures out how to parse that into something that can be used to set a more complex type... This is part of the JavaBeans spec,though, not the JSP spec. Also, if the value attribute in the <jsp:setProperty> tag is an expression rather than a String literal, then IF that expression evaluates to an object that’s compatible with bean property type, then it will probably work. If you pass in an expression that evaluates to a Dog, for example, the Person bean’s setDog(Dog) method will be called. But think about it—this means the Dog object must already exist. Anyway, you’re way better off NOT trying to construct new things in your JSP! Trying to get away with constructing and setting even marginally complex data types is gonna be tough without scripting
+
+***If the request if coming from servlet to the jsp and working to set the properties of String/Primitive types in the JSP Bean then you have to use the value attribute.. If you have to deal with the complex types then you need to write the scripting(expression) inside the value attribute..Even if you set the complex type using the value attribute it is difficult to retrive using the <jsp:getProperty> where you can retrive the only simple String and primitive Types..
+
+***If the request is Coming from the form/html and want to map all the coming field values to Bean then you use the <jsp:setProperty> with the param attribute.As the coming values from the fields are of the String type then <jsp:setProperty> tag is capable of coercing into the required primtive 
+datatypes automatically... If you maintain the input filed names same with the bean property names then you don't have to use the param tag also
+
+
+								EL Expression Language:
+
+>>>>>>> origin/main
+Working with attributes that are beans in any of the scopes..

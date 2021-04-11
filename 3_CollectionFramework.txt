@@ -1,0 +1,923 @@
+<<<<<<< HEAD
+
+Collection: It used for storing the multiple Objects as one group using singlename in Container Object.. Group can contain the homogenous hetrogenous
+unique and duplicate Objects in the diffrent Orders and different formats...
+
+Collection Object can used for passing as the method argument or the method return type.. With single name multiple Objects can be moved between the multiple layers of the project 
+
+Diffrent ways to store the multiple values/Objects? Using the Array and Collection
+
+Arrays Problems: Stores only homogenous objects/values..It allows only the fixed number of values/objects..No Inbuilt methods to perfom diffrent operations on the Group of Objects....It doesn't support different formats to store the values/Objects..doesn't support the diffrent orders for storing/retriving..
+
+When to use the Array and Collection? When the Size and Type of values/Objects to store are known in before hand then use the Arrays..
+
+Difference between the Array & Collection?
+1)
+Array is inbuilt language level Object its code part of the compiler and JVM.
+Collection is an API level object its Code is part of one class
+
+2)It will store primitives and Objects.. Collection can only store the oBjects can't even store primitives it needs to be converted to the Objects..
+
+3)Array supports only indexed format to store the values or Objects... Collection supports both the indexed format and Table format to store the values/Objects
+
+4) Array supports only the Insertion order to store elements...Collections supports the IO SO LIFO FIFO HashCode order to store and retrive the Objects
+
+***Different Operations on the Collection?
+
+Search Retrive Remove Replace Adding Inserting Size Printing sorting objects.... insert replace sort
+
+
+Based on the format and order requirement and on whether you need to store the duplicat/Unique Objects we have got several classes in the collection API..
+
+We must call the methods to perfom the above operations..
+
+Uses of the collection Framework:
+---------------------------------
+
+1)Reduces the programming effort 2)increases the perfomance 3)Provides the interoperability between the unrelated APIs.
+
+4) Reduces the effort required to learn the new API's in every organization..5)Reduces the effort required to design and implement APIS
+
+5) Fosters the software reuse
+
+
+Collection: It is root interface of the collection f/w.Collection hirerachy classes represents the collection of objects without mappings.stores the objects in the array format with or without index..
+
+Collection represents both the unique and duplicate objects..some of the collections are ordered and some are unordered..
+
+
+List:Stores the multiple objects they can even be duplicate(index plays crucial role in List implemented classes)...Ordered Collection
+Set:Stores the multiple objects they cannot be duplicate only unique... Ordered and Unique Collection
+Queue:For storing the multiple objects and helps to retrive them in the FIFO or LIFO order or any specific order [IO SO]..Ordered Collections
+Collection:[] Map:[]
+
+Set has one more interface called SoertedSet..This meant for storing the unique objects in the particular sorting order you define.
+
+Queue interface has one more subinterface called DeQueue. It meant for storing and retriving the objects from the both sides..Whereas Queue supports only single side that is at beginning. Dequeue has two implementtion classes 1)ArrayDequeue 2) LinkedList
+
+Same of Map Interface?unique duplicate --->keys ordered unordered
+
+Supporting Interfaces: Comparable Comparator Iterabel{For applying the foreach loop for retriving the elements with less code}
+
+Two Utility Classes: 
+
+Collections: Contains the several static methods for perfoming the diffrent operations on both Collection & Map
+Arrays: Contains the several static methods for perfoming the diffrent operations on Arrays & Collection
+
+
+ArrayList:
+----------
+
+When we want to store the multiple objects in the insertion order with the index including the duplicates in the singleThreaded environment and in method local operations where Thread safety is not required we must chosse the ArrayList.. It is not ThreadSafe Object so shouldn't be used in the multiThreaded environment.. Ordered Collection--->Insertion order is maintained along with index
+
+Its implemented datastructure is Resizable array..DefaultCapacity is 10 and incremental capactity is half or +1.. It allows us to store all 4 types of the objects Homogenous hetrogenous Unique and Duplicate... It allows us to store the null or multiple nulls.. It allows us to retrive the elments in the both sequnetial and random
+
+** In searching and removing operations internally equals method is called and is executed from the arg Object class, if it is not overriden then it is executed from the Object class, then this arg Object is compared with collection elements using the refrence..
+
+public ArrayList<E>() public ArrayList<E>(Collection c) public ArrayList<E>(int intialcapacity) 
+
+ArrayList Class Methods :: public void ensureCapacity(int capacity) public void trimToSize()
+
+
+Add Operation:
+-------------
+All kinds of objects(Hetrogenous) allowed...Duplicates are also allowed...duplicate nulls are also allowed...override the toString method for all the Objects that you add
+
+Retrive Operation: get
+-----------------
+
+// Rule #1: index >=0 && <size()
+
+//Rule #2: we can not assign get() method call to a variable of returning object type, because al generic type is Object all objects will be returned from collection as Object type So we must either assign to Object type variable or we must use type casting
+
+Refvaraible::can store the address of the parent itself or the childs...When you retrive you cannot assign it directly to the varaible of retrurning object
+type we need to Type case explicitly..
+
+If we use the Genric Type <Number> then it can have all the Integer Character all Objects but you can assign it to the only Number Varaible Directly..
+
+Rule #3:if we assign method call to Object type variable,we can not invoke methods of returned object, we must type casting object to its own type
+
+Rule #4: when we type cast returned object to its own type there is a change to get CCE, because objects position may be changed. Solution: we must type cast under instanceof operator if condition
+
+limitation of get() method: it can return only one object at a time if we want to return all objects, we must call get() method in loop
+
+Rule #5: in for loop we must use condition up to <size()../eles then IOOBE
+
+
+Search Operations:	contains-->indexOf    Inside the equals Method will be called
+------------------
+
+System.out.println(al.contains("a"));      //"a".equals("a")
+System.out.println(al.contains(new String("a")));  //n S("a").equals("a")
+System.out.println(al.contains(5)); //I(5).equals(I(5));
+System.out.println(al.contains(new Integer(5))); //n I(5).equals(I(5));
+System.out.println(al.contains(new A(5, 6))); //n A(5,6).equals(eles)
+System.out.println(al.contains(new A(15, 16))); //n A(5,6).equals(eles)
+
+
+remove Operations:		Inside the equals method will be called 
+------------------
+Using the remove method with the List(I) is having the problem since we have overloaded methods in collection
+E remove(int index); in List(I)  boolean remove(Object o); in the collection passing the object type...Integer.valueOf(5) (Character) 'p'
+
+System.out.println(al.remove(5));	Matches the index arg
+System.out.println(al.remove(new Integer(5)));
+System.out.println(al.remove(Integer.valueOf(5)));
+System.out.println(al.remove((Integer)5));
+System.out.println(al.remove('p'));		Matches the index arg only
+System.out.println(al.remove((Character) 'p'));
+ 
+The problem is for only to the byte short char int argument
+
+B b2 = new B(7, 8);
+al.add(b2);		
+if you modify the object b2 outside it will be reflected to the collection also internally
+
+****al.remove(b2) If we dont override the equals methods inside the B class the Objects class equals method that has the ref comaparision logic will be used
+
+****Nulls will be compared using the == reference operator and else other objects will be compared using the equals method..
+
+Replace Operations:
+-------------------
+
+al.set(al.indexOf("b"), "Y")  find the B getIndex and replace at that index with Y
+al.set(al.indexOf(new A(5, 6)), new A(9, 10)); Need to override the equals method
+
+al.set(al.indexOf(new B(5, 6)), new B(9, 10));		Situation where the equals method is not overriden
+/**Exception in thread "main" java.lang.IndexOutOfBoundsException: Index -1 out of bounds for length 18**/
+
+
+Insert Operations:
+------------------
+al.add(al.indexOf("M")+1, "N"); System.out.println(al);
+*****al.add(al.indexOf('p')+1, 'q'); System.out.println(al); If the Element is not found then the Object will get replaced at the first index..
+
+
+Sort Operations:
+----------------
+
+Comparable used for the NaturalSorting Logic..Comparator used for the our own custom sorting logic
+
+Collections.sor(List(I)) Takes the list and sorts out the elements by using the Comparable 
+ * 
+ * The objects added into the list should of the Comparable Type only.. Hetrogenous Objects 
+ * will not be allowed into the collection.. Generic Syntax should be used while 
+ * creating the collections
+ * 
+ * Collections.sort(List(I),Comparator(I)): Sorts the elements according to the logic provided
+ * 
+ * We can provide the sorting logic using the Outer class, Anonymous Inner class, LE,MethodReference
+ * 
+ * ArrayList.sort(Comparator(I)):provide the sorting logic or ArrayList.sort(null):Natrual Sorting logic
+ * ***/
+
+****Equals method inside the Objects should be implemented using the PK key columns..
+
+
+Cursor Objects :
+--------------
+
+Iterator: Can be applied on all the Collection Objects..
+
+Rules:
+
+Rules:1 We cannot call the itr.next() on the empty collection throws NoSuchElementException
+
+Rule 2: Iterator is fail fast it means we cannot modify the collection structurally by adding or removing while iterating on the collection
+
+Rule 3:: We cannot the call remove method in the Iterator without calling the next method..We will receive the IllegalStateException..
+
+itr.next();Reads and moves the cursor to next Object... itr.remove(); It removes the previous element that was read..
+
+IllegalStateException is received if all elements removed and again calling the remove method
+
+
+Methods:
+
+boolean hasNext(); E next();void remove();default void forEachRemaining(Consumer<? super E> action);
+
+ListIterator:	It can move the cursor in the Bidirectional manner.. We can add,set & even remove on the collection.ListIterator is also the fail fast	
+------------
+ListIterator will add the element to the collection after calling the next() method.. next to the element that is read element will be added.
+
+
+Methods:
+
+boolean hasNext(); E next();boolean hasPrevious();E previous();int nextIndex();int previousIndex();void remove(); void set(E e);void add(E e);
+
+
+Enumeration:	It has to be used for the only legacy collections Vector and HashTable.. It is fail safe iterator
+-----------
+
+We can get the Enumeration on the Non-Legacy collections also..
+
+ex:ArrayList<Object> al=new ArrayList<Object>();
+al.add(10);al.add("a");al.add(30);al.add("d");
+al.add(40);al.add("f");al.add(50);al.add("g");
+
+Enumeration<Object> e2 = Collections.enumeration(al);	But the Enumeration we have Obtained here is the fail fast Iterator
+
+Methods:boolean hasMoreElements();E nextElement();Iterator<E> asIterator()
+
+We can even convert the enumeration to the Iterator..
+
+
+Enhanced for Loop with out using the Cursors:(Java 5 Enhanchement)
+---------------------------------------------
+
+ArrayList<Object> al= new ArrayList<>(); Iterator<Object> itr = al.iterator();
+
+forEachLoop:
+
+for(Object obj : al) { //From Java 5v
+	System.out.println(obj); 
+ }
+
+for(Object obj : al) { //From Java 5v
+			
+if(obj instanceof String)
+	 System.out.println(((String)obj).toUpperCase());
+ else
+	 System.out.println(obj);
+}
+
+//Rule #1: The object user are using in for each loop must be either array type or must be Iterable type
+Note: Collection interface is derived from Iterable so we can use all implementation class object of Collection interface..
+
+For the map it is not valid? Then how will you iterate over the map objects.
+
+//Rule #2: The variable type must be itr.next() method return type or its super type...
+
+ int[] ia2 = {3, 4, 5, 6, 7};
+for(int i:ia2) {
+System.out.println(i); 
+}
+for(long i:ia2) {
+ System.out.println(i); 
+}
+
+//for(byte b:ia2) {System.out.println(i); }  //for(boolean b:ia2) {System.out.println(i); }
+
+ArrayList<Object> al3 = new ArrayList<>(); If you have Generic Collection then the next() returns the GenricType that is mentioned inside the <>		
+al3.add("a");
+for(Object obj: al3) {}
+//for(String obj: al3) {}
+
+ArrayList<String> al4 = new ArrayList<>();
+al3.add("a");
+for(String s: al4) { }
+for(Object s: al4) { }
+
+*****Note: for each loop is applied only on array objects and java.lang.Iterable type objects it is used for retrieving elements from container objects
+
+Enhanced forEach Method with out using the Cursors:(Java 8 Enhanchement):
+----------------------------------------------------------------------
+
+For Avoiding the logical programming inside the EnhancedforEach loop and forEachMethod the Java8 comeup with Streams to achive the functionalities in the functional programming & Object Oriented style..
+
+Note:  For any functional interface we can provide the implementation using the AIC, LE, MethodReference.
+
+The forEach method can be implemented using the AIC, LE, MethodReference.
+
+If your ArrayList is of Integer Types then forEach method can consume the NumberType or IntegerType only...But not the subtypes of the Ineteger or subtypes
+of the number
+
+ArrayList<Integer> al1=null;	/**Accepting the same type or the superType**/
+		al1.forEach(new Consumer<Number>() {
+			@Override
+			public void accept(Number t) {
+				
+			}
+		});
+
+al.forEach((Object obj) -> { // LE
+			System.out.println(obj);	
+		});
+System.out.println();
+// LE mandatory parts
+al.forEach(obj -> System.out.println(obj));	******The type is automatically inferred by the compiler incase of the LE
+
+al.forEach(System.out::println);	MethodReference Implementation
+
+
+Without New Features:
+
+Iterator itr = al1.iterator();
+		while (itr.hasNext()) {
+			Object obj = itr.next();
+			if (obj instanceof String ) {
+				System.out.println(((String) obj).toUpperCase());
+			} else if (obj instanceof Integer) {
+				Integer io = (Integer) obj;
+				int i = io.intValue();
+				printIsEvenOrOdd(i);
+			}		
+				else if(obj instanceof Double) {
+					Double do1 = (Double) obj;
+					int i1=do1.intValue();
+					printIsEvenOrOdd(i1);
+					
+				}
+			}
+
+
+New Features::  Genrics AB AUB forEach(-) instance of Pattern Matching
+
+ArrayList<Object> al3 = new ArrayList<>();
+		 al3.add("a");
+		 al3.add(5);
+		 al3.add("b");
+		 al3.add(6);
+		 al3.add("c");
+		 al3.add(7);
+		 al3.forEach(System.out::println);
+		
+		 al3.forEach(obj -> {
+		 if(obj instanceof String) {
+			String s= (String)obj;
+			System.out.println(s.toUpperCase());
+		 } 
+		 else if(obj instanceof Integer) {
+			 Integer i=(Integer)obj;
+//			 System.out.println(i%2==0 ? i+" is even": i+" is odd");
+			 printIsEvenOrOdd(i);
+		 }
+		 else if(obj instanceof Double) {
+				Double do1 = (Double) obj;
+				int i1=do1.intValue();
+				printIsEvenOrOdd(i1);
+				
+			}
+		 });
+
+Even the Logical programming part can be removed from the both EnhanceforLoop and forEachMethod with the help of Streams in Java8..
+
+
+Set Implemented Classes:	To store only the unique Objects
+-----------------------
+
+HashSet doesn't maintain the insertion order it will store the objs in the hashCode order..
+LinkedHashSet-->Maintains internally the insertion order.
+Treeset--> Sorting the Objects internally based on the sorting logic provided.
+
+Below table shows the 7 collections...
+
+adding 		hs.add(obj)	Internal Methods used ::obj.hashcode == & equals method.. To stop the duplicates
+counting 	hs.size		--
+retriving	hs.iterator	--
+searching 	hs.contains	Internal Methods used ::obj.hashcode == & equals method
+removing 	hs.remove	Internal Methods used ::obj.hashcode == & equals method
+
+replacing & inserting  operations are not supported since the Set Implemnted classes doesn't support the index.. We need to tell where Objects need to replaced or inserted.
+
+HashTable backed by HashMap instance?
+
+When we create the HashSet internally then the HashMap object is created and internally elements are stored inside the HashMap..
+
+Deafualt Capacity-16 	Incremental Capacity:Double 	LoadFactor-0.75 
+LoadFactor is measurement when the HashTable capacity should be increased.. i.e after adding the 75% of elements inside its capacity will be increased.
+
+Homogenous Hetrogenous and only unique elements..null is allowed only once because the duplicates are not allowed. After Objects are stored in the HashCode order. it is the non-synchronized collection.. not an ordered collection hashcode,==,equals method are used internally for the search remove and add operations..
+
+Difference between the HashSet & LinkedHashSet? Doubly LinkedList & HashTable backed by the HashMap Instance. & rest all of them are same..
+
+The classes that contains the word Hash will use the HashCode == equals method for stopping the duplicates and in the Searching & removing the element from the collection
+
+****Bucket is nothing but the new Index Postion inside the HashTable(Node):
+
+What will happen if the hashcode & equals methods are not overriden?
+
+Datawise duplicate objects will be added/stored. And these Objects will not be removed or found further from the collection with new refrence Objects..
+
+If we don't oveeride the hashcode method from the subclass then the they will be executed from Object class. Then Hashcode will generated using the refrence and Objects will be compared using the refrence then only same referenced duplicate Objects will not be added.
+While removing also if you pass the same refrence then only they will be deleted...To avoid data wise duplicates you should oveeride the hashcode & equals
+
+Procedure to Ovveride the HashCode & Equals method?
+
+From the HashCode method we must return the property using which one group of Objects will be differentiated from the other group of Objects of same class..
+In equals method we should compare the properties, using which one object is differentiated from another Object in the same hashcode group..
+
+
+HS LHS HM LHM HT: Internally use the HashTable datastructure.HashTable internally uses the another datastructure called bucket..Bucket is the collection of the elements/objects that has same hashcode..This collection is also know as the Bucket.
+
+Bucket is used for storing the sameHashcode Objects as one group so that comparing & searching will be fast..currently adding object will be compared with the only the objects hashcode group of elemnets..new Bucket will be created for the every new Hashcode Object.This Object will be added to the this bucket dircetly without perfoming any comparisions. If the bucket is already available with currently adding Object's Hashcode then add method will check whether the whether Object is unique or Duplicate using the == or equals() method.
+
+1)refrence wise using == operator returns true then they are duplicates.. if == return false they are unique based on the reference wise
+2)equals method state wise 	duplicates  will not be added to the collection.
+
+
+Contract Between the HashCode & Equals Method:
+---------------------------------------------
+
+If the HC is same for two objects==> Equals method should return True/False.
+If the HC is not same for two Objects==>Equals method should return false
+
+If the Equal method compares and return true for two objects ==>HashCode of two objects should be same.
+If the Equal method compares and return flase for two objects ==>HashCode of the two Object can be same/different
+
+
+
+
+Map:
+----
+For storing the Objects with mappings use the Map Collection.Map is the key value pair collection, every object is stored with key mapping
+
+Key must be  homogenous/hetrogenous but must be unique..We can store the key as null but only one null..If we pass the duplicate key, it is not stored but its old value is replaced with new value..
+
+While adding removing and searching it implicitly uses the hashcode equals and == operator for stopping the duplicate key and find the key with the new refrenced Object..
+
+Map is root interface of all Map Collections..SortedMap is subinterface of Map collection to provide the Sorting order..NavigableMap is the subinterface of the SortedMap for providing the navigable operations..
+
+Map Methods:  isEmpty(), V put(K k,V v), V get(K k), Set<K> keySet()  Collection<V> getValues() Set<Map.Entry<K,V>> entrySet() 
+
+boolean containsKey(K k) boolean containsValue(V v) boolean remove(K k) void clear() int hashCode()
+
+
+HashTable: Stores the unique entries in MultiThreaded application with ThreadSafety..HashMap is the alternative class for Hashtable with out ThreadSafety
+HashTable doesn't maintain the insertion order it stores entires in the hashcode order of keys..Either it uses the KeyClass hashCode method or Object class Hashcode method 
+
+HashMap to store the unique entires in Single Threaded application or in method local operations or single Thread applications without worrying about the insertion order..it stores entires in the hashcode order of keys..Either it uses the KeyClass hashCode method or Object class Hashcode method 
+
+LinkedHashMap stores the unique entries in the Insertion order.
+
+We must choose the WeakHashMap<K,V> to store only the unique entries with weak refrences, it means if we want to remove the entries by GC when there is no external reference to keys we must choose the WeakHashMap
+
+We must choose the IdentityHashMap to store the unique entries based on the key Object reference wise hashcode only..It means like other maps it doesn't use the Object class HashCode but uses the System.idnetityHashCode(Key).
+
+EnumMap:We must use EnumMap to store only one Enums named Constants as the keys and any type of  Objects as the values
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
+
+Collection: It used for storing the multiple Objects as one group using singlename in Container Object.. Group can contain the homogenous hetrogenous
+unique and duplicate Objects in the diffrent Orders and different formats...
+
+Collection Object can used for passing as the method argument or the method return type.. With single name multiple Objects can be moved between the multiple layers of the project 
+
+Diffrent ways to store the multiple values/Objects? Using the Array and Collection
+
+Arrays Problems: Stores only homogenous objects/values..It allows only the fixed number of values/objects..No Inbuilt methods to perfom diffrent operations on the Group of Objects....It doesn't support different formats to store the values/Objects..doesn't support the diffrent orders for storing/retriving..
+
+When to use the Array and Collection? When the Size and Type of values/Objects to store are known in before hand then use the Arrays..
+
+Difference between the Array & Collection?
+1)
+Array is inbuilt language level Object its code part of the compiler and JVM.
+Collection is an API level object its Code is part of one class
+
+2)It will store primitives and Objects.. Collection can only store the oBjects can't even store primitives it needs to be converted to the Objects..
+
+3)Array supports only indexed format to store the values or Objects... Collection supports both the indexed format and Table format to store the values/Objects
+
+4) Array supports only the Insertion order to store elements...Collections supports the IO SO LIFO FIFO HashCode order to store and retrive the Objects
+
+***Different Operations on the Collection?
+
+Search Retrive Remove Replace Adding Inserting Size Printing sorting objects.... insert replace sort
+
+
+Based on the format and order requirement and on whether you need to store the duplicat/Unique Objects we have got several classes in the collection API..
+
+We must call the methods to perfom the above operations..
+
+Uses of the collection Framework:
+---------------------------------
+
+1)Reduces the programming effort 2)increases the perfomance 3)Provides the interoperability between the unrelated APIs.
+
+4) Reduces the effort required to learn the new API's in every organization..5)Reduces the effort required to design and implement APIS
+
+5) Fosters the software reuse
+
+
+Collection: It is root interface of the collection f/w.Collection hirerachy classes represents the collection of objects without mappings.stores the objects in the array format with or without index..
+
+Collection represents both the unique and duplicate objects..some of the collections are ordered and some are unordered..
+
+
+List:Stores the multiple objects they can even be duplicate(index plays crucial role in List implemented classes)...Ordered Collection
+Set:Stores the multiple objects they cannot be duplicate only unique... Ordered and Unique Collection
+Queue:For storing the multiple objects and helps to retrive them in the FIFO or LIFO order or any specific order [IO SO]..Ordered Collections
+Collection:[] Map:[]
+
+Set has one more interface called SoertedSet..This meant for storing the unique objects in the particular sorting order you define.
+
+Queue interface has one more subinterface called DeQueue. It meant for storing and retriving the objects from the both sides..Whereas Queue supports only single side that is at beginning. Dequeue has two implementtion classes 1)ArrayDequeue 2) LinkedList
+
+Same of Map Interface?unique duplicate --->keys ordered unordered
+
+Supporting Interfaces: Comparable Comparator Iterabel{For applying the foreach loop for retriving the elements with less code}
+
+Two Utility Classes: 
+
+Collections: Contains the several static methods for perfoming the diffrent operations on both Collection & Map
+Arrays: Contains the several static methods for perfoming the diffrent operations on Arrays & Collection
+
+
+ArrayList:
+----------
+
+When we want to store the multiple objects in the insertion order with the index including the duplicates in the singleThreaded environment and in method local operations where Thread safety is not required we must chosse the ArrayList.. It is not ThreadSafe Object so shouldn't be used in the multiThreaded environment.. Ordered Collection--->Insertion order is maintained along with index
+
+Its implemented datastructure is Resizable array..DefaultCapacity is 10 and incremental capactity is half or +1.. It allows us to store all 4 types of the objects Homogenous hetrogenous Unique and Duplicate... It allows us to store the null or multiple nulls.. It allows us to retrive the elments in the both sequnetial and random
+
+** In searching and removing operations internally equals method is called and is executed from the arg Object class, if it is not overriden then it is executed from the Object class, then this arg Object is compared with collection elements using the refrence..
+
+public ArrayList<E>() public ArrayList<E>(Collection c) public ArrayList<E>(int intialcapacity) 
+
+ArrayList Class Methods :: public void ensureCapacity(int capacity) public void trimToSize()
+
+
+Add Operation:
+-------------
+All kinds of objects(Hetrogenous) allowed...Duplicates are also allowed...duplicate nulls are also allowed...override the toString method for all the Objects that you add
+
+Retrive Operation: get
+-----------------
+
+// Rule #1: index >=0 && <size()
+
+//Rule #2: we can not assign get() method call to a variable of returning object type, because al generic type is Object all objects will be returned from collection as Object type So we must either assign to Object type variable or we must use type casting
+
+Refvaraible::can store the address of the parent itself or the childs...When you retrive you cannot assign it directly to the varaible of retrurning object
+type we need to Type case explicitly..
+
+If we use the Genric Type <Number> then it can have all the Integer Character all Objects but you can assign it to the only Number Varaible Directly..
+
+Rule #3:if we assign method call to Object type variable,we can not invoke methods of returned object, we must type casting object to its own type
+
+Rule #4: when we type cast returned object to its own type there is a change to get CCE, because objects position may be changed. Solution: we must type cast under instanceof operator if condition
+
+limitation of get() method: it can return only one object at a time if we want to return all objects, we must call get() method in loop
+
+Rule #5: in for loop we must use condition up to <size()../eles then IOOBE
+
+
+Search Operations:	contains-->indexOf    Inside the equals Method will be called
+------------------
+
+System.out.println(al.contains("a"));      //"a".equals("a")
+System.out.println(al.contains(new String("a")));  //n S("a").equals("a")
+System.out.println(al.contains(5)); //I(5).equals(I(5));
+System.out.println(al.contains(new Integer(5))); //n I(5).equals(I(5));
+System.out.println(al.contains(new A(5, 6))); //n A(5,6).equals(eles)
+System.out.println(al.contains(new A(15, 16))); //n A(5,6).equals(eles)
+
+
+remove Operations:		Inside the equals method will be called 
+------------------
+Using the remove method with the List(I) is having the problem since we have overloaded methods in collection
+E remove(int index); in List(I)  boolean remove(Object o); in the collection passing the object type...Integer.valueOf(5) (Character) 'p'
+
+System.out.println(al.remove(5));	Matches the index arg
+System.out.println(al.remove(new Integer(5)));
+System.out.println(al.remove(Integer.valueOf(5)));
+System.out.println(al.remove((Integer)5));
+System.out.println(al.remove('p'));		Matches the index arg only
+System.out.println(al.remove((Character) 'p'));
+ 
+The problem is for only to the byte short char int argument
+
+B b2 = new B(7, 8);
+al.add(b2);		
+if you modify the object b2 outside it will be reflected to the collection also internally
+
+****al.remove(b2) If we dont override the equals methods inside the B class the Objects class equals method that has the ref comaparision logic will be used
+
+****Nulls will be compared using the == reference operator and else other objects will be compared using the equals method..
+
+Replace Operations:
+-------------------
+
+al.set(al.indexOf("b"), "Y")  find the B getIndex and replace at that index with Y
+al.set(al.indexOf(new A(5, 6)), new A(9, 10)); Need to override the equals method
+
+al.set(al.indexOf(new B(5, 6)), new B(9, 10));		Situation where the equals method is not overriden
+/**Exception in thread "main" java.lang.IndexOutOfBoundsException: Index -1 out of bounds for length 18**/
+
+
+Insert Operations:
+------------------
+al.add(al.indexOf("M")+1, "N"); System.out.println(al);
+*****al.add(al.indexOf('p')+1, 'q'); System.out.println(al); If the Element is not found then the Object will get replaced at the first index..
+
+
+Sort Operations:
+----------------
+
+Comparable used for the NaturalSorting Logic..Comparator used for the our own custom sorting logic
+
+Collections.sor(List(I)) Takes the list and sorts out the elements by using the Comparable 
+ * 
+ * The objects added into the list should of the Comparable Type only.. Hetrogenous Objects 
+ * will not be allowed into the collection.. Generic Syntax should be used while 
+ * creating the collections
+ * 
+ * Collections.sort(List(I),Comparator(I)): Sorts the elements according to the logic provided
+ * 
+ * We can provide the sorting logic using the Outer class, Anonymous Inner class, LE,MethodReference
+ * 
+ * ArrayList.sort(Comparator(I)):provide the sorting logic or ArrayList.sort(null):Natrual Sorting logic
+ * ***/
+
+****Equals method inside the Objects should be implemented using the PK key columns..
+
+
+Cursor Objects :
+--------------
+
+Iterator: Can be applied on all the Collection Objects..
+
+Rules:
+
+Rules:1 We cannot call the itr.next() on the empty collection throws NoSuchElementException
+
+Rule 2: Iterator is fail fast it means we cannot modify the collection structurally by adding or removing while iterating on the collection
+
+Rule 3:: We cannot the call remove method in the Iterator without calling the next method..We will receive the IllegalStateException..
+
+itr.next();Reads and moves the cursor to next Object... itr.remove(); It removes the previous element that was read..
+
+IllegalStateException is received if all elements removed and again calling the remove method
+
+
+Methods:
+
+boolean hasNext(); E next();void remove();default void forEachRemaining(Consumer<? super E> action);
+
+ListIterator:	It can move the cursor in the Bidirectional manner.. We can add,set & even remove on the collection.ListIterator is also the fail fast	
+------------
+ListIterator will add the element to the collection after calling the next() method.. next to the element that is read element will be added.
+
+
+Methods:
+
+boolean hasNext(); E next();boolean hasPrevious();E previous();int nextIndex();int previousIndex();void remove(); void set(E e);void add(E e);
+
+
+Enumeration:	It has to be used for the only legacy collections Vector and HashTable.. It is fail safe iterator
+-----------
+
+We can get the Enumeration on the Non-Legacy collections also..
+
+ex:ArrayList<Object> al=new ArrayList<Object>();
+al.add(10);al.add("a");al.add(30);al.add("d");
+al.add(40);al.add("f");al.add(50);al.add("g");
+
+Enumeration<Object> e2 = Collections.enumeration(al);	But the Enumeration we have Obtained here is the fail fast Iterator
+
+Methods:boolean hasMoreElements();E nextElement();Iterator<E> asIterator()
+
+We can even convert the enumeration to the Iterator..
+
+
+Enhanced for Loop with out using the Cursors:(Java 5 Enhanchement)
+---------------------------------------------
+
+ArrayList<Object> al= new ArrayList<>(); Iterator<Object> itr = al.iterator();
+
+forEachLoop:
+
+for(Object obj : al) { //From Java 5v
+	System.out.println(obj); 
+ }
+
+for(Object obj : al) { //From Java 5v
+			
+if(obj instanceof String)
+	 System.out.println(((String)obj).toUpperCase());
+ else
+	 System.out.println(obj);
+}
+
+//Rule #1: The object user are using in for each loop must be either array type or must be Iterable type
+Note: Collection interface is derived from Iterable so we can use all implementation class object of Collection interface..
+
+For the map it is not valid? Then how will you iterate over the map objects.
+
+//Rule #2: The variable type must be itr.next() method return type or its super type...
+
+ int[] ia2 = {3, 4, 5, 6, 7};
+for(int i:ia2) {
+System.out.println(i); 
+}
+for(long i:ia2) {
+ System.out.println(i); 
+}
+
+//for(byte b:ia2) {System.out.println(i); }  //for(boolean b:ia2) {System.out.println(i); }
+
+ArrayList<Object> al3 = new ArrayList<>(); If you have Generic Collection then the next() returns the GenricType that is mentioned inside the <>		
+al3.add("a");
+for(Object obj: al3) {}
+//for(String obj: al3) {}
+
+ArrayList<String> al4 = new ArrayList<>();
+al3.add("a");
+for(String s: al4) { }
+for(Object s: al4) { }
+
+*****Note: for each loop is applied only on array objects and java.lang.Iterable type objects it is used for retrieving elements from container objects
+
+Enhanced forEach Method with out using the Cursors:(Java 8 Enhanchement):
+----------------------------------------------------------------------
+
+For Avoiding the logical programming inside the EnhancedforEach loop and forEachMethod the Java8 comeup with Streams to achive the functionalities in the functional programming & Object Oriented style..
+
+Note:  For any functional interface we can provide the implementation using the AIC, LE, MethodReference.
+
+The forEach method can be implemented using the AIC, LE, MethodReference.
+
+If your ArrayList is of Integer Types then forEach method can consume the NumberType or IntegerType only...But not the subtypes of the Ineteger or subtypes
+of the number
+
+ArrayList<Integer> al1=null;	/**Accepting the same type or the superType**/
+		al1.forEach(new Consumer<Number>() {
+			@Override
+			public void accept(Number t) {
+				
+			}
+		});
+
+al.forEach((Object obj) -> { // LE
+			System.out.println(obj);	
+		});
+System.out.println();
+// LE mandatory parts
+al.forEach(obj -> System.out.println(obj));	******The type is automatically inferred by the compiler incase of the LE
+
+al.forEach(System.out::println);	MethodReference Implementation
+
+
+Without New Features:
+
+Iterator itr = al1.iterator();
+		while (itr.hasNext()) {
+			Object obj = itr.next();
+			if (obj instanceof String ) {
+				System.out.println(((String) obj).toUpperCase());
+			} else if (obj instanceof Integer) {
+				Integer io = (Integer) obj;
+				int i = io.intValue();
+				printIsEvenOrOdd(i);
+			}		
+				else if(obj instanceof Double) {
+					Double do1 = (Double) obj;
+					int i1=do1.intValue();
+					printIsEvenOrOdd(i1);
+					
+				}
+			}
+
+
+New Features::  Genrics AB AUB forEach(-) instance of Pattern Matching
+
+ArrayList<Object> al3 = new ArrayList<>();
+		 al3.add("a");
+		 al3.add(5);
+		 al3.add("b");
+		 al3.add(6);
+		 al3.add("c");
+		 al3.add(7);
+		 al3.forEach(System.out::println);
+		
+		 al3.forEach(obj -> {
+		 if(obj instanceof String) {
+			String s= (String)obj;
+			System.out.println(s.toUpperCase());
+		 } 
+		 else if(obj instanceof Integer) {
+			 Integer i=(Integer)obj;
+//			 System.out.println(i%2==0 ? i+" is even": i+" is odd");
+			 printIsEvenOrOdd(i);
+		 }
+		 else if(obj instanceof Double) {
+				Double do1 = (Double) obj;
+				int i1=do1.intValue();
+				printIsEvenOrOdd(i1);
+				
+			}
+		 });
+
+Even the Logical programming part can be removed from the both EnhanceforLoop and forEachMethod with the help of Streams in Java8..
+
+
+Set Implemented Classes:	To store only the unique Objects
+-----------------------
+
+HashSet doesn't maintain the insertion order it will store the objs in the hashCode order..
+LinkedHashSet-->Maintains internally the insertion order.
+Treeset--> Sorting the Objects internally based on the sorting logic provided.
+
+Below table shows the 7 collections...
+
+adding 		hs.add(obj)	Internal Methods used ::obj.hashcode == & equals method.. To stop the duplicates
+counting 	hs.size		--
+retriving	hs.iterator	--
+searching 	hs.contains	Internal Methods used ::obj.hashcode == & equals method
+removing 	hs.remove	Internal Methods used ::obj.hashcode == & equals method
+
+replacing & inserting  operations are not supported since the Set Implemnted classes doesn't support the index.. We need to tell where Objects need to replaced or inserted.
+
+HashTable backed by HashMap instance?
+
+When we create the HashSet internally then the HashMap object is created and internally elements are stored inside the HashMap..
+
+Deafualt Capacity-16 	Incremental Capacity:Double 	LoadFactor-0.75 
+LoadFactor is measurement when the HashTable capacity should be increased.. i.e after adding the 75% of elements inside its capacity will be increased.
+
+Homogenous Hetrogenous and only unique elements..null is allowed only once because the duplicates are not allowed. After Objects are stored in the HashCode order. it is the non-synchronized collection.. not an ordered collection hashcode,==,equals method are used internally for the search remove and add operations..
+
+Difference between the HashSet & LinkedHashSet? Doubly LinkedList & HashTable backed by the HashMap Instance. & rest all of them are same..
+
+The classes that contains the word Hash will use the HashCode == equals method for stopping the duplicates and in the Searching & removing the element from the collection
+
+****Bucket is nothing but the new Index Postion inside the HashTable(Node):
+
+What will happen if the hashcode & equals methods are not overriden?
+
+Datawise duplicate objects will be added/stored. And these Objects will not be removed or found further from the collection with new refrence Objects..
+
+If we don't oveeride the hashcode method from the subclass then the they will be executed from Object class. Then Hashcode will generated using the refrence and Objects will be compared using the refrence then only same referenced duplicate Objects will not be added.
+While removing also if you pass the same refrence then only they will be deleted...To avoid data wise duplicates you should oveeride the hashcode & equals
+
+Procedure to Ovveride the HashCode & Equals method?
+
+From the HashCode method we must return the property using which one group of Objects will be differentiated from the other group of Objects of same class..
+In equals method we should compare the properties, using which one object is differentiated from another Object in the same hashcode group..
+
+
+HS LHS HM LHM HT: Internally use the HashTable datastructure.HashTable internally uses the another datastructure called bucket..Bucket is the collection of the elements/objects that has same hashcode..This collection is also know as the Bucket.
+
+Bucket is used for storing the sameHashcode Objects as one group so that comparing & searching will be fast..currently adding object will be compared with the only the objects hashcode group of elemnets..new Bucket will be created for the every new Hashcode Object.This Object will be added to the this bucket dircetly without perfoming any comparisions. If the bucket is already available with currently adding Object's Hashcode then add method will check whether the whether Object is unique or Duplicate using the == or equals() method.
+
+1)refrence wise using == operator returns true then they are duplicates.. if == return false they are unique based on the reference wise
+2)equals method state wise 	duplicates  will not be added to the collection.
+
+
+Contract Between the HashCode & Equals Method:
+---------------------------------------------
+
+If the HC is same for two objects==> Equals method should return True/False.
+If the HC is not same for two Objects==>Equals method should return false
+
+If the Equal method compares and return true for two objects ==>HashCode of two objects should be same.
+If the Equal method compares and return flase for two objects ==>HashCode of the two Object can be same/different
+
+
+
+
+Map:
+----
+For storing the Objects with mappings use the Map Collection.Map is the key value pair collection, every object is stored with key mapping
+
+Key must be  homogenous/hetrogenous but must be unique..We can store the key as null but only one null..If we pass the duplicate key, it is not stored but its old value is replaced with new value..
+
+While adding removing and searching it implicitly uses the hashcode equals and == operator for stopping the duplicate key and find the key with the new refrenced Object..
+
+Map is root interface of all Map Collections..SortedMap is subinterface of Map collection to provide the Sorting order..NavigableMap is the subinterface of the SortedMap for providing the navigable operations..
+
+Map Methods:  isEmpty(), V put(K k,V v), V get(K k), Set<K> keySet()  Collection<V> getValues() Set<Map.Entry<K,V>> entrySet() 
+
+boolean containsKey(K k) boolean containsValue(V v) boolean remove(K k) void clear() int hashCode()
+
+
+HashTable: Stores the unique entries in MultiThreaded application with ThreadSafety..HashMap is the alternative class for Hashtable with out ThreadSafety
+HashTable doesn't maintain the insertion order it stores entires in the hashcode order of keys..Either it uses the KeyClass hashCode method or Object class Hashcode method 
+
+HashMap to store the unique entires in Single Threaded application or in method local operations or single Thread applications without worrying about the insertion order..it stores entires in the hashcode order of keys..Either it uses the KeyClass hashCode method or Object class Hashcode method 
+
+LinkedHashMap stores the unique entries in the Insertion order.
+
+We must choose the WeakHashMap<K,V> to store only the unique entries with weak refrences, it means if we want to remove the entries by GC when there is no external reference to keys we must choose the WeakHashMap
+
+We must choose the IdentityHashMap to store the unique entries based on the key Object reference wise hashcode only..It means like other maps it doesn't use the Object class HashCode but uses the System.idnetityHashCode(Key).
+
+EnumMap:We must use EnumMap to store only one Enums named Constants as the keys and any type of  Objects as the values
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> origin/main

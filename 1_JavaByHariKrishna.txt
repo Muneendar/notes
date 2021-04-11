@@ -1,0 +1,4061 @@
+<<<<<<< HEAD
+﻿
+API is available in the form of byte code means .class file
+
+API Documentation is availabele in the form of HTML file..
+
+How generated?  What it contains ? How it is distributed??
+
+javadoc <filename>
+
+
+Java.lang:: JVM loads the classes of this package automatically no need to write the import statements
+
+This package also Provides classes to perfom operations on the Strings..
+
+This package provides the classes to JVM Operations like System Runtime ClassLoader and Process
+
+Java.Lang.Object:: 11 common behaviours for all objects.. All methods implemented in the Object class has generic logic common for all the subclasses
+
+So developer can avoid implementing these operations in every class...Sun implemented all this methods with the obect refrence..Developer should override with object state
+
+
+Why should you override the hashcode and equals method?
+
+to use the subclass objects as the key to add entry to the Map object and also to add its object as element in the Set Collection...
+
+NO CE or RE but this objects are not found for the retriveing and removing from the collection
+
+
+Comparing two Objects of Same Class::
+=====================================
+
+We can compare based on the refrence or based on the state of the objects
+
+== Based on the refrence and equals():: Is given to compare the two objects for their equality...Compares the object based on the implementation of the method
+
+
+We cannot use the == for the incompatible type values or the incompatible refrenced types...
+
+We can use equals method for the incompatible refrenced types it will not throw CE or RE ... It will just return false
+
+
+null==null true     null.equals()  NPE
+
+Example e4=null;
+
+null==e4 true  null==new Exmaple()  false
+
+Example e4=null Test e5=null;  e4==e5 Incompatible Types..
+
+String s3=null; EqualTest s4=null;
+		
+System.out.println(s3==s4);
+	
+
+String s3=null; String s4=null; System.out.println(s3==s4);true
+
+
+String test=null; Object object=test; EqualTest t1=new EqualTest();  System.out.println(t1==test);//CE System.out.println(t1==object); //false
+
+
+
+HashCode:: Hashcode is the identity of an object.. It used to differentiate the one object with another object.. Every Object has its own hashcode..
+
+When the Hashcode is used: It is used by the Hashtable datastructure used when we store , retrive ,search, remove the object from the Set and Map Collections...
+
+
+If the object state changed then HashCode is it changed?
+
+
+Object Class hashcode()-->Returns hashcode based on the refrence of the object .. so whn state changed the hashcode doesn't change... 
+
+SubClass overriden hashcode()--->it is developed based on the state of the object using the hashing Algoritham....
+
+Can two objects can have same hashcode?  Yes there is possibility two objects of same class to have the same state ... leads to the same Hashcode..
+
+If we change the state the 
+
+Contract Between the HashCode and Equals methods::?
+
+
+If the equals method returns true by comparing the two objects then the hashcode of the both objects must be same....
+
+
+if the equals method returns false then the hashcode of the both objects may be same or not same....if it returns false then hashcode of the both objects may or may not
+
+be same
+
+
+getClass():
+==========
+
+To retrive the current Objects runtime class Objects refrence 
+
+Runtime class Runtime class Object.. To retrive the class name of the current object
+
+
+this.getClass().getName()--->Current Object
+
+
+Shallow cloning copies only top level structure of the Object  not the lower levels.. Objects is coped without its contained Objects...
+
+
+Object is copied along with Internal objects also...Deep Clone copies all the levels of the object from top to bottom recursively..
+
+
+
+Exception Handling:
+-------------------
+
+Exceptions is an event that occurs during the execution time that disrupts the normal execution flow of programming instructions....
+
+Exception is a signal because by looking into the exception message the developer will take the necessary action against the exception..
+
+JVM Or developer throws ---> This class Objects
+
+Error type exceptions are thrown due to the problem occured JVm logic :: JVM process is killed by throwing the Error type exception..
+
+Exception type exceptions are thrown due to the problem occured in the Application Logic:: JVM Terminates the program execution by throwing the exception type exception
+
+Error: We cannot Catch 	(JVM is terminated)	Exception: We can catch (JVM is terminated only if the exception is not caught)
+
+RuntimeException Subclasses: Represents the logical mistakes occured due the operator execution failures..It means this exceptions are prepared and thrown by the JVM at runtime when operator execution is failed... or it can be thrown by Devleoper
+
+Exception class direct subclasses:repsents the logical mistakes occured due to the condition failure because of wrong input...These exceptions are prepared and thrown by devloper using the throw keyword....
+
+All the above exceptions are categorised into two types:
+
+
+When an exception is thrown by the devloper using the throw keyword if that exception handling is checked by the compiler then that exception is called as the checked else it is unchecked
+
+Error and RuntimeException are unchecked.... Throwable and Exception classes are the Checked excepion..
+
+
+Exception Handling:: Using the exception Handling code developer can catch JVM given exception message and can convert  the user understandable message and he can resolves the issues by himself and also avoids the abnormal termination of the program....
+
+If we don't write the try catch block to catch the exception or if we don't have matching catch block then that exception is sent to the JVM default Handler 
+
+We should use the innner try catch to handle some exceptions inside the try catch or finally blocks......
+
+Interview Questions:
+
+https://www.java67.com/2012/12/difference-between-runtimeexception-and-checked-exception.html
+https://www.java67.com/2012/12/difference-between-error-vs-exception.html
+
+
+If a method is likely to fail and chances of failure is more than 50% it should throw Checked Exception to ensure alternate processing in case it failed. 
+Another thought is that programming errors should be unchecked and derived from RuntimeException e.g. java.lang.NullPointerException. 
+
+Checked Exception also enforces proper handling of the error condition, though it's theoretical in nature and many programs simply appease compiler by providing try catch block instead of correctly handling exception in the catch block. 
+
+One the disadvantage of checked exception over runtime exception is that it makes your code ugly by adding boilerplate code in form of try-catch-finally block. Though this issue is addressed at some extent by improved Exception handling in JDK 7 by introducing automatic resource management or ARM blocks and allowing to catch multiple Exception in same catch block.
+
+
+
+Finally Block:  Resource releasing logic in finally Block we should place...unrefrencing the objects that are created in the try block..
+
+If we keep the return statement in the finally block always the value returned from finally block is transferred to the calling method....
+
+Even if the exception is raised inside the try block it is supressed..because the returned value overrides the exception Object in JDH...
+
+If we place the return in finally we cannot place any statements after the finally block...it leads to the CE://unreachable statements...
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Rule1:We can use try catch to handle the exception in the current method itself and further to supress exception here only
+
+Rule2: If the exceptions in the raised inner try they don't have matching catch blocks inside they can be propagated to the outer try 
+
+
+try{} catch(){}
+
+try{} catch(){} finally{}..
+
+Compiler considers for all the statements in the try excpetion's are handled properly by the all catch blocks that are placed....
+
+Coontrol can go back to caller from the try/catch/finally if it is returining some value from try catch & finally.. 
+
+CE://And for the statments that are placed after try catch finally will become unreachable code...
+
+
+Rule3:If we keep the return in the finally block the value returnd from the finally block is transferred to the calling method...though there is return in try
+
+
+Rule4: If we keep the return in the finally block then exception raised in try block is not propagated to the caller method..Exception is replaced with return value..
+
+
+Rule 5: In the case of the void method we can supress the exception using the return;
+
+Rule 6: Local Varaible of method should not be intiliasied inside the try or catch blocks..They should be intialised with default values in the method itself
+
+
+Reporting the excpeiton or try catch...if you have logic to handle then use the try catch if not there we use the throws...
+
+---------------------------------------------------------------
+Roles of throw throws and try catch:
+
+Throw used for the throwing the exception with the error message if the given inputs/arguments are wrong
+
+throws used for reporting the exceptions that are throwing from the current method
+
+try:for plcaing the exception casuing the statements and further to catch and handle the exception in the current method itself
+
+catch:Catching the exception that is raised in try block and further placing the handling code to takke the necessary action on the exception by displaying the error message or doing the other some other work..
+
+We can also use the try catch to supress the raised exception and continue with the next lines of the code...
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+We use throw if you want to throw runtime or checked exception.. We use throws only for the checkedexception(optional for the Runtimeexceptions)when we don't have exception handling code..We use throws for reporting exception that is raised inside the current method
+
+Throw is used for throwing the exception manually by programmer when wrong inputs are passed according to the current method logic..Most of the times we throw only checked exceptions..
+
+
+Throw Key word Rules:: 
+---------------------
+We can use throw only inside the method/constructor.. Can't use inside the static or instance blocks and at class level..
+After throw only throwable object are allowed... 
+If you throw exception using throw keyword.. After the next lines becomes unreachable.. Should be placed inside the conditioanl block if you need other statements..
+
+If you want to throw multiple exceptions using the throw key word.. We need to take multiple if condition. on one per basis
+
+
+Throws Key word Rules::
+----------------------
+We can use inside only in methd declartion and constructor declaration.. Not allowed inside the static and instance blocks and class..if the 
+super class methods doesn't throw any checked exceptions in the subclass we are not allowed to add the checked exception while overriding..
+
+try catch finally rules:
+------------------------
+
+try catch finally can be placed inside the Method constrcutors or inside the static/instance blocks..Not allowed at the class level
+
+As a parameter to catch block we can have only Throwable types..we cannot place the super class exception catch block before the subclass exception catch block...
+
+
+
+Throwable is the super class for all the exception classes.. Throwable has two main subclasses 1)Error 2)Exception.. It menas all exceptions are of two types
+
+Again Exception class is divided into two types...RuntimeException subclasses 2)Direction subclasses of Exception(CheckedExceptions)
+
+Totally In java exceptions are of 3 kinds:::------> Errors RuntimeExceptions CheckedExceptions..
+
+Error:The subclasses that are dervied from the Error type are called Error type exceptions.. These are exceptions classes represents the JVM internal problems..
+We don't catch the Error Type exceptions because we cannot receover from situation.We must shutdown JVM correct the code level to conserve 
+memory and run again....
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Exception:The subclasses that are dervied from Exception type are Exception type exceptions...These are exceptions classes represent the java code level problems raised because of the wrong logic or wrong inputs..We must catch the exception type exception to recover from the situation and terminate the program smoothly
+
+Consider the Throwable and Exception classes as the checked exceptions for all the rules.. Except in Rule2..
+
+Exception Handling Rules::
+
+Rule1:When we throw checked exception or receive the checked exception we must handle it using the try catch or report the exception else:
+
+CE: unreported exception must be caught or declared to be thrown
+
+
+Rule2:: Without throwing or receiving the checked exception we must not place the catch block for this checked exception..CE: Exception is never thrown from the body of the correspoding try block...Because without thrwoing by the programmer the checked exception is never received...
+
+but we can add the catch(Exception|Thrwoable) even though they are not throwing from the try block to catch the unchecked Exceptions.. Because this catch block rules is not applied for these exception classes they are called as the partially checked exceptionss...
+
+On Throwable and Exception only this rule is not applied remaining 6 rules are applied...It means when you throw the exception or Throwable we must handle them or report..
+We cannot add the catch(CheckedException) with out throwing it from the try block but we can add throws CheckedException on the methodprototype without throwing from the method body.. And caller must handle or report them...
+
+
+Rule3::if the super class methods doesn't throw any checked exceptions in the subclass we are not allowed to add the checked exception while overriding..
+
+if super class method has throws checked exception then:we must override this method
+
+1)Either by ignoring throws Exception 2)or only throwing the same checked exception 3)or only by throwing its subclasses.4)Not by throwing the superclasses or more checked exception 5)But we can override by adding the throws unchecked Exception
+
+Rule 4:: Rule on throwing the diffrent checked Exception from the subclass.. If we need to throw the diffrent checked exception from the overrdiing method, we cannot throw it directly..We must implement the Exception Chaining by using the either same super class ovveriden method throwing checkedException or by using the RuntimeException
+
+
+Rule5:: If a method or constructor is reporting the checked then we cannot call this method at class level or constructor to create the object at the class Level
+
+
+We must call this method and constructor only inside the static block instance block or inside the another constructor or in another method by handling exception
+
+
+Rule 6: Rule on Subclass Constructor
+
+If a super class default constrcutor throws the checked exception in subclasses in all construtors we must handle this checked exception using the throws keyword.Inside the subclass constructor we cannot catch the super() because it has to be first statement inside the constructor..
+
+
+Note:: Inside the subclass from its constrcutor logic if some other checked exception are throwing..We must report this exception by using the , separation alongwith super class constructor reported exception...because the constrcutor is not a overriding memeber
+
+
+Rule 7: Rule on handling the exception inside the SB IB and constructor.. Inside the static and instance we cannot report the checked exception, we can only catch the  checked exception because they are not the methods they don't have signature..They must be completed normally...
+
+Inside the constructor we can report and catch the exception because constrcutor is kind of method they have signature...
+
+
+Rule 8: We need to use the BackupCatch Block concept when need to catch the exception at any cost to supresss or show the user some message....
+
+
+Try with resources New JAva7 features:
+-------------------------------------
+
+Rule1: The resources varaiable and Object both must be Autoclosable Type
+
+try(Object ps=new PrintStream(System.out)){ } CE://
+
+try(PrintStream ps=new PrintStream(System.out)){ }
+
+Rule2: If the resource Objects close method throws the checked exception either it is a Exception IOException or SQLException or any other checked Exception 
+
+it must be handled either by catching or using the throws keyword.. Else it throws Unreported Exception
+
+
+try(PrintStream ps=new PrintStream(System.out)){ }  Catch Block is not required because close method doesn't throw any checked exception
+
+try(FileInputStream fis=new FileInputStream("a.txt")){}
+catch(FileNotFoundException e){}
+catch(IOException e){}			//fis.close method throws IOException so it must be handled..
+
+
+Rule 3:The resource varaiable must be intialised either with an Object or with MethodCall or atleast with null else we will CE://
+
+
+try(PrintStream ps){} CE://
+
+try(PrintStream ps=null){} 
+
+try(PrintStream ps=new PrintStream(System.out)){ } 
+
+The rule is created because internally the close method is called using the resource varaibale.. If we don't intialize the resource varaible, close() 
+
+method cannot be invoked .. This is basic varaible accessing rule..
+
+
+Rule 4:  Also we cannot create the Object without the varaible we will get CE://Indentifer excepted
+
+try(new PrintStream(System.out)){ } CE:
+
+
+Rule 5:: We cannot assign the new Object or null to the resource varaible inside the try body compiler will throw an error because this Object cannot 
+
+be closed at the end of the try, because the ref var is pointing to other Object or null
+
+try(PrintStream ps=new PrintStream(System.out)){ 
+
+	// ps=null;
+	// ps=new PrintStream(System.out);
+} 
+
+Also we cannot just declare varaible and intialize it in the try block because of the  rule 3:
+
+
+try(PrintStream ps=null){ 
+
+	ps=new PrintStream(System.out); CE://
+} 
+
+
+try(PrintStream ps){ 
+
+	ps=new PrintStream(System.out); CE:// Rule 3 is violating
+} 
+
+
+Rule 6: By Decalring the resource varaible outside of try we cannot use it inside the try(){} we will get cE:// try with resource must be a varaible declaration
+
+
+PrinStream ps4;
+
+try(ps4=new PrintStream("abc.txt")){}	CE://
+
+try(PrinStream ps5=new PrintStream("abc.txt")){}
+
+
+Rule 7: Till Java 7
+
+PrintStream ps5=new PrintStream("abc.txt");
+
+try(ps5){}  it is Compile time error
+
+In Java 8: We must create the local varaible in try and assign that Outer Object to LV
+
+
+PrintStream ps5=new PrintStream("abc.txt");
+
+try(Prinstream ps6=ps5){} 			It will be compiled fine
+
+
+From Java 9 we got this 
+
+PrintStream ps5=new PrintStream("abc.txt");		No Compile time
+
+try(ps5){}  
+
+
+Rule 8:We cannot use try-resource LV from outside of the try block .. WE will get CE: Cannot find the Symbol..
+
+Also we cannot use the outside try{} varaible after try{} if we use we will get RE: Stream Closed...
+
+
+FileOutStream fs6=new FileOutputStream("abc.txt");
+
+try(FileOutputStream fs7=fs6){
+
+}
+FileOutStream fs8=new FileOutputStream("abc.txt");
+
+try(fs8){}
+
+
+fs7.write('a');
+fs6.write('a'); RE: Stream already cloased
+fs8.write('a'); RE: Stream already cloased
+
+
+
+
+PrintStream ps=new PrintStream("abc.txt");
+		
+		try(ps){
+			
+		}
+		
+		ps=new PrintStream("abc.txt");		// We cannot reassign 
+			
+}
+CE::The varaible ps used with try resource is neiter final or effectively final
+
+
+So the best practisce to use the varaibles declared outside we should maintain them as the final varaibles....
+
+
+Rule 9:
+
+
+If we want to create or use the multiple resources inside the try{} we must seprate using the ;
+
+try(FileOutStream fs8=new FileOutputStream("abc.txt");FileOutStream fs9=new FileOutputStream("abc.txt")){
+
+}
+ or:
+
+FileOutStream fs8=new FileOutputStream("abc.txt");FileOutStream fs9=new FileOutputStream("abc.txt")
+
+try(fs8;fs9){}
+
+Rule 10: Inside the try only AutoClosable type varaible declaration is allowed with intialization either with new keyword or with method call or with
+
+null .. Inside the try() we cannot place any logic, compiler will throw error.. Logic is allowed only inside the try{} body
+
+
+
+
+Main Rules to remeber:: varaible of reosucre type is mandatory to declare inside try(){} with intialization atleast with null.. 
+
+You cannot reaasign to other Object because the resource varaibles are considered as final or effectivetly final...
+
+
+
+From the Java7 Onwards we can create the Cacth(){} with multiple exceptions as parameters as shown below
+
+try(){} catch(AE | AIOBE  e){}
+
+If we have same logic for executing diff exceptions we must combine catching those exception using the single catch block
+
+
+Rules:: We must use the | operator// We must use only one parameter name.. Exception classes must be only sibilings cannot have parent and child Relationships..
+
+//catch(NumberFormatException | Exception e){}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+OOPS:(Object Oriented Programming Language)
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Object::  Instance of the class IN pW .. RWT
+
+Why we need to create the object RWO in PW?? In real world we perfom every operatoion for one object.. 
+
+We must develop every program around one object and its data....
+
+Class meant for representing Object's Type and structure...
+
+Basically Object has two things::  Type and instances.. Examp::Consider the Bike Object...The name Bike is type of Object..Pulsar Fz Bullet are instance of the Bike
+
+The Objects type is created by the keyword: Class and instances are created by the keyword new
+
+Bike(C) Pulsar(c) FZ(C)
+
+What is Object ? Object is the real world thing or instance of the class
+
+What is the class? It is user defined datatype/specfication allows us to specify type, properties & operations of the Object...
+
+Class is the blueprint of the Object and allows us to create the multiple objects of the same type....
+
+A class is a logical construct of the Object or design document of the Object that provides the look and feel to the object...
+
+Instance:: Instance is the one physical copy of the memory created from the class to represent the one individual Object physically by storing its values...
+
+A class is the logical construct of the Object and Instance is the Physical reality of the Object...
+
+
+Static Members:: static import, SV , SB , SM , Main Method, SIC
+
+static import: Helps us to access the SV SM and SIC class in other class without using the class name
+
+Static Varaible: Holds the values that are common to all objects and all methods in class.. Only one copy of memory is created..
+
+Static Blocks: Used for executing the somelogic only once at time of class loading and intialize the static varaibles
+
+Static Methods: Developing and executing the logic common to all the objects.. Object is not required for executing static method. 
+
+By the time any class is loaded the memory has been provided & intialised with DV for static varaibles by Class Loader in Linking Phase.. 
+
+intialization for the static varaibles may or may not be done..intialization done only if we have static varaibles declared with assigning some value
+
+static int a=20; or if we taken the static block to execute for assigning values..
+
+public class Test02 {
+	
+	static int a=m1();
+	
+	static int m1() {
+		a=20;
+		
+		return a;
+	}
+
+But by the time child static method execution Parent class varaibles memory provided and also intialiased..... 
+
+Execution order of the static method::
+------------------------------------
+If we dont call the SM it is never executed..If we call SM first Main method executed in the middle of MM Execution SM is executed..
+
+If we call SM in static Block or SV varaiable assignment then the SM is executed then after the Main Method is executed.
+
+In the above case the SM is executed first because the SV/SB intialization logic is executed before the main method...
+
+
+Compiler Adding changes to SMS in .class file:
+---------------------------------------------
+
+1) Compiler moves all the SVS declartions to the class level in the order they defined from the top to bottom..
+2) Compiler moves all the SV assignments and all the SB logics into the single SB inthe order they are defined from top to bottom
+3) Finally SB is placed at end of the Class..(in case there are not SV assignments or SBlocks then Static{} not created at the end of the .class file)
+
+JVM activities w.r.t to SMS
+---------------------------
+
+JVM allocates the memory to all the SV first and then goes to the end of the class and executes the SB, executes the SV intialization & SBlocks logic..
+
+If there is main method inside the class main method is executed.. Example.a{In this case main method is not executed.. only static varaib intialization and SB logics are execute}
+
+
+Are the SV intialization logic executed before main Method? Yes if there assignment done in varaiable declartion or in SBlock..
+
+****Final Point::once the class is loaded the SV and their intialization logics(assignments or SB's) are executed once and they are not repated again..
+
+
+How many times the SM are executed in the class LifeTime?
+
+SV-->1  SB -->1 MM ---> 0 or 1 or multiple times  SM-->0 or Multiple
+
+
+Illegal Forward Refrence Error:
+------------------------------
+
+We will see the illegal forward error only inisde the static & instance blocks when we access the static/nonstatic data before they are declared inside the
+
+static or non static blocks..
+
+class Test{
+
+	{
+		System.out.println(b);	CE:// IllegalForward Refrence error Cannot refrence a filed before it is defined
+		b=20;
+	}
+	
+	static{
+		System.out.println(a);   CE:// IllegalForward Refrence error
+		a=10;
+	
+}
+	static int a;
+	int b=10;
+
+	public void m1(){
+		
+		System.out.println(a);	//cannot find symbol
+		int a;
+}
+
+}
+
+We don't get error when we intialise but we get only when we want to read;
+
+
+
+
+In order to access the non static varaibles we need to create the Object explicitly inside the static method.
+
+As the execution is not common to all objects we cannot access the object values directly inside the static method..We can access only static varaibles..
+
+Static Inner Class: Used for creating the inner Object that is common to all Objects of the Outer class..
+
+A method/operation perfoms modification on the Object data or static data or uses the static/object data..for perfoming the operations on static data we should create static method
+
+
+JVM Flow::
+
+Loading        -------------------------->	Linking ---------------------->		intializing
+
+Class Loader loads the class			Prepare   Verify  Resolve		inside the static Block static varaiables are intialized..	
+
+				SV memory allocated & intiliased with default values	 static block is executed within the currently running thread.		
+
+
+Class Person{
+
+
+	static Address addr=new Address();  // The Object that common to use within all the static & non static methods..stores values that common for 						Objects created from Person class
+	static int count;		   //  The value that is common to use within all the static and non static methods..	
+}
+
+All the Person Objects created from this class will have same address property values...you can change the properties of the address and it gets reflected to all objects created from this class... With help of encapsulation if you want you can stop that..
+
+final Keyword: You cannot modify the value/object in the varaible once it is intialised
+
+static final Address addr=new Address(); But when you create the final varaible you cannot assign the new value/object but only can change the values of existing object.....final keyword and encapsulation makes it for closing. We cannot modify the value/object
+
+
+Why the static method is developed?
+
+Generally we will develop the static method for :: intialising the Static Varaiables.Displaying SV values..Devlop business logic by using the static varaibles...perfoming the mathmatecial calculations like addition subtraction using the method parameters etc...
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+static m1(){}
+		> Two threads can modify the static data at once and leads to Data Inconsistency
+static m2(){}
+
+int m1(){}
+		> Two threads can modify the Object data at once and can lead to data inconsistency
+int m2(){}
+
+class Person{
+
+Address addr;	> Two threads lets say using the two individual Objects.. Addr addr=new Addr(); Person p1=new Person(addr) Person p2=new Person(addr);
+
+void m1(){}	 Even the two Objects are diffrent in this case also it will lead to data inconsistency with Addr Object values..
+void m2(){}	  so where ever addr object is used it should be within the 	synchronized(addr){}
+
+}
+
+static/object data Modification in the class method operations needs to be done in the synchronized fashion always...
+
+or you can use the AtomicClasses for creating the static&nonstatic data of class and JVM takes care of perfoming the operation in Atomic way
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+How the static varaible can be diffrentiated from Local/Parameter varaible if they both have same name..
+
+Does JVM execute the static methods by default like static varaibles? They are executed if they are called explicitly by devloper inside the main method
+
+or in varaible assignment or in the static block...
+
+
+Modularity: Means dividing the big task into the multiple tasks.. In java we can achive the modularity with methods and also with classes..
+
+Advantage:: We can achieve the centralized code change and code reusability
+
+Devloping the modularity at class level.. Defining the Logic into seprate class if it needs to be utilised by multiple classes...
+
+
+Can we execute the class logic without main method?After Java 7 class execution starts only if it has main method, else program execution is terminated
+
+with out executing the static varaibles or static blocks by throwing the error..	main method is not avaialble
+
+Before Java 7 it executes the static varaibles and static blocks and search for the main method and throw the error: CE://NoSuchMethodError
+
+Can we execute the static method at time of class loading? Yes call from the static block
+
+
+Non Static Members:: Stores one copy of memory in every Object instance and executes the logic specific to every to Object with Object specific values
+
+Non Static Varaible (Instance varaible)
+Non Static Block (instance Intializer Block)
+Constructor
+Non Static Method	/Instance Method
+Non Static Inner Class/ member Inner class
+
+
+
+Non Static Varaible: Varaible created inside class outside method block or constructor without static keyword
+
+Just {} created at class level is NonStatic Block..Constructor is kind of method whose name is same as class name and deosn't have any return type..
+
+Both NonStatic Block and constructor are used for the intiliasing the (NSV inside the instance) of Particular Object with user given value.. This logics are 
+executed only once at the time of evry Object creation...
+
+Non Static Block is used for placing the intialisation logic common to all constructors and all objects created from this class.
+
+Constructor is used for placing the specific intialization logics...for devloping the diffrent intialization logics for all the objects created from class..
+
+Non Static Block cannot take the parameter/user values to intialize the Object..
+
+Non Static Inner Class:: A class created inside another class with out nonstatic key word..It is also a non static member of the outerclass..
+
+class Person{
+				
+	Address addr;		If the Address Class Logics needs to be used by the multiple classes we place outside.. If it is just specific
+				only for this Object then we will place the class inside the outer class only
+}
+
+Non Static inner class used representing the inner Object of the outer Object and for creating its instance with the association of the outer class instance
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MethodOverloading Points:
+------------------------
+
+double 					l=	(byte)		10.56F;
+
+Varaibale specifes final type (or)		You have to do conversion manually to saftisfy range of datatype on right side(or)
+
+Literal Specifies the final Type		Compiler will promote to the highest type
+
+
+var v=10;	The left side expr/literal specifies the final type
+
+Automatically the type is converted to the highest range type in the expression...
+
+Integer i=10; Number=10; Object=10; Checks for the int,long,float,long,Integer,Number,Object types while promoting in method overloading concept
+
+public class Test03 {
+	
+	static void m1(Example e) {
+		System.out.println("Example Param");
+	}
+/*	static void m1(Sample e) {
+		System.out.println("Example Param");
+	}*/
+
+class Example{
+	
+}
+
+class Sample extends Example{
+	
+}
+
+Test03.m1(null);if Sample is uncommented When the subtype is matched it will not promote again.. if commented it will map to Example e
+	
+m1(new Example());When exact match is found it will not search for other
+		
+m1(new Sample());if Sample is commented.. Type is automatically promoted to the super Type
+
+
+AutoBoxing:: Converting the primitive values as Object by using the predefined classes is called boxing...The classes those are used for the boxing are called as the
+
+Wrapper classes...
+
+----->int literal can only be converted to Integer Object... long iteral can only be converted to Long Object...
+
+Till Java 1.4  int x=10; Integer i=new Integer(x);
+
+After Java 1.5 Integer i02=x; Integer i02=Integer.valueOf(x); Compiler does the AutoBoxing automatically
+
+
+m1(arg) ---> m1(st)  m1(wideningtype)
+
+from 1.5V--->m1(autoboxingtype) m1(AutoBoxingWidening)
+	
+	---->m1(sametypeVarg)  m1(samtypeWideningVarArg)
+
+	---> m1(ABVArgs)  m1(ABWVArgs)
+
+
+m1(int [] i)  ->  m1(new int[]{10})  m1(new int[]{10,20})  m1(new int[]{10,20,30})
+
+
+From Java 1.5 m1(ABWVArgs) m1(int... x)  m1(10) m1(20) m1(30)
+
+
+Ambigious Error in Method Overloading cases:
+
+Shouldn't take the..SameTypeWidening and AutoBoxing VarArgs Params together in the same class 
+
+public class Test02 {
+	
+	public void m1(Example e1) {
+		System.out.println("Example Param");
+	}
+	public void m1(Object e1) {
+		System.out.println("Object Param");
+	}
+//	public void m1(Test t) {}
+	
+	  public void m1(Sample s1) { 
+		  
+		  System.out.println("Sample Param"); 
+		  
+	  }
+	
+m1(null); 
+
+If there are multiple params with Parent child relationship it will match to childParams first..If you uncomment the Test Param we will get Ambiguous Error
+
+public class Test05 {
+
+	static void m1(Object o) {
+		System.out.println("Object Param");
+	}
+
+	static void m1(I i) {
+		System.out.println("I Param");
+	}
+}	
+
+With Interface Ccompiler will inherit the Object Class.. So the Object and I param has parent and Child relationship..
+
+
+Method Overriding Points:
+-------------------------
+
+Compiler is always responsible for the linking of the methods for the invoked method calls inside the java code..Compiler always links based on the refrence
+
+type..It will search for the methods in refrence type and its super classes..Compiler checks for the arg types also while linking the methods...
+
+COmpiler activity::
+
+Consider the m1 is of static method defined in A class..m2() is the non static method defined the super type of A.
+
+A a=new B(); a.m1();  Compiler replaces with A.m1();
+
+a.m2();Compilers search & links to the method that is present in the super class of A.
+
+Runnable r=new X();
+r.xxx();   		Consider xxx is static method.. Then compiler searches for the method in the super type..if found then Runnable.xxx();
+
+
+JVM is responsible to execute the linked methods calls based on method type..Static method will execute from the refrence type and non static methods
+
+will get executed from the current Object type....
+
+
+class Sample{
+	
+	 void m5() {
+		System.out.println("Sample m5");
+	}
+	 static void m6() {
+		 System.out.println("Sample m6");
+	 }
+	void m4() {
+			System.out.println("A m4");
+		}
+}
+
+ class A extends Sample{
+	
+	private void m1() {
+		System.out.println("A m1");
+	}
+	
+	static void m3() {
+		System.out.println("A m3");
+	}
+	final void m4() {
+		System.out.println("A m4");
+	}
+	
+	void m5() {
+		System.out.println("A m5");
+	}
+	
+	void m2() {
+		System.out.println("A m2");
+		m1();
+		m3();
+		m4();
+		this.m5();
+		m6();
+	}
+}
+
+public class B extends A{
+	
+	private void m1() {
+		System.out.println("B m1");
+		
+	}
+	static void m3() {
+		System.out.println("A m3");
+	}
+	/*
+	 * void m5() { System.out.println("B m5"); }
+	 */
+	 static void m6() {
+		 System.out.println("B m6");
+	 }
+	public static void main(String[] args) {
+		
+		B b=new B();
+		b.m1();
+		b.m2();
+	}
+	
+}
+
+
+Understand the flow of execution for the above code...
+
+We cannot ovveride the private methods even we create them in the subclass they are not called as the Overriding methods..
+
+Private Static final overloaded methods ---> Will execute doesn't consider the runtime Object...It only considers the compiletime method resolutions and execute the same methods..
+
+Non Private Non Static Non final methods always execute from the current Object class even they are called using any refrence varaiable
+
+*****In Eclipse Intellisense gives the Type & to which method it is linking during the compile time... methodname space..returntype Type
+
+
+Diffrentiating the SM and NSM Hidden and overriden methods with from hiding and overriding method?
+
+->subclass/ref/superclass ref/this ref the NSM always executes from the current object class
+
+-->SM Hidden method can diff 1)superclass ref varaible 2)Super class Name 3)by using the super kw(in nonstatic methods)
+
+-->SV & NSV are also called Hiding---> They can also be diffrentiated using the 1)superclass ref varaible 2)Super class Name 3)by using the super kw(in nonstatic methods.. for the static varaibles)
+
+
+If you override the parent class private method in subclass then you are allowed but it is considered as the subclass own method...
+
+You can change the return types accessibility modifiers and execution level modifiers also...that means compiler doesn't check for the return type AL & EL Modifiers
+
+and exceptions list in the subclass methods.....
+
+
+Rules of Overriding:
+--------------------
+
+Rule with Return type:: We should have same return type that is der in Parent class..W.R.T to Primitive typess.. With refrenced datatypes we are allowed to change 
+
+the return type.. The covariants are allowed..
+
+We cannot override the static method as nOn static and non static methods as Static...
+
+We cannot ovveride the final Parent class method in subclass.. but we can ovveride an non final method in subclass as the final method...
+
+We can override the abstract method as non-abstract/concrete method in Child class...And non-abstract method as the Abstract method in child class.. This way
+
+we are stpoing the further subclasses to use the Parent logic and asking them to implement their own logic
+
+
+We can override the native method as non-native and also we can override the native with native or non-native method as the native method..Anything is valid...
+
+
+We can override the synch method as non-synch and also we can override the synch with synch or non-synch method as the native method..Anything is valid
+
+We can override the strictfp method as non-strictfp and also we can override the strictfp with strictfp or non-strictfp method as the strictfp method..
+
+Anything is valid
+
+
+
+Covariant Return Type::
+----------------------
+
+
+The type is decided when method is called based on the return type of the method..
+
+long m1(){return 'C';} When we call method m1 we should assign to only long type varaible.. We cannot assign to the shorter datatype  
+
+
+public class P {
+
+}
+
+public class Q extends P{
+	
+	public static void main(String[] args) {
+
+	P p=null;
+//	Q q=p; It will throw compile time error.. To make it possible we need to type cast Q q=(Q)p;
+
+	Q q1=null;
+	P p1=q;    But this assignment is possible directly
+	
+}
+
+
+We do casting only to refer the Object to the subtype refrence varaibles.....
+
+
+P--->Q---->R		Lets say P Q R are having inheritance relationship..
+
+P p=new R();	upcasting
+
+Q q=(Q)p;	Possible Downcasting
+
+R r=(R)p;   	Possible DownCasting
+
+
+
+There is no use of the using the Covaraiant return types in the Project..As we will be devloping only lossely coupled Application We should always return
+
+the Parent types and shouldn't return the SubTypes...
+
+
+Rules in working with CVR:: overriding the method Return type must be only subclass of the Overriden method Return Type..It must not be the super class or 
+
+the Sibiling..CVR concept not applicable for the Primitive Datatypes...
+
+
+Abstraction:
+-----------
+
+Abstraction is the process of hiding the implementation details of Object operation method from the user class programmer and providing only the necessary
+
+information to invoke the method is called as the abstraction...
+
+How we can devlop abstraction? By decalring the abstract method inside abstract class/interface	..we are hiding implementation details by providing the
+
+subclass where the Object operation is defined..Then user class programmer will invoke the abstract method by using the super class ref varaible by storing
+
+the subclass Object from which this method logic need to be executed...
+
+Advantages::
+
+We can hide the bigger picture of the Object because the implementation details are hidden..We will get security to the Object data bcz data is accessed 
+only through methods..We can force the subclass programmers to implement operations with same method signature..User class will get the Loose coupiling and
+
+Runtime polymorhism because the abstract class & interface cannot be instantiated so coming classes will be subclass Objects and in these Objects super 
+class methods are 100% implemented..
+
+
+Can we declare the Class as abstract even though all methods are implemented? 
+
+Yes.. Abstract keyword for class doesn't allow to create the Object for class...We are not allowing the user class programmers to use the logics of this class..
+
+
+Abstract Class: Creates or represent the main type/subtype  of the Object by declaring some operations and by implementing the some other operations..
+
+Concrete Class: It is blueprint of the Object, it is used for the representing the either the maintype or subtype of the Object by implementing all the operations of the Object and it allows further subtypes..
+
+final Class:A concrete class that is declared as the final is called as the final class..When you don't want to allow the further subtypes for this object
+then we will create/represent this Object as the final type...
+
+
+What is an Interface?
+
+-Like class Interface is also refrencedDataype/UserDefined Data Type.. It creates or represent the main type of the Object by declaring the all the operations of the Object and forcing the subclass programers to implement them by supporting the multiple Inheritances..
+
+-It is also a contract document between the user class or the implementation class programmer.. It tells the implementation class programmer what to implement but not how to implement..it tells the user class programmer what to call to access operations of the Object...
+
+Cohesion: The process of creating all fields and methods of an Object in one class by seprating them from other object classes is called Cohesion..
+
+Coupling: The process of connecting/integrating one object with another Object for accessing one object opertaions from the other Object operations is called as the coupling..The degree of dependency between the two Objects in accessing their operations comes under TC LC..
+
+In user class if we want to change from one subtype to other subtype, if wanted to change the code then recompile user class then we call user class as TC
+
+The dependency between the user and subtype is very low then we call it as the Lossely Coupled Objects..
+
+** User class sholdn't be recompiled for the reasons of changing from one subtype to another subtype..
+ 
+In the user class we shouldn't declare the field or method parameter or return type with the subtype...
+
+***For achieving the reusable,dynamically extensible and Highly scalable applications we must develop :: High cohesion, Strongly encapsulated,Loosely coupled, Runtime Polymorphic Subtypes and user type components..
+
+
+List L				=			new ArrayList();
+
+Field/MethodParam/Return Type should be the Interface refrence Type so it can store the diffrent subtypes...Hence we achive Loose Coupling..
+
+
+
+Types of inheritance 
+--------------------
+
+Topic notes need to be prepared please look into the C:\Users\91970\Videos\Java\07 OOPS\06 Types of Inheritance
+
+and prepare notes..
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Multi Threading
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Executing the multiple tasks at once is called MultiTasking
+
+There are two kinds of multi Taskings:  Process Based 	Thread Based
+
+Process Based:: Executing multiple Tasks as a separate independent process simulataneously.. Process 1:: Writing the java programs Process 2:: Listening Music  3:: Downloading from Net.. There is no relationships between the each Task.. This multi Tasking is developed at the OS level
+
+Thread Based:: Executing the multiple tasks concurrently where each task is a independent part of the single process is called Thread based multi tasking
+
+There is no relationships between the tasks executed by the each Thread...This multitasking is developed at the programmatic level
+
+In general process based multi tasking is called just multi tasking while Thread based multi tasking is called as the multiThreading
+
+Multitasking is Heavy weight switching between the contexts is slows because each process is stored in separte address..
+
+Multi Threading is light weight switching between the contexts is fast because all threads are stored in the same address..
+
+
+If we consider the JVm as process when JVM is started by default in its java stacks area two threads are created with names:: main and GC
+
+main Thread : to execute the java methods GC:: to destroy the unrefrenced Objects..
+
+Sequential Execution VS Concurrent Execution:: Means the single thread execution at a time takes more time to complete all methods..at once only one thread is executing
+
+Whereas concurrent execution takes the less time to complete all methods execution... At once multiple threads executing simualtenously
+
+
+Meaning of the concurrent Execution:
+------------------------------------
+
+Executing the multiple tasks in start supesend resume end fashion is called concurrent execution..JVM allows application to have multiple threads of 
+execution concurrently. When the programs has mulitiple threads then the CPU can switch between the two threads to execute them at the same time..
+
+Note:: At a single instance of time JVM cannot execute the multiple tasks at a time
+
+Definition of Thread: Thread is the independent seqential flow of the execution..It is a stack created inside the Java stacks area..It executes the methods
+
+in the sequence one after the one...
+
+Definition of MultiThreading:: It is the process of creating the multiple threads in the javastacks area for executing the multiple tasks concurrently to 
+
+finish their execution in short time ...
+
+When the multi Threading is suitable:: To complete the independent multiple tasks execution in short time we develop the multiThreading.. In multi Threading
+
+based programming the CPU is Utilized Effectively...
+
+
+How to execute our method logic in the userdefined Thread?
+
+run() --> It is implemented as Empty implementation in the Thread Class..We should override in subclass..and create the ThreadClass Object and call start().
+
+Start method internally creates the Thread of execution in the java stacks area and calls run method in ThreadClass. If it is overriden it is executed from 
+the subclass and loads the our logic in run() ovveriden method to execute in the created Thread
+
+If the run method is not ovveriden the logic in Thread class run method calls the runnable(target) Object run()..and it further loads the our logic to execute in the created Thread...
+
+Thread CLass Constructors:: Thread() Thread(String name) Thread(Runnable target) Thread(Runnable target,String name)
+
+Can we call the ThreadClass start method twice? The thread that calls the start method ---Execution is terminated abnormally RE: IllegalThreadStateException
+
+There is no problem for the started Threads it will execute normally..
+
+
+How to create the multiple user defined Threads in the Java Stacks Area?
+
+1)Create the multiple Thread Subclass Objects and call the start method....Calls the same run() logic by diffrent Threads concurrently with diffrent Obj state
+
+2) Creates the multiple Subclasses with diffrent run() logics and create Objects of subclasses and call the start method..Here Diffrent run() logics are executed concurrenlty 
+
+Q) Can we override the start method in the custom Thread? Yes If we want do the some custom validations and calculation to update the current custome Thread Object state and call the super class start method..Then only the custom thread will be created and logic will be loaded to the custom Thread...
+
+
+Once the Thread is created it will be avaialble in any one of the below states?
+
+New , Ready-to-Run , Running , NonRunnable States , Dead
+													on Notification				
+Non Runnable States:: sleeping, Blocked for the joined Thread Completion, Waiting for the Notification--------------->Blocked for the Lock Acquisation
+
+Blocked for the IO..Once after the completion of the Non Runnable states the Thread enters into the Ready-to-Run State and will be waiting for chance from
+
+the ThreadSchedualr
+
+Ready to Run:: Is also called as the Runnable state or Queue..A thread starts its life in the Ready-to-Run state by calling the start method and waits for
+
+its turn..The ThreadSchedular decides the which Thread to run and for how long..
+
+Waiting for the Notification: The threads awaits for the notification from another Thread..
+
+Blocked for the Lock Acquistion::The threads awaits to acquire the lock of Object from another Thread...
+
+
+Threads Execution Procedure:: Schedulars in JVm implement usally Employ one of the following strategies..
+
+Premptive Scheduling::If the Thread has higher priority than the current running Thread, then current Running Thread can be preempted(moved to Ready-to-Run
+
+state) to let the higher priority Thread to complete its execution
+
+TimeSliced or Round Robin:: A running thread is allowed to execute for the fixed length of the time after which it moves into the Ready-to-Run state
+
+
+Thread Priority: Every Thread in the JVM will be assigned with some Priority..Priority ranges 1-10
+
+Every Thread by default will be assigned with some Priority and ThreadSchedular uses the Prioties of Thread to schedule the Threads..Thread Schedular 
+favours giving the High CPU time to the Thread with highest Priority which is in the Ready to Run state..
+
+
+Retriving the Current Thread Object:
+-----------------------------------
+
+Method is used the retrive the refrence of the currently executing Thread Object 
+
+public static native Thread currentThread();
+
+Method is useful to perfom some operations on a thread Object when its refrence is not stored in our logic
+
+Every Thread is by default part of one ThreadGroup..in thread class we have method public final ThreadGroup getThreadGroup() to retrive the current Thread 
+
+ThreadGroup..
+
+Types of Threads::
+-----------------
+
+Non Deamon Thread: A thread that is executing the main logic of the project is called as the Non Deamon Threads
+
+Daemon Thread(Service Thread): A thread that is executing in the background to provide the services to the Non Daemon Threads is called as the Daemon Threads..Its execution is terminated if all the non daemon Threads execution is completed..
+
+Main Thread is the NonDaemon thread.. And every userdefined thread that is created is NonDameon by default as deamon prop it is inherited from the parent Thread.
+
+To create the userdefined Thread as the Daemon setDaemon() should call on Thread Object .. isDaemon()
+
+You cannot call the setDaemon() once the Thread is started th.start..Thread created as the Non-Dameon cannot be converted to Daemon..
+
+RE: IllegalThreadStateException
+
+
+Controlling the Threads Execution:
+----------------------------------
+
+Pausing the Thread execution for the given Period of time using the sleep Method..
+
+Pausing the Thread Execution until the other Thread Execution is completed using the join method...
+
+Executing the Threads sequentially if both are using the same object. and perfoming the operations on the same Object
+--------------------------------------------------------------------------------------------------------------------------
+
+Difference between the no-arg join() and arg join() methods? No arg join method pauses the current Thread until the completion of the other Thread while 
+
+if the other is blocked then this Thread is also blocked forever...parameterised join() doesn't wait for completion of the other Thread..it resumes exec aft
+
+
+Diffrence between the sleep(ms) and join(ms)?
+
+sleep() Pauses the current Thread Execution for the given amnt of time completely independent of the other Threads execution.. 
+
+join() Pauses the current Thread dependent on other Threads execution..It pauses current Thread for the given amnt of time or if the other Thread completed
+
+before the given time, current thread is resumed..
+
+
+Synchronization:
+----------------
+
+The process of allowing the multiple threads to modify data the Object data in the sequence is called as Synchronization..	
+
+Synchronization in java is implemented using the lock concept. If the one Thread has lock of an Object then other Thread will not be allowed to modify the
+
+Object data until the first thread relases the lock.. Lock will be released if the modifying operation is completed by first Thread. In that way we will get
+
+the sequential flow of execution which is bad programming Practisce.. If the lock of the Object is never relased then other Thread goes into the infinite
+
+waiting state. Which is also a bad program. It should have flexibility to get lock if its free else wait for the particular amount of time
+
+
+
+We can implement the synchronization in two ways in Java:: synchronized method and synchronized block
+
+Same Object is accessed by the two Threads.. One is accessing the synchronized method and other is accessing the non synchronized method on the same 
+Object.. Then the flow is concurrent...For NonSynch() methods lock is not required even though the Object used is same by two threads...
+
+Only synchronized portions of the code inside the Object(considering all non static methods) will be executed sequential rest all code will be executed in the Concurrent Fashiion.
+
+Using the synchronized method we can lock only the current object.. but using the synchronized block we can lock current object or argument object
+
+What is difference between the SM and NSM synchronized?
+
+if we declare the NSM as the synchronized then the current object is locked, so that in this method NSVs of this object is are modified sequentially by multiple threads..
+
+if we declare the SM as the synchronized then its class java.lang.Class Object is locked, so that in this Method SV's are modified sequentially by multiple Threads...
+
+Focus::using synchronized block in static method we get lock of only arg Object.. becuase this keyword is not valid in static method
+
+Need of Synchronization: To avoid the data inconsistency problems if the same object is being used by multiple Threads..if the different object is used by
+the multiple Threads then no need to implement the synchronization
+
+Example: Servlet is the singleton Object.. Within the servlet you shouldn't take the instance varaiables until required..Blogic Model Logic all classes are
+
+sharable Objects while you are developing the Advanced Java Applications.. It is best you take most of the local varaibles in them per each request
+
+If the instance varaibles are final then there is no probelm..We can declare them as non static final varaible.. They are meant only for the reading not meant for modifying in the NonStatic methods..
+
+Local varaibles are not sharable across the multiple Threads..so a thread cannot change other Threads local varaible values so we get the desired results..
+Most of the cases it is recommended to uses the local varaibles in the object that is sharable across multiple Threads.....
+
+
+How to get the ThreadSafety for the Sharable Object that accessed across multiple threads ? It is achived if Non Modifiable static/Non static varaibles if declared as final..If there are any modifiable varaibles are there then they must be modified under the lock/synchronized concept...
+
+Inter Thread Communication: The process of executing the two Threads on the same Object with alternate execution
+
+Data is modified by one thread and Data is used by other thread...
+
+If the same Thread gets chance again or lock is received unexpectedly to Thread with out other Thread reading/modifying operation is completed? Then we should have the condition as precheck before proceeding with this current Thread..If the condition  is not met then current Thread should wait().. Wait internally relases the lock of the Object..
+
+Condition used in Producer thread:: If the data is not consumed by the consumer thread then wait
+									Here: ProducerTh & consumerTh both sharing the same Object....
+Condition used in Consumer thread:: If the data is not produced by the Producer thread then wait
+
+***Focus: Make sure while you are implementing the Synchronization concept then both Threads are using the same Object...
+
+**The process of executing the Threads in sequence in loop with communication of one Object is called Inter Thread communication..We develop this concept when the two 
+
+different dependent tasks want to be executed continuously in sequnece by two diffrent Threads...
+
+
+wait(): The functionality of the wait() method is to block the currently executing Thread by releasing the lock of the Object.. so other waiting Threads can use the lock of the Object.. The wait method releases the lock of the object immediately
+
+Notify():The functionality of the notify() is notifying to the waiting Thrread that lock is available on Object..Then waiting Thread moved from waiting state to 
+
+LockAcquistion state..Once the lock is Obtained then it moved to Ready to Run state waiting for its turn..The Notify method doesn't releases the lock of the object immediately.. its a just wakeup call for the other blocked Threads...
+
+wait(100)-->Blocks Thread execution until 100ms or other Thread calling the notify() whichever is coming first that Thread will resume
+
+What happens if we don't call the notify notifyAll methods on waiting threads.?
+
+What is the rule while calling these three methods?? This three methods allowed only inside the synchronized method or synchronized blocks...
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+01:(Java Inner Classes)
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+A final/concrete/abstractclass interface enum annotation that is defined inside in another final/concrete/abstractclass interface enum annotation is called Innerclass
+
+A inner class is used for creating the inner object of the outer Object..A inner class creates the has-relationship Objects of the outer  Object...
+
+
+If you want to reuse the Object in multiple other objects, we must not use the inner class..we must create this object using an outer class and must access and reuse 
+
+the outer class by using the instance varaiables.. If you want to use this object only in one Object then it is recommended to create this object using the inner class
+
+It is way of logically grouping the classes that are used in only one place...It increases the encapsulation...it can lead to the more readable and mainatable code....
+
+
+What are the advanatges of the inner class compared to the Outer class with instance varaible?
+
+The outer classes created private members we cannot access in the other classes.. we should use the getter and setter methods....
+
+
+Using the inner classes reduces the lot of wiring code that we write...Two way communication can be made possible with the help of the inner classes.
+
+
+
+Types of Inner classes:  1) Static Nested class 2) Non-Static Nested class  3) Local Inner class 4) Anonymous Inner class
+
+
+1) Static Nested class:: Meant for creating the inner Object of the outer Object and want to instantiate it without using the outer class object.....
+	
+	Means this class Object we can create inside the outer class static methods and static blocks also...
+	
+	It can use only the static scope of outer class by default. You need to create the object of outer class to use non-static scope of outer class
+	
+
+2) Non Static Nested class:: Meant for creating the inner Object of the outer Object and want to instantiate it  using the outer class object..
+
+	Means this class Object we cannot create inside the outer class static methods and static blocks also...only inside the non-static memebers...
+	
+	It can use the non static & static scope of the outer class.
+
+
+3) Local inner class: Used for creating the inner Object of the operation.. if it is defined inside the static method.. We are allowed to use only the 		    		      static scope of the outer class & scope of method where it is defined. If it is defined inside the non-static block of outer class we 			      can use the both the static and non static scope of the outer class
+
+4) AIC: It is meant for creating the subtype of the class or an interface... It is also meant for defining the subclass by making use of the scope of the 	method/block/constructor wherever it is define..
+
+
+Local innner class is allowed to define inside any static/instance blocks or inside the constructor or static or Non staticMethods..
+
+AIC innner class is allowed to define inside any static/instance blocks or inside the constructor or static or Non staticMethods..or as the Instance/static varaiable
+
+intialisation statements
+
+
+static block scope: We can acees the static varaibles/Methods of the class.. Local varaibles of the block..To acess the NSV/M create the Object
+constructor scope: We can acees the Non-static/static varaibles&Methods of the class.Local varaibles of constructor..
+{}: We can acees the Non-static/static varaibles&Methods of the class.Local varaibles of constructor..
+static method: We can acees the static varaibles of the class.. Local varaibles of the block..To acess the NSV/M create the Object
+NonStatic Method:We can access the Non-static/static varaible&Methods of the outer class
+static inner Class: We can acees the static varaibles/Methods of the outer class directly anywhere inside the class {SB,C,IIB,SM,NSM}..To access the NSV/M create the Object of outer class
+Non-Static Class:We can acees the static/Nonstatic varaibles/Methods of the outer class directly..Anywhere inside the class{SB,C,IIB,SM,NSM}
+
+
+Fuse lu Egripoye Questions:
+---------------------------
+
+public class Test01 {
+	
+	static {
+		class A{}
+		new A() { };
+	}
+	
+	{
+		class A{}
+		new A() { };
+	}
+	
+	public Test01() {
+		class A{}	//You cannot use the class/logics of this inner class anywhere.. It should be used inside this method
+					
+		new A() { };	// block or constructor.. Its scope is restricted for this block.. we cannot call from outside.
+	
+	}
+	static void m1() {
+		
+		class A{}
+		new A() { };
+	}
+	
+	void m2() {
+		class A{}
+		new A() { };
+	}
+		
+	public static void main(String[] args) {
+		class A{}
+		
+		new A() { };	//	This is Anonymous inner class for the Local Inner class inner class defined inside the method
+		
+		
+	}
+
+}
+
+
+static Nested Class Points:
+---------------------------
+
+We create the object of static nested class independent of the outer Object...
+
+Look for allowed modifiers for the static nested class:: final abstract strictfp private protected default
+
+We are allowed to take the both static and non static members inside the class...Even main method is also allowed..
+
+The inner class can be even executed from the command propmt.. The outer class is not loaded unless any of the outer class member is being utilized inside the static nested class members.. the same thing is valid in the vice versa..
+
+How to access the static inner class from the Outside the outer class?Test02.A a=new Test02.A();
+
+From the Outer class we can access directly using the :: A a=new A();
+
+
+*****Refer the Inner class notes...in the HK screenshots folder.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+01:(Java Introduction)
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Environment Variables:: Two ways to set environment variables
+
+Path ClassPath ...
+
+When the java .class file is not found we get NoClassDefFoundError(<1.7) Error:Couldn't find or load the main class A  ClassNotFoundException is thrown in current versions
+
+Set Path=%Path%;
+
+Set ClassPath=%ClassPath%;
+
+UnSupportedClassversionError -->If you run on the lower JRE 
+
+Java Supports 8 programming elements: module package class variable block constructor method inner class
+
+
+How to install Java Software on the Linux Environment?? Set the Path and ClassPath...
+
+
+Interface:: It is fully unimplemented class used to define the Object Operations.. Class used for the implementing the Object Operations....
+
+
+Compliler generates the .class file name with Class Name and not with Java File name...
+
+
+Compliler Activity::For the all classes defined in the file name separted .class file(BYte Code) is created  
+
+JVM Activity:: searchs for the .class file if it is found it loads the byte code into the jvm and starts class logic execution by calling the main method...
+
+
+If the class doesn't contain the main method program is compiled fine but cannot be executed.. JVm throws the runtime error "NoSuchMethodError"
+
+
+
+Errors thrown by the JVM at the time of execution are called as the runtime errors or exceptions ....
+
+
+In one java file how many public classes we can define? One and multiple non public classes
+
+
+
+Does JVM execute the user defined methods?? No we need to call from main method..
+
+
+JVM provides the memory for the variables and methods by using the keyword :: static new 
+
+
+Define the main method:: it is the mediator between the java developer and JVm to inform which methods to be exeucted when and in which order....
+
+
+In a class if we don't have main method how we should exeucte the user defined methods of that class?? 
+
+
+In Projet development we should choose the names for the programming elements very carefully, the name should be meaningful and releveant to the present context...
+
+It improves the readability and understandability 
+ 
+
+What is the JIT Compliler?  JIT Compiler stands for the just in time compiler , it is the part of JVM which increases the speed of the execution of java program.....
+
+
+How Java achived Platform Independent nature??
+https://medium.com/javarevisited/java-platform-independency-2dddd92a53f8
+
+What is difference between the JVM JRE JIT?  Environments in Project Development??
+
+
+What to learn 2021?  Docker Container Cloud , Git , Junit & Mockito , JDK 9 to 13 , Devops Jenkins , Spring Security5.0 (OAuth), Spring Boot 2 and microservices
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+Compiler :: Will not generate byte codes for the comments.. it ignores that lines...
+
+class static{}  Keywords cannot be used as user defined indentifer..because they are available through out the JVM directly...
+
+Prefedined class name can be used as the user defined identifer .. Because they are available in diffrent package...
+
+class String{	public static void main(String[] args){  } }  CE://
+
+
+Keywords: Bascially keywords are used to communicate with JVM and compiler about the operations that we are perfoming in the Java Applications...
+
+50 Key words:: 
+
+Not keywords:: referenced Literals: null and boolean literals true false ...All keywords are highlighted with blue color in the eclipse....
+
+
+class interface or enum is expected?  illegal start of type ?? and illegal start of expression??  Compile time error
+
+class interface or enum is expected:
+
+The root cause of the “class, interface, or enum expected” error is typically a misplaced curly brace “}”. This can be an extra curly brace after the class. It could also be a method accidentally written outside the class
+
+illegal start of expression::
+
+Missing Curly Braces for Methods: Access Modifier Inside Method:: Nested Methods::  char or String Without Quotes
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+									DataTypes:			
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+To read the values and store in the Programming memory.. verify the values .. values are correct and values are wrong...
+
+The keyword used for creating the variable memory or the object memory to store the single value or multiple values in Program is called Datatype....
+
+Datatype keyword provides the below informations?
+
+What type of memory? what is the size of memory ? what types of values can be stored? what range of values can be stored? what operators are allowed to apply?
+
+what typeof result will be returned from exp when used it in the exp?
+
+Java Datypes:: PDT ----->Numeric(Integral-->Integer(byte short int long) character(char))  floating Point (float double) Non Numeric(boolean)
+
+RDT ::  array class interface enum annotation ---.For storing the multiple values as one group by using the single name..
+
+CE:// Possible Lossy Conversion   cannot find the symbol
+
+What does JVM do when it encounter the datatype in the program??
+
+It creates the memory location with based on Datatype size and names the ML with the given name , stores the assigned value in the meomory location...
+The named memory location is called variable...
+
+
+if we want to store multiple values then we need to create the 100 varaibles and the memory locations created at 100 diffrent places in the JVM..retriving is tough
+
+Refrenced Datatypes are given to store the multiple values in continuous memory locations to retrive the data quickly and pass all the values in single network call
+
+Array: stores the fixed number of multiple values of same type in continuous memory locations...
+
+byte b[]={1...100}..b is now refrenced varaible.. The base address will be stored in b..in the reference varaibles address will be stored...
+
+Bascially class is the keyword sun given to create the new datatypes to store any type and any no:of values in the continuous memory locations...
+
+DataTypesDemo dd=new DataTypesDemo(); The new is the keyword provides the continuous memory locations for the varaibles created in the class.. 
+
+The base address is stored in the dd...
+
+What is the size of RDT? RDT datatype allocates the memory location of 4 bytes(refrence is of integer type..its size should be 4 bytes)
+
+Default values of PDT ??   char-->onespace  boolen-->false RDT-->null
+
+Default values are only applicable for the class level varaible..Class level varaibles are intialized by JVM automatically with the Default values...if no value provided
+
+Rule:: We must intialize the local variables before accessing them...
+
+Literals:: Integeral (All integer type literals are of int type...if we want to represent as the long suffix with L)..We don't have byte short type literals
+ 
+Floating Literals:(All floating point literals are of double type..if we want to represent as the float suffix with F)..double literals can also be suffixed with D..
+
+Charcater Literal String Literal Boolean Literal
+
+
+Conversion of DataType::	
+------------------------
+
+Primitive Type conversions::  
+
+Implicit conversions: int a=10;  long l=a;		Widening		If wanted to stored the values in the higher size memory location
+
+Explicit type conversions:  int i=10;  long l=(int)i;	int i=150; byte b=(int)i; Narrowing    If wanted to stored the values in the lower size memory location
+
+
+While conversions:: ERRORS:
+
+int i=150;
+byte b=i;
+
+CE://incompatible types... possible lossy conversions from int to byte... Without type conversion
+
+float f=10f;
+int i1=f;
+
+CE://incompatible types... possible lossy conversions from float to int... Without type conversion
+
+ 
+int a=10; boolean b=a; // incompatible types. int cannot be converted to boolean Expect boolean all the primitive datatypes are compatible..
+
+
+char ch='a';
+byte b=(byte)ch;	
+System.out.println(b);
+
+
+int i=10; byte b=i;
+
+byte b2=(byte)i;	byte b3=(int)i; CE://possible lossy conversion from int to byte  	byte b4=(boolean)i; CE://incompatible types:int cannot be converted to boolean
+
+
+char and number types are compatible types::
+-----------------------------------------------
+
+You can assign the char literal to the number variable.. And also int literal to char varaible
+
+Java supports unicode character set.. It is super  set of Ascii charcter set...
+
+The number you are assiging to char varaible must be in the range of 0 to 65535..
+
+Char varaiable can store the character or unicode of the character number...
+
+otherwise CE::
+
+char ch='a';	char ch1=97;	System.out.println(ch1);		In these case's conversion done by JVM... char ch1=(char)97;
+int i1=98;	int i2='a';	System.out.println(i2);			byte b='a'; short s='a'; char literal ASCII should be in range of byte or short
+float f='a';   	double d='a';
+
+char ch='A';
+byte b=ch;		//Possible lossy conversion from char to byte
+byte b=(byte)ch;
+
+byte b=100;
+char ch=b;	//possible lossy conversion from byte to char..shorter range to higher range..it is also not possible..because bytes range has -ve no's
+char ch=(char)b;
+
+
+char ch=(char)66000;
+System.out.println(ch);
+
+if the assigned numbers corresponding character is not supported by your computer JVM internally stores ?..By Default Windows OS supports only ASCII charset
+
+How many ways you can intialise varaible:int i=10; int j=i; expression and using non void method
+	
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+									Operators			
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Using datatypes we have Created varaiables and objects for storing single values and multiple values..
+
+After storing the values we need to perfom the validations and calculations on values using the diffrent operators..
+
+Operator : symbol or word meant for perfoming the assignment calculation and validations operations is called operator..
+
+Operand: The value that has passed as input to the operator for perfoming assignment calculation and validations operations is called operand
+
+Expression: A combination of operator and operand is called as expression
+
+
+What are diffrent things we can use as operand: Literal, variable ,non void method call  & An expression
+
+10+20 a1+a2 m1+m2()  (10+c)*m1()/(20-30)
+
+Types of operators::unary: binary ternary
+
+Validation operators , calculation operators , & Storing Assignment operations
+
+Operators precedence and operators Associtiviy::
+
+If there are multiple opeartors used in the expresssion which operators is exeucted first which next is decided by operator precedence table
+
+
+Assignment =
+Arithmetic Operator: + - * / %
+Increment Decrement ++ --
+Relational : > < >= <= instanceof
+Equality == !=
+Logical : && || !
+Bitwise:  & | ^ ~
+Shift Operators: << >> >>>
+Ternary Operators: ? :
+Compound Assignment:  += -= *= /= %= &= |= ^= <<= >>= >>>=
+Object creation Operator : new
+Lambda Operator: ->
+
+postfix prefix unary:: expr++ expr-- ++expr --expr +expr -expr ~ ! new
+multiplicative: * / %
+additive : + -
+shift : >> << >>>
+relational:: > < >= <= instanceof 
+equality:: == !=
+Bitwise And:  &
+Bitwise exclusive OR:  ^
+Bitwise inclusive OR: |
+Logical And: && 
+Logical OR: ||
+ternary ? :
+Lambda ->
+assignment:: += -= *= /= %= &= |= ^= <<= >>= >>>=
+
+
+compiler Algoritham in expression evaluation w.r.t to Literals and variables::
+----------------------------------------------------------------------------
+
+Constant Expression:if we use  only literals or only final variables or both is called as constant expression..
+
+Compiler directly uses the values and generates the final result value and checks is this value is in the range of dest var or not..
+
+if yes compiled fine.. Else CE: Possible lossy conversion error...									(values is result)
+
+
+Varaible expression: if we use atleast one varaible or non void method calls in the expression we call it as variable expression..
+
+Compiler uses the variable types and generates the varaible type as the result and verifies this type range in the range of dest variable
+
+if yes compiled fine..if no Possible Lossy conversion error..										(type is result)
+
+
+Identify first it is constant or varaible expression or not?? and then solve
+
+byte b=(int)10L;	//value
+
+
+long l1=10L;
+byte b=(int)l1;		//type	Possible lossy conversion error cannot convert int to byte
+
+
+byte b19=10;
+byte b20=b19+20;	//int	Possible lossy conversion error cannot convert int to byte
+
+final byte b19=10;
+byte b20=b19+20;	//value
+
+
+final byte b19=10;
+final byte b20=20;	
+byte b21=b19+b20;	//value
+
+final byte b19;
+final byte b20;
+
+b19=10;b20=10;
+
+byte 30=b19+b20;	//int  Possible lossy conversion error cannot convert int to byte
+
+
+
+Arithmetic expression: Cannot use the boolean type operand..only numeric datatypes including the char 
+
+result type::always numeric based on the datatypes used in the calculation we always we will get the highest range datatype as result	
+
+byte + byte ==>int   short + short = int char +char =int;
+
+int + long=long  int+long+float+double=double
+
+
+
+Automatic type Promotion in expression: to the Highest range data type used in the expression..
+
+Type promotion::Converting the type to its highest range
+
+When a value or variable type is promoted:: when we use combination datatypes then type is used..
+
+
+
++::It is overloaded operator
+
+1) Addition Operation:: If the both operands are numeric or char
+
+2)Concatenation Operator
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Variabeles:: It is named memory location used for storing the value or Object refe temporarily during the program execution..
+
+Varaible is created using the PDT or RDT..based on the type of the values that you want to store..
+
+PDT varname=value  Primtive Varaibles    RDT varname=new Object(); refrenced variables
+
+When an object is created the memory is allocated for all the varaibles...For primitive varaibles predefined size & for the refrenced variable size 4 bytes is allocated...
+
+int a;		Memory is created.. it is Variable declartion
+int b=20; 	Memory is created..and value intialized...Variable Definition
+a=10;		Memory is not created...First time.. Variable intialization
+b=20;		Memory is not created...second time varaible assignment
+
+int c=a+b; 	varaible def + a&b varaible reading
+
+1)Varaible creation:	Declartion & Definition
+2) Varaible accessing:   Intilalization assignment reading
+
+Don't create the varaibles unnecessary.. If you want to resue the values then only create otherwise.. you can use them on fly..Memory can be saved
+
+Where we can create Varaible? Only at class level and method and we call them as the Class Level Varaibles or Method Level Varaible
+
+Class Level Varaiables? They are meant for the storing the values of an Object
+-----------------------
+**static Varaible:Meant for the storing the values that are common to all objects.. For this varaibles one copy memory allocated in the Class Context.
+
+**Non Static Varaible: Meant for the storing the values that particular to every object..For this varaiables memory allocated when the Object is created
+
+--->As long as the Object is available from the non-static varaiables we can access the values..
+
+For the static and non static varaibles ? We need to manage the memory else we run out of Space.. But in the case of MLV .. they are by default destroyed
+
+when the operation is completed..We need to deallocate the static/instance refvaraible by storing the null if the Object is not required..
+
+Diffrent ways to access the SV Varaibles? 1)Directly by its name 2) using class name 3) Using the Object reference varaible 4)using the null ref varaible
+
+
+Method Level Varaibles Parameter Varaibles Local Varaibles (Stack Varaibles Auto Varaibles)
+-----------------------
+
+They are meant for storing values for perfoming one operation
+
+Parameters menat for receiving the inputs from the other methods..LV meant for the storing the results or values of the particular operation
+
+Scope of the parameter Varaibles:: Memory for these varaibles is allocated when method is called.. It is availble until method completion
+
+Scope of Local Varaible:Inside the enclosing block where varaible is declared the memory is allocated and destroyed when enclosing block completed
+
+Default Values: Will not have default values
+
+
+Nameless Local Block: created inside the method to decrease the scope of the Local Varaible...It means after block completed memory is destroyed
+
+The varaible created inside the local block can be accessed until the end of local block.. if we can't access after the local block...
+
+Named Local blocks are also used to break out of the loops....
+
+Local Variable Type Inference feature of Java 10..
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Methods:
+
+Method Declaration/abstract Method:If we create a method without implementation body, with only prototype we call as the method declartion..
+---------------------------------
+Method declration also called as abstract method.. It should have modifier abstrcat compulsory..We declare the abstract methods in the super class for this
+
+declared methods we provide the implementation in the subclass as per subclass programmer requirement....
+
+public/default/protected abstract void m1().. Only public/default/protected abstract modifiers are allowed for the abstract methods..
+
+
+Method Definition: If we create the method with implementation body then we call it as the method definition
+-----------------
+A method definition is also called as the concrete method.. Concrete method can be static/non-static..
+ 
+We can declare the concrete method either in the super or subclass.. All the modifiers that allowed for a method are allowed
+
+public/default/protected/private 	static final native synchronised strictfp
+
+
+Method Implementation(varaible intilaization)::		
+-----------------------------------------------
+Providing the implementation to the super class method for first time in the subclass is called Method implementation...
+
+
+Method Overriding/Method Hiding:
+--------------------------------
+
+Redefining the method that is implemented in the super class again in the subclass as per the requirement of the subclass programmer then we call method 
+overriding..if the Redefining is for the static method we call as the Method Hiding
+
+
+Method Overloading:
+-------------------
+Defining the multiple static/non static methods with same name but with different parameters type or list or order is called as the method overloading
+
+
+We create the methods to perfom the operation on the object valuess..We call it as Object operation..logic inside the methods need to be reused...
+
+
+Abstract Method:: If we want to declare the operation of the object in the super class and want to force the subclass programmers  to implement that operation we must choose the abstract method 
+	
+If we want to implement the operation of the object in the super class common to all its subclasses for the reusing purpose we must choose the concrete method
+
+
+if an object operation implementation logic is changing from one subclass to another subclass of an Object, that operation must be implemented by sub class
+progrmmaers. Then in order to force the subclass programmer to implement this this object operation we must create the abstract method in super class
+
+if an object operation implementation logic is not changing from one subclass to another subclass of an Object, that operation must be implemented using the concerte method..so that logic is reused by the sublcass programmers...
+
+
+
+Static Methods: Developing and executing the logic common to all the objects.. Object is not required for executing static method. By the time static method is executing the memory has been provided to static varaibles during the class loading and intialization for the static varaibles provided inside the static block... In order to access the non static varaibles we need to create the Object explicitly inside the static method.
+
+As the execution is not common to all objects we cannot access the object values directly inside the static method..We can access only static varaibles..
+
+
+Non Static Methods: Developing the logic common to all objects but executing the logic specific to each Object we need to use the Non Static Method..
+Object(memory for the object varaibles) is required for executing/calling the non static method.We can access the static and non static varaibles directly
+in the non static method.. 
+
+As the execution is common to all objects we can access the object values(static/non-static)values directly inside the static method..
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ENUM:
+----
+
+Enum is one kind of the final class. It is created by the keyword enum.. It used for defining the set of named constants those represent the menu kind of items..Before the jav5v these menu items are created from the class.. Class has problem in acessing this menu items, this cannot return or print item name
+as it is declared instead it returns or prints its value.
+
+Syntax:
+
+enum name{
+	//menu items names separted with ,
+;
+	//normal all 8 members which can you define inside the normal class
+}
+
+Note: For creating the NamedConstants use only names don't use the DataType.
+
+What is the datatype of the namedConstants: Its datatype is current Enum Type.. It is added by the compiler automatically
+
+java.lang.Enum: it is an abstract which is the default super type for the evry Enum Type classes.. Also it is implementing the Comparable & Serializable
+
+Interfaces..Since evry enum type is comparable we can add its Objects to the collection Treeset and it can be stored in the file as it is Serializable type
+
+
+public static EnumType[] vlaues():  The Objects are already created in static block..But it is returing the created the array of Objects..
+
+public static Enum valueOf(String s)-->String is the named Constant Name..
+
+public final String name() public final String ordinal()
+
+Every Enum Type class Object has minimum 2 variables : name and Ordinal & our specific (in FoodItem Enum)price..Every named constant varaible defined inside the enum type is an Object refrenced varaible that holds the current enum Class Object..
+
+enum Month{
+
+	JAN=1,FEB=2
+} 
+
+Named Constants are not of type int.. They are of Type Month so we get CE
+
+To assign the values to the named Constant, enum should have the parameterized constructor with the passed constructor argument type..Else it leads to CE
+
+JAN(1) FEB(2);
+
+Where the values 1 & 2 are stored.. You should create the non-static int type varaible to store the values..
+
+SCJP Questions:  We cannot derive on Enum Subclass because it is the final Class..we cannot instantiate the enum using the new and constructor it leads to 
+CE:EnumTypes may not be instantiated, but it is instantiated by compiler in the .class file..
+NamedConstants should be defined first in Enum and seprated by ; If there are no named constants just use separator ;
+
+public enum EnumTest {
+	;
+	public static void main(String[] args) {
+		EnumTest test=new EnumTest();
+	}
+}
+
+What are allowed inside the Enum? Named Constants, Static & Nonstatic varaibles and methods. Main Method.. Abstarct memebers are not allowed because Enums are by default final Classes.We cannot declare enum as Abstract as enum Object should be created intialize the named constants
+
+public enum EnumTest {
+	SAMPLE;
+	static int x;
+	int y;
+	private EnumTest() {			Abstract Methods are not allowed and Modifiers for the Constructors are only Private and default
+		
+	}
+	static {}
+	{}
+	class A{}
+	static class B{}
+	static void m1() {}
+	void m2() {}
+	interface Test1{}
+	enum InnerEnum{}
+}
+
+Accessing Memebers:: Constants:EnumTest.SAMPLE  Static Members: EnumTest.x EnumTest.m1() Instance mem: EnumTest.SAMPLE.m2() EnumTest.SAMPLE.y
+
+We cannot create the explicit constructor as protected or public, because enum constructor is by default private.. even if you create the constructor with default modifier it converts to private.
+
+
+
+
+
+
+=======
+﻿
+API is available in the form of byte code means .class file
+
+API Documentation is availabele in the form of HTML file..
+
+How generated?  What it contains ? How it is distributed??
+
+javadoc <filename>
+
+
+Java.lang:: JVM loads the classes of this package automatically no need to write the import statements
+
+This package also Provides classes to perfom operations on the Strings..
+
+This package provides the classes to JVM Operations like System Runtime ClassLoader and Process
+
+Java.Lang.Object:: 11 common behaviours for all objects.. All methods implemented in the Object class has generic logic common for all the subclasses
+
+So developer can avoid implementing these operations in every class...Sun implemented all this methods with the obect refrence..Developer should override with object state
+
+
+Why should you override the hashcode and equals method?
+
+to use the subclass objects as the key to add entry to the Map object and also to add its object as element in the Set Collection...
+
+NO CE or RE but this objects are not found for the retriveing and removing from the collection
+
+
+Comparing two Objects of Same Class::
+=====================================
+
+We can compare based on the refrence or based on the state of the objects
+
+== Based on the refrence and equals():: Is given to compare the two objects for their equality...Compares the object based on the implementation of the method
+
+
+We cannot use the == for the incompatible type values or the incompatible refrenced types...
+
+We can use equals method for the incompatible refrenced types it will not throw CE or RE ... It will just return false
+
+
+null==null true     null.equals()  NPE
+
+Example e4=null;
+
+null==e4 true  null==new Exmaple()  false
+
+Example e4=null Test e5=null;  e4==e5 Incompatible Types..
+
+String s3=null; EqualTest s4=null;
+		
+System.out.println(s3==s4);
+	
+
+String s3=null; String s4=null; System.out.println(s3==s4);true
+
+
+String test=null; Object object=test; EqualTest t1=new EqualTest();  System.out.println(t1==test);//CE System.out.println(t1==object); //false
+
+
+
+HashCode:: Hashcode is the identity of an object.. It used to differentiate the one object with another object.. Every Object has its own hashcode..
+
+When the Hashcode is used: It is used by the Hashtable datastructure used when we store , retrive ,search, remove the object from the Set and Map Collections...
+
+
+If the object state changed then HashCode is it changed?
+
+
+Object Class hashcode()-->Returns hashcode based on the refrence of the object .. so whn state changed the hashcode doesn't change... 
+
+SubClass overriden hashcode()--->it is developed based on the state of the object using the hashing Algoritham....
+
+Can two objects can have same hashcode?  Yes there is possibility two objects of same class to have the same state ... leads to the same Hashcode..
+
+If we change the state the 
+
+Contract Between the HashCode and Equals methods::?
+
+
+If the equals method returns true by comparing the two objects then the hashcode of the both objects must be same....
+
+
+if the equals method returns false then the hashcode of the both objects may be same or not same....if it returns false then hashcode of the both objects may or may not
+
+be same
+
+
+getClass():
+==========
+
+To retrive the current Objects runtime class Objects refrence 
+
+Runtime class Runtime class Object.. To retrive the class name of the current object
+
+
+this.getClass().getName()--->Current Object
+
+
+Shallow cloning copies only top level structure of the Object  not the lower levels.. Objects is coped without its contained Objects...
+
+
+Object is copied along with Internal objects also...Deep Clone copies all the levels of the object from top to bottom recursively..
+
+
+
+Exception Handling:
+-------------------
+
+Exceptions is an event that occurs during the execution time that disrupts the normal execution flow of programming instructions....
+
+Exception is a signal because by looking into the exception message the developer will take the necessary action against the exception..
+
+JVM Or developer throws ---> This class Objects
+
+Error type exceptions are thrown due to the problem occured JVm logic :: JVM process is killed by throwing the Error type exception..
+
+Exception type exceptions are thrown due to the problem occured in the Application Logic:: JVM Terminates the program execution by throwing the exception type exception
+
+Error: We cannot Catch 	(JVM is terminated)	Exception: We can catch (JVM is terminated only if the exception is not caught)
+
+RuntimeException Subclasses: Represents the logical mistakes occured due the operator execution failures..It means this exceptions are prepared and thrown by the JVM at runtime when operator execution is failed... or it can be thrown by Devleoper
+
+Exception class direct subclasses:repsents the logical mistakes occured due to the condition failure because of wrong input...These exceptions are prepared and thrown by devloper using the throw keyword....
+
+All the above exceptions are categorised into two types:
+
+
+When an exception is thrown by the devloper using the throw keyword if that exception handling is checked by the compiler then that exception is called as the checked else it is unchecked
+
+Error and RuntimeException are unchecked.... Throwable and Exception classes are the Checked excepion..
+
+
+Exception Handling:: Using the exception Handling code developer can catch JVM given exception message and can convert  the user understandable message and he can resolves the issues by himself and also avoids the abnormal termination of the program....
+
+If we don't write the try catch block to catch the exception or if we don't have matching catch block then that exception is sent to the JVM default Handler 
+
+We should use the innner try catch to handle some exceptions inside the try catch or finally blocks......
+
+Interview Questions:
+
+https://www.java67.com/2012/12/difference-between-runtimeexception-and-checked-exception.html
+https://www.java67.com/2012/12/difference-between-error-vs-exception.html
+
+
+If a method is likely to fail and chances of failure is more than 50% it should throw Checked Exception to ensure alternate processing in case it failed. 
+Another thought is that programming errors should be unchecked and derived from RuntimeException e.g. java.lang.NullPointerException. 
+
+Checked Exception also enforces proper handling of the error condition, though it's theoretical in nature and many programs simply appease compiler by providing try catch block instead of correctly handling exception in the catch block. 
+
+One the disadvantage of checked exception over runtime exception is that it makes your code ugly by adding boilerplate code in form of try-catch-finally block. Though this issue is addressed at some extent by improved Exception handling in JDK 7 by introducing automatic resource management or ARM blocks and allowing to catch multiple Exception in same catch block.
+
+
+
+Finally Block:  Resource releasing logic in finally Block we should place...unrefrencing the objects that are created in the try block..
+
+If we keep the return statement in the finally block always the value returned from finally block is transferred to the calling method....
+
+Even if the exception is raised inside the try block it is supressed..because the returned value overrides the exception Object in JDH...
+
+If we place the return in finally we cannot place any statements after the finally block...it leads to the CE://unreachable statements...
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Rule1:We can use try catch to handle the exception in the current method itself and further to supress exception here only
+
+Rule2: If the exceptions in the raised inner try they don't have matching catch blocks inside they can be propagated to the outer try 
+
+
+try{} catch(){}
+
+try{} catch(){} finally{}..
+
+Compiler considers for all the statements in the try excpetion's are handled properly by the all catch blocks that are placed....
+
+Coontrol can go back to caller from the try/catch/finally if it is returining some value from try catch & finally.. 
+
+CE://And for the statments that are placed after try catch finally will become unreachable code...
+
+
+Rule3:If we keep the return in the finally block the value returnd from the finally block is transferred to the calling method...though there is return in try
+
+
+Rule4: If we keep the return in the finally block then exception raised in try block is not propagated to the caller method..Exception is replaced with return value..
+
+
+Rule 5: In the case of the void method we can supress the exception using the return;
+
+Rule 6: Local Varaible of method should not be intiliasied inside the try or catch blocks..They should be intialised with default values in the method itself
+
+
+Reporting the excpeiton or try catch...if you have logic to handle then use the try catch if not there we use the throws...
+
+---------------------------------------------------------------
+Roles of throw throws and try catch:
+
+Throw used for the throwing the exception with the error message if the given inputs/arguments are wrong
+
+throws used for reporting the exceptions that are throwing from the current method
+
+try:for plcaing the exception casuing the statements and further to catch and handle the exception in the current method itself
+
+catch:Catching the exception that is raised in try block and further placing the handling code to takke the necessary action on the exception by displaying the error message or doing the other some other work..
+
+We can also use the try catch to supress the raised exception and continue with the next lines of the code...
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+We use throw if you want to throw runtime or checked exception.. We use throws only for the checkedexception(optional for the Runtimeexceptions)when we don't have exception handling code..We use throws for reporting exception that is raised inside the current method
+
+Throw is used for throwing the exception manually by programmer when wrong inputs are passed according to the current method logic..Most of the times we throw only checked exceptions..
+
+
+Throw Key word Rules:: 
+---------------------
+We can use throw only inside the method/constructor.. Can't use inside the static or instance blocks and at class level..
+After throw only throwable object are allowed... 
+If you throw exception using throw keyword.. After the next lines becomes unreachable.. Should be placed inside the conditioanl block if you need other statements..
+
+If you want to throw multiple exceptions using the throw key word.. We need to take multiple if condition. on one per basis
+
+
+Throws Key word Rules::
+----------------------
+We can use inside only in methd declartion and constructor declaration.. Not allowed inside the static and instance blocks and class..if the 
+super class methods doesn't throw any checked exceptions in the subclass we are not allowed to add the checked exception while overriding..
+
+try catch finally rules:
+------------------------
+
+try catch finally can be placed inside the Method constrcutors or inside the static/instance blocks..Not allowed at the class level
+
+As a parameter to catch block we can have only Throwable types..we cannot place the super class exception catch block before the subclass exception catch block...
+
+
+
+Throwable is the super class for all the exception classes.. Throwable has two main subclasses 1)Error 2)Exception.. It menas all exceptions are of two types
+
+Again Exception class is divided into two types...RuntimeException subclasses 2)Direction subclasses of Exception(CheckedExceptions)
+
+Totally In java exceptions are of 3 kinds:::------> Errors RuntimeExceptions CheckedExceptions..
+
+Error:The subclasses that are dervied from the Error type are called Error type exceptions.. These are exceptions classes represents the JVM internal problems..
+We don't catch the Error Type exceptions because we cannot receover from situation.We must shutdown JVM correct the code level to conserve 
+memory and run again....
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Exception:The subclasses that are dervied from Exception type are Exception type exceptions...These are exceptions classes represent the java code level problems raised because of the wrong logic or wrong inputs..We must catch the exception type exception to recover from the situation and terminate the program smoothly
+
+Consider the Throwable and Exception classes as the checked exceptions for all the rules.. Except in Rule2..
+
+Exception Handling Rules::
+
+Rule1:When we throw checked exception or receive the checked exception we must handle it using the try catch or report the exception else:
+
+CE: unreported exception must be caught or declared to be thrown
+
+
+Rule2:: Without throwing or receiving the checked exception we must not place the catch block for this checked exception..CE: Exception is never thrown from the body of the correspoding try block...Because without thrwoing by the programmer the checked exception is never received...
+
+but we can add the catch(Exception|Thrwoable) even though they are not throwing from the try block to catch the unchecked Exceptions.. Because this catch block rules is not applied for these exception classes they are called as the partially checked exceptionss...
+
+On Throwable and Exception only this rule is not applied remaining 6 rules are applied...It means when you throw the exception or Throwable we must handle them or report..
+We cannot add the catch(CheckedException) with out throwing it from the try block but we can add throws CheckedException on the methodprototype without throwing from the method body.. And caller must handle or report them...
+
+
+Rule3::if the super class methods doesn't throw any checked exceptions in the subclass we are not allowed to add the checked exception while overriding..
+
+if super class method has throws checked exception then:we must override this method
+
+1)Either by ignoring throws Exception 2)or only throwing the same checked exception 3)or only by throwing its subclasses.4)Not by throwing the superclasses or more checked exception 5)But we can override by adding the throws unchecked Exception
+
+Rule 4:: Rule on throwing the diffrent checked Exception from the subclass.. If we need to throw the diffrent checked exception from the overrdiing method, we cannot throw it directly..We must implement the Exception Chaining by using the either same super class ovveriden method throwing checkedException or by using the RuntimeException
+
+
+Rule5:: If a method or constructor is reporting the checked then we cannot call this method at class level or constructor to create the object at the class Level
+
+
+We must call this method and constructor only inside the static block instance block or inside the another constructor or in another method by handling exception
+
+
+Rule 6: Rule on Subclass Constructor
+
+If a super class default constrcutor throws the checked exception in subclasses in all construtors we must handle this checked exception using the throws keyword.Inside the subclass constructor we cannot catch the super() because it has to be first statement inside the constructor..
+
+
+Note:: Inside the subclass from its constrcutor logic if some other checked exception are throwing..We must report this exception by using the , separation alongwith super class constructor reported exception...because the constrcutor is not a overriding memeber
+
+
+Rule 7: Rule on handling the exception inside the SB IB and constructor.. Inside the static and instance we cannot report the checked exception, we can only catch the  checked exception because they are not the methods they don't have signature..They must be completed normally...
+
+Inside the constructor we can report and catch the exception because constrcutor is kind of method they have signature...
+
+
+Rule 8: We need to use the BackupCatch Block concept when need to catch the exception at any cost to supresss or show the user some message....
+
+
+Try with resources New JAva7 features:
+-------------------------------------
+
+Rule1: The resources varaiable and Object both must be Autoclosable Type
+
+try(Object ps=new PrintStream(System.out)){ } CE://
+
+try(PrintStream ps=new PrintStream(System.out)){ }
+
+Rule2: If the resource Objects close method throws the checked exception either it is a Exception IOException or SQLException or any other checked Exception 
+
+it must be handled either by catching or using the throws keyword.. Else it throws Unreported Exception
+
+
+try(PrintStream ps=new PrintStream(System.out)){ }  Catch Block is not required because close method doesn't throw any checked exception
+
+try(FileInputStream fis=new FileInputStream("a.txt")){}
+catch(FileNotFoundException e){}
+catch(IOException e){}			//fis.close method throws IOException so it must be handled..
+
+
+Rule 3:The resource varaiable must be intialised either with an Object or with MethodCall or atleast with null else we will CE://
+
+
+try(PrintStream ps){} CE://
+
+try(PrintStream ps=null){} 
+
+try(PrintStream ps=new PrintStream(System.out)){ } 
+
+The rule is created because internally the close method is called using the resource varaibale.. If we don't intialize the resource varaible, close() 
+
+method cannot be invoked .. This is basic varaible accessing rule..
+
+
+Rule 4:  Also we cannot create the Object without the varaible we will get CE://Indentifer excepted
+
+try(new PrintStream(System.out)){ } CE:
+
+
+Rule 5:: We cannot assign the new Object or null to the resource varaible inside the try body compiler will throw an error because this Object cannot 
+
+be closed at the end of the try, because the ref var is pointing to other Object or null
+
+try(PrintStream ps=new PrintStream(System.out)){ 
+
+	// ps=null;
+	// ps=new PrintStream(System.out);
+} 
+
+Also we cannot just declare varaible and intialize it in the try block because of the  rule 3:
+
+
+try(PrintStream ps=null){ 
+
+	ps=new PrintStream(System.out); CE://
+} 
+
+
+try(PrintStream ps){ 
+
+	ps=new PrintStream(System.out); CE:// Rule 3 is violating
+} 
+
+
+Rule 6: By Decalring the resource varaible outside of try we cannot use it inside the try(){} we will get cE:// try with resource must be a varaible declaration
+
+
+PrinStream ps4;
+
+try(ps4=new PrintStream("abc.txt")){}	CE://
+
+try(PrinStream ps5=new PrintStream("abc.txt")){}
+
+
+Rule 7: Till Java 7
+
+PrintStream ps5=new PrintStream("abc.txt");
+
+try(ps5){}  it is Compile time error
+
+In Java 8: We must create the local varaible in try and assign that Outer Object to LV
+
+
+PrintStream ps5=new PrintStream("abc.txt");
+
+try(Prinstream ps6=ps5){} 			It will be compiled fine
+
+
+From Java 9 we got this 
+
+PrintStream ps5=new PrintStream("abc.txt");		No Compile time
+
+try(ps5){}  
+
+
+Rule 8:We cannot use try-resource LV from outside of the try block .. WE will get CE: Cannot find the Symbol..
+
+Also we cannot use the outside try{} varaible after try{} if we use we will get RE: Stream Closed...
+
+
+FileOutStream fs6=new FileOutputStream("abc.txt");
+
+try(FileOutputStream fs7=fs6){
+
+}
+FileOutStream fs8=new FileOutputStream("abc.txt");
+
+try(fs8){}
+
+
+fs7.write('a');
+fs6.write('a'); RE: Stream already cloased
+fs8.write('a'); RE: Stream already cloased
+
+
+
+
+PrintStream ps=new PrintStream("abc.txt");
+		
+		try(ps){
+			
+		}
+		
+		ps=new PrintStream("abc.txt");		// We cannot reassign 
+			
+}
+CE::The varaible ps used with try resource is neiter final or effectively final
+
+
+So the best practisce to use the varaibles declared outside we should maintain them as the final varaibles....
+
+
+Rule 9:
+
+
+If we want to create or use the multiple resources inside the try{} we must seprate using the ;
+
+try(FileOutStream fs8=new FileOutputStream("abc.txt");FileOutStream fs9=new FileOutputStream("abc.txt")){
+
+}
+ or:
+
+FileOutStream fs8=new FileOutputStream("abc.txt");FileOutStream fs9=new FileOutputStream("abc.txt")
+
+try(fs8;fs9){}
+
+Rule 10: Inside the try only AutoClosable type varaible declaration is allowed with intialization either with new keyword or with method call or with
+
+null .. Inside the try() we cannot place any logic, compiler will throw error.. Logic is allowed only inside the try{} body
+
+
+
+
+Main Rules to remeber:: varaible of reosucre type is mandatory to declare inside try(){} with intialization atleast with null.. 
+
+You cannot reaasign to other Object because the resource varaibles are considered as final or effectivetly final...
+
+
+
+From the Java7 Onwards we can create the Cacth(){} with multiple exceptions as parameters as shown below
+
+try(){} catch(AE | AIOBE  e){}
+
+If we have same logic for executing diff exceptions we must combine catching those exception using the single catch block
+
+
+Rules:: We must use the | operator// We must use only one parameter name.. Exception classes must be only sibilings cannot have parent and child Relationships..
+
+//catch(NumberFormatException | Exception e){}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+OOPS:(Object Oriented Programming Language)
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Object::  Instance of the class IN pW .. RWT
+
+Why we need to create the object RWO in PW?? In real world we perfom every operatoion for one object.. 
+
+We must develop every program around one object and its data....
+
+Class meant for representing Object's Type and structure...
+
+Basically Object has two things::  Type and instances.. Examp::Consider the Bike Object...The name Bike is type of Object..Pulsar Fz Bullet are instance of the Bike
+
+The Objects type is created by the keyword: Class and instances are created by the keyword new
+
+Bike(C) Pulsar(c) FZ(C)
+
+What is Object ? Object is the real world thing or instance of the class
+
+What is the class? It is user defined datatype/specfication allows us to specify type, properties & operations of the Object...
+
+Class is the blueprint of the Object and allows us to create the multiple objects of the same type....
+
+A class is a logical construct of the Object or design document of the Object that provides the look and feel to the object...
+
+Instance:: Instance is the one physical copy of the memory created from the class to represent the one individual Object physically by storing its values...
+
+A class is the logical construct of the Object and Instance is the Physical reality of the Object...
+
+
+Static Members:: static import, SV , SB , SM , Main Method, SIC
+
+static import: Helps us to access the SV SM and SIC class in other class without using the class name
+
+Static Varaible: Holds the values that are common to all objects and all methods in class.. Only one copy of memory is created..
+
+Static Blocks: Used for executing the somelogic only once at time of class loading and intialize the static varaibles
+
+Static Methods: Developing and executing the logic common to all the objects.. Object is not required for executing static method. 
+
+By the time any class is loaded the memory has been provided & intialised with DV for static varaibles by Class Loader in Linking Phase.. 
+
+intialization for the static varaibles may or may not be done..intialization done only if we have static varaibles declared with assigning some value
+
+static int a=20; or if we taken the static block to execute for assigning values..
+
+public class Test02 {
+	
+	static int a=m1();
+	
+	static int m1() {
+		a=20;
+		
+		return a;
+	}
+
+But by the time child static method execution Parent class varaibles memory provided and also intialiased..... 
+
+Execution order of the static method::
+------------------------------------
+If we dont call the SM it is never executed..If we call SM first Main method executed in the middle of MM Execution SM is executed..
+
+If we call SM in static Block or SV varaiable assignment then the SM is executed then after the Main Method is executed.
+
+In the above case the SM is executed first because the SV/SB intialization logic is executed before the main method...
+
+
+Compiler Adding changes to SMS in .class file:
+---------------------------------------------
+
+1) Compiler moves all the SVS declartions to the class level in the order they defined from the top to bottom..
+2) Compiler moves all the SV assignments and all the SB logics into the single SB inthe order they are defined from top to bottom
+3) Finally SB is placed at end of the Class..(in case there are not SV assignments or SBlocks then Static{} not created at the end of the .class file)
+
+JVM activities w.r.t to SMS
+---------------------------
+
+JVM allocates the memory to all the SV first and then goes to the end of the class and executes the SB, executes the SV intialization & SBlocks logic..
+
+If there is main method inside the class main method is executed.. Example.a{In this case main method is not executed.. only static varaib intialization and SB logics are execute}
+
+
+Are the SV intialization logic executed before main Method? Yes if there assignment done in varaiable declartion or in SBlock..
+
+****Final Point::once the class is loaded the SV and their intialization logics(assignments or SB's) are executed once and they are not repated again..
+
+
+How many times the SM are executed in the class LifeTime?
+
+SV-->1  SB -->1 MM ---> 0 or 1 or multiple times  SM-->0 or Multiple
+
+
+Illegal Forward Refrence Error:
+------------------------------
+
+We will see the illegal forward error only inisde the static & instance blocks when we access the static/nonstatic data before they are declared inside the
+
+static or non static blocks..
+
+class Test{
+
+	{
+		System.out.println(b);	CE:// IllegalForward Refrence error Cannot refrence a filed before it is defined
+		b=20;
+	}
+	
+	static{
+		System.out.println(a);   CE:// IllegalForward Refrence error
+		a=10;
+	
+}
+	static int a;
+	int b=10;
+
+	public void m1(){
+		
+		System.out.println(a);	//cannot find symbol
+		int a;
+}
+
+}
+
+We don't get error when we intialise but we get only when we want to read;
+
+
+
+
+In order to access the non static varaibles we need to create the Object explicitly inside the static method.
+
+As the execution is not common to all objects we cannot access the object values directly inside the static method..We can access only static varaibles..
+
+Static Inner Class: Used for creating the inner Object that is common to all Objects of the Outer class..
+
+A method/operation perfoms modification on the Object data or static data or uses the static/object data..for perfoming the operations on static data we should create static method
+
+
+JVM Flow::
+
+Loading        -------------------------->	Linking ---------------------->		intializing
+
+Class Loader loads the class			Prepare   Verify  Resolve		inside the static Block static varaiables are intialized..	
+
+				SV memory allocated & intiliased with default values	 static block is executed within the currently running thread.		
+
+
+Class Person{
+
+
+	static Address addr=new Address();  // The Object that common to use within all the static & non static methods..stores values that common for 						Objects created from Person class
+	static int count;		   //  The value that is common to use within all the static and non static methods..	
+}
+
+All the Person Objects created from this class will have same address property values...you can change the properties of the address and it gets reflected to all objects created from this class... With help of encapsulation if you want you can stop that..
+
+final Keyword: You cannot modify the value/object in the varaible once it is intialised
+
+static final Address addr=new Address(); But when you create the final varaible you cannot assign the new value/object but only can change the values of existing object.....final keyword and encapsulation makes it for closing. We cannot modify the value/object
+
+
+Why the static method is developed?
+
+Generally we will develop the static method for :: intialising the Static Varaiables.Displaying SV values..Devlop business logic by using the static varaibles...perfoming the mathmatecial calculations like addition subtraction using the method parameters etc...
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+static m1(){}
+		> Two threads can modify the static data at once and leads to Data Inconsistency
+static m2(){}
+
+int m1(){}
+		> Two threads can modify the Object data at once and can lead to data inconsistency
+int m2(){}
+
+class Person{
+
+Address addr;	> Two threads lets say using the two individual Objects.. Addr addr=new Addr(); Person p1=new Person(addr) Person p2=new Person(addr);
+
+void m1(){}	 Even the two Objects are diffrent in this case also it will lead to data inconsistency with Addr Object values..
+void m2(){}	  so where ever addr object is used it should be within the 	synchronized(addr){}
+
+}
+
+static/object data Modification in the class method operations needs to be done in the synchronized fashion always...
+
+or you can use the AtomicClasses for creating the static&nonstatic data of class and JVM takes care of perfoming the operation in Atomic way
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+How the static varaible can be diffrentiated from Local/Parameter varaible if they both have same name..
+
+Does JVM execute the static methods by default like static varaibles? They are executed if they are called explicitly by devloper inside the main method
+
+or in varaible assignment or in the static block...
+
+
+Modularity: Means dividing the big task into the multiple tasks.. In java we can achive the modularity with methods and also with classes..
+
+Advantage:: We can achieve the centralized code change and code reusability
+
+Devloping the modularity at class level.. Defining the Logic into seprate class if it needs to be utilised by multiple classes...
+
+
+Can we execute the class logic without main method?After Java 7 class execution starts only if it has main method, else program execution is terminated
+
+with out executing the static varaibles or static blocks by throwing the error..	main method is not avaialble
+
+Before Java 7 it executes the static varaibles and static blocks and search for the main method and throw the error: CE://NoSuchMethodError
+
+Can we execute the static method at time of class loading? Yes call from the static block
+
+
+Non Static Members:: Stores one copy of memory in every Object instance and executes the logic specific to every to Object with Object specific values
+
+Non Static Varaible (Instance varaible)
+Non Static Block (instance Intializer Block)
+Constructor
+Non Static Method	/Instance Method
+Non Static Inner Class/ member Inner class
+
+
+
+Non Static Varaible: Varaible created inside class outside method block or constructor without static keyword
+
+Just {} created at class level is NonStatic Block..Constructor is kind of method whose name is same as class name and deosn't have any return type..
+
+Both NonStatic Block and constructor are used for the intiliasing the (NSV inside the instance) of Particular Object with user given value.. This logics are 
+executed only once at the time of evry Object creation...
+
+Non Static Block is used for placing the intialisation logic common to all constructors and all objects created from this class.
+
+Constructor is used for placing the specific intialization logics...for devloping the diffrent intialization logics for all the objects created from class..
+
+Non Static Block cannot take the parameter/user values to intialize the Object..
+
+Non Static Inner Class:: A class created inside another class with out nonstatic key word..It is also a non static member of the outerclass..
+
+class Person{
+				
+	Address addr;		If the Address Class Logics needs to be used by the multiple classes we place outside.. If it is just specific
+				only for this Object then we will place the class inside the outer class only
+}
+
+Non Static inner class used representing the inner Object of the outer Object and for creating its instance with the association of the outer class instance
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MethodOverloading Points:
+------------------------
+
+double 					l=	(byte)		10.56F;
+
+Varaibale specifes final type (or)		You have to do conversion manually to saftisfy range of datatype on right side(or)
+
+Literal Specifies the final Type		Compiler will promote to the highest type
+
+
+var v=10;	The left side expr/literal specifies the final type
+
+Automatically the type is converted to the highest range type in the expression...
+
+Integer i=10; Number=10; Object=10; Checks for the int,long,float,long,Integer,Number,Object types while promoting in method overloading concept
+
+public class Test03 {
+	
+	static void m1(Example e) {
+		System.out.println("Example Param");
+	}
+/*	static void m1(Sample e) {
+		System.out.println("Example Param");
+	}*/
+
+class Example{
+	
+}
+
+class Sample extends Example{
+	
+}
+
+Test03.m1(null);if Sample is uncommented When the subtype is matched it will not promote again.. if commented it will map to Example e
+	
+m1(new Example());When exact match is found it will not search for other
+		
+m1(new Sample());if Sample is commented.. Type is automatically promoted to the super Type
+
+
+AutoBoxing:: Converting the primitive values as Object by using the predefined classes is called boxing...The classes those are used for the boxing are called as the
+
+Wrapper classes...
+
+----->int literal can only be converted to Integer Object... long iteral can only be converted to Long Object...
+
+Till Java 1.4  int x=10; Integer i=new Integer(x);
+
+After Java 1.5 Integer i02=x; Integer i02=Integer.valueOf(x); Compiler does the AutoBoxing automatically
+
+
+m1(arg) ---> m1(st)  m1(wideningtype)
+
+from 1.5V--->m1(autoboxingtype) m1(AutoBoxingWidening)
+	
+	---->m1(sametypeVarg)  m1(samtypeWideningVarArg)
+
+	---> m1(ABVArgs)  m1(ABWVArgs)
+
+
+m1(int [] i)  ->  m1(new int[]{10})  m1(new int[]{10,20})  m1(new int[]{10,20,30})
+
+
+From Java 1.5 m1(ABWVArgs) m1(int... x)  m1(10) m1(20) m1(30)
+
+
+Ambigious Error in Method Overloading cases:
+
+Shouldn't take the..SameTypeWidening and AutoBoxing VarArgs Params together in the same class 
+
+public class Test02 {
+	
+	public void m1(Example e1) {
+		System.out.println("Example Param");
+	}
+	public void m1(Object e1) {
+		System.out.println("Object Param");
+	}
+//	public void m1(Test t) {}
+	
+	  public void m1(Sample s1) { 
+		  
+		  System.out.println("Sample Param"); 
+		  
+	  }
+	
+m1(null); 
+
+If there are multiple params with Parent child relationship it will match to childParams first..If you uncomment the Test Param we will get Ambiguous Error
+
+public class Test05 {
+
+	static void m1(Object o) {
+		System.out.println("Object Param");
+	}
+
+	static void m1(I i) {
+		System.out.println("I Param");
+	}
+}	
+
+With Interface Ccompiler will inherit the Object Class.. So the Object and I param has parent and Child relationship..
+
+
+Method Overriding Points:
+-------------------------
+
+Compiler is always responsible for the linking of the methods for the invoked method calls inside the java code..Compiler always links based on the refrence
+
+type..It will search for the methods in refrence type and its super classes..Compiler checks for the arg types also while linking the methods...
+
+COmpiler activity::
+
+Consider the m1 is of static method defined in A class..m2() is the non static method defined the super type of A.
+
+A a=new B(); a.m1();  Compiler replaces with A.m1();
+
+a.m2();Compilers search & links to the method that is present in the super class of A.
+
+Runnable r=new X();
+r.xxx();   		Consider xxx is static method.. Then compiler searches for the method in the super type..if found then Runnable.xxx();
+
+
+JVM is responsible to execute the linked methods calls based on method type..Static method will execute from the refrence type and non static methods
+
+will get executed from the current Object type....
+
+
+class Sample{
+	
+	 void m5() {
+		System.out.println("Sample m5");
+	}
+	 static void m6() {
+		 System.out.println("Sample m6");
+	 }
+	void m4() {
+			System.out.println("A m4");
+		}
+}
+
+ class A extends Sample{
+	
+	private void m1() {
+		System.out.println("A m1");
+	}
+	
+	static void m3() {
+		System.out.println("A m3");
+	}
+	final void m4() {
+		System.out.println("A m4");
+	}
+	
+	void m5() {
+		System.out.println("A m5");
+	}
+	
+	void m2() {
+		System.out.println("A m2");
+		m1();
+		m3();
+		m4();
+		this.m5();
+		m6();
+	}
+}
+
+public class B extends A{
+	
+	private void m1() {
+		System.out.println("B m1");
+		
+	}
+	static void m3() {
+		System.out.println("A m3");
+	}
+	/*
+	 * void m5() { System.out.println("B m5"); }
+	 */
+	 static void m6() {
+		 System.out.println("B m6");
+	 }
+	public static void main(String[] args) {
+		
+		B b=new B();
+		b.m1();
+		b.m2();
+	}
+	
+}
+
+
+Understand the flow of execution for the above code...
+
+We cannot ovveride the private methods even we create them in the subclass they are not called as the Overriding methods..
+
+Private Static final overloaded methods ---> Will execute doesn't consider the runtime Object...It only considers the compiletime method resolutions and execute the same methods..
+
+Non Private Non Static Non final methods always execute from the current Object class even they are called using any refrence varaiable
+
+*****In Eclipse Intellisense gives the Type & to which method it is linking during the compile time... methodname space..returntype Type
+
+
+Diffrentiating the SM and NSM Hidden and overriden methods with from hiding and overriding method?
+
+->subclass/ref/superclass ref/this ref the NSM always executes from the current object class
+
+-->SM Hidden method can diff 1)superclass ref varaible 2)Super class Name 3)by using the super kw(in nonstatic methods)
+
+-->SV & NSV are also called Hiding---> They can also be diffrentiated using the 1)superclass ref varaible 2)Super class Name 3)by using the super kw(in nonstatic methods.. for the static varaibles)
+
+
+If you override the parent class private method in subclass then you are allowed but it is considered as the subclass own method...
+
+You can change the return types accessibility modifiers and execution level modifiers also...that means compiler doesn't check for the return type AL & EL Modifiers
+
+and exceptions list in the subclass methods.....
+
+
+Rules of Overriding:
+--------------------
+
+Rule with Return type:: We should have same return type that is der in Parent class..W.R.T to Primitive typess.. With refrenced datatypes we are allowed to change 
+
+the return type.. The covariants are allowed..
+
+We cannot override the static method as nOn static and non static methods as Static...
+
+We cannot ovveride the final Parent class method in subclass.. but we can ovveride an non final method in subclass as the final method...
+
+We can override the abstract method as non-abstract/concrete method in Child class...And non-abstract method as the Abstract method in child class.. This way
+
+we are stpoing the further subclasses to use the Parent logic and asking them to implement their own logic
+
+
+We can override the native method as non-native and also we can override the native with native or non-native method as the native method..Anything is valid...
+
+
+We can override the synch method as non-synch and also we can override the synch with synch or non-synch method as the native method..Anything is valid
+
+We can override the strictfp method as non-strictfp and also we can override the strictfp with strictfp or non-strictfp method as the strictfp method..
+
+Anything is valid
+
+
+
+Covariant Return Type::
+----------------------
+
+
+The type is decided when method is called based on the return type of the method..
+
+long m1(){return 'C';} When we call method m1 we should assign to only long type varaible.. We cannot assign to the shorter datatype  
+
+
+public class P {
+
+}
+
+public class Q extends P{
+	
+	public static void main(String[] args) {
+
+	P p=null;
+//	Q q=p; It will throw compile time error.. To make it possible we need to type cast Q q=(Q)p;
+
+	Q q1=null;
+	P p1=q;    But this assignment is possible directly
+	
+}
+
+
+We do casting only to refer the Object to the subtype refrence varaibles.....
+
+
+P--->Q---->R		Lets say P Q R are having inheritance relationship..
+
+P p=new R();	upcasting
+
+Q q=(Q)p;	Possible Downcasting
+
+R r=(R)p;   	Possible DownCasting
+
+
+
+There is no use of the using the Covaraiant return types in the Project..As we will be devloping only lossely coupled Application We should always return
+
+the Parent types and shouldn't return the SubTypes...
+
+
+Rules in working with CVR:: overriding the method Return type must be only subclass of the Overriden method Return Type..It must not be the super class or 
+
+the Sibiling..CVR concept not applicable for the Primitive Datatypes...
+
+
+Abstraction:
+-----------
+
+Abstraction is the process of hiding the implementation details of Object operation method from the user class programmer and providing only the necessary
+
+information to invoke the method is called as the abstraction...
+
+How we can devlop abstraction? By decalring the abstract method inside abstract class/interface	..we are hiding implementation details by providing the
+
+subclass where the Object operation is defined..Then user class programmer will invoke the abstract method by using the super class ref varaible by storing
+
+the subclass Object from which this method logic need to be executed...
+
+Advantages::
+
+We can hide the bigger picture of the Object because the implementation details are hidden..We will get security to the Object data bcz data is accessed 
+only through methods..We can force the subclass programmers to implement operations with same method signature..User class will get the Loose coupiling and
+
+Runtime polymorhism because the abstract class & interface cannot be instantiated so coming classes will be subclass Objects and in these Objects super 
+class methods are 100% implemented..
+
+
+Can we declare the Class as abstract even though all methods are implemented? 
+
+Yes.. Abstract keyword for class doesn't allow to create the Object for class...We are not allowing the user class programmers to use the logics of this class..
+
+
+Abstract Class: Creates or represent the main type/subtype  of the Object by declaring some operations and by implementing the some other operations..
+
+Concrete Class: It is blueprint of the Object, it is used for the representing the either the maintype or subtype of the Object by implementing all the operations of the Object and it allows further subtypes..
+
+final Class:A concrete class that is declared as the final is called as the final class..When you don't want to allow the further subtypes for this object
+then we will create/represent this Object as the final type...
+
+
+What is an Interface?
+
+-Like class Interface is also refrencedDataype/UserDefined Data Type.. It creates or represent the main type of the Object by declaring the all the operations of the Object and forcing the subclass programers to implement them by supporting the multiple Inheritances..
+
+-It is also a contract document between the user class or the implementation class programmer.. It tells the implementation class programmer what to implement but not how to implement..it tells the user class programmer what to call to access operations of the Object...
+
+Cohesion: The process of creating all fields and methods of an Object in one class by seprating them from other object classes is called Cohesion..
+
+Coupling: The process of connecting/integrating one object with another Object for accessing one object opertaions from the other Object operations is called as the coupling..The degree of dependency between the two Objects in accessing their operations comes under TC LC..
+
+In user class if we want to change from one subtype to other subtype, if wanted to change the code then recompile user class then we call user class as TC
+
+The dependency between the user and subtype is very low then we call it as the Lossely Coupled Objects..
+
+** User class sholdn't be recompiled for the reasons of changing from one subtype to another subtype..
+ 
+In the user class we shouldn't declare the field or method parameter or return type with the subtype...
+
+***For achieving the reusable,dynamically extensible and Highly scalable applications we must develop :: High cohesion, Strongly encapsulated,Loosely coupled, Runtime Polymorphic Subtypes and user type components..
+
+
+List L				=			new ArrayList();
+
+Field/MethodParam/Return Type should be the Interface refrence Type so it can store the diffrent subtypes...Hence we achive Loose Coupling..
+
+
+
+Types of inheritance 
+--------------------
+
+Topic notes need to be prepared please look into the C:\Users\91970\Videos\Java\07 OOPS\06 Types of Inheritance
+
+and prepare notes..
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Multi Threading
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Executing the multiple tasks at once is called MultiTasking
+
+There are two kinds of multi Taskings:  Process Based 	Thread Based
+
+Process Based:: Executing multiple Tasks as a separate independent process simulataneously.. Process 1:: Writing the java programs Process 2:: Listening Music  3:: Downloading from Net.. There is no relationships between the each Task.. This multi Tasking is developed at the OS level
+
+Thread Based:: Executing the multiple tasks concurrently where each task is a independent part of the single process is called Thread based multi tasking
+
+There is no relationships between the tasks executed by the each Thread...This multitasking is developed at the programmatic level
+
+In general process based multi tasking is called just multi tasking while Thread based multi tasking is called as the multiThreading
+
+Multitasking is Heavy weight switching between the contexts is slows because each process is stored in separte address..
+
+Multi Threading is light weight switching between the contexts is fast because all threads are stored in the same address..
+
+
+If we consider the JVm as process when JVM is started by default in its java stacks area two threads are created with names:: main and GC
+
+main Thread : to execute the java methods GC:: to destroy the unrefrenced Objects..
+
+Sequential Execution VS Concurrent Execution:: Means the single thread execution at a time takes more time to complete all methods..at once only one thread is executing
+
+Whereas concurrent execution takes the less time to complete all methods execution... At once multiple threads executing simualtenously
+
+
+Meaning of the concurrent Execution:
+------------------------------------
+
+Executing the multiple tasks in start supesend resume end fashion is called concurrent execution..JVM allows application to have multiple threads of 
+execution concurrently. When the programs has mulitiple threads then the CPU can switch between the two threads to execute them at the same time..
+
+Note:: At a single instance of time JVM cannot execute the multiple tasks at a time
+
+Definition of Thread: Thread is the independent seqential flow of the execution..It is a stack created inside the Java stacks area..It executes the methods
+
+in the sequence one after the one...
+
+Definition of MultiThreading:: It is the process of creating the multiple threads in the javastacks area for executing the multiple tasks concurrently to 
+
+finish their execution in short time ...
+
+When the multi Threading is suitable:: To complete the independent multiple tasks execution in short time we develop the multiThreading.. In multi Threading
+
+based programming the CPU is Utilized Effectively...
+
+
+How to execute our method logic in the userdefined Thread?
+
+run() --> It is implemented as Empty implementation in the Thread Class..We should override in subclass..and create the ThreadClass Object and call start().
+
+Start method internally creates the Thread of execution in the java stacks area and calls run method in ThreadClass. If it is overriden it is executed from 
+the subclass and loads the our logic in run() ovveriden method to execute in the created Thread
+
+If the run method is not ovveriden the logic in Thread class run method calls the runnable(target) Object run()..and it further loads the our logic to execute in the created Thread...
+
+Thread CLass Constructors:: Thread() Thread(String name) Thread(Runnable target) Thread(Runnable target,String name)
+
+Can we call the ThreadClass start method twice? The thread that calls the start method ---Execution is terminated abnormally RE: IllegalThreadStateException
+
+There is no problem for the started Threads it will execute normally..
+
+
+How to create the multiple user defined Threads in the Java Stacks Area?
+
+1)Create the multiple Thread Subclass Objects and call the start method....Calls the same run() logic by diffrent Threads concurrently with diffrent Obj state
+
+2) Creates the multiple Subclasses with diffrent run() logics and create Objects of subclasses and call the start method..Here Diffrent run() logics are executed concurrenlty 
+
+Q) Can we override the start method in the custom Thread? Yes If we want do the some custom validations and calculation to update the current custome Thread Object state and call the super class start method..Then only the custom thread will be created and logic will be loaded to the custom Thread...
+
+
+Once the Thread is created it will be avaialble in any one of the below states?
+
+New , Ready-to-Run , Running , NonRunnable States , Dead
+													on Notification				
+Non Runnable States:: sleeping, Blocked for the joined Thread Completion, Waiting for the Notification--------------->Blocked for the Lock Acquisation
+
+Blocked for the IO..Once after the completion of the Non Runnable states the Thread enters into the Ready-to-Run State and will be waiting for chance from
+
+the ThreadSchedualr
+
+Ready to Run:: Is also called as the Runnable state or Queue..A thread starts its life in the Ready-to-Run state by calling the start method and waits for
+
+its turn..The ThreadSchedular decides the which Thread to run and for how long..
+
+Waiting for the Notification: The threads awaits for the notification from another Thread..
+
+Blocked for the Lock Acquistion::The threads awaits to acquire the lock of Object from another Thread...
+
+
+Threads Execution Procedure:: Schedulars in JVm implement usally Employ one of the following strategies..
+
+Premptive Scheduling::If the Thread has higher priority than the current running Thread, then current Running Thread can be preempted(moved to Ready-to-Run
+
+state) to let the higher priority Thread to complete its execution
+
+TimeSliced or Round Robin:: A running thread is allowed to execute for the fixed length of the time after which it moves into the Ready-to-Run state
+
+
+Thread Priority: Every Thread in the JVM will be assigned with some Priority..Priority ranges 1-10
+
+Every Thread by default will be assigned with some Priority and ThreadSchedular uses the Prioties of Thread to schedule the Threads..Thread Schedular 
+favours giving the High CPU time to the Thread with highest Priority which is in the Ready to Run state..
+
+
+Retriving the Current Thread Object:
+-----------------------------------
+
+Method is used the retrive the refrence of the currently executing Thread Object 
+
+public static native Thread currentThread();
+
+Method is useful to perfom some operations on a thread Object when its refrence is not stored in our logic
+
+Every Thread is by default part of one ThreadGroup..in thread class we have method public final ThreadGroup getThreadGroup() to retrive the current Thread 
+
+ThreadGroup..
+
+Types of Threads::
+-----------------
+
+Non Deamon Thread: A thread that is executing the main logic of the project is called as the Non Deamon Threads
+
+Daemon Thread(Service Thread): A thread that is executing in the background to provide the services to the Non Daemon Threads is called as the Daemon Threads..Its execution is terminated if all the non daemon Threads execution is completed..
+
+Main Thread is the NonDaemon thread.. And every userdefined thread that is created is NonDameon by default as deamon prop it is inherited from the parent Thread.
+
+To create the userdefined Thread as the Daemon setDaemon() should call on Thread Object .. isDaemon()
+
+You cannot call the setDaemon() once the Thread is started th.start..Thread created as the Non-Dameon cannot be converted to Daemon..
+
+RE: IllegalThreadStateException
+
+
+Controlling the Threads Execution:
+----------------------------------
+
+Pausing the Thread execution for the given Period of time using the sleep Method..
+
+Pausing the Thread Execution until the other Thread Execution is completed using the join method...
+
+Executing the Threads sequentially if both are using the same object. and perfoming the operations on the same Object
+--------------------------------------------------------------------------------------------------------------------------
+
+Difference between the no-arg join() and arg join() methods? No arg join method pauses the current Thread until the completion of the other Thread while 
+
+if the other is blocked then this Thread is also blocked forever...parameterised join() doesn't wait for completion of the other Thread..it resumes exec aft
+
+
+Diffrence between the sleep(ms) and join(ms)?
+
+sleep() Pauses the current Thread Execution for the given amnt of time completely independent of the other Threads execution.. 
+
+join() Pauses the current Thread dependent on other Threads execution..It pauses current Thread for the given amnt of time or if the other Thread completed
+
+before the given time, current thread is resumed..
+
+
+Synchronization:
+----------------
+
+The process of allowing the multiple threads to modify data the Object data in the sequence is called as Synchronization..	
+
+Synchronization in java is implemented using the lock concept. If the one Thread has lock of an Object then other Thread will not be allowed to modify the
+
+Object data until the first thread relases the lock.. Lock will be released if the modifying operation is completed by first Thread. In that way we will get
+
+the sequential flow of execution which is bad programming Practisce.. If the lock of the Object is never relased then other Thread goes into the infinite
+
+waiting state. Which is also a bad program. It should have flexibility to get lock if its free else wait for the particular amount of time
+
+
+
+We can implement the synchronization in two ways in Java:: synchronized method and synchronized block
+
+Same Object is accessed by the two Threads.. One is accessing the synchronized method and other is accessing the non synchronized method on the same 
+Object.. Then the flow is concurrent...For NonSynch() methods lock is not required even though the Object used is same by two threads...
+
+Only synchronized portions of the code inside the Object(considering all non static methods) will be executed sequential rest all code will be executed in the Concurrent Fashiion.
+
+Using the synchronized method we can lock only the current object.. but using the synchronized block we can lock current object or argument object
+
+What is difference between the SM and NSM synchronized?
+
+if we declare the NSM as the synchronized then the current object is locked, so that in this method NSVs of this object is are modified sequentially by multiple threads..
+
+if we declare the SM as the synchronized then its class java.lang.Class Object is locked, so that in this Method SV's are modified sequentially by multiple Threads...
+
+Focus::using synchronized block in static method we get lock of only arg Object.. becuase this keyword is not valid in static method
+
+Need of Synchronization: To avoid the data inconsistency problems if the same object is being used by multiple Threads..if the different object is used by
+the multiple Threads then no need to implement the synchronization
+
+Example: Servlet is the singleton Object.. Within the servlet you shouldn't take the instance varaiables until required..Blogic Model Logic all classes are
+
+sharable Objects while you are developing the Advanced Java Applications.. It is best you take most of the local varaibles in them per each request
+
+If the instance varaibles are final then there is no probelm..We can declare them as non static final varaible.. They are meant only for the reading not meant for modifying in the NonStatic methods..
+
+Local varaibles are not sharable across the multiple Threads..so a thread cannot change other Threads local varaible values so we get the desired results..
+Most of the cases it is recommended to uses the local varaibles in the object that is sharable across multiple Threads.....
+
+
+How to get the ThreadSafety for the Sharable Object that accessed across multiple threads ? It is achived if Non Modifiable static/Non static varaibles if declared as final..If there are any modifiable varaibles are there then they must be modified under the lock/synchronized concept...
+
+Inter Thread Communication: The process of executing the two Threads on the same Object with alternate execution
+
+Data is modified by one thread and Data is used by other thread...
+
+If the same Thread gets chance again or lock is received unexpectedly to Thread with out other Thread reading/modifying operation is completed? Then we should have the condition as precheck before proceeding with this current Thread..If the condition  is not met then current Thread should wait().. Wait internally relases the lock of the Object..
+
+Condition used in Producer thread:: If the data is not consumed by the consumer thread then wait
+									Here: ProducerTh & consumerTh both sharing the same Object....
+Condition used in Consumer thread:: If the data is not produced by the Producer thread then wait
+
+***Focus: Make sure while you are implementing the Synchronization concept then both Threads are using the same Object...
+
+**The process of executing the Threads in sequence in loop with communication of one Object is called Inter Thread communication..We develop this concept when the two 
+
+different dependent tasks want to be executed continuously in sequnece by two diffrent Threads...
+
+
+wait(): The functionality of the wait() method is to block the currently executing Thread by releasing the lock of the Object.. so other waiting Threads can use the lock of the Object.. The wait method releases the lock of the object immediately
+
+Notify():The functionality of the notify() is notifying to the waiting Thrread that lock is available on Object..Then waiting Thread moved from waiting state to 
+
+LockAcquistion state..Once the lock is Obtained then it moved to Ready to Run state waiting for its turn..The Notify method doesn't releases the lock of the object immediately.. its a just wakeup call for the other blocked Threads...
+
+wait(100)-->Blocks Thread execution until 100ms or other Thread calling the notify() whichever is coming first that Thread will resume
+
+What happens if we don't call the notify notifyAll methods on waiting threads.?
+
+What is the rule while calling these three methods?? This three methods allowed only inside the synchronized method or synchronized blocks...
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+01:(Java Inner Classes)
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+A final/concrete/abstractclass interface enum annotation that is defined inside in another final/concrete/abstractclass interface enum annotation is called Innerclass
+
+A inner class is used for creating the inner object of the outer Object..A inner class creates the has-relationship Objects of the outer  Object...
+
+
+If you want to reuse the Object in multiple other objects, we must not use the inner class..we must create this object using an outer class and must access and reuse 
+
+the outer class by using the instance varaiables.. If you want to use this object only in one Object then it is recommended to create this object using the inner class
+
+It is way of logically grouping the classes that are used in only one place...It increases the encapsulation...it can lead to the more readable and mainatable code....
+
+
+What are the advanatges of the inner class compared to the Outer class with instance varaible?
+
+The outer classes created private members we cannot access in the other classes.. we should use the getter and setter methods....
+
+
+Using the inner classes reduces the lot of wiring code that we write...Two way communication can be made possible with the help of the inner classes.
+
+
+
+Types of Inner classes:  1) Static Nested class 2) Non-Static Nested class  3) Local Inner class 4) Anonymous Inner class
+
+
+1) Static Nested class:: Meant for creating the inner Object of the outer Object and want to instantiate it without using the outer class object.....
+	
+	Means this class Object we can create inside the outer class static methods and static blocks also...
+	
+	It can use only the static scope of outer class by default. You need to create the object of outer class to use non-static scope of outer class
+	
+
+2) Non Static Nested class:: Meant for creating the inner Object of the outer Object and want to instantiate it  using the outer class object..
+
+	Means this class Object we cannot create inside the outer class static methods and static blocks also...only inside the non-static memebers...
+	
+	It can use the non static & static scope of the outer class.
+
+
+3) Local inner class: Used for creating the inner Object of the operation.. if it is defined inside the static method.. We are allowed to use only the 		    		      static scope of the outer class & scope of method where it is defined. If it is defined inside the non-static block of outer class we 			      can use the both the static and non static scope of the outer class
+
+4) AIC: It is meant for creating the subtype of the class or an interface... It is also meant for defining the subclass by making use of the scope of the 	method/block/constructor wherever it is define..
+
+
+Local innner class is allowed to define inside any static/instance blocks or inside the constructor or static or Non staticMethods..
+
+AIC innner class is allowed to define inside any static/instance blocks or inside the constructor or static or Non staticMethods..or as the Instance/static varaiable
+
+intialisation statements
+
+
+static block scope: We can acees the static varaibles/Methods of the class.. Local varaibles of the block..To acess the NSV/M create the Object
+constructor scope: We can acees the Non-static/static varaibles&Methods of the class.Local varaibles of constructor..
+{}: We can acees the Non-static/static varaibles&Methods of the class.Local varaibles of constructor..
+static method: We can acees the static varaibles of the class.. Local varaibles of the block..To acess the NSV/M create the Object
+NonStatic Method:We can access the Non-static/static varaible&Methods of the outer class
+static inner Class: We can acees the static varaibles/Methods of the outer class directly anywhere inside the class {SB,C,IIB,SM,NSM}..To access the NSV/M create the Object of outer class
+Non-Static Class:We can acees the static/Nonstatic varaibles/Methods of the outer class directly..Anywhere inside the class{SB,C,IIB,SM,NSM}
+
+
+Fuse lu Egripoye Questions:
+---------------------------
+
+public class Test01 {
+	
+	static {
+		class A{}
+		new A() { };
+	}
+	
+	{
+		class A{}
+		new A() { };
+	}
+	
+	public Test01() {
+		class A{}	//You cannot use the class/logics of this inner class anywhere.. It should be used inside this method
+					
+		new A() { };	// block or constructor.. Its scope is restricted for this block.. we cannot call from outside.
+	
+	}
+	static void m1() {
+		
+		class A{}
+		new A() { };
+	}
+	
+	void m2() {
+		class A{}
+		new A() { };
+	}
+		
+	public static void main(String[] args) {
+		class A{}
+		
+		new A() { };	//	This is Anonymous inner class for the Local Inner class inner class defined inside the method
+		
+		
+	}
+
+}
+
+
+static Nested Class Points:
+---------------------------
+
+We create the object of static nested class independent of the outer Object...
+
+Look for allowed modifiers for the static nested class:: final abstract strictfp private protected default
+
+We are allowed to take the both static and non static members inside the class...Even main method is also allowed..
+
+The inner class can be even executed from the command propmt.. The outer class is not loaded unless any of the outer class member is being utilized inside the static nested class members.. the same thing is valid in the vice versa..
+
+How to access the static inner class from the Outside the outer class?Test02.A a=new Test02.A();
+
+From the Outer class we can access directly using the :: A a=new A();
+
+
+*****Refer the Inner class notes...in the HK screenshots folder.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+01:(Java Introduction)
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Environment Variables:: Two ways to set environment variables
+
+Path ClassPath ...
+
+When the java .class file is not found we get NoClassDefFoundError(<1.7) Error:Couldn't find or load the main class A  ClassNotFoundException is thrown in current versions
+
+Set Path=%Path%;
+
+Set ClassPath=%ClassPath%;
+
+UnSupportedClassversionError -->If you run on the lower JRE 
+
+Java Supports 8 programming elements: module package class variable block constructor method inner class
+
+
+How to install Java Software on the Linux Environment?? Set the Path and ClassPath...
+
+
+Interface:: It is fully unimplemented class used to define the Object Operations.. Class used for the implementing the Object Operations....
+
+
+Compliler generates the .class file name with Class Name and not with Java File name...
+
+
+Compliler Activity::For the all classes defined in the file name separted .class file(BYte Code) is created  
+
+JVM Activity:: searchs for the .class file if it is found it loads the byte code into the jvm and starts class logic execution by calling the main method...
+
+
+If the class doesn't contain the main method program is compiled fine but cannot be executed.. JVm throws the runtime error "NoSuchMethodError"
+
+
+
+Errors thrown by the JVM at the time of execution are called as the runtime errors or exceptions ....
+
+
+In one java file how many public classes we can define? One and multiple non public classes
+
+
+
+Does JVM execute the user defined methods?? No we need to call from main method..
+
+
+JVM provides the memory for the variables and methods by using the keyword :: static new 
+
+
+Define the main method:: it is the mediator between the java developer and JVm to inform which methods to be exeucted when and in which order....
+
+
+In a class if we don't have main method how we should exeucte the user defined methods of that class?? 
+
+
+In Projet development we should choose the names for the programming elements very carefully, the name should be meaningful and releveant to the present context...
+
+It improves the readability and understandability 
+ 
+
+What is the JIT Compliler?  JIT Compiler stands for the just in time compiler , it is the part of JVM which increases the speed of the execution of java program.....
+
+
+How Java achived Platform Independent nature??
+https://medium.com/javarevisited/java-platform-independency-2dddd92a53f8
+
+What is difference between the JVM JRE JIT?  Environments in Project Development??
+
+
+What to learn 2021?  Docker Container Cloud , Git , Junit & Mockito , JDK 9 to 13 , Devops Jenkins , Spring Security5.0 (OAuth), Spring Boot 2 and microservices
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+Compiler :: Will not generate byte codes for the comments.. it ignores that lines...
+
+class static{}  Keywords cannot be used as user defined indentifer..because they are available through out the JVM directly...
+
+Prefedined class name can be used as the user defined identifer .. Because they are available in diffrent package...
+
+class String{	public static void main(String[] args){  } }  CE://
+
+
+Keywords: Bascially keywords are used to communicate with JVM and compiler about the operations that we are perfoming in the Java Applications...
+
+50 Key words:: 
+
+Not keywords:: referenced Literals: null and boolean literals true false ...All keywords are highlighted with blue color in the eclipse....
+
+
+class interface or enum is expected?  illegal start of type ?? and illegal start of expression??  Compile time error
+
+class interface or enum is expected:
+
+The root cause of the “class, interface, or enum expected” error is typically a misplaced curly brace “}”. This can be an extra curly brace after the class. It could also be a method accidentally written outside the class
+
+illegal start of expression::
+
+Missing Curly Braces for Methods: Access Modifier Inside Method:: Nested Methods::  char or String Without Quotes
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+									DataTypes:			
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+To read the values and store in the Programming memory.. verify the values .. values are correct and values are wrong...
+
+The keyword used for creating the variable memory or the object memory to store the single value or multiple values in Program is called Datatype....
+
+Datatype keyword provides the below informations?
+
+What type of memory? what is the size of memory ? what types of values can be stored? what range of values can be stored? what operators are allowed to apply?
+
+what typeof result will be returned from exp when used it in the exp?
+
+Java Datypes:: PDT ----->Numeric(Integral-->Integer(byte short int long) character(char))  floating Point (float double) Non Numeric(boolean)
+
+RDT ::  array class interface enum annotation ---.For storing the multiple values as one group by using the single name..
+
+CE:// Possible Lossy Conversion   cannot find the symbol
+
+What does JVM do when it encounter the datatype in the program??
+
+It creates the memory location with based on Datatype size and names the ML with the given name , stores the assigned value in the meomory location...
+The named memory location is called variable...
+
+
+if we want to store multiple values then we need to create the 100 varaibles and the memory locations created at 100 diffrent places in the JVM..retriving is tough
+
+Refrenced Datatypes are given to store the multiple values in continuous memory locations to retrive the data quickly and pass all the values in single network call
+
+Array: stores the fixed number of multiple values of same type in continuous memory locations...
+
+byte b[]={1...100}..b is now refrenced varaible.. The base address will be stored in b..in the reference varaibles address will be stored...
+
+Bascially class is the keyword sun given to create the new datatypes to store any type and any no:of values in the continuous memory locations...
+
+DataTypesDemo dd=new DataTypesDemo(); The new is the keyword provides the continuous memory locations for the varaibles created in the class.. 
+
+The base address is stored in the dd...
+
+What is the size of RDT? RDT datatype allocates the memory location of 4 bytes(refrence is of integer type..its size should be 4 bytes)
+
+Default values of PDT ??   char-->onespace  boolen-->false RDT-->null
+
+Default values are only applicable for the class level varaible..Class level varaibles are intialized by JVM automatically with the Default values...if no value provided
+
+Rule:: We must intialize the local variables before accessing them...
+
+Literals:: Integeral (All integer type literals are of int type...if we want to represent as the long suffix with L)..We don't have byte short type literals
+ 
+Floating Literals:(All floating point literals are of double type..if we want to represent as the float suffix with F)..double literals can also be suffixed with D..
+
+Charcater Literal String Literal Boolean Literal
+
+
+Conversion of DataType::	
+------------------------
+
+Primitive Type conversions::  
+
+Implicit conversions: int a=10;  long l=a;		Widening		If wanted to stored the values in the higher size memory location
+
+Explicit type conversions:  int i=10;  long l=(int)i;	int i=150; byte b=(int)i; Narrowing    If wanted to stored the values in the lower size memory location
+
+
+While conversions:: ERRORS:
+
+int i=150;
+byte b=i;
+
+CE://incompatible types... possible lossy conversions from int to byte... Without type conversion
+
+float f=10f;
+int i1=f;
+
+CE://incompatible types... possible lossy conversions from float to int... Without type conversion
+
+ 
+int a=10; boolean b=a; // incompatible types. int cannot be converted to boolean Expect boolean all the primitive datatypes are compatible..
+
+
+char ch='a';
+byte b=(byte)ch;	
+System.out.println(b);
+
+
+int i=10; byte b=i;
+
+byte b2=(byte)i;	byte b3=(int)i; CE://possible lossy conversion from int to byte  	byte b4=(boolean)i; CE://incompatible types:int cannot be converted to boolean
+
+
+char and number types are compatible types::
+-----------------------------------------------
+
+You can assign the char literal to the number variable.. And also int literal to char varaible
+
+Java supports unicode character set.. It is super  set of Ascii charcter set...
+
+The number you are assiging to char varaible must be in the range of 0 to 65535..
+
+Char varaiable can store the character or unicode of the character number...
+
+otherwise CE::
+
+char ch='a';	char ch1=97;	System.out.println(ch1);		In these case's conversion done by JVM... char ch1=(char)97;
+int i1=98;	int i2='a';	System.out.println(i2);			byte b='a'; short s='a'; char literal ASCII should be in range of byte or short
+float f='a';   	double d='a';
+
+char ch='A';
+byte b=ch;		//Possible lossy conversion from char to byte
+byte b=(byte)ch;
+
+byte b=100;
+char ch=b;	//possible lossy conversion from byte to char..shorter range to higher range..it is also not possible..because bytes range has -ve no's
+char ch=(char)b;
+
+
+char ch=(char)66000;
+System.out.println(ch);
+
+if the assigned numbers corresponding character is not supported by your computer JVM internally stores ?..By Default Windows OS supports only ASCII charset
+
+How many ways you can intialise varaible:int i=10; int j=i; expression and using non void method
+	
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+									Operators			
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Using datatypes we have Created varaiables and objects for storing single values and multiple values..
+
+After storing the values we need to perfom the validations and calculations on values using the diffrent operators..
+
+Operator : symbol or word meant for perfoming the assignment calculation and validations operations is called operator..
+
+Operand: The value that has passed as input to the operator for perfoming assignment calculation and validations operations is called operand
+
+Expression: A combination of operator and operand is called as expression
+
+
+What are diffrent things we can use as operand: Literal, variable ,non void method call  & An expression
+
+10+20 a1+a2 m1+m2()  (10+c)*m1()/(20-30)
+
+Types of operators::unary: binary ternary
+
+Validation operators , calculation operators , & Storing Assignment operations
+
+Operators precedence and operators Associtiviy::
+
+If there are multiple opeartors used in the expresssion which operators is exeucted first which next is decided by operator precedence table
+
+
+Assignment =
+Arithmetic Operator: + - * / %
+Increment Decrement ++ --
+Relational : > < >= <= instanceof
+Equality == !=
+Logical : && || !
+Bitwise:  & | ^ ~
+Shift Operators: << >> >>>
+Ternary Operators: ? :
+Compound Assignment:  += -= *= /= %= &= |= ^= <<= >>= >>>=
+Object creation Operator : new
+Lambda Operator: ->
+
+postfix prefix unary:: expr++ expr-- ++expr --expr +expr -expr ~ ! new
+multiplicative: * / %
+additive : + -
+shift : >> << >>>
+relational:: > < >= <= instanceof 
+equality:: == !=
+Bitwise And:  &
+Bitwise exclusive OR:  ^
+Bitwise inclusive OR: |
+Logical And: && 
+Logical OR: ||
+ternary ? :
+Lambda ->
+assignment:: += -= *= /= %= &= |= ^= <<= >>= >>>=
+
+
+compiler Algoritham in expression evaluation w.r.t to Literals and variables::
+----------------------------------------------------------------------------
+
+Constant Expression:if we use  only literals or only final variables or both is called as constant expression..
+
+Compiler directly uses the values and generates the final result value and checks is this value is in the range of dest var or not..
+
+if yes compiled fine.. Else CE: Possible lossy conversion error...									(values is result)
+
+
+Varaible expression: if we use atleast one varaible or non void method calls in the expression we call it as variable expression..
+
+Compiler uses the variable types and generates the varaible type as the result and verifies this type range in the range of dest variable
+
+if yes compiled fine..if no Possible Lossy conversion error..										(type is result)
+
+
+Identify first it is constant or varaible expression or not?? and then solve
+
+byte b=(int)10L;	//value
+
+
+long l1=10L;
+byte b=(int)l1;		//type	Possible lossy conversion error cannot convert int to byte
+
+
+byte b19=10;
+byte b20=b19+20;	//int	Possible lossy conversion error cannot convert int to byte
+
+final byte b19=10;
+byte b20=b19+20;	//value
+
+
+final byte b19=10;
+final byte b20=20;	
+byte b21=b19+b20;	//value
+
+final byte b19;
+final byte b20;
+
+b19=10;b20=10;
+
+byte 30=b19+b20;	//int  Possible lossy conversion error cannot convert int to byte
+
+
+
+Arithmetic expression: Cannot use the boolean type operand..only numeric datatypes including the char 
+
+result type::always numeric based on the datatypes used in the calculation we always we will get the highest range datatype as result	
+
+byte + byte ==>int   short + short = int char +char =int;
+
+int + long=long  int+long+float+double=double
+
+
+
+Automatic type Promotion in expression: to the Highest range data type used in the expression..
+
+Type promotion::Converting the type to its highest range
+
+When a value or variable type is promoted:: when we use combination datatypes then type is used..
+
+
+
++::It is overloaded operator
+
+1) Addition Operation:: If the both operands are numeric or char
+
+2)Concatenation Operator
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Variabeles:: It is named memory location used for storing the value or Object refe temporarily during the program execution..
+
+Varaible is created using the PDT or RDT..based on the type of the values that you want to store..
+
+PDT varname=value  Primtive Varaibles    RDT varname=new Object(); refrenced variables
+
+When an object is created the memory is allocated for all the varaibles...For primitive varaibles predefined size & for the refrenced variable size 4 bytes is allocated...
+
+int a;		Memory is created.. it is Variable declartion
+int b=20; 	Memory is created..and value intialized...Variable Definition
+a=10;		Memory is not created...First time.. Variable intialization
+b=20;		Memory is not created...second time varaible assignment
+
+int c=a+b; 	varaible def + a&b varaible reading
+
+1)Varaible creation:	Declartion & Definition
+2) Varaible accessing:   Intilalization assignment reading
+
+Don't create the varaibles unnecessary.. If you want to resue the values then only create otherwise.. you can use them on fly..Memory can be saved
+
+Where we can create Varaible? Only at class level and method and we call them as the Class Level Varaibles or Method Level Varaible
+
+Class Level Varaiables? They are meant for the storing the values of an Object
+-----------------------
+**static Varaible:Meant for the storing the values that are common to all objects.. For this varaibles one copy memory allocated in the Class Context.
+
+**Non Static Varaible: Meant for the storing the values that particular to every object..For this varaiables memory allocated when the Object is created
+
+--->As long as the Object is available from the non-static varaiables we can access the values..
+
+For the static and non static varaibles ? We need to manage the memory else we run out of Space.. But in the case of MLV .. they are by default destroyed
+
+when the operation is completed..We need to deallocate the static/instance refvaraible by storing the null if the Object is not required..
+
+Diffrent ways to access the SV Varaibles? 1)Directly by its name 2) using class name 3) Using the Object reference varaible 4)using the null ref varaible
+
+
+Method Level Varaibles Parameter Varaibles Local Varaibles (Stack Varaibles Auto Varaibles)
+-----------------------
+
+They are meant for storing values for perfoming one operation
+
+Parameters menat for receiving the inputs from the other methods..LV meant for the storing the results or values of the particular operation
+
+Scope of the parameter Varaibles:: Memory for these varaibles is allocated when method is called.. It is availble until method completion
+
+Scope of Local Varaible:Inside the enclosing block where varaible is declared the memory is allocated and destroyed when enclosing block completed
+
+Default Values: Will not have default values
+
+
+Nameless Local Block: created inside the method to decrease the scope of the Local Varaible...It means after block completed memory is destroyed
+
+The varaible created inside the local block can be accessed until the end of local block.. if we can't access after the local block...
+
+Named Local blocks are also used to break out of the loops....
+
+Local Variable Type Inference feature of Java 10..
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Methods:
+
+Method Declaration/abstract Method:If we create a method without implementation body, with only prototype we call as the method declartion..
+---------------------------------
+Method declration also called as abstract method.. It should have modifier abstrcat compulsory..We declare the abstract methods in the super class for this
+
+declared methods we provide the implementation in the subclass as per subclass programmer requirement....
+
+public/default/protected abstract void m1().. Only public/default/protected abstract modifiers are allowed for the abstract methods..
+
+
+Method Definition: If we create the method with implementation body then we call it as the method definition
+-----------------
+A method definition is also called as the concrete method.. Concrete method can be static/non-static..
+ 
+We can declare the concrete method either in the super or subclass.. All the modifiers that allowed for a method are allowed
+
+public/default/protected/private 	static final native synchronised strictfp
+
+
+Method Implementation(varaible intilaization)::		
+-----------------------------------------------
+Providing the implementation to the super class method for first time in the subclass is called Method implementation...
+
+
+Method Overriding/Method Hiding:
+--------------------------------
+
+Redefining the method that is implemented in the super class again in the subclass as per the requirement of the subclass programmer then we call method 
+overriding..if the Redefining is for the static method we call as the Method Hiding
+
+
+Method Overloading:
+-------------------
+Defining the multiple static/non static methods with same name but with different parameters type or list or order is called as the method overloading
+
+
+We create the methods to perfom the operation on the object valuess..We call it as Object operation..logic inside the methods need to be reused...
+
+
+Abstract Method:: If we want to declare the operation of the object in the super class and want to force the subclass programmers  to implement that operation we must choose the abstract method 
+	
+If we want to implement the operation of the object in the super class common to all its subclasses for the reusing purpose we must choose the concrete method
+
+
+if an object operation implementation logic is changing from one subclass to another subclass of an Object, that operation must be implemented by sub class
+progrmmaers. Then in order to force the subclass programmer to implement this this object operation we must create the abstract method in super class
+
+if an object operation implementation logic is not changing from one subclass to another subclass of an Object, that operation must be implemented using the concerte method..so that logic is reused by the sublcass programmers...
+
+
+
+Static Methods: Developing and executing the logic common to all the objects.. Object is not required for executing static method. By the time static method is executing the memory has been provided to static varaibles during the class loading and intialization for the static varaibles provided inside the static block... In order to access the non static varaibles we need to create the Object explicitly inside the static method.
+
+As the execution is not common to all objects we cannot access the object values directly inside the static method..We can access only static varaibles..
+
+
+Non Static Methods: Developing the logic common to all objects but executing the logic specific to each Object we need to use the Non Static Method..
+Object(memory for the object varaibles) is required for executing/calling the non static method.We can access the static and non static varaibles directly
+in the non static method.. 
+
+As the execution is common to all objects we can access the object values(static/non-static)values directly inside the static method..
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ENUM:
+----
+
+Enum is one kind of the final class. It is created by the keyword enum.. It used for defining the set of named constants those represent the menu kind of items..Before the jav5v these menu items are created from the class.. Class has problem in acessing this menu items, this cannot return or print item name
+as it is declared instead it returns or prints its value.
+
+Syntax:
+
+enum name{
+	//menu items names separted with ,
+;
+	//normal all 8 members which can you define inside the normal class
+}
+
+Note: For creating the NamedConstants use only names don't use the DataType.
+
+What is the datatype of the namedConstants: Its datatype is current Enum Type.. It is added by the compiler automatically
+
+java.lang.Enum: it is an abstract which is the default super type for the evry Enum Type classes.. Also it is implementing the Comparable & Serializable
+
+Interfaces..Since evry enum type is comparable we can add its Objects to the collection Treeset and it can be stored in the file as it is Serializable type
+
+
+public static EnumType[] vlaues():  The Objects are already created in static block..But it is returing the created the array of Objects..
+
+public static Enum valueOf(String s)-->String is the named Constant Name..
+
+public final String name() public final String ordinal()
+
+Every Enum Type class Object has minimum 2 variables : name and Ordinal & our specific (in FoodItem Enum)price..Every named constant varaible defined inside the enum type is an Object refrenced varaible that holds the current enum Class Object..
+
+enum Month{
+
+	JAN=1,FEB=2
+} 
+
+Named Constants are not of type int.. They are of Type Month so we get CE
+
+To assign the values to the named Constant, enum should have the parameterized constructor with the passed constructor argument type..Else it leads to CE
+
+JAN(1) FEB(2);
+
+Where the values 1 & 2 are stored.. You should create the non-static int type varaible to store the values..
+
+SCJP Questions:  We cannot derive on Enum Subclass because it is the final Class..we cannot instantiate the enum using the new and constructor it leads to 
+CE:EnumTypes may not be instantiated, but it is instantiated by compiler in the .class file..
+NamedConstants should be defined first in Enum and seprated by ; If there are no named constants just use separator ;
+
+public enum EnumTest {
+	;
+	public static void main(String[] args) {
+		EnumTest test=new EnumTest();
+	}
+}
+
+What are allowed inside the Enum? Named Constants, Static & Nonstatic varaibles and methods. Main Method.. Abstarct memebers are not allowed because Enums are by default final Classes.We cannot declare enum as Abstract as enum Object should be created intialize the named constants
+
+public enum EnumTest {
+	SAMPLE;
+	static int x;
+	int y;
+	private EnumTest() {			Abstract Methods are not allowed and Modifiers for the Constructors are only Private and default
+		
+	}
+	static {}
+	{}
+	class A{}
+	static class B{}
+	static void m1() {}
+	void m2() {}
+	interface Test1{}
+	enum InnerEnum{}
+}
+
+Accessing Memebers:: Constants:EnumTest.SAMPLE  Static Members: EnumTest.x EnumTest.m1() Instance mem: EnumTest.SAMPLE.m2() EnumTest.SAMPLE.y
+
+We cannot create the explicit constructor as protected or public, because enum constructor is by default private.. even if you create the constructor with default modifier it converts to private.
+
+
+
+
+
+
+>>>>>>> origin/main

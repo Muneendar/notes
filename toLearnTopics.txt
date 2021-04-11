@@ -1,0 +1,125 @@
+<<<<<<< HEAD
+				Core-Java 
+
+>Default methods static methods private methods of interface
+>Generics Annotations
+>Garbage Collection
+>Wrapper classes 	String API
+>Custom Collections along with Datastructures Concepts...
+>Number Based Character Based Pattern Based Array Based searching & sorting Algorithams
+>Fork Join Pool
+>Reactive Programming
+>IO Classes
+>Serailization
+>Regualr Expressions
+>New Date & Time API
+>Concurrent Collections
+>Java9 Modules & Jshell
+>Design Patterns
+>Refelection API
+>Stream API
+>BufferedReaderConcepts
+>Lambda & Stream API from the JavaBrains
+>HariKrishna Intial Videos on the Java Compiler and JVM
+>System & Runtime Class
+>Date & Time API  & i18N
+>Java Instance & static flow
+>Java Documentation
+>Executor Framework
+>Eclipse Shortcuts
+
+HashMap:https://www.youtube.com/watch?v=-oafFAPgLao&list=PL3hpmQhMoz-dMhvnkTunjOMZSa_f3FH24&ab_channel=WebEncyclopTutorials
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+			Servlets & JSP
+
+>Naatraz Sir introduction videos
+>Entire Servlet & JSP Videos..
+>Servlet 4.0 Version
+>ServletContext Methods need to be remembered
+>Custom TagLibrary in JSP
+
+
+
+
+
+
+
+
+
+
+
+
+Verify the IncomeTax
+HDFC Refund
+PM Kisaan
+Timesheets of Trianz
+
+Dilip--12000 Pending
+Nagu--5000 to get
+
+Love the Work that you do-->Else step out of it no point of wasting time
+=======
+				Core-Java 
+
+>Default methods static methods private methods of interface
+>Generics Annotations
+>Garbage Collection
+>Wrapper classes 	String API
+>Custom Collections along with Datastructures Concepts...
+>Number Based Character Based Pattern Based Array Based searching & sorting Algorithams
+>Fork Join Pool
+>Reactive Programming
+>IO Classes
+>Serailization
+>Regualr Expressions
+>New Date & Time API
+>Concurrent Collections
+>Java9 Modules & Jshell
+>Design Patterns
+>Refelection API
+>Stream API
+>BufferedReaderConcepts
+>Lambda & Stream API from the JavaBrains
+>HariKrishna Intial Videos on the Java Compiler and JVM
+>System & Runtime Class
+>Date & Time API  & i18N
+>Java Instance & static flow
+>Java Documentation
+>Executor Framework
+>Eclipse Shortcuts
+
+HashMap:https://www.youtube.com/watch?v=-oafFAPgLao&list=PL3hpmQhMoz-dMhvnkTunjOMZSa_f3FH24&ab_channel=WebEncyclopTutorials
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+			Servlets & JSP
+
+>Naatraz Sir introduction videos
+>Entire Servlet & JSP Videos..
+>Servlet 4.0 Version
+>ServletContext Methods need to be remembered
+>Custom TagLibrary in JSP
+
+
+
+
+
+
+
+
+
+
+
+
+Verify the IncomeTax
+HDFC Refund
+PM Kisaan
+Timesheets of Trianz
+
+Dilip--12000 Pending
+Nagu--5000 to get
+
+Love the Work that you do-->Else step out of it no point of wasting time
+>>>>>>> origin/main

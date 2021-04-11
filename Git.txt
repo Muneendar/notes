@@ -1,0 +1,1371 @@
+<<<<<<< HEAD
+Select the folder & make it repo
+
+>mkdir Git
+> vi s1
+> git install 
+	it creates the .git folder in the repo.
+
+Configuring the Git Username & Email:
+-------------------------------------
+
+> git config --global user.name "David.Mahler"
+> git config --global user.email "muneendarkumar17@gmail.com"
+
+Since in every commit the git logs the username and email and timestamp.
+
+--global flag .. Username and email will be valid for all repos in the system..Use --local flag for the particular repo
+
+>To list the configurations
+
+> git config --list
+
+
+Since there is a new file S1. Now Git will call it as untracked file
+
+>Git tracks the changes to the files overtime.. Git is now not doing any tracking for s1. It will do once we add to the staging area.
+
+> git status 		Tells how the things stand in the working tree and in the staging area.
+
+On branch master
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        s1
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+>git add s1   Changes the S1 file from untracked status to the tracked status
+
+$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   s1
+
+
+Now add the file S2
+
+>vi s2
+
+
+$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   s1
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        s2
+
+
+>Now the s2 is added to the working directory. So the status of working tree and staging area is now..We have one untracked file and new file that to be committed.
+
+
+>If we commit now..The files that were staged will only be committed.
+
+**********Leaving the S2 file in the Working Tree and committing the file S1.*********
+	
+>$ git commit -m "add file s1"
+[master (root-commit) 2bc0758] add file s1
+ 1 file changed, 10 insertions(+)
+ create mode 100644 s1
+
+$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        S2
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+******nothing to commit, working directory clean **********************
+
+nothing to commit means in the staging area nothing is there to commit. Working dircetory clean is we didn't made any changes to directory after the commit
+
+
+$ git log
+commit 2bc07583d4d11176032c3892a6cf2bb05343673a (HEAD -> master)
+Author: Muneendar <muneendarkumar17@gmail.com>
+Date:   Fri Apr 9 11:39:10 2021 +0530
+
+    add file s1
+
+
+****Now we are modifying the files that are being tracked by the Git******
+
+Make some changes to the S1 file using the Vi editor. Now check the git status
+
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   s1
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        S2
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+
+>>Since the Working tree is modified for git tracking files for the file S1 we got it is as the modified.
+
+
+************************************************************************************************************************************************************
+Untracked:Changes made for the files in the working tree that are not being tracked by the Git.
+
+Tracked:Changes once you add the files to staging area now Git will try to track the files
+
+Modified: Once the file is being tracked by the Git and once again if you make any changes to the tracked file in the Git Working directory then it is called as the Modified
+
+************************************************************************************************************************************************************
+
+>git diff It will point the differences for the tracked files that are inthe staging area and working directory.
+
+
+>git add S1 S2 (Add the files S1 & S2 to the Staging/Indexing area)
+
+>Now it will add the untracked file S2 and the tracked file S1.(For the tracked file we made the changes in the working directory)
+
+or we can do it using the 	git add . (All the new & modified files to the staging area)
+
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   S2						Added for the first time in staging area not part of any commit graph
+        modified:   s1						Modified the file and added to the staging area.That is it already being tracked
+
+*********************************Unstaging the file fom staging area to the woking area***************************************************
+
+If you unstage the new file in index area then it becomes the untracked file
+
+ git restore --staged S2
+
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   s1
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        S2
+
+***If you unstage the modified file in the index area then it will be in the modified status in working tree also. In the staging area the file will restored from the commit history.
+
+$ git restore --staged s1
+
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   s1
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        S2
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+91970@LAPTOP-U4C6S2RF MINGW64 ~/Desktop/Git (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   S2
+        modified:   s1
+
+***********************************************************************************************************************************************************
+>git diff 	      It shows the difference only for the tracked files between the Staging Index & Working Tree Area
+
+>git diff --staged **It shows the difference between the Commit History & Staging Index Area for all the files..That is what things that are going to commit
+
+***********************************************************************************************************************************************************
+
+> git log -p   What has changed in the each commit will be shown here
+
+
+Git Remove File:
+---------------
+
+>git rm s2  >It removes the file from the working tree & Staging area and it also have staged the removal
+
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        deleted:    s1
+
+****************************************************************************************************************
+	Working Tree Status 							Staging Area Status of Files   |
+****************************************************************************************************************
+> Untracked File for new added file						> new file		       |	
+> Modified file 								> Modified file		       |	
+> Deleted file									> Deleted file		       |	
+													       |		
+****************************************************************************************************************
+
+
+$ git restore --staged s1		Unstage the deleted file..
+
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    s1
+
+
+Even the working tree also it is not present...
+
+$ git restore s1
+
+Now you can see the deleted file in the working treee
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Undo Woring tree changes:
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+git restore s1	(It can restore the files only if the git is tracking the file)
+
+git checkout --S1 (Discarding the new working tree changes)
+
+Make some changes to the s1 or delete the file in the working tree.If you want to restore.. You can restore the file from the staging area
+
+
+$ git diff
+diff --git a/s1 b/s1
+index cd87038..f5415ff 100644
+--- a/s1
++++ b/s1
+@@ -5,7 +5,8 @@ vlans:
+  blue:
+     id:20
+  green:
+-     id: 30
++     id: 30
++ badvlan: 0
+ ports:
+  1:[ 30 ]
+  2:[ 20 ]
+
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   s1
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+
+$ git restore s1	> Even this command also will work
+
+$ git diff
+
+It will print nothing now
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Undo Staging a file
+------------------
+
+Once you have staged the changes you can revert with the last commit..
+
+>git reset HEAD S1  changes have been reverted only in staging area
+
+>git checkout --S1  To revert the changes in the working directory also....
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Restore the file deleted in the earlier commit:
+----------------------------------------------
+ git log -- S2								To get the logs related to S2 file.Find latest Hash of File S2.
+
+commit 1161f8bee024958e3c79cd9886cef799152bd871 (HEAD -> master)
+Author: Muneendar <muneendarkumar17@gmail.com>
+Date:   Fri Apr 9 14:18:48 2021 +0530
+
+    remove S2
+    Switch s2 was decommissioned
+
+commit f2885bc88c6d3c518ae5b0768d17870b33cd3959
+Author: Muneendar <muneendarkumar17@gmail.com>
+Date:   Fri Apr 9 13:20:41 2021 +0530
+
+    add s2 and edit s1
+
+
+git checkout f2885 -- S2 ... Now the file is in the git staging Area as well as in the Working directory also....
+
+
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   S2
+
+$ git commit -m "restored file S2"
+
+-------------------------------------------------------GIT IGNORE FILE------------------------------------------------------------------------------------
+$ touch myapp.pyc
+mkdir logs
+
+
+$ mkdir logs
+$ touch logs/log1.log
+$ touch logs/log2.log
+
+
+$ vi .gitignore  Add the logs/ & myapp.pyc
+
+$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .gitignore
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+git commit -m "add .gitignore file" 	The changes to the files & directories mentioned in gitignore files will not be considered..
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+>git log --all --decorate --oneline --graph
+
+>To reuse the commands use the alias
+
+>alias graph=" git log --all --decorate --oneline --graph"
+
+
+Important Commands of GIT:
+--------------------------
+
+Configuring the Repo:
+
+git config --global user.name  " "
+git config --global user.email " "
+
+--global: This settings valid for the all the repositories in the Laptop.. Use --local for different configurations for the every repository.
+
+>git commit -a -m "comment" To stage and commit the changes to local with single command
+
+>git diff (Shows the differences between the Staging & Working copy)
+
+Work Area 	Index Area
+--------------------------
+untracked 	newfile
+modified  	modified
+deleted   	deleted
+
+To unstage the file that added to the index area.
+
+>git restore --stage s2  (To unstage the changes of the file s2)
+
+> git diff ( It shows only difference between the staging area and working area only for the tracked files)
+
+> git diff --staged(It shows the difference between the stagingarea and local commit history)
+
+Git Remove the File:
+
+>git rm filename: Delete the file in working & staging area. Now place the commit
+
+Unstage the changes in the staging area: 
+
+>git restore --staged <deletedFileName>   The file will be restored only in the staging area.
+
+>git restore <deletedFileName>		  To restore the file in the working area
+
+If you make some changes in the file or delete some files in the working tree we can restore them directly by using the... git restore <fileName>
+
+>Even you can use the command:: git checkout --S1 (Pull from the staging area )
+
+>Undo the staging of file:: To get from the local commit history use: git reset HEAD S1. Changes will be restored only to the staging area
+
+
+Restore the file from Earlier Commit:(If the file is deleted)
+------------------------------------------------------------
+
+git checkout #Hash  -- S2   To restore the file from the particular hash.
+
+vi .gitignore Place the files & directories that shouldn't be tracked in the file and commit the changes.
+
+
+Order:  Commit->Branch->HEAD
+
+>Every Branch will always points to some particular commit. HEAD points to the branch that is currently checked
+
+>When we create the new branch..The branch would be instantiated from where the HEAD Pointer is.
+
+
+Create the new branch: git branch SDN. git checkout SDN.
+
+When we checkout the branch git will automatically update the Working tree and Staging area. Working area should be clean or stashed.
+
+From one point every branch works goes in one particular direction. Like the branches of the tree...
+
+		master
+	branch1		branch2	
+
+->Merge the changes of the branch1->master and also merge the changes of branch2->master. Now the master is caught up with all changes of branch1 and branch2. Now you can safely delete the branches.
+
+	
+After the everything is finalised then merge the changes to the master branch.
+
+> Git merges are of two types::: Fast forward merge and Three way merge
+
+To identify the differneces between the two branches::  git diff SDN..master
+
+Checkout the master. And merging the master with SDN issue the git merge SDN
+
+
+>git branch  -->On which branch we are working
+
+>git branch --merged --->It shows that the master branch merged with the SDN branch.
+
+> git branch -d SDN (If the two branches are at the same commit point. You can safely delete the one)
+
+If the branch updates haven't been pushed to the master we get the error.
+
+>git branch -d auth 		Error: The branch auth is not fully merged with the master
+
+
+********************We will be making the new commit point if the merge is successfull incase of fast-forward or in the case of Three way merge*************
+
+
+Merge Conflicits: When we try to merge the branches that has changed the same lines of code in the same files merge conflicts will occur.
+
+if the git merge dev throws error to fix the conflicts then git status shows.
+
+>git status    Fix the conflicts and then run the "git commit" or use git merge --abort.. To abort the merge
+
+>Once you change the local copy with what changes has to be finalised then we commit.
+
+
+Detached HEAD:
+-------------
+
+>If we have the HEAD pointing directly to the commit.Then we say it is in the detached HEAD.
+
+To see the state of the Project at the particular commit we use the.. Now it is Detached Head state.
+
+>git checkout #commitHash
+
+Again checkout the master to remove the detached Head state. or create the new branch at the Detached HEAD state and proceed.
+
+
+Git Stash:
+---------
+
+We don't have the clean working tree we will complicate the changing of the branches and merging of the branches..Excellent way to get the clean state is by using the 
+
+>git stash  The local changes will be stashed and makes the working tree clean
+
+>git stash list  {List of stashes}
+
+>git stash list -p  (Edits that occured at every stash point)
+
+**We can apply the stashes at every point
+
+> git stash apply .. Working directory will now change.. stage and commit the changes
+
+>git stash apply stash{0}
+
+> git stash save "added the yellow VLAN"
+
+
+Remote Repositories::
+-------------------
+
+Central Repo  (Only Manager or lead has access)
+
+Muni Central Repo(You can fork all the projects from the central repo.. Muni is the owner of forked repo he can download the commits & push the commits)
+
+**You can upload the commits to repo and we can fetch/pull the commits from the repo
+
+>After our clone to the project. origin is the default name for the remote. usually orgin will be git@github.com:bettyremote/netauto.git
+
+origin/master:: It represents how the master branch will look at the central repo.
+
+**f8acobc  (HEAD -> master, origin/master , origin/HEAD) If local master and remote master at same commit then we say it as the local & remote inSync
+
+
+>git checkout origin/master. We get the detached HEAD state  (To see the state of remote repo.. If both were in different states.)
+
+
+
+Make some commits @Remote & Download & integrate the Local Repo: (We use the git fetch and git merge)
+
+>git local repo automatically doesn't that someone made the commits.
+
+>git status shows: on branch main you branch is upto date with 'origin/main' nothing to commit,working tree is clean
+
+To get the updates to local we use the :: > get fetch origin
+
+>git status now shows: Your branch is behind 'origin/master' by 1 commit
+
+> git graph
+
+	*10a7b3 (origin/main,origin/HEAD)
+	*76ebd1 (HEAD -> main)  
+
+To update the local with remote we use 
+
+> git merge origin/main
+
+
+> git graph
+
+	*10a7b3 (origin/main,origin/HEAD,HEAD -> main)
+	*76ebd1
+
+** Git pull:: Does the job of the git fetch origin and git merge  origin/main into single command. but do not use frequently to avoid the unexpected merge results
+
+
+Make some changes locally & commit:
+----------------------------------
+
+> we will one commit ahead of the remote repo
+
+>git status on branch main Your branch is ahead of the 'origin/master' by 1 commit. Use the git push to publish your commits
+
+>git push origin master  {To move the changes to remote into the branch master}
+
+
+Create the GitHub Fork:
+-----------------------
+
+origin  <---> To the Munis central Repo
+upstream <---> To point to the Central Repo
+
+One option Muni has to fork the repo in the GitHub.Fork creates the copy of Muni repo in GitHub. Muni is the owner of the copy and Muni can do git clone aganist his fork. He can make the changes push the changes to his fork.
+
+Add the Git remote: git remote add upstream GitUrl.(Project Url)
+
+>git remote remove <remotename>
+
+staying inSync with the upstream:
+--------------------------------
+
+Team lead has made some changes and committed. in Local working copy of Muni doesn't even know the changes have pushed in the central repo.
+
+To get the updates of central repo we do:
+
+>git fetch upstream
+
+	*38c (upstream/master)
+	*a4472 (HEAD->master,origin/master,origin/HEAD)
+
+Now merge the local with upstream
+
+>git merge upstream/master
+
+>graph
+
+	*38C (HEAD->master,upstream/master)
+	*a4472(origin/master,origin/HEAD) 
+
+
+>Local Branch caught up with the Upstream Repo. To push the same changes to Muni's Central Repo we can do
+
+>git push origin master
+
+>graph
+
+*38C (HEAD->master,upstream/master,origin/master,origin/HEAD)
+*a4472
+
+Now all are in sync
+
+Proposing the changes into the Central Repo:
+-------------------------------------------
+
+Create the branch in Munis local repo. Make the changes and commit the changes. Move the branch code to the muni central repo.We will issue the pull request to the central repo. The request is to merge the changes of the master branch to Central repo.Team lead can review the changes,add the comments,request the others to review the changes.Approve the pull request and merge.
+
+You can make the pull request from the GitHub.
+
+>git checkout -b "edit-branch"
+
+> git branch (doesn't display the any remote tracking branches)
+
+* To see all the branches. 
+
+>git branch -a
+
+*edit-s2
+master
+remote/origin/HEAD ->origin/master
+
+> git branch -r only the remote branches we can see
+
+>git commit -a -m "updated the S2"
+
+>git push origin edit-s2
+
+graph now shows:
+---------------
+
+	*9706c (HEAD -> edit-s2,origin/edit-s2)
+	*384cf (upstream/master,origin/master,origin/HEAD)
+
+Once the Team lead approves the pull request and merges the branch code to the master. We need to delete the branch in the local and GitHub and pull the updated code into the Muni central repo and local repo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*Questions:
+
+>Folder structure or no:of repositories that need to be maintained for the Huge project
+
+>Does the no:of commits in the local and remote repos will be different or same..
+
+>From the one commit point create the multiple branches and work on the project/code parallely.Our work or edits on the one branch will be independent of other branch.
+
+
+
+=======
+Select the folder & make it repo
+
+>mkdir Git
+> vi s1
+> git install 
+	it creates the .git folder in the repo.
+
+Configuring the Git Username & Email:
+-------------------------------------
+
+> git config --global user.name "David.Mahler"
+> git config --global user.email "muneendarkumar17@gmail.com"
+
+Since in every commit the git logs the username and email and timestamp.
+
+--global flag .. Username and email will be valid for all repos in the system..Use --local flag for the particular repo
+
+>To list the configurations
+
+> git config --list
+
+
+Since there is a new file S1. Now Git will call it as untracked file
+
+>Git tracks the changes to the files overtime.. Git is now not doing any tracking for s1. It will do once we add to the staging area.
+
+> git status 		Tells how the things stand in the working tree and in the staging area.
+
+On branch master
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        s1
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+>git add s1   Changes the S1 file from untracked status to the tracked status
+
+$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   s1
+
+
+Now add the file S2
+
+>vi s2
+
+
+$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   s1
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        s2
+
+
+>Now the s2 is added to the working directory. So the status of working tree and staging area is now..We have one untracked file and new file that to be committed.
+
+
+>If we commit now..The files that were staged will only be committed.
+
+**********Leaving the S2 file in the Working Tree and committing the file S1.*********
+	
+>$ git commit -m "add file s1"
+[master (root-commit) 2bc0758] add file s1
+ 1 file changed, 10 insertions(+)
+ create mode 100644 s1
+
+$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        S2
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+******nothing to commit, working directory clean **********************
+
+nothing to commit means in the staging area nothing is there to commit. Working dircetory clean is we didn't made any changes to directory after the commit
+
+
+$ git log
+commit 2bc07583d4d11176032c3892a6cf2bb05343673a (HEAD -> master)
+Author: Muneendar <muneendarkumar17@gmail.com>
+Date:   Fri Apr 9 11:39:10 2021 +0530
+
+    add file s1
+
+
+****Now we are modifying the files that are being tracked by the Git******
+
+Make some changes to the S1 file using the Vi editor. Now check the git status
+
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   s1
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        S2
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+
+>>Since the Working tree is modified for git tracking files for the file S1 we got it is as the modified.
+
+
+************************************************************************************************************************************************************
+Untracked:Changes made for the files in the working tree that are not being tracked by the Git.
+
+Tracked:Changes once you add the files to staging area now Git will try to track the files
+
+Modified: Once the file is being tracked by the Git and once again if you make any changes to the tracked file in the Git Working directory then it is called as the Modified
+
+************************************************************************************************************************************************************
+
+>git diff It will point the differences for the tracked files that are inthe staging area and working directory.
+
+
+>git add S1 S2 (Add the files S1 & S2 to the Staging/Indexing area)
+
+>Now it will add the untracked file S2 and the tracked file S1.(For the tracked file we made the changes in the working directory)
+
+or we can do it using the 	git add . (All the new & modified files to the staging area)
+
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   S2						Added for the first time in staging area not part of any commit graph
+        modified:   s1						Modified the file and added to the staging area.That is it already being tracked
+
+*********************************Unstaging the file fom staging area to the woking area***************************************************
+
+If you unstage the new file in index area then it becomes the untracked file
+
+ git restore --staged S2
+
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   s1
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        S2
+
+***If you unstage the modified file in the index area then it will be in the modified status in working tree also. In the staging area the file will restored from the commit history.
+
+$ git restore --staged s1
+
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   s1
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        S2
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+91970@LAPTOP-U4C6S2RF MINGW64 ~/Desktop/Git (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   S2
+        modified:   s1
+
+***********************************************************************************************************************************************************
+>git diff 	      It shows the difference only for the tracked files between the Staging Index & Working Tree Area
+
+>git diff --staged **It shows the difference between the Commit History & Staging Index Area for all the files..That is what things that are going to commit
+
+***********************************************************************************************************************************************************
+
+> git log -p   What has changed in the each commit will be shown here
+
+
+Git Remove File:
+---------------
+
+>git rm s2  >It removes the file from the working tree & Staging area and it also have staged the removal
+
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        deleted:    s1
+
+****************************************************************************************************************
+	Working Tree Status 							Staging Area Status of Files   |
+****************************************************************************************************************
+> Untracked File for new added file						> new file		       |	
+> Modified file 								> Modified file		       |	
+> Deleted file									> Deleted file		       |	
+													       |		
+****************************************************************************************************************
+
+
+$ git restore --staged s1		Unstage the deleted file..
+
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    s1
+
+
+Even the working tree also it is not present...
+
+$ git restore s1
+
+Now you can see the deleted file in the working treee
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Undo Woring tree changes:
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+git restore s1	(It can restore the files only if the git is tracking the file)
+
+git checkout --S1 (Discarding the new working tree changes)
+
+Make some changes to the s1 or delete the file in the working tree.If you want to restore.. You can restore the file from the staging area
+
+
+$ git diff
+diff --git a/s1 b/s1
+index cd87038..f5415ff 100644
+--- a/s1
++++ b/s1
+@@ -5,7 +5,8 @@ vlans:
+  blue:
+     id:20
+  green:
+-     id: 30
++     id: 30
++ badvlan: 0
+ ports:
+  1:[ 30 ]
+  2:[ 20 ]
+
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   s1
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+
+$ git restore s1	> Even this command also will work
+
+$ git diff
+
+It will print nothing now
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Undo Staging a file
+------------------
+
+Once you have staged the changes you can revert with the last commit..
+
+>git reset HEAD S1  changes have been reverted only in staging area
+
+>git checkout --S1  To revert the changes in the working directory also....
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Restore the file deleted in the earlier commit:
+----------------------------------------------
+ git log -- S2								To get the logs related to S2 file.Find latest Hash of File S2.
+
+commit 1161f8bee024958e3c79cd9886cef799152bd871 (HEAD -> master)
+Author: Muneendar <muneendarkumar17@gmail.com>
+Date:   Fri Apr 9 14:18:48 2021 +0530
+
+    remove S2
+    Switch s2 was decommissioned
+
+commit f2885bc88c6d3c518ae5b0768d17870b33cd3959
+Author: Muneendar <muneendarkumar17@gmail.com>
+Date:   Fri Apr 9 13:20:41 2021 +0530
+
+    add s2 and edit s1
+
+
+git checkout f2885 -- S2 ... Now the file is in the git staging Area as well as in the Working directory also....
+
+
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   S2
+
+$ git commit -m "restored file S2"
+
+-------------------------------------------------------GIT IGNORE FILE------------------------------------------------------------------------------------
+$ touch myapp.pyc
+mkdir logs
+
+
+$ mkdir logs
+$ touch logs/log1.log
+$ touch logs/log2.log
+
+
+$ vi .gitignore  Add the logs/ & myapp.pyc
+
+$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .gitignore
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+git commit -m "add .gitignore file" 	The changes to the files & directories mentioned in gitignore files will not be considered..
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+>git log --all --decorate --oneline --graph
+
+>To reuse the commands use the alias
+
+>alias graph=" git log --all --decorate --oneline --graph"
+
+
+Important Commands of GIT:
+--------------------------
+
+Configuring the Repo:
+
+git config --global user.name  " "
+git config --global user.email " "
+
+--global: This settings valid for the all the repositories in the Laptop.. Use --local for different configurations for the every repository.
+
+>git commit -a -m "comment" To stage and commit the changes to local with single command
+
+>git diff (Shows the differences between the Staging & Working copy)
+
+Work Area 	Index Area
+--------------------------
+untracked 	newfile
+modified  	modified
+deleted   	deleted
+
+To unstage the file that added to the index area.
+
+>git restore --stage s2  (To unstage the changes of the file s2)
+
+> git diff ( It shows only difference between the staging area and working area only for the tracked files)
+
+> git diff --staged(It shows the difference between the stagingarea and local commit history)
+
+Git Remove the File:
+
+>git rm filename: Delete the file in working & staging area. Now place the commit
+
+Unstage the changes in the staging area: 
+
+>git restore --staged <deletedFileName>   The file will be restored only in the staging area.
+
+>git restore <deletedFileName>		  To restore the file in the working area
+
+If you make some changes in the file or delete some files in the working tree we can restore them directly by using the... git restore <fileName>
+
+>Even you can use the command:: git checkout --S1 (Pull from the staging area )
+
+>Undo the staging of file:: To get from the local commit history use: git reset HEAD S1. Changes will be restored only to the staging area
+
+
+Restore the file from Earlier Commit:(If the file is deleted)
+------------------------------------------------------------
+
+git checkout #Hash  -- S2   To restore the file from the particular hash.
+
+vi .gitignore Place the files & directories that shouldn't be tracked in the file and commit the changes.
+
+
+Order:  Commit->Branch->HEAD
+
+>Every Branch will always points to some particular commit. HEAD points to the branch that is currently checked
+
+>When we create the new branch..The branch would be instantiated from where the HEAD Pointer is.
+
+
+Create the new branch: git branch SDN. git checkout SDN.
+
+When we checkout the branch git will automatically update the Working tree and Staging area. Working area should be clean or stashed.
+
+From one point every branch works goes in one particular direction. Like the branches of the tree...
+
+		master
+	branch1		branch2	
+
+->Merge the changes of the branch1->master and also merge the changes of branch2->master. Now the master is caught up with all changes of branch1 and branch2. Now you can safely delete the branches.
+
+	
+After the everything is finalised then merge the changes to the master branch.
+
+> Git merges are of two types::: Fast forward merge and Three way merge
+
+To identify the differneces between the two branches::  git diff SDN..master
+
+Checkout the master. And merging the master with SDN issue the git merge SDN
+
+
+>git branch  -->On which branch we are working
+
+>git branch --merged --->It shows that the master branch merged with the SDN branch.
+
+> git branch -d SDN (If the two branches are at the same commit point. You can safely delete the one)
+
+If the branch updates haven't been pushed to the master we get the error.
+
+>git branch -d auth 		Error: The branch auth is not fully merged with the master
+
+
+********************We will be making the new commit point if the merge is successfull incase of fast-forward or in the case of Three way merge*************
+
+
+Merge Conflicits: When we try to merge the branches that has changed the same lines of code in the same files merge conflicts will occur.
+
+if the git merge dev throws error to fix the conflicts then git status shows.
+
+>git status    Fix the conflicts and then run the "git commit" or use git merge --abort.. To abort the merge
+
+>Once you change the local copy with what changes has to be finalised then we commit.
+
+
+Detached HEAD:
+-------------
+
+>If we have the HEAD pointing directly to the commit.Then we say it is in the detached HEAD.
+
+To see the state of the Project at the particular commit we use the.. Now it is Detached Head state.
+
+>git checkout #commitHash
+
+Again checkout the master to remove the detached Head state. or create the new branch at the Detached HEAD state and proceed.
+
+
+Git Stash:
+---------
+
+We don't have the clean working tree we will complicate the changing of the branches and merging of the branches..Excellent way to get the clean state is by using the 
+
+>git stash  The local changes will be stashed and makes the working tree clean
+
+>git stash list  {List of stashes}
+
+>git stash list -p  (Edits that occured at every stash point)
+
+**We can apply the stashes at every point
+
+> git stash apply .. Working directory will now change.. stage and commit the changes
+
+>git stash apply stash{0}
+
+> git stash save "added the yellow VLAN"
+
+
+Remote Repositories::
+-------------------
+
+Central Repo  (Only Manager or lead has access)
+
+Muni Central Repo(You can fork all the projects from the central repo.. Muni is the owner of forked repo he can download the commits & push the commits)
+
+**You can upload the commits to repo and we can fetch/pull the commits from the repo
+
+>After our clone to the project. origin is the default name for the remote. usually orgin will be git@github.com:bettyremote/netauto.git
+
+origin/master:: It represents how the master branch will look at the central repo.
+
+**f8acobc  (HEAD -> master, origin/master , origin/HEAD) If local master and remote master at same commit then we say it as the local & remote inSync
+
+
+>git checkout origin/master. We get the detached HEAD state  (To see the state of remote repo.. If both were in different states.)
+
+
+
+Make some commits @Remote & Download & integrate the Local Repo: (We use the git fetch and git merge)
+
+>git local repo automatically doesn't that someone made the commits.
+
+>git status shows: on branch main you branch is upto date with 'origin/main' nothing to commit,working tree is clean
+
+To get the updates to local we use the :: > get fetch origin
+
+>git status now shows: Your branch is behind 'origin/master' by 1 commit
+
+> git graph
+
+	*10a7b3 (origin/main,origin/HEAD)
+	*76ebd1 (HEAD -> main)  
+
+To update the local with remote we use 
+
+> git merge origin/main
+
+
+> git graph
+
+	*10a7b3 (origin/main,origin/HEAD,HEAD -> main)
+	*76ebd1
+
+** Git pull:: Does the job of the git fetch origin and git merge  origin/main into single command. but do not use frequently to avoid the unexpected merge results
+
+
+Make some changes locally & commit:
+----------------------------------
+
+> we will one commit ahead of the remote repo
+
+>git status on branch main Your branch is ahead of the 'origin/master' by 1 commit. Use the git push to publish your commits
+
+>git push origin master  {To move the changes to remote into the branch master}
+
+
+Create the GitHub Fork:
+-----------------------
+
+origin  <---> To the Munis central Repo
+upstream <---> To point to the Central Repo
+
+One option Muni has to fork the repo in the GitHub.Fork creates the copy of Muni repo in GitHub. Muni is the owner of the copy and Muni can do git clone aganist his fork. He can make the changes push the changes to his fork.
+
+Add the Git remote: git remote add upstream GitUrl.(Project Url)
+
+>git remote remove <remotename>
+
+staying inSync with the upstream:
+--------------------------------
+
+Team lead has made some changes and committed. in Local working copy of Muni doesn't even know the changes have pushed in the central repo.
+
+To get the updates of central repo we do:
+
+>git fetch upstream
+
+	*38c (upstream/master)
+	*a4472 (HEAD->master,origin/master,origin/HEAD)
+
+Now merge the local with upstream
+
+>git merge upstream/master
+
+>graph
+
+	*38C (HEAD->master,upstream/master)
+	*a4472(origin/master,origin/HEAD) 
+
+
+>Local Branch caught up with the Upstream Repo. To push the same changes to Muni's Central Repo we can do
+
+>git push origin master
+
+>graph
+
+*38C (HEAD->master,upstream/master,origin/master,origin/HEAD)
+*a4472
+
+Now all are in sync
+
+Proposing the changes into the Central Repo:
+-------------------------------------------
+
+Create the branch in Munis local repo. Make the changes and commit the changes. Move the branch code to the muni central repo.We will issue the pull request to the central repo. The request is to merge the changes of the master branch to Central repo.Team lead can review the changes,add the comments,request the others to review the changes.Approve the pull request and merge.
+
+You can make the pull request from the GitHub.
+
+>git checkout -b "edit-branch"
+
+> git branch (doesn't display the any remote tracking branches)
+
+* To see all the branches. 
+
+>git branch -a
+
+*edit-s2
+master
+remote/origin/HEAD ->origin/master
+
+> git branch -r only the remote branches we can see
+
+>git commit -a -m "updated the S2"
+
+>git push origin edit-s2
+
+graph now shows:
+---------------
+
+	*9706c (HEAD -> edit-s2,origin/edit-s2)
+	*384cf (upstream/master,origin/master,origin/HEAD)
+
+Once the Team lead approves the pull request and merges the branch code to the master. We need to delete the branch in the local and GitHub and pull the updated code into the Muni central repo and local repo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*Questions:
+
+>Folder structure or no:of repositories that need to be maintained for the Huge project
+
+>Does the no:of commits in the local and remote repos will be different or same..
+
+>From the one commit point create the multiple branches and work on the project/code parallely.Our work or edits on the one branch will be independent of other branch.
+
+
+
+>>>>>>> origin/main

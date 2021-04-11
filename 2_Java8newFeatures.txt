@@ -1,0 +1,365 @@
+<<<<<<< HEAD
+
+Java7 Solution before the Java8 default methods.. And it is not effective one the classes we are devlepoing is increasing 
+
+interface SIM{
+	void sms();
+	void call();
+}
+
+class Airtel implements SIM{
+	
+	@Override
+	public void call() {
+		System.out.println("Airtel Class call");
+	}
+	@Override
+	public void sms() {
+		System.out.println("Airtel class sms");
+	}
+}
+
+interface SIM3G extends SIM{ 
+	//since the subclasses get disturbed we are taking new interface
+	
+	void videocall();
+	
+}
+
+class Airtel3G extends Airtel implements SIM3G{
+	
+	@Override
+	public void videocall() {
+		System.out.println("Airtel class 3g Video Call");
+	}
+}
+
+class Mobile{
+	
+	void insertSIM(SIM sim) {
+		sim.call();
+		sim.sms();				
+//Every time user class needs to be revamped for every new feature released in the market
+//If the user class needs to use the new Feature then Need to code with the SIM3G 
+//User class programmers will get burden to remember all the new sub-interfaces
+//so we got the default methods provides the default functionality
+//		sim.videocall();
+		
+	}
+}
+
+So the default methods have been introduced to release the new feature in the existing interface and not forcing the implementation class programmers..
+
+They can re-use the existing default functionality or implement again the with new changes
+
+Allowed modifiers for the default methods: public strictfp allowed....private protected static final native synchronized ---Are not allowed
+
+With the methods Logic in Interfaces we are getting the multiple inheritance problem in java..
+
+
+public interface I1 {
+	
+	abstract void m1();
+}
+
+class A{
+	
+	public void m1() {}
+}
+
+class B extends A implements I1{
+			////m1 in A is being considered as overriding method for the method in I1
+}
+
+It checks for the method signatures in A... If any of the method has matching signature then it considers as the overriding method for the methods in Interface... The methods in A should satisfy the overriding rules mandatorily...
+
+ interface I1 {
+	  default void m1() {
+	}
+}
+
+interface I2{
+	  default void m1() {
+		}
+}
+class A{
+	public void m1() {
+		System.out.println("A m1");
+	}
+}
+class Example extends A implements I1,I2{
+	
+	// The method in A is considered as the overriding method
+
+	/**or you can implement like this**/
+	@Override 
+	 public void m1() { 
+		  I1.super.m1(); 
+		  super.m1();
+		  
+	}
+}
+
+class Example1 implements I1,I2{
+
+/**You have to provide the clarity to compliler by providing the implementation which logic we need to use**/
+
+	@Override
+	public void m1() {
+		// TODO Auto-generated method stub
+		I1.super.m1(); or I2.super.m1();
+	}
+
+}
+
+
+
+f.apply(10,20); One F.I 	f.apply(10.5,20.5); 		We need to have another diffrent F.I
+
+If our functional interface is not a genric one then we have to create the multiple functional interfaces with the diffrent type parameters to accept and diffrent 
+
+return types which is the tedious process.. So we have Generic Style Functional Interfaces...
+
+
+class Addition<T>{
+
+	T add(T a,T b);		Takes any type of value and returns the same type of the value..
+
+				Wherever the T is used then the Type is replaced Dynamically by compiler automatically
+}
+
+Defining bounded Types::
+
+<T extends Person>   Only SubTypes of Person are allowed.
+
+<T> <T,R,U>   or <T extends Person,R extends Number>
+
+
+Function<T,R>			Predicate<T>    				Supplier<T>    				Consumer<T>
+R apply(T t)			boolean test(T t)				T get()					void accpet(T t)
+				IntPredicate
+				DoublePredicate
+				LongPredicate				
+
+BiFunction<T,U,R>		BiPredicate<T,U>				BooleanSupplier				BiConsumer<T,U>
+R apply(T t, U u)		boolean test(T t, U u)				boolean getAsBoolean()			void accpet(T t,U u)
+										DoubleSupplier				IntConsumer
+ToDoubleBiFunction								LongSupplier				LongConsumer
+ToIntBiFunction									IntSupplier				DoubleConsumer
+ToLongBiFunction															
+															BiConsumer Types:
+															ObjIntConsumer	
+															ObjDoubleConsumer
+															ObjLongConsumer
+DoubleFunction
+IntFunction	R apply(int value)	
+LongFunction 
+
+ToDoubleFunction	double applyAsDouble(T value);
+ToIntFunction
+ToLongFunction
+
+
+DoubleToIntFunction	
+DoubleToLongFunction 	long applyAsLong(douoble value)
+LongtoIntFunction
+LongToDoubleFunction
+IntToDoubleFunction
+IntToLongFunction
+
+
+
+UnaryOperator<T,T> extends Function<T,T>
+DoubleUnaryOperator  double applyAsDouble(double d)
+LongUnaryOperator
+IntUnaryOperator
+
+BinaryOperator<T,T,T> extends BiFunction<T,T,T>
+DoubleBinaryOperator	double applyAsDouble(double left,double right)
+LongBinaryOperator
+IntBinaryOperator
+
+
+=======
+
+Java7 Solution before the Java8 default methods.. And it is not effective one the classes we are devlepoing is increasing 
+
+interface SIM{
+	void sms();
+	void call();
+}
+
+class Airtel implements SIM{
+	
+	@Override
+	public void call() {
+		System.out.println("Airtel Class call");
+	}
+	@Override
+	public void sms() {
+		System.out.println("Airtel class sms");
+	}
+}
+
+interface SIM3G extends SIM{ 
+	//since the subclasses get disturbed we are taking new interface
+	
+	void videocall();
+	
+}
+
+class Airtel3G extends Airtel implements SIM3G{
+	
+	@Override
+	public void videocall() {
+		System.out.println("Airtel class 3g Video Call");
+	}
+}
+
+class Mobile{
+	
+	void insertSIM(SIM sim) {
+		sim.call();
+		sim.sms();				
+//Every time user class needs to be revamped for every new feature released in the market
+//If the user class needs to use the new Feature then Need to code with the SIM3G 
+//User class programmers will get burden to remember all the new sub-interfaces
+//so we got the default methods provides the default functionality
+//		sim.videocall();
+		
+	}
+}
+
+So the default methods have been introduced to release the new feature in the existing interface and not forcing the implementation class programmers..
+
+They can re-use the existing default functionality or implement again the with new changes
+
+Allowed modifiers for the default methods: public strictfp allowed....private protected static final native synchronized ---Are not allowed
+
+With the methods Logic in Interfaces we are getting the multiple inheritance problem in java..
+
+
+public interface I1 {
+	
+	abstract void m1();
+}
+
+class A{
+	
+	public void m1() {}
+}
+
+class B extends A implements I1{
+			////m1 in A is being considered as overriding method for the method in I1
+}
+
+It checks for the method signatures in A... If any of the method has matching signature then it considers as the overriding method for the methods in Interface... The methods in A should satisfy the overriding rules mandatorily...
+
+ interface I1 {
+	  default void m1() {
+	}
+}
+
+interface I2{
+	  default void m1() {
+		}
+}
+class A{
+	public void m1() {
+		System.out.println("A m1");
+	}
+}
+class Example extends A implements I1,I2{
+	
+	// The method in A is considered as the overriding method
+
+	/**or you can implement like this**/
+	@Override 
+	 public void m1() { 
+		  I1.super.m1(); 
+		  super.m1();
+		  
+	}
+}
+
+class Example1 implements I1,I2{
+
+/**You have to provide the clarity to compliler by providing the implementation which logic we need to use**/
+
+	@Override
+	public void m1() {
+		// TODO Auto-generated method stub
+		I1.super.m1(); or I2.super.m1();
+	}
+
+}
+
+
+
+f.apply(10,20); One F.I 	f.apply(10.5,20.5); 		We need to have another diffrent F.I
+
+If our functional interface is not a genric one then we have to create the multiple functional interfaces with the diffrent type parameters to accept and diffrent 
+
+return types which is the tedious process.. So we have Generic Style Functional Interfaces...
+
+
+class Addition<T>{
+
+	T add(T a,T b);		Takes any type of value and returns the same type of the value..
+
+				Wherever the T is used then the Type is replaced Dynamically by compiler automatically
+}
+
+Defining bounded Types::
+
+<T extends Person>   Only SubTypes of Person are allowed.
+
+<T> <T,R,U>   or <T extends Person,R extends Number>
+
+
+Function<T,R>			Predicate<T>    				Supplier<T>    				Consumer<T>
+R apply(T t)			boolean test(T t)				T get()					void accpet(T t)
+				IntPredicate
+				DoublePredicate
+				LongPredicate				
+
+BiFunction<T,U,R>		BiPredicate<T,U>				BooleanSupplier				BiConsumer<T,U>
+R apply(T t, U u)		boolean test(T t, U u)				boolean getAsBoolean()			void accpet(T t,U u)
+										DoubleSupplier				IntConsumer
+ToDoubleBiFunction								LongSupplier				LongConsumer
+ToIntBiFunction									IntSupplier				DoubleConsumer
+ToLongBiFunction															
+															BiConsumer Types:
+															ObjIntConsumer	
+															ObjDoubleConsumer
+															ObjLongConsumer
+DoubleFunction
+IntFunction	R apply(int value)	
+LongFunction 
+
+ToDoubleFunction	double applyAsDouble(T value);
+ToIntFunction
+ToLongFunction
+
+
+DoubleToIntFunction	
+DoubleToLongFunction 	long applyAsLong(douoble value)
+LongtoIntFunction
+LongToDoubleFunction
+IntToDoubleFunction
+IntToLongFunction
+
+
+
+UnaryOperator<T,T> extends Function<T,T>
+DoubleUnaryOperator  double applyAsDouble(double d)
+LongUnaryOperator
+IntUnaryOperator
+
+BinaryOperator<T,T,T> extends BiFunction<T,T,T>
+DoubleBinaryOperator	double applyAsDouble(double left,double right)
+LongBinaryOperator
+IntBinaryOperator
+
+
+>>>>>>> origin/main

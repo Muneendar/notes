@@ -1,0 +1,325 @@
+<<<<<<< HEAD
+Factory Pattern:
+---------------
+
+public class ComputerFactory {
+	
+	private ComputerFactory() {
+		
+	}
+	
+	public static Computer getComputer(ComputerType computerType) {
+		
+	/**You can create the Objects as you wish.. Not required you maintain same kind 
+	 * of the initialization process**/	
+	/**The complex Object creation process is separated from the client code**/	
+		
+		switch (computerType) {
+		case PC:
+			return	new PC(new LaptopConfigurations
+					("16 GB", "120 GB", "2,23 HGZ", true, true));
+		case SERVER:
+			return new Server(new LaptopConfigurations
+					("16 GB", "120 GB", "2,23 HGZ", true, true));
+		case LAPTOP:
+			return new Laptop(new LaptopConfigurations
+					("16 GB", "120 GB", "2,23 HGZ", true, true));
+		default:
+			throw new RuntimeException("Invalid Computer Type!!");
+		}
+	}
+
+}
+
+The factory design pattern is used when we have super class with multiple subclasses and based on the input, we need to return the one of the subclass Object.. This pattern takes out the responsibilty of the instantiation of the class from the client code to the Factory Class..
+
+In the factory class we have two types of intializations:  Static Factory Method and Instance Factory Method..
+
+
+Advantages:	Object creation process while working with StrategyPattern with the help of the Spring framework is FactoryPattern
+----------
+Factory desing pattern is a way to code for the interface rather than Implementation..Factory pattern removes the instantiation of the actual implementation classes from the client to the factory class..Factory Pattern makes our code more roboust, less coupled and easy to extend so we can easily change base class implementation because the client program is unaware of this..
+
+
+Abstract Factory Pattern
+------------------------
+
+Abstract Factory pattern is almost similar to Factory Pattern except for the fact that it’s more like a factory of factories....
+
+public class ComputerFactory {
+
+public static Computer getComputer(
+			AbstractComputerFactory abstractComputerFactory) {
+		
+		return abstractComputerFactory.createComputer();
+	}
+
+When the Object creation for each Object{for subtypes extending from common interface in this case Laptop Server PC} is seprate..We need to take the one more layer of abstraction
+
+AbstrcatFactoryPattern is considered as another layer of abstraction over the factory Pattern.Whenever you need the another layer of abstraction over the group of factories then you consider choosing of AbstarctFactoryPattern
+
+Mix both the BuilderFactory and AbstractFactory Patterns
+
+
+BuilderDesignPattern:
+=====================
+
+Major Drawbacks of Factory Pattern:
+==================================
+There are three major issues with Factory and Abstract Factory Pattern when the Object contains the lot of attributes..
+
+We have to pass too many arguments from client program to Factory class that can error be prone because most of the time,type of arguments that we send from the client are the same becomes difficult to maintain the order of the arguments from the client.
+
+Few of the parameters might be optional but with the factory pattern, we are forced to send all the parameters, the optional ones and required ones.
+
+If the Object is very heavy and Object creation is complex, then all that complexity will be part of the Factory Class that will be confusing..
+
+How the Builder Pattern Overcomes ?
+
+Solves the problem with large number of optional parameters and inconsistent state by providing a way to build the Object step by step and provide a method that explicitly return the final Object of the class
+
+
+public class Laptop {
+	
+	 	//Required Fields
+		private String ram;
+		private String hdd;
+		private String cpu;
+		
+		//Optional Fields
+		private boolean isGraphicsEnable;
+		private boolean isBluetoothEnable;
+		
+		
+		public String getRam() {
+			return ram;
+		}
+		public String getHdd() {
+			return hdd;
+		}
+		public String getCpu() {
+			return cpu;
+		}
+		public boolean isGraphicsEnable() {
+			return isGraphicsEnable;
+		}
+		public boolean isBluetoothEnable() {
+			return isBluetoothEnable;
+		}
+		
+		/**Don't allow the clients to create the Laptop Object Directly
+		 * They wanted to create the Laptop using the LaptopBuilder**/	
+		/**When the client access the Laptop Object he should be able to get the Laptop Properties so taken the getter method
+			But we should allow only setter methods inside the Builder Object for the Optional Parameters
+			The setters are not required for the Required Parameters***/
+		private Laptop(LaptopBuilder builder) {
+			this.ram=builder.ram;
+			this.cpu=builder.cpu;
+			this.hdd=builder.hdd;
+			this.isBluetoothEnable=builder.isBluetoothEnable;
+			this.isGraphicsEnable=builder.isGraphicsEnable;
+		}
+		
+		public static class LaptopBuilder{
+			
+			//Required Fields
+			private String ram;
+			private String hdd;
+			private String cpu;
+			
+			//Optional Fields
+			private boolean isGraphicsEnable;
+			private boolean isBluetoothEnable;
+		
+			/**Take the constructor of all the required fields**/
+			
+			public LaptopBuilder(String ram, String hdd, String cpu) {
+				super();
+				this.ram = ram;
+				this.hdd = hdd;
+				this.cpu = cpu;
+			}
+			
+			/**Optional fields has to be set using setters.. Take only setters of 
+			 * the optional fields**/
+			
+			public LaptopBuilder setGraphicsEnable(boolean isGraphicsEnable) {
+				return this;
+			}
+			
+			public LaptopBuilder setBluetoothEnable(boolean isBluetoothEnable) {
+				return this;
+			}
+			public Laptop build() {
+				return new Laptop(this);
+			}
+			
+		}
+}
+
+
+
+
+=======
+Factory Pattern:
+---------------
+
+public class ComputerFactory {
+	
+	private ComputerFactory() {
+		
+	}
+	
+	public static Computer getComputer(ComputerType computerType) {
+		
+	/**You can create the Objects as you wish.. Not required you maintain same kind 
+	 * of the initialization process**/	
+	/**The complex Object creation process is separated from the client code**/	
+		
+		switch (computerType) {
+		case PC:
+			return	new PC(new LaptopConfigurations
+					("16 GB", "120 GB", "2,23 HGZ", true, true));
+		case SERVER:
+			return new Server(new LaptopConfigurations
+					("16 GB", "120 GB", "2,23 HGZ", true, true));
+		case LAPTOP:
+			return new Laptop(new LaptopConfigurations
+					("16 GB", "120 GB", "2,23 HGZ", true, true));
+		default:
+			throw new RuntimeException("Invalid Computer Type!!");
+		}
+	}
+
+}
+
+The factory design pattern is used when we have super class with multiple subclasses and based on the input, we need to return the one of the subclass Object.. This pattern takes out the responsibilty of the instantiation of the class from the client code to the Factory Class..
+
+In the factory class we have two types of intializations:  Static Factory Method and Instance Factory Method..
+
+
+Advantages:	Object creation process while working with StrategyPattern with the help of the Spring framework is FactoryPattern
+----------
+Factory desing pattern is a way to code for the interface rather than Implementation..Factory pattern removes the instantiation of the actual implementation classes from the client to the factory class..Factory Pattern makes our code more roboust, less coupled and easy to extend so we can easily change base class implementation because the client program is unaware of this..
+
+
+Abstract Factory Pattern
+------------------------
+
+Abstract Factory pattern is almost similar to Factory Pattern except for the fact that it’s more like a factory of factories....
+
+public class ComputerFactory {
+
+public static Computer getComputer(
+			AbstractComputerFactory abstractComputerFactory) {
+		
+		return abstractComputerFactory.createComputer();
+	}
+
+When the Object creation for each Object{for subtypes extending from common interface in this case Laptop Server PC} is seprate..We need to take the one more layer of abstraction
+
+AbstrcatFactoryPattern is considered as another layer of abstraction over the factory Pattern.Whenever you need the another layer of abstraction over the group of factories then you consider choosing of AbstarctFactoryPattern
+
+Mix both the BuilderFactory and AbstractFactory Patterns
+
+
+BuilderDesignPattern:
+=====================
+
+Major Drawbacks of Factory Pattern:
+==================================
+There are three major issues with Factory and Abstract Factory Pattern when the Object contains the lot of attributes..
+
+We have to pass too many arguments from client program to Factory class that can error be prone because most of the time,type of arguments that we send from the client are the same becomes difficult to maintain the order of the arguments from the client.
+
+Few of the parameters might be optional but with the factory pattern, we are forced to send all the parameters, the optional ones and required ones.
+
+If the Object is very heavy and Object creation is complex, then all that complexity will be part of the Factory Class that will be confusing..
+
+How the Builder Pattern Overcomes ?
+
+Solves the problem with large number of optional parameters and inconsistent state by providing a way to build the Object step by step and provide a method that explicitly return the final Object of the class
+
+
+public class Laptop {
+	
+	 	//Required Fields
+		private String ram;
+		private String hdd;
+		private String cpu;
+		
+		//Optional Fields
+		private boolean isGraphicsEnable;
+		private boolean isBluetoothEnable;
+		
+		
+		public String getRam() {
+			return ram;
+		}
+		public String getHdd() {
+			return hdd;
+		}
+		public String getCpu() {
+			return cpu;
+		}
+		public boolean isGraphicsEnable() {
+			return isGraphicsEnable;
+		}
+		public boolean isBluetoothEnable() {
+			return isBluetoothEnable;
+		}
+		
+		/**Don't allow the clients to create the Laptop Object Directly
+		 * They wanted to create the Laptop using the LaptopBuilder**/	
+		/**When the client access the Laptop Object he should be able to get the Laptop Properties so taken the getter method
+			But we should allow only setter methods inside the Builder Object for the Optional Parameters
+			The setters are not required for the Required Parameters***/
+		private Laptop(LaptopBuilder builder) {
+			this.ram=builder.ram;
+			this.cpu=builder.cpu;
+			this.hdd=builder.hdd;
+			this.isBluetoothEnable=builder.isBluetoothEnable;
+			this.isGraphicsEnable=builder.isGraphicsEnable;
+		}
+		
+		public static class LaptopBuilder{
+			
+			//Required Fields
+			private String ram;
+			private String hdd;
+			private String cpu;
+			
+			//Optional Fields
+			private boolean isGraphicsEnable;
+			private boolean isBluetoothEnable;
+		
+			/**Take the constructor of all the required fields**/
+			
+			public LaptopBuilder(String ram, String hdd, String cpu) {
+				super();
+				this.ram = ram;
+				this.hdd = hdd;
+				this.cpu = cpu;
+			}
+			
+			/**Optional fields has to be set using setters.. Take only setters of 
+			 * the optional fields**/
+			
+			public LaptopBuilder setGraphicsEnable(boolean isGraphicsEnable) {
+				return this;
+			}
+			
+			public LaptopBuilder setBluetoothEnable(boolean isBluetoothEnable) {
+				return this;
+			}
+			public Laptop build() {
+				return new Laptop(this);
+			}
+			
+		}
+}
+
+
+
+
+>>>>>>> origin/main

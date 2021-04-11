@@ -1,0 +1,35 @@
+<<<<<<< HEAD
+For (Class) or (Interface): 
+
+Creating the Types:{in the multiple types Type Specific Operations or some operations will be implemented that needs to be resuable for all the subtypes.. And we will force the subclass programmer to implement some of the operations using the abstraction}
+
+Some times the declartion or implementations can be inherited..Implementations we need to allow to particpate in Inheritance when the logics are common for the all the subtypes created under this Type..
+
+If the some of the operations are implemented in the class or interface then we will get the multiple Inheritance problem.. With the classes as we dont support the multiple inheritance it is not a problem.. But within the interfaces if we implement some operations then we will get multiple inheritance problem as interfaces support the Multiple Inheritances..
+
+
+The methods that you are defining inside the subclass programm cannot be invoked the user programmer.. You need to use it only for the perfoming the operations of the super class
+
+abstract class Samaple extends Example{
+	
+
+
+}
+=======
+For (Class) or (Interface): 
+
+Creating the Types:{in the multiple types Type Specific Operations or some operations will be implemented that needs to be resuable for all the subtypes.. And we will force the subclass programmer to implement some of the operations using the abstraction}
+
+Some times the declartion or implementations can be inherited..Implementations we need to allow to particpate in Inheritance when the logics are common for the all the subtypes created under this Type..
+
+If the some of the operations are implemented in the class or interface then we will get the multiple Inheritance problem.. With the classes as we dont support the multiple inheritance it is not a problem.. But within the interfaces if we implement some operations then we will get multiple inheritance problem as interfaces support the Multiple Inheritances..
+
+
+The methods that you are defining inside the subclass programm cannot be invoked the user programmer.. You need to use it only for the perfoming the operations of the super class
+
+abstract class Samaple extends Example{
+	
+
+
+}
+>>>>>>> origin/main
